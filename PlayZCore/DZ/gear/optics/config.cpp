@@ -1,6 +1,6 @@
 class CfgPatches
 {
-	class DZ_Gear_Optics_PlayZ_Core
+	class DZ_Gear_Optics_PlayZCore
 	{
 		units[] = {};
 		weapons[] = {};

@@ -8,7 +8,7 @@ No DayZ Expansion modules on Sakhal — client features are vanilla + PlayZ only
 
 - Entity/config classes, UI, inputs, models, sounds, textures, NetSync variables, and client-observable RPC contracts belong here.
 - Every sub-mod must have its own `config.cpp` with its own `CfgPatches.<Name>` entry so it packs as an independent PBO.
-- Script `files[]` paths use the workspace prefix `PlayZ_Client/<AddonName>/scripts/...` (see existing `PlayZ_Core/config.cpp`).
+- Script `files[]` paths use the workspace prefix `PlayZ_Client/<AddonName>/scripts/...` (see existing `PlayZCore/config.cpp`).
 - `requiredAddons[]` may list engine addons (`DZ_Data`, `DZ_Scripts`) or other `PlayZ_Client/` sub-mods.
 - **Must not** require or reference any `PlayZ_Server/` addon or class.
 - **Must not** depend on DayZ Expansion.
@@ -25,7 +25,7 @@ Some server features need a client-only API (e.g. `GetCurrentCameraPosition()`).
 Dedicated server and clients share the same `-mod=` chain:
 
 ```text
-DayZServer_x64.exe -mod="@PlayZ_Core;@PlayZAntiCheatClient;..." -servermod="@PlayZAntiCheat;@PlayZLogs;..." -config=serverDZ.cfg
+DayZServer_x64.exe -mod="@PlayZCore;@PlayZAntiCheatClient;..." -servermod="@PlayZAntiCheat;@PlayZLogs;..." -config=serverDZ.cfg
 ```
 
 Clients never receive `-servermod=`.
@@ -40,7 +40,7 @@ Set `MOD_OUT` in `.vscode/scripts/Build-PlayZ_Client.bat` to your CFTools `@Play
 
 ## Current sub-mods
 
-- `PlayZ_Core` — anti-combat logout, mouth-cover eat/drink block (`#STR_PlayZ_MouthBlocked`), attached-backpack cargo hide (waist bags exempt), shortcuts (`V` lie down, `B` backpack, `M` face cover), crafting/environment tweaks. Config: `$profile:PlayZ/Core.json`.
+- `PlayZCore` — anti-combat logout, mouth-cover eat/drink block (`#STR_PlayZ_MouthBlocked`), attached-backpack cargo hide (waist bags exempt), shortcuts (`V` lie down, `B` backpack, `M` face cover), crafting/environment tweaks. Config: `$profile:PlayZ/Core.json`.
 - `PlayZAntiCheatClient` — client stub for `PlayZ_Server/PlayZAntiCheat` camera spot-check (RPC constants + `GetCurrentCameraPosition` response). Load before or with server `-servermod=@PlayZAntiCheat`; server `requiredAddons[]` already lists this patch.
 - `PlayZWeather` — scenario-driven weather + client PPE on **Sakhal** (`modded class SakhalData`). Config: `$profile:PlayZ/Weather.json`, `$profile:PlayZ/PPE.json`. Toggle with `m_EnablePlayZWeather` to fall back to vanilla Sakhal weather.
 - `PlayZLighting` — custom global lighting profiles (server `lightingConfig` IDs **60–64**). Map-agnostic; vanilla Sakhal ID **2** still works via `super` when those IDs are not used.

@@ -263,7 +263,7 @@ modded class MissionServer
 
 		if (player && player.GetIdentity() && killPlayer)
 		{
-			Print("[PlayZ_Core] Player " + player.GetCachedID() + " killed for combat logging.");
+			Print("[PlayZCore] Player " + player.GetCachedID() + " killed for combat logging.");
 		}
 
 		return killPlayer;

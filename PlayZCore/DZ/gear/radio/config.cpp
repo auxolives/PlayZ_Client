@@ -1,6 +1,6 @@
 class CfgPatches
 {
-	class DZ_Radio_PlayZ_Core
+	class DZ_Radio_PlayZCore
 	{
 		units[] = {};
 		weapons[] = {};

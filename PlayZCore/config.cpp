@@ -1,6 +1,6 @@
 class CfgPatches
 {
-	class PlayZ_Core
+	class PlayZCore
 	{
 		units[] = {};
 		weapons[] = {};
@@ -14,16 +14,16 @@ class CfgPatches
 
 class CfgMods
 {
-	class PlayZ_Core
+	class PlayZCore
 	{
-		dir = "PlayZ_Core";
+		dir = "PlayZCore";
 		hideName = 1;
 		hidePicture = 1;
 		name = "PlayZ Core";
 		credits = "";
 		author = "Olivier";
 		type = "mod";
-		inputs = "PlayZ_Client/PlayZ_Core/inputs.xml";
+		inputs = "PlayZ_Client/PlayZCore/inputs.xml";
 		dependencies[] = {
 			"Game",
 			"World",
@@ -35,21 +35,21 @@ class CfgMods
 			{
 				value = "";
 				files[] = {
-					"PlayZ_Client/PlayZ_Core/scripts/3_Game"
+					"PlayZ_Client/PlayZCore/scripts/3_Game"
 				};
 			};
 			class worldScriptModule
 			{
 				value = "";
 				files[] = {
-					"PlayZ_Client/PlayZ_Core/scripts/4_World"
+					"PlayZ_Client/PlayZCore/scripts/4_World"
 				};
 			};
 			class missionScriptModule
 			{
 				value = "";
 				files[] = {
-					"PlayZ_Client/PlayZ_Core/scripts/5_Mission"
+					"PlayZ_Client/PlayZCore/scripts/5_Mission"
 				};
 			};
 		};

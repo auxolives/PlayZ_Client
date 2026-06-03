@@ -1,6 +1,6 @@
 class CfgPatches
 {
-	class DZ_Gear_Drinks_PlayZ_Core
+	class DZ_Gear_Drinks_PlayZCore
 	{
 		units[] = {};
 		weapons[] = {};

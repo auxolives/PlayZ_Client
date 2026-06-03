@@ -1,6 +1,6 @@
 class CfgPatches
 {
-	class DZ_Weapons_Melee_PlayZ_Core
+	class DZ_Weapons_Melee_PlayZCore
 	{
 		units[] = {};
 		weapons[] = {};

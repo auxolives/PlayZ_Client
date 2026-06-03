@@ -8,7 +8,7 @@ class CfgPatches
 		requiredAddons[] = {
 			"DZ_Data",
 			"DZ_Scripts",
-			"PlayZ_Core",
+			"PlayZCore",
 			"TerjeMedicine",
 			"PlayZTerjeCore"
 		};

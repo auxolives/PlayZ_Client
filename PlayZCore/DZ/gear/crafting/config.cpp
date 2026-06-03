@@ -1,6 +1,6 @@
 class CfgPatches
 {
-	class DZ_Gear_Crafting_PlayZ_Core
+	class DZ_Gear_Crafting_PlayZCore
 	{
 		units[] = {};
 		weapons[] = {};

@@ -1,6 +1,6 @@
 class CfgPatches
 {
-	class PlayZ_Core_AntiCombatLog
+	class PlayZCore_AntiCombatLog
 	{
 		units[] = {};
 		weapons[] = {};
