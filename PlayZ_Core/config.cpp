@@ -17,11 +17,11 @@ class CfgMods
 	class PlayZ_Core
 	{
 		dir = "PlayZ_Core";
-		hideName = 0;
+		hideName = 1;
 		hidePicture = 1;
 		name = "PlayZ Core";
 		credits = "";
-		author = "PlayZ";
+		author = "Olivier";
 		type = "mod";
 		inputs = "PlayZ_Client/PlayZ_Core/inputs.xml";
 		dependencies[] = {
