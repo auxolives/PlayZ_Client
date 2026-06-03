@@ -1,0 +1,5 @@
+enum PlayZAntiCombatLogRPCs
+{
+	ANTI_COMBAT_LOG_RPC = 992110,
+	ANTI_COMBAT_LOG_MSG_RPC = 992111
+}
