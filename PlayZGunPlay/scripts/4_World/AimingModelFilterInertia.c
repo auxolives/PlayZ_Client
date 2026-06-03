@@ -4,16 +4,6 @@
 // in the SmoothCD target, reversing the inertia vector direction.
 modded class AimingModelFilterInertia
 {
-    override float computeInertiaMultiplier()
-    {
-        float m = super.computeInertiaMultiplier();
-        if (getWeapon().IsBipodDeployed() && getWeapon().Bipod().IsBipodInUse())
-        {
-            return 0;
-        }
-        return m;
-    }
-
     override void onUpdate(float pDt, SDayZPlayerAimingModel pModel, int stanceIndex)
     {
         //////////////////////////
