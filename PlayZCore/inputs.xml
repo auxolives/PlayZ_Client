@@ -2,12 +2,16 @@
 <modded_inputs>
 	<inputs>
 		<actions>
+			<input name="UAEarPlugsToggle" loc="STR_PlayZ_EarPlugs_Keybind" />
 			<input name="UAEmoteLyingDown" loc="STR_PlayZ_EmoteLyingDown_Keybind" />
 			<input name="UATakeBackpackToHands" loc="STR_PlayZ_BackpackToHands_Keybind" />
 			<input name="UATakeMouthBlockerToHands" loc="STR_PlayZ_MouthBlocker_Keybind" />
 		</actions>
 	</inputs>
 	<preset>
+		<input name="UAEarPlugsToggle">
+			<btn name="kN" />
+		</input>
 		<input name="UAEmoteLyingDown">
 			<btn name="kV" />
 		</input>

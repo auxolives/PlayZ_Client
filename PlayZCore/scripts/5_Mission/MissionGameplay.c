@@ -1,5 +1,11 @@
 modded class MissionGameplay
 {
+	int m_EarPlugsState = 0;
+
+	bool m_EarPlugsSleepingDeafnessLastFrame = false;
+
+	autoptr EarPlugsWidget m_earplugswidget = new EarPlugsWidget();
+
 	override void OnInit()
 	{
 		super.OnInit();
@@ -25,6 +31,41 @@ modded class MissionGameplay
 	override void OnUpdate(float timeslice)
 	{
 		super.OnUpdate(timeslice);
+
+		bool sleepingDeafness = PlayZEarPlugsGate.IsSleepingDeafnessActive();
+		if (m_EarPlugsSleepingDeafnessLastFrame && !sleepingDeafness)
+		{
+			m_EarPlugsState = 0;
+		}
+		m_EarPlugsSleepingDeafnessLastFrame = sleepingDeafness;
+
+		if (!sleepingDeafness && GetGame().GetInput().LocalPress("UAEarPlugsToggle") && GetGame().GetUIManager().GetMenu() == NULL)
+		{
+			if (m_EarPlugsState == 0)
+			{
+				m_EarPlugsState++;
+				GetGame().GetSoundScene().SetSoundVolume(0.50, 1);
+				m_earplugswidget.SetIcon("PlayZ_Client/PlayZCore/gui/volume_mid.edds");
+			}
+			else if (m_EarPlugsState == 1)
+			{
+				m_EarPlugsState++;
+				GetGame().GetSoundScene().SetSoundVolume(0.25, 1);
+				m_earplugswidget.SetIcon("PlayZ_Client/PlayZCore/gui/volume_low.edds");
+			}
+			else if (m_EarPlugsState == 2)
+			{
+				m_EarPlugsState++;
+				GetGame().GetSoundScene().SetSoundVolume(0.05, 1);
+				m_earplugswidget.SetIcon("PlayZ_Client/PlayZCore/gui/volume_off.edds");
+			}
+			else if (m_EarPlugsState >= 3)
+			{
+				m_EarPlugsState = 0;
+				GetGame().GetSoundScene().SetSoundVolume(1, 1);
+				m_earplugswidget.SetIcon("PlayZ_Client/PlayZCore/gui/volume_full.edds");
+			}
+		}
 
 		if (GetGame().GetInput().LocalPress("UAEmoteLyingDown") && GetGame().GetUIManager().GetMenu() == NULL)
 		{

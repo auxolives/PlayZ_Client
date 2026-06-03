@@ -9,8 +9,7 @@ class CfgPatches
 			"DZ_Data",
 			"DZ_Scripts",
 			"PlayZCore",
-			"TerjeCore",
-            "PlayZMovement"
+			"TerjeCore"
 		};
 	};
 };
