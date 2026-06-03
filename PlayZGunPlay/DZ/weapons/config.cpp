@@ -9,10 +9,7 @@ class CfgPatches
 			"DZ_Data",
 			"DZ_Scripts",
 			"PlayZGunPlay",
-			"sFramework",
-			"weapon_a",
-			"weapon_b",
-			"weapon_c"
+			"sFramework"
 		};
 	};
 };
@@ -129,24 +126,6 @@ class cfgWeapons
 		s_recoilControlKick = 0.40;
 	};
 
-	class TF_MakarovPB: Pistol_Base
-	{
-		s_recoilControlStabilityX = 0.43;
-		s_recoilControlStabilityY = 0.39;
-		s_recoilControlMisalignmentX = 0.30;
-		s_recoilControlMisalignmentY = 0.26;
-		s_recoilControlKick = 0.42;
-	};
-
-	class TF_FiveSeven: Pistol_Base
-	{
-		s_recoilControlStabilityX = 0.32;
-		s_recoilControlStabilityY = 0.28;
-		s_recoilControlMisalignmentX = 0.11;
-		s_recoilControlMisalignmentY = 0.06;
-		s_recoilControlKick = 0.15;
-	};
-
 	class CZ61_Base: Rifle_Base
 	{
 		s_recoilControlStabilityX = 0.30;
@@ -227,219 +206,6 @@ class cfgWeapons
 		s_recoilControlMisalignmentX = 0.22;
 		s_recoilControlMisalignmentY = 0.18;
 		s_recoilControlKick = 0.18;
-	};
-
-	class TF_AN94_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.45;
-		s_recoilControlStabilityY = 0.41;
-		s_recoilControlMisalignmentX = 0.35;
-		s_recoilControlMisalignmentY = 0.31;
-		s_recoilControlKick = 0.34;
-	};
-
-	class TF_SCAR_L_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.43;
-		s_recoilControlStabilityY = 0.39;
-		s_recoilControlMisalignmentX = 0.33;
-		s_recoilControlMisalignmentY = 0.29;
-		s_recoilControlKick = 0.32;
-	};
-
-	class TF_SCAR_H_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.36;
-		s_recoilControlStabilityY = 0.32;
-		s_recoilControlMisalignmentX = 0.26;
-		s_recoilControlMisalignmentY = 0.22;
-		s_recoilControlKick = 0.24;
-	};
-
-
-	class TF_SCAR_20_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.34;
-		s_recoilControlStabilityY = 0.30;
-		s_recoilControlMisalignmentX = 0.25;
-		s_recoilControlMisalignmentY = 0.21;
-		s_recoilControlKick = 0.22;
-	};
-
-
-
-
-
-	class TF_MK47_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.39;
-		s_recoilControlStabilityY = 0.35;
-		s_recoilControlMisalignmentX = 0.29;
-		s_recoilControlMisalignmentY = 0.25;
-		s_recoilControlKick = 0.27;
-	};
-
-
-	class TF_M16A4_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.43;
-		s_recoilControlStabilityY = 0.39;
-		s_recoilControlMisalignmentX = 0.33;
-		s_recoilControlMisalignmentY = 0.29;
-		s_recoilControlKick = 0.32;
-	};
-
-	class TF_M4A1_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.44;
-		s_recoilControlStabilityY = 0.40;
-		s_recoilControlMisalignmentX = 0.34;
-		s_recoilControlMisalignmentY = 0.30;
-		s_recoilControlKick = 0.33;
-	};
-
-	class TF_ADAR2_15_Base: TF_M4A1_Base
-	{
-		s_recoilControlStabilityX = 0.42;
-		s_recoilControlStabilityY = 0.38;
-		s_recoilControlMisalignmentX = 0.32;
-		s_recoilControlMisalignmentY = 0.28;
-		s_recoilControlKick = 0.31;
-	};
-
-	class TF_AKS74U_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.29;
-		s_recoilControlStabilityY = 0.26;
-		s_recoilControlMisalignmentX = 0.22;
-		s_recoilControlMisalignmentY = 0.19;
-		s_recoilControlKick = 0.22;
-	};
-
-	class TF_AK74M_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.40;
-		s_recoilControlStabilityY = 0.36;
-		s_recoilControlMisalignmentX = 0.30;
-		s_recoilControlMisalignmentY = 0.26;
-		s_recoilControlKick = 0.31;
-	};
-
-	class TF_AK105_Bullpup_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.34;
-		s_recoilControlStabilityY = 0.30;
-		s_recoilControlMisalignmentX = 0.25;
-		s_recoilControlMisalignmentY = 0.21;
-		s_recoilControlKick = 0.24;
-	};
-
-	class TF_AK105_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.37;
-		s_recoilControlStabilityY = 0.33;
-		s_recoilControlMisalignmentX = 0.28;
-		s_recoilControlMisalignmentY = 0.24;
-		s_recoilControlKick = 0.27;
-	};
-
-	class TF_AK101_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.42;
-		s_recoilControlStabilityY = 0.38;
-		s_recoilControlMisalignmentX = 0.32;
-		s_recoilControlMisalignmentY = 0.28;
-		s_recoilControlKick = 0.33;
-	};
-
-	class TF_AK102_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.39;
-		s_recoilControlStabilityY = 0.35;
-		s_recoilControlMisalignmentX = 0.30;
-		s_recoilControlMisalignmentY = 0.26;
-		s_recoilControlKick = 0.29;
-	};
-
-	class TF_AK103_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.38;
-		s_recoilControlStabilityY = 0.34;
-		s_recoilControlMisalignmentX = 0.29;
-		s_recoilControlMisalignmentY = 0.25;
-		s_recoilControlKick = 0.28;
-	};
-
-	class TF_AK104_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.35;
-		s_recoilControlStabilityY = 0.31;
-		s_recoilControlMisalignmentX = 0.26;
-		s_recoilControlMisalignmentY = 0.22;
-		s_recoilControlKick = 0.25;
-	};
-
-	class TF_AKM_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.36;
-		s_recoilControlStabilityY = 0.32;
-		s_recoilControlMisalignmentX = 0.27;
-		s_recoilControlMisalignmentY = 0.23;
-		s_recoilControlKick = 0.26;
-	};
-
-	class TF_AKMN_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.37;
-		s_recoilControlStabilityY = 0.33;
-		s_recoilControlMisalignmentX = 0.28;
-		s_recoilControlMisalignmentY = 0.24;
-		s_recoilControlKick = 0.27;
-	};
-
-	class TF_M249_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = -0.30;
-		s_recoilControlStabilityY = -0.26;
-		s_recoilControlMisalignmentX = -0.20;
-		s_recoilControlMisalignmentY = -0.16;
-		s_recoilControlKick = -0.18;
-	};
-
-	class TF_AEK999_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = -0.31;
-		s_recoilControlStabilityY = -0.27;
-		s_recoilControlMisalignmentX = -0.21;
-		s_recoilControlMisalignmentY = -0.17;
-		s_recoilControlKick = -0.18;
-	};
-
-	class TF_PKM_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = -0.28;
-		s_recoilControlStabilityY = -0.24;
-		s_recoilControlMisalignmentX = -0.18;
-		s_recoilControlMisalignmentY = -0.14;
-		s_recoilControlKick = -0.16;
-	};
-
-	class TF_PKP_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = -0.24;
-		s_recoilControlStabilityY = -0.20;
-		s_recoilControlMisalignmentX = -0.14;
-		s_recoilControlMisalignmentY = -0.10;
-		s_recoilControlKick = -0.10;
-	};
-
-	class TF_M240_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = -0.24;
-		s_recoilControlStabilityY = -0.20;
-		s_recoilControlMisalignmentX = -0.14;
-		s_recoilControlMisalignmentY = -0.10;
-		s_recoilControlKick = -0.12;
 	};
 
 	class B95_Base: Rifle_Base
@@ -550,16 +316,6 @@ class cfgWeapons
 		s_recoilControlKick = 0.14;
 	};
 
-	class TF_VPO190_Base: BoltActionRifle_Base
-	{
-
-		s_recoilControlStabilityX = 0.23;
-		s_recoilControlStabilityY = 0.19;
-		s_recoilControlMisalignmentX = 0.13;
-		s_recoilControlMisalignmentY = 0.09;
-		s_recoilControlKick = 0.12;
-	};
-
 	class Izh18_Base: Rifle_Base
 	{
 		s_recoilControlStabilityX = 0.24;
@@ -597,43 +353,6 @@ class cfgWeapons
 		s_recoilControlKick = 0.14;
 	};
 
-
-	class TF_M1A_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.18;
-		s_recoilControlStabilityY = 0.15;
-		s_recoilControlMisalignmentX = 0.20;
-		s_recoilControlMisalignmentY = 0.16;
-		s_recoilControlKick = 0.09;
-	};
-
-
-	class TF_M14_DMR_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.32;
-		s_recoilControlStabilityY = 0.28;
-		s_recoilControlMisalignmentX = 0.22;
-		s_recoilControlMisalignmentY = 0.18;
-		s_recoilControlKick = 0.20;
-	};
-
-	class TF_M14_EBR_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.40;
-		s_recoilControlStabilityY = 0.36;
-		s_recoilControlMisalignmentX = 0.20;
-		s_recoilControlMisalignmentY = 0.16;
-		s_recoilControlKick = 0.28;
-	};
-
-	class TF_MAR_10_Base: Rifle_Base
-	{
-		s_recoilControlStabilityX = 0.33;
-		s_recoilControlStabilityY = 0.29;
-		s_recoilControlMisalignmentX = 0.23;
-		s_recoilControlMisalignmentY = 0.19;
-		s_recoilControlKick = 0.22;
-	};
 
 	class Mp133Shotgun_Base: Shotgun_Base
 	{
