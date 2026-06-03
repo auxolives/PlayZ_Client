@@ -1,0 +1,3 @@
+static const int RPC_PLAYZ_AC_CAMERA_REQUEST  = 264001;
+static const int RPC_PLAYZ_AC_CAMERA_RESPONSE = 264002;
+static const int PLAYZ_AC_CAMERA_FLAG_DETACHED = 1;

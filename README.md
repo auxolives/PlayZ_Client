@@ -25,7 +25,7 @@ Some server features need a client-only API (e.g. `GetCurrentCameraPosition()`).
 Dedicated server and clients share the same `-mod=` chain:
 
 ```text
-DayZServer_x64.exe -mod="@PlayZ_Core;..." -servermod="@PlayZLogs;@..." -config=serverDZ.cfg
+DayZServer_x64.exe -mod="@PlayZ_Core;@PlayZAntiCheatClient;..." -servermod="@PlayZAntiCheat;@PlayZLogs;..." -config=serverDZ.cfg
 ```
 
 Clients never receive `-servermod=`.
@@ -33,14 +33,15 @@ Clients never receive `-servermod=`.
 ## Packing
 
 - Workspace sources: `PlayZ_Client/<AddonName>/`
-- Mikero mirror (pack script): `P:\PlayZ_Client\` — map P: to this tree or edit `SOURCE_ROOT` in `Build-PlayZ_Client.bat` at the workspace root.
+- Mikero mirror (pack script): `P:\PlayZ_Client\` — map P: to this tree or edit `SOURCE_ROOT` in `.vscode/scripts/Build-PlayZ_Client.bat`.
 - Cursor/VS Code: **Ctrl+Shift+B** → **PlayZ: Build Client PBOs (all)** (workspace `.vscode/tasks.json`).
 
-Set `MOD_OUT` in `Build-PlayZ_Client.bat` to your CFTools `@PlayZ_Client` deployment folder.
+Set `MOD_OUT` in `.vscode/scripts/Build-PlayZ_Client.bat` to your CFTools `@PlayZ_Client` deployment folder.
 
 ## Current sub-mods
 
 - `PlayZ_Core` — anti-combat logout, mouth-cover eat/drink block (`#STR_PlayZ_MouthBlocked`), attached-backpack cargo hide (waist bags exempt), shortcuts (`V` lie down, `B` backpack, `M` face cover), crafting/environment tweaks. Config: `$profile:PlayZ/Core.json`.
+- `PlayZAntiCheatClient` — client stub for `PlayZ_Server/PlayZAntiCheat` camera spot-check (RPC constants + `GetCurrentCameraPosition` response). Load before or with server `-servermod=@PlayZAntiCheat`; server `requiredAddons[]` already lists this patch.
 
 ## Adding a new shared sub-mod
 
