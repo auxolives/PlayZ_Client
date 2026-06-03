@@ -1,4 +1,4 @@
-class PlayZSakhalHypoxia
+class Hypoxia
 {
 	static bool IsSakhalWorld()
 	{

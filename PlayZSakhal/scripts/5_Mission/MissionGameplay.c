@@ -14,7 +14,7 @@ modded class MissionGameplay
 		if (GetGame().IsDedicatedServer())
 			return;
 
-		if (!PlayZSakhalHypoxia.IsSakhalWorld())
+		if (!Hypoxia.IsSakhalWorld())
 		{
 			m_PlayZHypoxiaChromSmoothed = 0;
 			m_PlayZHypoxiaBlurSmoothed = 0;
@@ -29,10 +29,10 @@ modded class MissionGameplay
 		float alt = player.GetPosition()[1];
 		float targetChrom = 0;
 		float targetBlur = 0;
-		if (PlayZSakhalHypoxia.IsHypoxicAltitude(alt))
+		if (Hypoxia.IsHypoxicAltitude(alt))
 		{
-			targetChrom = PlayZSakhalHypoxia.GetHypoxiaChromForPPE(player, alt);
-			targetBlur = PlayZSakhalHypoxia.GetHypoxiaBlurForPPE(player, alt);
+			targetChrom = Hypoxia.GetHypoxiaChromForPPE(player, alt);
+			targetBlur = Hypoxia.GetHypoxiaBlurForPPE(player, alt);
 		}
 
 		float k = timeslice / GameConstants.PLAYZ_SAKHAL_HYPOXIA_PPE_FADE_SEC;

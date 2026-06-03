@@ -13,10 +13,10 @@ modded class StaminaHandler
 		if (!pb)
 			return;
 
-		if (!PlayZSakhalHypoxia.IsSakhalWorld())
+		if (!Hypoxia.IsSakhalWorld())
 			return;
 
-		float pen = PlayZSakhalHypoxia.ComputeCapPenalty(pb);
+		float pen = Hypoxia.ComputeCapPenalty(pb);
 		if (pen <= 0)
 			return;
 
@@ -38,7 +38,7 @@ modded class StaminaHandler
 		if (!pb)
 			return;
 
-		if (!PlayZSakhalHypoxia.IsSakhalWorld())
+		if (!Hypoxia.IsSakhalWorld())
 			return;
 
 		float alt = pb.GetPosition()[1];
