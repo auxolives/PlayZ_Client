@@ -42,6 +42,8 @@ Set `MOD_OUT` in `.vscode/scripts/Build-PlayZ_Client.bat` to your CFTools `@Play
 
 - `PlayZ_Core` — anti-combat logout, mouth-cover eat/drink block (`#STR_PlayZ_MouthBlocked`), attached-backpack cargo hide (waist bags exempt), shortcuts (`V` lie down, `B` backpack, `M` face cover), crafting/environment tweaks. Config: `$profile:PlayZ/Core.json`.
 - `PlayZAntiCheatClient` — client stub for `PlayZ_Server/PlayZAntiCheat` camera spot-check (RPC constants + `GetCurrentCameraPosition` response). Load before or with server `-servermod=@PlayZAntiCheat`; server `requiredAddons[]` already lists this patch.
+- `PlayZWeather` — scenario-driven weather + client PPE on **Sakhal** (`modded class SakhalData`). Config: `$profile:PlayZ/Weather.json`, `$profile:PlayZ/PPE.json`. Toggle with `m_EnablePlayZWeather` to fall back to vanilla Sakhal weather.
+- `PlayZLighting` — custom global lighting profiles (server `lightingConfig` IDs **60–64**). Map-agnostic; vanilla Sakhal ID **2** still works via `super` when those IDs are not used.
 
 ## Adding a new shared sub-mod
 
