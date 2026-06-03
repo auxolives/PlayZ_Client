@@ -8,12 +8,8 @@ class CfgPatches
 		requiredAddons[] = {
 			"DZ_Data",
 			"DZ_Scripts",
-			"sFramework",
-			"script_a",
-			"optic_a",
-			"weapon_a",
-			"weapon_b",
-			"weapon_c"
+			"PlayZCore",
+			"sFramework"
 		};
 	};
 };
