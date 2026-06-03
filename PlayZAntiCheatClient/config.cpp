@@ -21,7 +21,7 @@ class CfgMods
 		hidePicture = 1;
 		name = "PlayZ AntiCheat Client";
 		credits = "";
-		author = "PlayZ";
+		author = "Olivier";
 		type = "mod";
 		dependencies[] = {
 			"Game",
