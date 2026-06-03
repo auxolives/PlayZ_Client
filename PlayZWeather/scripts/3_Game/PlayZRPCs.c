@@ -1,0 +1,5 @@
+enum PlayZRPCs
+{
+	SYNC_CONFIG = 991234,
+	SYNC_SCENARIO = 991235,
+}
