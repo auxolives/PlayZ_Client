@@ -28,15 +28,31 @@ class CfgMods
 		author = "Olivier";
 		type = "mod";
 		dependencies[] = {
-			"World"
+			"Game",
+			"World",
+			"Mission"
 		};
 		class defs
 		{
+			class gameScriptModule
+			{
+				value = "";
+				files[] = {
+					"PlayZ_Client/PlayZTerjeRadiation/scripts/3_Game"
+				};
+			};
 			class worldScriptModule
 			{
 				value = "";
 				files[] = {
 					"PlayZ_Client/PlayZTerjeRadiation/scripts/4_world"
+				};
+			};
+			class missionScriptModule
+			{
+				value = "";
+				files[] = {
+					"PlayZ_Client/PlayZTerjeRadiation/scripts/5_Mission"
 				};
 			};
 		};
