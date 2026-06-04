@@ -181,23 +181,69 @@ class CfgVehicles
 	class Asmond_HikingPants_Yellow;
 	class CargoPants_Hiking_Yellow: Asmond_HikingPants_Yellow { scope=2; };
 
-	class Asmond_HunterPants_Camo;
-	class HunterPants_Camo: Asmond_HunterPants_Camo { scope=2; };
+	class HunterPants_Camo: HunterPants_ColorBase
+	{
+		scope = 2;
+		hiddenSelections[] = {"camoGround","camoMale","camoFemale"};
+		hiddenSelectionsTextures[] = {
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_Camo_co.paa",
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_Camo_co.paa",
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_Camo_co.paa"
+		};
+	};
+	class HunterPants_Beige: HunterPants_ColorBase
+	{
+		scope = 2;
+		hiddenSelections[] = {"camoGround","camoMale","camoFemale"};
+		hiddenSelectionsTextures[] = {
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_Beige_co.paa",
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_Beige_co.paa",
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_Beige_co.paa"
+		};
+	};
+	class HunterPants_Grey: HunterPants_ColorBase
+	{
+		scope = 2;
+		heatIsolation = 1;
+		hiddenSelections[] = {"camoGround","camoMale","camoFemale"};
+		hiddenSelectionsTextures[] = {
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_Grey_co.paa",
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_Grey_co.paa",
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_Grey_co.paa"
+		};
+	};
+	class HunterPants_Winter_2: HunterPants_ColorBase
+	{
+		scope = 2;
+		heatIsolation = 1;
+		hiddenSelections[] = {"camoGround","camoMale","camoFemale"};
+		hiddenSelectionsTextures[] = {
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_Winter_co.paa",
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_Winter_co.paa",
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_Winter_co.paa"
+		};
+	};
+	class HunterPants_Hunter: HunterPants_ColorBase
+	{
+		scope = 2;
+		hiddenSelections[] = {"camoGround","camoMale","camoFemale"};
+		hiddenSelectionsTextures[] = {
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_Hunter_co.paa",
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_Hunter_co.paa",
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_Hunter_co.paa"
+		};
 
-	class Asmond_HunterPants_Beige;
-	class HunterPants_Beige: Asmond_HunterPants_Beige { scope=2; };
-
-	class Asmond_HunterPants_Grey;
-	class HunterPants_Grey: Asmond_HunterPants_Grey { scope=2; };
-
-	class Asmond_HunterPants_Winter;
-	class HunterPants_Winter_2: Asmond_HunterPants_Winter { scope=2; };
-
-	class Asmond_HunterPants_Hunter;
-	class HunterPants_Hunter: Asmond_HunterPants_Hunter { scope=2; };
-
-	class Asmond_HunterPants_White;
-	class HunterPants_White: Asmond_HunterPants_White { scope=2; };
+	};
+	class HunterPants_White: HunterPants_ColorBase
+	{
+		scope = 2;
+		hiddenSelections[] = {"camoGround","camoMale","camoFemale"};
+		hiddenSelectionsTextures[] = {
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_White_co.paa",
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_White_co.paa",
+			"AsmondClothing\Data\Pants\HunterPants\Data\Asmond_HuntingPants_White_co.paa"
+		};
+	};
 
 	class Asmond_Jeans_Beige;
 	class Jeans_Beige: Asmond_Jeans_Beige { scope=2; };
