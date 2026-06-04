@@ -677,11 +677,11 @@ class CfgVehicles
 	class Asmond_CamoHelmet_UNA;
 	class CamoHelmet_UNA: Asmond_CamoHelmet_UNA { scope=2; };
 
-	class Asmond_ChainMail_Coif_Rebels;
-	class ChainMail_Coif_Rebels: Asmond_ChainMail_Coif_Rebels { scope=2; };
+	class Asmond_Chainmail_Coif_Rebels;
+	class Chainmail_Coif_Rebels: Asmond_Chainmail_Coif_Rebels { scope=2; };
 
-	class Asmond_ChainMail_Coif_King;
-	class ChainMail_Coif_King: Asmond_ChainMail_Coif_King { scope=2; };
+	class Asmond_Chainmail_Coif_King;
+	class Chainmail_Coif_King: Asmond_Chainmail_Coif_King { scope=2; };
 
 	class Asmond_GorkaHelmet_EMR;
 	class GorkaHelmet_EMR: Asmond_GorkaHelmet_EMR { scope=2; };

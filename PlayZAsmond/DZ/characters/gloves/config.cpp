@@ -26,22 +26,22 @@ class CfgVehicles
 	class WorkingGloves_ColorBase;
 
 	class Asmond_NBCGloves_Blue;
-	class NBCGloves_Blue: Asmond_NBCGloves_Blue { scope=2; };
+	class NBCGlovesBlue: Asmond_NBCGloves_Blue { scope=2; };
 
 	class Asmond_NBCGloves_Orange;
-	class NBCGloves_Orange: Asmond_NBCGloves_Orange { scope=2; };
+	class NBCGlovesOrange: Asmond_NBCGloves_Orange { scope=2; };
 
 	class Asmond_NBCGloves_EMR;
-	class NBCGloves_EMR: Asmond_NBCGloves_EMR { scope=2; };
+	class NBCGlovesEMR: Asmond_NBCGloves_EMR { scope=2; };
 
 	class Asmond_NBCGloves_Camo;
-	class NBCGloves_Camo: Asmond_NBCGloves_Camo { scope=2; };
+	class NBCGlovesCamo: Asmond_NBCGloves_Camo { scope=2; };
 
 	class Asmond_NBCGloves_OZK;
-	class NBCGloves_OZK: Asmond_NBCGloves_OZK { scope=2; };
+	class NBCGlovesOZK: Asmond_NBCGloves_OZK { scope=2; };
 
 	class Asmond_NBCGloves_Grey;
-	class NBCGloves_Grey: Asmond_NBCGloves_Grey { scope=2; };
+	class NBCGlovesGray_2: Asmond_NBCGloves_Grey { scope=2; };
 
 	class Asmond_OMNOGloves_Snow;
 	class OMNOGloves_Snow: Asmond_OMNOGloves_Snow { scope=2; };

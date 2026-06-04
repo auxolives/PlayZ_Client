@@ -76,7 +76,7 @@ class CfgVehicles
 	class NBCBoots_OZK: Asmond_NBCBoots_OZK { scope=2; };
 
 	class Asmond_NBCBoots_Grey;
-	class NBCBoots_Grey: Asmond_NBCBoots_Grey { scope=2; };
+	class NBCBootsGray_2: Asmond_NBCBoots_Grey { scope=2; };
 
 	class Asmond_TraditionalBoots_Black;
 	class TraditionalBoots_Black: Asmond_TraditionalBoots_Black { scope=2; };

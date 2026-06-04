@@ -173,13 +173,13 @@ class CfgVehicles
 	class MimeMask_FullWhite: Asmond_MimeMask_FullWhite { scope=2; };
 
 	class Asmond_Mimemask_Fawkes;
-	class Mimemask_Fawkes: Asmond_Mimemask_Fawkes { scope=2; };
+	class MimeMask_Fawkes: Asmond_Mimemask_Fawkes { scope=2; };
 
 	class Asmond_Mimemask_Killer;
-	class Mimemask_Killer: Asmond_Mimemask_Killer { scope=2; };
+	class MimeMask_Killer: Asmond_Mimemask_Killer { scope=2; };
 
 	class Asmond_Mimemask_King;
-	class Mimemask_King: Asmond_Mimemask_King
+	class MimeMask_King: Asmond_Mimemask_King
 	{
 		scope=2;
 		class DamageSystem
@@ -196,7 +196,7 @@ class CfgVehicles
 	};
 
 	class Asmond_Mimemask_BaldwinIV;
-	class Mimemask_BaldwinIV: Asmond_Mimemask_BaldwinIV
+	class MimeMask_BaldwinIV: Asmond_Mimemask_BaldwinIV
 	{
 		scope=2;
 		class DamageSystem

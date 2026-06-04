@@ -208,7 +208,7 @@ class CfgVehicles
 	};
 
 	class Asmond_BushlatJacket_Arctic;
-	class BushlatJacket_Arctic: Asmond_BushlatJacket_Arctic
+	class BushlatPoliceJacket_Arctic: Asmond_BushlatJacket_Arctic
 	{
 		scope=2;
 		class DamageSystem
@@ -225,7 +225,7 @@ class CfgVehicles
 	};
 
 	class Asmond_BushlatJacket_Green;
-	class BushlatJacket_Green: Asmond_BushlatJacket_Green
+	class BushlatPoliceJacket_Green: Asmond_BushlatJacket_Green
 	{
 		scope=2;
 		class DamageSystem
@@ -242,7 +242,7 @@ class CfgVehicles
 	};
 
 	class Asmond_BushlatJacket_VSRFlora;
-	class BushlatJacket_VSRFlora: Asmond_BushlatJacket_VSRFlora
+	class BushlatPoliceJacket_VSRFlora: Asmond_BushlatJacket_VSRFlora
 	{
 		scope=2;
 		class DamageSystem
@@ -259,7 +259,7 @@ class CfgVehicles
 	};
 
 	class Asmond_BushlatJacket_Brown;
-	class BushlatJacket_Brown: Asmond_BushlatJacket_Brown
+	class BushlatPoliceJacket_Brown: Asmond_BushlatJacket_Brown
 	{
 		scope=2;
 		class DamageSystem
@@ -276,7 +276,7 @@ class CfgVehicles
 	};
 
 	class Asmond_BushlatJacket_Grey;
-	class BushlatJacket_Grey: Asmond_BushlatJacket_Grey
+	class BushlatPoliceJacket_Grey: Asmond_BushlatJacket_Grey
 	{
 		scope=2;
 		class DamageSystem
@@ -293,13 +293,13 @@ class CfgVehicles
 	};
 
 	class Asmond_BushlatJacket_Orel;
-	class BushlatJacket_Orel: Asmond_BushlatJacket_Orel { scope=2; };
+	class BushlatPoliceJacket_Orel: Asmond_BushlatJacket_Orel { scope=2; };
 
 	class Asmond_BushlatJacket_Winter;
-	class BushlatJacket_Winter: Asmond_BushlatJacket_Winter { scope=2; };
+	class BushlatPoliceJacket_Winter: Asmond_BushlatJacket_Winter { scope=2; };
 
 	class Asmond_BushlatJacket_Orange;
-	class BushlatJacket_Orange: Asmond_BushlatJacket_Orange
+	class BushlatPoliceJacket_Orange: Asmond_BushlatJacket_Orange
 	{
 		scope=2;
 		class DamageSystem
@@ -316,7 +316,7 @@ class CfgVehicles
 	};
 
 	class Asmond_CasualShirt_Base;
-	class CasualShirt_Base: Asmond_CasualShirt_Base
+	class PrisonUniformJacket_Base: Asmond_CasualShirt_Base
 	{
 		scope=2;
 		class DamageSystem
@@ -333,16 +333,16 @@ class CfgVehicles
 	};
 
 	class Asmond_CasualShirt_Beige;
-	class CasualShirt_Beige: Asmond_CasualShirt_Beige { scope=2; };
+	class PrisonUniformJacket_Beige: Asmond_CasualShirt_Beige { scope=2; };
 
 	class Asmond_CasualShirt_Grey;
-	class CasualShirt_Grey: Asmond_CasualShirt_Grey { scope=2; };
+	class PrisonUniformJacket_Grey: Asmond_CasualShirt_Grey { scope=2; };
 
 	class Asmond_CasualShirt_Cyan;
-	class CasualShirt_Cyan: Asmond_CasualShirt_Cyan { scope=2; };
+	class PrisonUniformJacket_Cyan: Asmond_CasualShirt_Cyan { scope=2; };
 
 	class Asmond_CasualShirt_Blue;
-	class CasualShirt_Blue: Asmond_CasualShirt_Blue { scope=2; };
+	class PrisonUniformJacket_Blue: Asmond_CasualShirt_Blue { scope=2; };
 
 	class Asmond_Chainmail_King;
 	class Chainmail_King: Asmond_Chainmail_King { scope=2; };
@@ -525,7 +525,7 @@ class CfgVehicles
 	class FirefighterJacket_Orange: Asmond_FirefighterJacket_Orange { scope=2; };
 
 	class Asmond_GasStationJacket_Base;
-	class GasStationJacket_Base: Asmond_GasStationJacket_Base
+	class ParamedicJacket_GasStation_Base: Asmond_GasStationJacket_Base
 	{
 		scope=2;
 		class DamageSystem
@@ -541,16 +541,16 @@ class CfgVehicles
 	};
 
 	class Asmond_GasStationJacket_YPF;
-	class GasStationJacket_YPF: Asmond_GasStationJacket_YPF { scope=2; };
+	class ParamedicJacket_GasStation_YPF: Asmond_GasStationJacket_YPF { scope=2; };
 
 	class Asmond_GasStationJacket_Chernarus;
-	class GasStationJacket_Chernarus: Asmond_GasStationJacket_Chernarus { scope=2; };
+	class ParamedicJacket_GasStation_Chernarus: Asmond_GasStationJacket_Chernarus { scope=2; };
 
 	class Asmond_GasStationJacket_Livonia;
-	class GasStationJacket_Livonia: Asmond_GasStationJacket_Livonia { scope=2; };
+	class ParamedicJacket_GasStation_Livonia: Asmond_GasStationJacket_Livonia { scope=2; };
 
 	class Asmond_GorkaJacket_M05;
-	class GorkaJacket_M05: Asmond_GorkaJacket_M05
+	class GorkaEJacket_M05: Asmond_GorkaJacket_M05
 	{
 		scope=2;
 		class DamageSystem
@@ -567,7 +567,7 @@ class CfgVehicles
 	};
 
 	class Asmond_GorkaJacket_FullAutumn;
-	class GorkaJacket_FullAutumn: Asmond_GorkaJacket_FullAutumn
+	class GorkaEJacket_FullAutumn: Asmond_GorkaJacket_FullAutumn
 	{
 		scope=2;
 		class DamageSystem
@@ -584,7 +584,7 @@ class CfgVehicles
 	};
 
 	class Asmond_GorkaJacket_Combat;
-	class GorkaJacket_Combat: Asmond_GorkaJacket_Combat
+	class GorkaEJacket_Combat: Asmond_GorkaJacket_Combat
 	{
 		scope=2;
 		class DamageSystem
@@ -601,7 +601,7 @@ class CfgVehicles
 	};
 
 	class Asmond_GorkaJacket_Snow;
-	class GorkaJacket_Snow: Asmond_GorkaJacket_Snow
+	class GorkaEJacket_Snow: Asmond_GorkaJacket_Snow
 	{
 		scope=2;
 		class DamageSystem
@@ -618,7 +618,7 @@ class CfgVehicles
 	};
 
 	class Asmond_GorkaJacket_Flecktarn;
-	class GorkaJacket_Flecktarn: Asmond_GorkaJacket_Flecktarn
+	class GorkaEJacket_Flecktarn: Asmond_GorkaJacket_Flecktarn
 	{
 		scope=2;
 		class DamageSystem
@@ -635,7 +635,7 @@ class CfgVehicles
 	};
 
 	class Asmond_GorkaJacket_RedDawn;
-	class GorkaJacket_RedDawn: Asmond_GorkaJacket_RedDawn
+	class GorkaEJacket_RedDawn: Asmond_GorkaJacket_RedDawn
 	{
 		scope=2;
 		class DamageSystem
@@ -652,7 +652,7 @@ class CfgVehicles
 	};
 
 	class Asmond_GorkaJacket_Partizan;
-	class GorkaJacket_Partizan: Asmond_GorkaJacket_Partizan
+	class GorkaEJacket_Partizan: Asmond_GorkaJacket_Partizan
 	{
 		scope=2;
 		class DamageSystem
@@ -669,7 +669,7 @@ class CfgVehicles
 	};
 
 	class Asmond_GorkaJacket_Berezka;
-	class GorkaJacket_Berezka: Asmond_GorkaJacket_Berezka
+	class GorkaEJacket_Berezka: Asmond_GorkaJacket_Berezka
 	{
 		scope=2;
 		class DamageSystem
@@ -686,7 +686,7 @@ class CfgVehicles
 	};
 
 	class Asmond_GorkaJacket_BDU;
-	class GorkaJacket_BDU: Asmond_GorkaJacket_BDU
+	class GorkaEJacket_BDU: Asmond_GorkaJacket_BDU
 	{
 		scope=2;
 		class DamageSystem
@@ -703,7 +703,7 @@ class CfgVehicles
 	};
 
 	class Asmond_GorkaJacket_Spetsnaz;
-	class GorkaJacket_Spetsnaz: Asmond_GorkaJacket_Spetsnaz
+	class GorkaEJacket_Spetsnaz: Asmond_GorkaJacket_Spetsnaz
 	{
 		scope=2;
 		class DamageSystem
@@ -720,7 +720,7 @@ class CfgVehicles
 	};
 
 	class Asmond_GorkaJacket_TTSKO;
-	class GorkaJacket_TTSKO: Asmond_GorkaJacket_TTSKO
+	class GorkaEJacket_TTSKO: Asmond_GorkaJacket_TTSKO
 	{
 		scope=2;
 		class DamageSystem
@@ -737,7 +737,7 @@ class CfgVehicles
 	};
 
 	class Asmond_GorkaJacket_WinterBerezka;
-	class GorkaJacket_WinterBerezka: Asmond_GorkaJacket_WinterBerezka
+	class GorkaEJacket_WinterBerezka: Asmond_GorkaJacket_WinterBerezka
 	{
 		scope=2;
 		class DamageSystem
@@ -754,7 +754,7 @@ class CfgVehicles
 	};
 
 	class Asmond_GorkaJacket_EMR;
-	class GorkaJacket_EMR: Asmond_GorkaJacket_EMR
+	class GorkaEJacket_EMR: Asmond_GorkaJacket_EMR
 	{
 		scope=2;
 		class DamageSystem
@@ -786,28 +786,28 @@ class CfgVehicles
 	class GulagJacket_Blue: Asmond_GulagJacket_Blue { scope=2; };
 
 	class Asmond_HeavyMilitaryJacket_Base;
-	class HeavyMilitaryJacket_Base: Asmond_HeavyMilitaryJacket_Base { scope=2; };
+	class USMCJacket_Base: Asmond_HeavyMilitaryJacket_Base { scope=2; };
 
 	class Asmond_HeavyMilitaryJacket_BlackMulticam;
-	class HeavyMilitaryJacket_BlackMulticam: Asmond_HeavyMilitaryJacket_BlackMulticam { scope=2; };
+	class USMCJacket_BlackMulticam: Asmond_HeavyMilitaryJacket_BlackMulticam { scope=2; };
 
 	class Asmond_HeavyMilitaryJacket_ACU;
-	class HeavyMilitaryJacket_ACU: Asmond_HeavyMilitaryJacket_ACU { scope=2; };
+	class USMCJacket_ACU: Asmond_HeavyMilitaryJacket_ACU { scope=2; };
 
 	class Asmond_HeavyMilitaryJacket_Strichtarn;
-	class HeavyMilitaryJacket_Strichtarn: Asmond_HeavyMilitaryJacket_Strichtarn { scope=2; };
+	class USMCJacket_Strichtarn: Asmond_HeavyMilitaryJacket_Strichtarn { scope=2; };
 
 	class Asmond_HeavyMilitaryJacket_VSR93;
-	class HeavyMilitaryJacket_VSR93: Asmond_HeavyMilitaryJacket_VSR93 { scope=2; };
+	class USMCJacket_VSR93: Asmond_HeavyMilitaryJacket_VSR93 { scope=2; };
 
 	class Asmond_HeavyMilitaryJacket_FleckTarn;
-	class HeavyMilitaryJacket_FleckTarn: Asmond_HeavyMilitaryJacket_FleckTarn { scope=2; };
+	class USMCJacket_FleckTarn: Asmond_HeavyMilitaryJacket_FleckTarn { scope=2; };
 
 	class Asmond_HeavyMilitaryJacket_TropenTarn;
-	class HeavyMilitaryJacket_TropenTarn: Asmond_HeavyMilitaryJacket_TropenTarn { scope=2; };
+	class USMCJacket_TropenTarn: Asmond_HeavyMilitaryJacket_TropenTarn { scope=2; };
 
 	class Asmond_HeavyMilitaryJacket_WZ93;
-	class HeavyMilitaryJacket_WZ93: Asmond_HeavyMilitaryJacket_WZ93 { scope=2; };
+	class USMCJacket_WZ93: Asmond_HeavyMilitaryJacket_WZ93 { scope=2; };
 
 	class Asmond_HikingJacket_Yellow;
 	class HikingJacket_Yellow: Asmond_HikingJacket_Yellow
@@ -921,7 +921,7 @@ class CfgVehicles
 	class JumpsuitJacket_Brown: Asmond_JumpsuitJacket_Brown { scope=2; };
 
 	class Asmond_LightMilitaryJacket_Base;
-	class LightMilitaryJacket_Base: Asmond_LightMilitaryJacket_Base
+	class ParamedicJacket_LightMilitary_Base: Asmond_LightMilitaryJacket_Base
 	{
 		scope=2;
 		class DamageSystem
@@ -938,34 +938,34 @@ class CfgVehicles
 	};
 
 	class Asmond_LightMilitaryJacket_TropenTarn;
-	class LightMilitaryJacket_TropenTarn: Asmond_LightMilitaryJacket_TropenTarn { scope=2; };
+	class ParamedicJacket_LightMilitary_TropenTarn: Asmond_LightMilitaryJacket_TropenTarn { scope=2; };
 
 	class Asmond_LightMilitaryJacket_BDU;
-	class LightMilitaryJacket_BDU: Asmond_LightMilitaryJacket_BDU { scope=2; };
+	class ParamedicJacket_LightMilitary_BDU: Asmond_LightMilitaryJacket_BDU { scope=2; };
 
 	class Asmond_LightMilitaryJacket_WZ93;
-	class LightMilitaryJacket_WZ93: Asmond_LightMilitaryJacket_WZ93 { scope=2; };
+	class ParamedicJacket_LightMilitary_WZ93: Asmond_LightMilitaryJacket_WZ93 { scope=2; };
 
 	class Asmond_LightMilitaryJacket_TTSKO;
-	class LightMilitaryJacket_TTSKO: Asmond_LightMilitaryJacket_TTSKO { scope=2; };
+	class ParamedicJacket_LightMilitary_TTSKO: Asmond_LightMilitaryJacket_TTSKO { scope=2; };
 
 	class Asmond_LightMilitaryJacket_Snow;
-	class LightMilitaryJacket_Snow: Asmond_LightMilitaryJacket_Snow { scope=2; };
+	class ParamedicJacket_LightMilitary_Snow: Asmond_LightMilitaryJacket_Snow { scope=2; };
 
 	class Asmond_LightMilitaryJacket_Partizan;
-	class LightMilitaryJacket_Partizan: Asmond_LightMilitaryJacket_Partizan { scope=2; };
+	class ParamedicJacket_LightMilitary_Partizan: Asmond_LightMilitaryJacket_Partizan { scope=2; };
 
 	class Asmond_LightMilitaryJacket_Arctic;
-	class LightMilitaryJacket_Arctic: Asmond_LightMilitaryJacket_Arctic { scope=2; };
+	class ParamedicJacket_LightMilitary_Arctic: Asmond_LightMilitaryJacket_Arctic { scope=2; };
 
 	class Asmond_LightMilitaryJacket_M05;
-	class LightMilitaryJacket_M05: Asmond_LightMilitaryJacket_M05 { scope=2; };
+	class ParamedicJacket_LightMilitary_M05: Asmond_LightMilitaryJacket_M05 { scope=2; };
 
 	class Asmond_LightMilitaryJacket_Desert;
-	class LightMilitaryJacket_Desert: Asmond_LightMilitaryJacket_Desert { scope=2; };
+	class ParamedicJacket_LightMilitary_Desert: Asmond_LightMilitaryJacket_Desert { scope=2; };
 
 	class Asmond_LongSleevesShirt_Base;
-	class LongSleevesShirt_Base: Asmond_LongSleevesShirt_Base
+	class ChernarusSportShirt_LongSleeves_Base: Asmond_LongSleevesShirt_Base
 	{
 		scope=2;
 		class DamageSystem
@@ -982,22 +982,22 @@ class CfgVehicles
 	};
 
 	class Asmond_LongSleevesShirt_Black;
-	class LongSleevesShirt_Black: Asmond_LongSleevesShirt_Black { scope=2; };
+	class ChernarusSportShirt_LongSleeves_Black: Asmond_LongSleevesShirt_Black { scope=2; };
 
 	class Asmond_LongSleevesShirt_Blue;
-	class LongSleevesShirt_Blue: Asmond_LongSleevesShirt_Blue { scope=2; };
+	class ChernarusSportShirt_LongSleeves_Blue: Asmond_LongSleevesShirt_Blue { scope=2; };
 
 	class Asmond_LongSleevesShirt_Green;
-	class LongSleevesShirt_Green: Asmond_LongSleevesShirt_Green { scope=2; };
+	class ChernarusSportShirt_LongSleeves_Green: Asmond_LongSleevesShirt_Green { scope=2; };
 
 	class Asmond_LongSleevesShirt_Pink;
-	class LongSleevesShirt_Pink: Asmond_LongSleevesShirt_Pink { scope=2; };
+	class ChernarusSportShirt_LongSleeves_Pink: Asmond_LongSleevesShirt_Pink { scope=2; };
 
 	class Asmond_LongSleevesShirt_Brown;
-	class LongSleevesShirt_Brown: Asmond_LongSleevesShirt_Brown { scope=2; };
+	class ChernarusSportShirt_LongSleeves_Brown: Asmond_LongSleevesShirt_Brown { scope=2; };
 
 	class Asmond_LongSleevesShirt_Red;
-	class LongSleevesShirt_Red: Asmond_LongSleevesShirt_Red { scope=2; };
+	class ChernarusSportShirt_LongSleeves_Red: Asmond_LongSleevesShirt_Red { scope=2; };
 
 	class Asmond_M65Jacket_MulticamDark;
 	class M65Jacket_MulticamDark: Asmond_M65Jacket_MulticamDark { scope=2; };
@@ -1258,25 +1258,25 @@ class CfgVehicles
 	class NavyUniformJacket_Soviet: Asmond_NavyUniformJacket_Soviet { scope=2; };
 
 	class Asmond_NBCJacket_Blue;
-	class NBCJacket_Blue: Asmond_NBCJacket_Blue { scope=2; };
+	class NBCJacketBlue: Asmond_NBCJacket_Blue { scope=2; };
 
 	class Asmond_NBCJacket_Orange;
-	class NBCJacket_Orange: Asmond_NBCJacket_Orange { scope=2; };
+	class NBCJacketOrange: Asmond_NBCJacket_Orange { scope=2; };
 
 	class Asmond_NBCJacket_EMR;
-	class NBCJacket_EMR: Asmond_NBCJacket_EMR { scope=2; };
+	class NBCJacketEMR: Asmond_NBCJacket_EMR { scope=2; };
 
 	class Asmond_NBCJacket_Camo;
-	class NBCJacket_Camo: Asmond_NBCJacket_Camo { scope=2; };
+	class NBCJacketCamo: Asmond_NBCJacket_Camo { scope=2; };
 
 	class Asmond_NBCJacket_OZK;
-	class NBCJacket_OZK: Asmond_NBCJacket_OZK { scope=2; };
+	class NBCJacketOZK: Asmond_NBCJacket_OZK { scope=2; };
 
 	class Asmond_NBCJacket_Grey;
-	class NBCJacket_Grey: Asmond_NBCJacket_Grey { scope=2; };
+	class NBCJacketGray_2: Asmond_NBCJacket_Grey { scope=2; };
 
 	class Asmond_PoliceJacketCamo_Base;
-	class PoliceJacketCamo_Base: Asmond_PoliceJacketCamo_Base
+	class PoliceJacketOrel_Base: Asmond_PoliceJacketCamo_Base
 	{
 		scope=2;
 		class DamageSystem
@@ -1293,13 +1293,13 @@ class CfgVehicles
 	};
 
 	class Asmond_PoliceJacketCamo_Tiger;
-	class PoliceJacketCamo_Tiger: Asmond_PoliceJacketCamo_Tiger { scope=2; };
+	class PoliceJacketOrel_Tiger: Asmond_PoliceJacketCamo_Tiger { scope=2; };
 
 	class Asmond_PoliceJacketCamo_Orel;
-	class PoliceJacketCamo_Orel: Asmond_PoliceJacketCamo_Orel { scope=2; };
+	class PoliceJacketOrel_Camo: Asmond_PoliceJacketCamo_Orel { scope=2; };
 
 	class Asmond_PoliceJacketCamo_VSRFlora;
-	class PoliceJacketCamo_VSRFlora: Asmond_PoliceJacketCamo_VSRFlora { scope=2; };
+	class PoliceJacketOrel_VSRFlora: Asmond_PoliceJacketCamo_VSRFlora { scope=2; };
 
 	class Asmond_ParamedicJacket_Black;
 	class ParamedicJacket_Black: Asmond_ParamedicJacket_Black { scope=2; };
@@ -1659,7 +1659,7 @@ class CfgVehicles
 	class Sweater_Green_2: Asmond_Sweater_Green { scope=2; };
 
 	class Asmond_Sweater_Grey;
-	class Sweater_Grey: Asmond_Sweater_Grey { scope=2; };
+	class Sweater_Gray: Asmond_Sweater_Grey { scope=2; };
 
 	class Asmond_Sweater_Blue;
 	class Sweater_Blue_2: Asmond_Sweater_Blue { scope=2; };
@@ -1707,19 +1707,19 @@ class CfgVehicles
 	class TacticalShirt_Desert: Asmond_TacticalShirt_Desert { scope=2; };
 
 	class Asmond_Telnyashka_White;
-	class Telnyashka_White: Asmond_Telnyashka_White { scope=2; };
+	class TelnyashkaShirt_White: Asmond_Telnyashka_White { scope=2; };
 
 	class Asmond_Telnyashka_Red;
-	class Telnyashka_Red: Asmond_Telnyashka_Red { scope=2; };
+	class TelnyashkaShirt_Red: Asmond_Telnyashka_Red { scope=2; };
 
 	class Asmond_Telnyashka_Green;
-	class Telnyashka_Green: Asmond_Telnyashka_Green { scope=2; };
+	class TelnyashkaShirt_Green: Asmond_Telnyashka_Green { scope=2; };
 
 	class Asmond_Telnyashka_Beige;
-	class Telnyashka_Beige: Asmond_Telnyashka_Beige { scope=2; };
+	class TelnyashkaShirt_Beige: Asmond_Telnyashka_Beige { scope=2; };
 
 	class Asmond_ThermalShirt_Base;
-	class ThermalShirt_Base: Asmond_ThermalShirt_Base
+	class ChernarusSportShirt_Thermal_Base: Asmond_ThermalShirt_Base
 	{
 		scope=2;
 		class DamageSystem
@@ -1736,22 +1736,22 @@ class CfgVehicles
 	};
 
 	class Asmond_ThermalShirt_Purple;
-	class ThermalShirt_Purple: Asmond_ThermalShirt_Purple { scope=2; };
+	class ChernarusSportShirt_Thermal_Purple: Asmond_ThermalShirt_Purple { scope=2; };
 
 	class Asmond_ThermalShirt_Grey;
-	class ThermalShirt_Grey: Asmond_ThermalShirt_Grey { scope=2; };
+	class ChernarusSportShirt_Thermal_Grey: Asmond_ThermalShirt_Grey { scope=2; };
 
 	class Asmond_ThermalShirt_Brown;
-	class ThermalShirt_Brown: Asmond_ThermalShirt_Brown { scope=2; };
+	class ChernarusSportShirt_Thermal_Brown: Asmond_ThermalShirt_Brown { scope=2; };
 
 	class Asmond_ThermalShirt_Green;
-	class ThermalShirt_Green: Asmond_ThermalShirt_Green { scope=2; };
+	class ChernarusSportShirt_Thermal_Green: Asmond_ThermalShirt_Green { scope=2; };
 
 	class Asmond_ThermalShirt_Blue;
-	class ThermalShirt_Blue: Asmond_ThermalShirt_Blue { scope=2; };
+	class ChernarusSportShirt_Thermal_Blue: Asmond_ThermalShirt_Blue { scope=2; };
 
 	class Asmond_ThermalShirt_Red;
-	class ThermalShirt_Red: Asmond_ThermalShirt_Red { scope=2; };
+	class ChernarusSportShirt_Thermal_Red: Asmond_ThermalShirt_Red { scope=2; };
 
 	class Asmond_TrackSuitJacket_Sasha;
 	class TrackSuitJacket_Sasha: Asmond_TrackSuitJacket_Sasha
@@ -1895,7 +1895,7 @@ class CfgVehicles
 	class TShirt_StripesGreen: Asmond_TShirt_StripesGreen { scope=2; };
 
 	class Asmond_TTSKOJacket_MountainFlora;
-	class TTSKOJacket_MountainFlora: Asmond_TTSKOJacket_MountainFlora
+	class TTsKOJacket_MountainFlora: Asmond_TTSKOJacket_MountainFlora
 	{
 		scope=2;
 		class DamageSystem
@@ -1912,13 +1912,13 @@ class CfgVehicles
 	};
 
 	class Asmond_TTSKOJacket_VSRFlora;
-	class TTSKOJacket_VSRFlora: Asmond_TTSKOJacket_VSRFlora { scope=2; };
+	class TTsKOJacket_VSRFlora: Asmond_TTSKOJacket_VSRFlora { scope=2; };
 
 	class Asmond_TTSKOJacket_VSR93;
-	class TTSKOJacket_VSR93: Asmond_TTSKOJacket_VSR93 { scope=2; };
+	class TTsKOJacket_VSR93: Asmond_TTSKOJacket_VSR93 { scope=2; };
 
 	class Asmond_TTSKOJacket_Grey;
-	class TTSKOJacket_Grey: Asmond_TTSKOJacket_Grey
+	class TTsKOJacket_Grey: Asmond_TTSKOJacket_Grey
 	{
 		scope=2;
 		class DamageSystem
@@ -1935,7 +1935,7 @@ class CfgVehicles
 	};
 
 	class Asmond_TTSKOJacket_Jigsaw;
-	class TTSKOJacket_Jigsaw: Asmond_TTSKOJacket_Jigsaw
+	class TTsKOJacket_Jigsaw: Asmond_TTSKOJacket_Jigsaw
 	{
 		scope=2;
 		class DamageSystem
@@ -1952,10 +1952,10 @@ class CfgVehicles
 	};
 
 	class Asmond_TTSKOJacket_Green;
-	class TTSKOJacket_Green: Asmond_TTSKOJacket_Green { scope=2; };
+	class TTsKOJacket_Green: Asmond_TTSKOJacket_Green { scope=2; };
 
 	class Asmond_TTSKOJacket_Tan;
-	class TTSKOJacket_Tan: Asmond_TTSKOJacket_Tan
+	class TTsKOJacket_Tan: Asmond_TTSKOJacket_Tan
 	{
 		scope=2;
 		class DamageSystem
@@ -1972,7 +1972,7 @@ class CfgVehicles
 	};
 
 	class Asmond_TTSKOJacket_BDU;
-	class TTSKOJacket_BDU: Asmond_TTSKOJacket_BDU
+	class TTsKOJacket_BDU: Asmond_TTSKOJacket_BDU
 	{
 		scope=2;
 		class DamageSystem
@@ -1989,10 +1989,10 @@ class CfgVehicles
 	};
 
 	class Asmond_TTSKOJacket_Flecktarn;
-	class TTSKOJacket_Flecktarn: Asmond_TTSKOJacket_Flecktarn { scope=2; };
+	class TTsKOJacket_Flecktarn: Asmond_TTSKOJacket_Flecktarn { scope=2; };
 
 	class Asmond_TTSKOJacket_WZ93;
-	class TTSKOJacket_WZ93: Asmond_TTSKOJacket_WZ93
+	class TTsKOJacket_WZ93: Asmond_TTSKOJacket_WZ93
 	{
 		scope=2;
 		class DamageSystem
@@ -2009,7 +2009,7 @@ class CfgVehicles
 	};
 
 	class Asmond_TurnoutJacket_Base;
-	class TurnoutJacket_Base: Asmond_TurnoutJacket_Base
+	class ParamedicJacket_Turnout_Base: Asmond_TurnoutJacket_Base
 	{
 		scope=2;
 		class DamageSystem
@@ -2026,10 +2026,10 @@ class CfgVehicles
 	};
 
 	class Asmond_TurnoutJacket_Beige;
-	class TurnoutJacket_Beige: Asmond_TurnoutJacket_Beige { scope=2; };
+	class ParamedicJacket_Turnout_Beige: Asmond_TurnoutJacket_Beige { scope=2; };
 
 	class Asmond_TurnoutJacket_Black;
-	class TurnoutJacket_Black: Asmond_TurnoutJacket_Black { scope=2; };
+	class ParamedicJacket_Turnout_Black: Asmond_TurnoutJacket_Black { scope=2; };
 
 	class Asmond_WinterMilitaryCoat_Beige;
 	class WinterMilitaryCoat_Beige: Asmond_WinterMilitaryCoat_Beige
@@ -2098,7 +2098,7 @@ class CfgVehicles
 	class WoolCoat_GreyLine: Asmond_WoolCoat_GreyLine { scope=2; };
 
 	class Asmond_WorkingJacket_Base;
-	class WorkingJacket_Base: Asmond_WorkingJacket_Base
+	class ParamedicJacket_Working_Base: Asmond_WorkingJacket_Base
 	{
 		scope=2;
 		class DamageSystem
@@ -2115,21 +2115,21 @@ class CfgVehicles
 	};
 
 	class Asmond_WorkingJacket_Steel;
-	class WorkingJacket_Steel: Asmond_WorkingJacket_Steel { scope=2; };
+	class ParamedicJacket_Working_Steel: Asmond_WorkingJacket_Steel { scope=2; };
 
 	class Asmond_WorkingJacket_Beige;
-	class WorkingJacket_Beige: Asmond_WorkingJacket_Beige { scope=2; };
+	class ParamedicJacket_Working_Beige: Asmond_WorkingJacket_Beige { scope=2; };
 
 	class Asmond_WorkingJacket_Grey;
-	class WorkingJacket_Grey: Asmond_WorkingJacket_Grey { scope=2; };
+	class ParamedicJacket_Working_Grey: Asmond_WorkingJacket_Grey { scope=2; };
 
 	class Asmond_WorkingJacket_Orange;
-	class WorkingJacket_Orange: Asmond_WorkingJacket_Orange { scope=2; };
+	class ParamedicJacket_Working_Orange: Asmond_WorkingJacket_Orange { scope=2; };
 
 	class Asmond_WorkingJacket_Green;
-	class WorkingJacket_Green: Asmond_WorkingJacket_Green { scope=2; };
+	class ParamedicJacket_Working_Green: Asmond_WorkingJacket_Green { scope=2; };
 
 	class Asmond_WorkingJacket_Yellow;
-	class WorkingJacket_Yellow: Asmond_WorkingJacket_Yellow { scope=2; };
+	class ParamedicJacket_Working_Yellow: Asmond_WorkingJacket_Yellow { scope=2; };
 
 };

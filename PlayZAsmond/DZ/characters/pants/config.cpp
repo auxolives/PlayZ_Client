@@ -92,16 +92,16 @@ class CfgVehicles
 	class FirefightersPants_Orange: Asmond_FirefightersPants_Orange { scope=2; };
 
 	class Asmond_GasStationPants_Base;
-	class GasStationPants_Base: Asmond_GasStationPants_Base { scope=2; };
+	class ParamedicPants_GasStation_Base: Asmond_GasStationPants_Base { scope=2; };
 
 	class Asmond_GasStationPants_YPF;
-	class GasStationPants_YPF: Asmond_GasStationPants_YPF { scope=2; };
+	class ParamedicPants_GasStation_YPF: Asmond_GasStationPants_YPF { scope=2; };
 
 	class Asmond_GasStationPants_Chernarus;
-	class GasStationPants_Chernarus: Asmond_GasStationPants_Chernarus { scope=2; };
+	class ParamedicPants_GasStation_Chernarus: Asmond_GasStationPants_Chernarus { scope=2; };
 
 	class Asmond_GasStationPants_Livonia;
-	class GasStationPants_Livonia: Asmond_GasStationPants_Livonia { scope=2; };
+	class ParamedicPants_GasStation_Livonia: Asmond_GasStationPants_Livonia { scope=2; };
 
 	class Asmond_GorkaPants_M05;
 	class GorkaPants_M05: Asmond_GorkaPants_M05 { scope=2; };
@@ -143,61 +143,61 @@ class CfgVehicles
 	class GorkaPants_EMR: Asmond_GorkaPants_EMR { scope=2; };
 
 	class Asmond_HeavyMilitaryPants_Base;
-	class HeavyMilitaryPants_Base: Asmond_HeavyMilitaryPants_Base { scope=2; };
+	class USMCPants_Base: Asmond_HeavyMilitaryPants_Base { scope=2; };
 
 	class Asmond_HeavyMilitaryPants_BlackMulticam;
-	class HeavyMilitaryPants_BlackMulticam: Asmond_HeavyMilitaryPants_BlackMulticam { scope=2; };
+	class USMCPants_BlackMulticam: Asmond_HeavyMilitaryPants_BlackMulticam { scope=2; };
 
 	class Asmond_HeavyMilitaryPants_ACU;
-	class HeavyMilitaryPants_ACU: Asmond_HeavyMilitaryPants_ACU { scope=2; };
+	class USMCPants_ACU: Asmond_HeavyMilitaryPants_ACU { scope=2; };
 
 	class Asmond_HeavyMilitaryPants_Strichtarn;
-	class HeavyMilitaryPants_Strichtarn: Asmond_HeavyMilitaryPants_Strichtarn { scope=2; };
+	class USMCPants_Strichtarn: Asmond_HeavyMilitaryPants_Strichtarn { scope=2; };
 
 	class Asmond_HeavyMilitaryPants_VSR93;
-	class HeavyMilitaryPants_VSR93: Asmond_HeavyMilitaryPants_VSR93 { scope=2; };
+	class USMCPants_VSR93: Asmond_HeavyMilitaryPants_VSR93 { scope=2; };
 
 	class Asmond_HeavyMilitaryPants_FleckTarn;
-	class HeavyMilitaryPants_FleckTarn: Asmond_HeavyMilitaryPants_FleckTarn { scope=2; };
+	class USMCPants_FleckTarn: Asmond_HeavyMilitaryPants_FleckTarn { scope=2; };
 
 	class Asmond_HeavyMilitaryPants_TropenTarn;
-	class HeavyMilitaryPants_TropenTarn: Asmond_HeavyMilitaryPants_TropenTarn { scope=2; };
+	class USMCPants_TropenTarn: Asmond_HeavyMilitaryPants_TropenTarn { scope=2; };
 
 	class Asmond_HeavyMilitaryPants_WZ93;
-	class HeavyMilitaryPants_WZ93: Asmond_HeavyMilitaryPants_WZ93 { scope=2; };
+	class USMCPants_WZ93: Asmond_HeavyMilitaryPants_WZ93 { scope=2; };
 
 	class Asmond_HikingPants_Base;
-	class HikingPants_Base: Asmond_HikingPants_Base { scope=2; };
+	class CargoPants_Hiking_Base: Asmond_HikingPants_Base { scope=2; };
 
 	class Asmond_HikingPants_Brown;
-	class HikingPants_Brown: Asmond_HikingPants_Brown { scope=2; };
+	class CargoPants_Hiking_Brown: Asmond_HikingPants_Brown { scope=2; };
 
 	class Asmond_HikingPants_GreyBlue;
-	class HikingPants_GreyBlue: Asmond_HikingPants_GreyBlue { scope=2; };
+	class CargoPants_Hiking_GreyBlue: Asmond_HikingPants_GreyBlue { scope=2; };
 
 	class Asmond_HikingPants_WhiteCamo;
-	class HikingPants_WhiteCamo: Asmond_HikingPants_WhiteCamo { scope=2; };
+	class CargoPants_Hiking_WhiteCamo: Asmond_HikingPants_WhiteCamo { scope=2; };
 
 	class Asmond_HikingPants_Yellow;
-	class HikingPants_Yellow: Asmond_HikingPants_Yellow { scope=2; };
+	class CargoPants_Hiking_Yellow: Asmond_HikingPants_Yellow { scope=2; };
 
-	class Asmond_HuntingPants_Camo;
-	class HuntingPants_Camo: Asmond_HuntingPants_Camo { scope=2; };
+	class Asmond_HunterPants_Camo;
+	class HunterPants_Camo: Asmond_HunterPants_Camo { scope=2; };
 
-	class Asmond_HuntingPants_Beige;
-	class HuntingPants_Beige: Asmond_HuntingPants_Beige { scope=2; };
+	class Asmond_HunterPants_Beige;
+	class HunterPants_Beige: Asmond_HunterPants_Beige { scope=2; };
 
-	class Asmond_HuntingPants_Grey;
-	class HuntingPants_Grey: Asmond_HuntingPants_Grey { scope=2; };
+	class Asmond_HunterPants_Grey;
+	class HunterPants_Grey: Asmond_HunterPants_Grey { scope=2; };
 
-	class Asmond_HuntingPants_Winter;
-	class HuntingPants_Winter: Asmond_HuntingPants_Winter { scope=2; };
+	class Asmond_HunterPants_Winter;
+	class HunterPants_Winter_2: Asmond_HunterPants_Winter { scope=2; };
 
-	class Asmond_HuntingPants_Hunter;
-	class HuntingPants_Hunter: Asmond_HuntingPants_Hunter { scope=2; };
+	class Asmond_HunterPants_Hunter;
+	class HunterPants_Hunter: Asmond_HunterPants_Hunter { scope=2; };
 
-	class Asmond_HuntingPants_White;
-	class HuntingPants_White: Asmond_HuntingPants_White { scope=2; };
+	class Asmond_HunterPants_White;
+	class HunterPants_White: Asmond_HunterPants_White { scope=2; };
 
 	class Asmond_Jeans_Beige;
 	class Jeans_Beige: Asmond_Jeans_Beige { scope=2; };
@@ -251,52 +251,52 @@ class CfgVehicles
 	class MedicalScrubsPants_Red: Asmond_MedicalScrubsPants_Red { scope=2; };
 
 	class Asmond_MilitaryShorts_Base;
-	class MilitaryShorts_Base: Asmond_MilitaryShorts_Base { scope=2; };
+	class Breeches_Shorts_Base: Asmond_MilitaryShorts_Base { scope=2; };
 
 	class Asmond_MilitaryShorts_TropenTarn;
-	class MilitaryShorts_TropenTarn: Asmond_MilitaryShorts_TropenTarn { scope=2; };
+	class Breeches_Shorts_TropenTarn: Asmond_MilitaryShorts_TropenTarn { scope=2; };
 
 	class Asmond_MilitaryShorts_MulticamDark;
-	class MilitaryShorts_MulticamDark: Asmond_MilitaryShorts_MulticamDark { scope=2; };
+	class Breeches_Shorts_MulticamDark: Asmond_MilitaryShorts_MulticamDark { scope=2; };
 
 	class Asmond_MilitaryShorts_BDU;
-	class MilitaryShorts_BDU: Asmond_MilitaryShorts_BDU { scope=2; };
+	class Breeches_Shorts_BDU: Asmond_MilitaryShorts_BDU { scope=2; };
 
 	class Asmond_MilitaryShorts_Desert;
-	class MilitaryShorts_Desert: Asmond_MilitaryShorts_Desert { scope=2; };
+	class Breeches_Shorts_Desert: Asmond_MilitaryShorts_Desert { scope=2; };
 
 	class Asmond_MilitaryShorts_TTSKO;
-	class MilitaryShorts_TTSKO: Asmond_MilitaryShorts_TTSKO { scope=2; };
+	class Breeches_Shorts_TTSKO: Asmond_MilitaryShorts_TTSKO { scope=2; };
 
 	class Asmond_MilitaryShorts_WZ93;
-	class MilitaryShorts_WZ93: Asmond_MilitaryShorts_WZ93 { scope=2; };
+	class Breeches_Shorts_WZ93: Asmond_MilitaryShorts_WZ93 { scope=2; };
 
 	class Asmond_NBCPants_Blue;
-	class NBCPants_Blue: Asmond_NBCPants_Blue { scope=2; };
+	class NBCPantsBlue: Asmond_NBCPants_Blue { scope=2; };
 
 	class Asmond_NBCPants_Orange;
-	class NBCPants_Orange: Asmond_NBCPants_Orange { scope=2; };
+	class NBCPantsOrange: Asmond_NBCPants_Orange { scope=2; };
 
 	class Asmond_NBCPants_EMR;
-	class NBCPants_EMR: Asmond_NBCPants_EMR { scope=2; };
+	class NBCPantsEMR: Asmond_NBCPants_EMR { scope=2; };
 
 	class Asmond_NBCPants_Camo;
-	class NBCPants_Camo: Asmond_NBCPants_Camo { scope=2; };
+	class NBCPantsCamo: Asmond_NBCPants_Camo { scope=2; };
 
 	class Asmond_NBCPants_OZK;
-	class NBCPants_OZK: Asmond_NBCPants_OZK { scope=2; };
+	class NBCPantsOZK: Asmond_NBCPants_OZK { scope=2; };
 
 	class Asmond_NBCPants_Grey;
-	class NBCPants_Grey: Asmond_NBCPants_Grey { scope=2; };
+	class NBCPantsGray_2: Asmond_NBCPants_Grey { scope=2; };
 
 	class Asmond_PolicePantsCamo_Tiger;
-	class PolicePantsCamo_Tiger: Asmond_PolicePantsCamo_Tiger { scope=2; };
+	class PolicePantsOrel_Tiger: Asmond_PolicePantsCamo_Tiger { scope=2; };
 
 	class Asmond_PolicePantsCamo_Orel;
-	class PolicePantsCamo_Orel: Asmond_PolicePantsCamo_Orel { scope=2; };
+	class PolicePantsOrel_Camo: Asmond_PolicePantsCamo_Orel { scope=2; };
 
 	class Asmond_PolicePantsCamo_VSRFlora;
-	class PolicePantsCamo_VSRFlora: Asmond_PolicePantsCamo_VSRFlora { scope=2; };
+	class PolicePantsOrel_VSRFlora: Asmond_PolicePantsCamo_VSRFlora { scope=2; };
 
 	class Asmond_ParamedicPants_Black;
 	class ParamedicPants_Black: Asmond_ParamedicPants_Black { scope=2; };
@@ -426,7 +426,7 @@ class CfgVehicles
 	class TTSKOPants_WZ93: Asmond_TTSKOPants_WZ93 { scope=2; };
 
 	class Asmond_TurnoutPants_Base;
-	class TurnoutPants_Base: Asmond_TurnoutPants_Base
+	class ParamedicPants_Turnout_Base: Asmond_TurnoutPants_Base
 	{
 		scope=2;
 		class DamageSystem
@@ -443,9 +443,9 @@ class CfgVehicles
 	};
 
 	class Asmond_TurnoutPants_Beige;
-	class TurnoutPants_Beige: Asmond_TurnoutPants_Beige { scope=2; };
+	class ParamedicPants_Turnout_Beige: Asmond_TurnoutPants_Beige { scope=2; };
 
 	class Asmond_TurnoutPants_Black;
-	class TurnoutPants_Black: Asmond_TurnoutPants_Black { scope=2; };
+	class ParamedicPants_Turnout_Black: Asmond_TurnoutPants_Black { scope=2; };
 
 };
