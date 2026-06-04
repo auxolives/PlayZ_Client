@@ -1,0 +1,127 @@
+﻿WindowWidgetClass TextInputDialogRoot {
+ clipchildren 0
+ color 0 0 0 1
+ position 0 0
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 0
+ priority 1001
+ style Colorable
+ {
+  ImageWidgetClass Background {
+   ignorepointer 1
+  color 0.72 0.10 0.06 1
+   position 0 0
+   size 1 1
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   imageTexture "{4A5BA03522015F2C}PlayZ_Client/PlayZUI/gui/textures/Background01.edds"
+   mode blend
+   "src alpha" 1
+   "clamp mode" invalid
+   "stretch mode" stretch_w_h
+   filter 1
+  }
+  ImageWidgetClass ImageLogo {
+   visible 1
+   ignorepointer 1
+   position 0 0.04
+   size 0.33 0.33
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   imageTexture "{9A0DA73AC3FCC2C4}PlayZ_Client/PlayZUI/gui/textures/LOGOTEXT.edds"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  ButtonWidgetClass btnLeave {
+   visible 1
+   color 1 0 0 1
+   position 0.05 0.05
+   size 0.15 0.05
+   halign right_ref
+   valign bottom_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   userID 1
+   style EmptyHighlight
+   text "#STR_TextInputDialogRoot_ButtonLeave0"
+   text_proportion 0.4
+   font "gui/fonts/sdf_MetronBook24"
+   "disabled text color" 0.341 0.341 0.341 1
+  }
+  GridSpacerWidgetClass GridSpacerWidget0 {
+   ignorepointer 1
+   position 0.05 0.05
+   size 300 150
+   valign bottom_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 1
+   vexactsize 1
+   scaled 0
+   "Size To Content H" 1
+   "Size To Content V" 1
+   content_halign center
+   content_valign center
+   Columns 1
+   Rows 2
+   {
+    TextWidgetClass txtLabel {
+     disabled 0
+     size 1 1
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Bold
+     text "Loading timer"
+     font "gui/fonts/sdf_MetronBook72"
+     "bold text" 0
+     "exact text" 1
+     "exact text size" 20
+     "size to text h" 0
+     "size to text v" 1
+     "text valign" center
+    }
+    MultilineTextWidgetClass txtPosition {
+     color 1 1 1 1
+     size 1 1
+     halign right_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     scaled 1
+     priority 10
+     text " "
+     font "gui/fonts/sdf_MetronLight24"
+     "text offset" 10 0
+     "text spacing" 20 0
+     "bold text" 0
+     "exact text" 1
+     "exact text size" 20
+     "size to text h" 0
+     "size to text v" 1
+     "text valign" center
+     wrap 1
+     "condense whitespace" 1
+    }
+   }
+  }
+ }
+}

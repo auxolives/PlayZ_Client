@@ -1,0 +1,639 @@
+﻿FrameWidgetClass FrameWidget {
+ ignorepointer 0
+ size 1 1
+ halign center_ref
+ valign center_ref
+ priority 995
+ {
+  ImageWidgetClass vignette {
+   visible 1
+   ignorepointer 1
+   color 1 0.188 0 1
+   position 0 0
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   imageTexture "{4A5BA03522015F2C}PlayZ_Client/PlayZUI/gui/textures/Background01.edds"
+   mode blend
+   "src alpha" 1
+   "clamp mode" clamp
+   "stretch mode" stretch_w_h
+   filter 0
+   nocache 1
+  }
+  ImageWidgetClass ImageLogo {
+   visible 1
+   ignorepointer 1
+   position 0.05 0.05
+   size 0.25 0.25
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   imageTexture "{9A0DA73AC3FCC2C4}PlayZ_Client/PlayZUI/gui/textures/LOGOTEXT.edds"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+   filter 1
+  }
+  WrapSpacerWidgetClass play_panel_root {
+   visible 1
+   clipchildren 0
+   ignorepointer 1
+   position 0 0.1
+   size 1 0.03
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 3
+   Padding 24
+   Margin 0
+   "Size To Content H" 1
+   content_halign center
+   content_valign center
+   {
+    WrapSpacerWidgetClass bottom {
+     visible 1
+     ignorepointer 1
+     color 0 0 0 0
+     position 0 0
+     size 1 120
+     halign center_ref
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     style DayZDefaultPanel
+     "no focus" 0
+     "next left" "news_main"
+     "next right" "news_main"
+     "next up" ""
+     "next down" "exit_button"
+     Padding 0
+     Margin 0
+     "Size To Content H" 1
+     "Size To Content V" 1
+     content_halign center
+     {
+      ButtonWidgetClass continuebtn {
+       visible 1
+       ignorepointer 0
+       color 0 0 0 0
+       position 0 0
+       size 1 65
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       scaled 1
+       {
+        PanelWidgetClass continuebtn_panel {
+         ignorepointer 1
+         color 0 0 0 0
+         position 0 0
+         size 1 1
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style DayZDefaultPanel
+        }
+        TextWidgetClass continuebtn_label {
+         ignorepointer 1
+         size 1 0.6
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         text "#main_menu_continue"
+         font "gui/fonts/MetronBlack58"
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+      ButtonWidgetClass respawn_button_custom {
+       visible 0
+       ignorepointer 0
+       color 0 0 0 0
+       position 0 0
+       size 1 65
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       userID 2
+       {
+        PanelWidgetClass respawn_button_custom_panel {
+         visible 1
+         ignorepointer 1
+         color 0 0 0 0
+         position 0 0
+         size 1 1
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style DayZDefaultPanel
+        }
+        TextWidgetClass respawn_button_custom_label {
+         ignorepointer 1
+         size 1 0.6
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         scaled 1
+         text "#main_menu_respawn_custom"
+         font "gui/fonts/sdf_MetronLight72"
+         "exact text" 0
+         "size to text h" 0
+         "size to text v" 0
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+      ButtonWidgetClass respawn_button_random {
+       visible 0
+       ignorepointer 0
+       color 0 0 0 0
+       position 0 0
+       size 1 65
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       userID 1
+       {
+        PanelWidgetClass respawn_button_random_panel {
+         visible 1
+         ignorepointer 1
+         color 0 0 0 0
+         position 0 0
+         size 1 1
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style DayZDefaultPanel
+        }
+        TextWidgetClass respawn_button_random_label {
+         ignorepointer 1
+         size 1 0.6
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         scaled 1
+         text "#main_menu_respawn_random"
+         font "gui/fonts/sdf_MetronLight72"
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+      ButtonWidgetClass respawn_button {
+       visible 1
+       ignorepointer 0
+       color 0 0 0 0
+       position 0 0
+       size 1 65
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       {
+        PanelWidgetClass respawn_button_panel {
+         visible 1
+         ignorepointer 1
+         color 0 0 0 0
+         position 0 0
+         size 1 1
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style DayZDefaultPanel
+        }
+        TextWidgetClass respawn_button_label {
+         ignorepointer 1
+         size 1 0.6
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         scaled 1
+         text "#main_menu_respawn"
+         font "gui/fonts/MetronBlack58"
+         "exact text" 0
+         "size to text h" 0
+         "size to text v" 0
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+     }
+    }
+    WrapSpacerWidgetClass top {
+     clipchildren 1
+     ignorepointer 1
+     color 0 0 0 0
+     size 1 50
+     halign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     style DayZDefaultPanel
+     "no focus" 1
+     Padding 0
+     Margin 0
+     "Size To Content H" 1
+     "Size To Content V" 1
+     {
+      ButtonWidgetClass exitbtn {
+       visible 1
+       ignorepointer 0
+       color 0 0 0 0
+       position 0 0
+       size 1 38
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       {
+        PanelWidgetClass exitbtn_panel {
+         ignorepointer 1
+         color 0 0 0 0
+         position 0 0
+         size 1 1
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style DayZDefaultPanel
+        }
+        TextWidgetClass exitbtn_label {
+         clipchildren 0
+         ignorepointer 1
+         size 1 0.55
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         text "#main_menu_exit"
+         font "gui/fonts/Metron-Bold28"
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+      ButtonWidgetClass restartbtn {
+       visible 0
+       ignorepointer 0
+       color 0 0 0 0
+       position 0 0
+       size 1 38
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       {
+        PanelWidgetClass restartbtn_panel {
+         ignorepointer 1
+         color 0 0 0 0
+         position 0 0
+         size 1 1
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style DayZDefaultPanel
+        }
+        TextWidgetClass restartbtn_label {
+         clipchildren 0
+         ignorepointer 1
+         size 1 0.55
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         text "#main_menu_restart"
+         font "gui/fonts/sdf_MetronLight72"
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+      ButtonWidgetClass feedbackbtn {
+       visible 1
+       ignorepointer 0
+       color 0 0 0 0
+       position 0 0
+       size 1 38
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       {
+        PanelWidgetClass feedbackbtn_panel {
+         ignorepointer 1
+         color 0 0 0 0
+         position 0 0
+         size 1 1
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style DayZDefaultPanel
+        }
+        TextWidgetClass feedbackbtn_label {
+         clipchildren 0
+         ignorepointer 1
+         size 1 0.55
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         text "#str_placeholder_feedback"
+         font "gui/fonts/MetronBook-Bold28"
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+      ButtonWidgetClass optionsbtn {
+       visible 1
+       ignorepointer 0
+       color 0 0 0 0
+       position 0 0
+       size 1 38
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       {
+        PanelWidgetClass optionsbtn_panel {
+         ignorepointer 1
+         color 0 0 0 0
+         position 0 0
+         size 1 1
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style DayZDefaultPanel
+        }
+        TextWidgetClass optionsbtn_label {
+         clipchildren 0
+         ignorepointer 1
+         size 1 0.55
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         text "#layout_xbox_ingame_menu_options"
+         font "gui/fonts/MetronBook-Bold28"
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+     }
+    }
+    GridSpacerWidgetClass GridSpacerWidget1 {
+     visible 1
+     clipchildren 1
+     inheritalpha 0
+     ignorepointer 0
+     ignoregloballv 0
+     position 0 0
+     size 0.14 0.05
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     scaled 0
+     content_halign center
+     content_valign center
+     Columns 3
+     Rows 1
+     {
+      ButtonWidgetClass playz_website_button {
+       visible 1
+       color 1 1 1 0
+       position 0 0
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Empty
+       "no focus" 1
+       switch normal
+       {
+        ImageWidgetClass playz_website_button_image {
+         inheritalpha 0
+         ignorepointer 1
+         position 0 0
+         size 0.5 1
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         imageTexture "{B430F40A6C69E37B}PlayZ_Client/PlayZUI/gui/icons/icon-website.edds"
+         mode blend
+         "src alpha" 1
+         "clamp mode" clamp
+         "stretch mode" fit_h_center
+        }
+       }
+      }
+      ButtonWidgetClass playz_discord_button {
+       visible 1
+       color 1 1 1 0
+       position 0 0
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Empty
+       "no focus" 1
+       switch normal
+       {
+        ImageWidgetClass playz_discord_button_image {
+         ignorepointer 1
+         position 0 0
+         size 0.5 1
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         imageTexture "{210350DC6F343CBC}PlayZ_Client/PlayZUI/gui/icons/icon_discord.edds"
+         mode blend
+         "src alpha" 1
+         "clamp mode" clamp
+         "stretch mode" fit_h_center
+        }
+       }
+      }
+      ButtonWidgetClass playz_paypal_button {
+       visible 1
+       color 1 1 1 0
+       position 0 0
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Empty
+       "no focus" 1
+       switch normal
+       {
+        ImageWidgetClass playz_paypal_button_image {
+         ignorepointer 1
+         position 0 0
+         size 0.5 1
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         imageTexture "{12017927D26BE8BF}PlayZ_Client/PlayZUI/gui/icons/icon-paypal.edds"
+         mode blend
+         "src alpha" 1
+         "clamp mode" clamp
+         "stretch mode" fit_h_center
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+  GridSpacerWidgetClass menu_details_tooltip {
+   visible 0
+   clipchildren 1
+   ignorepointer 1
+   color 0 0 0 0.549
+   position 500 666
+   size 600 200
+   halign right_ref
+   valign bottom_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   priority 3
+   style DayZDefaultPanel
+   "no focus" 1
+   Padding 0
+   Margin 0
+   "Size To Content V" 1
+   Columns 1
+   Rows 2
+   {
+    PanelWidgetClass menu_details_tooltip_header {
+     ignorepointer 1
+     color 0 0 0 1
+     size 0.08 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     style DayZDefaultPanel
+     {
+      TextWidgetClass menu_details_label {
+       clipchildren 0
+       ignorepointer 1
+       size 0.95 0.5
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       text "This is Sparta"
+       font "gui/fonts/sdf_MetronLight72"
+       text_proportion 0.9
+      }
+     }
+    }
+    GridSpacerWidgetClass menu_details_tooltip_body {
+     ignorepointer 1
+     position 0 0
+     size 0.9 0.571
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     Padding 0
+     Margin 15
+     "Size To Content V" 1
+     Columns 1
+     Rows 1
+     {
+      RichTextWidgetClass menu_details_tooltip_content {
+       clipchildren 0
+       ignorepointer 1
+       position 0 0
+       size 1 1
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "this is details"
+       font "gui/fonts/sdf_MetronLight24"
+       "exact text" 1
+       "exact text size" 16
+       "size to text h" 0
+       "size to text v" 1
+       wrap 1
+       "condense whitespace" 1
+      }
+     }
+    }
+   }
+  }
+ }
+}

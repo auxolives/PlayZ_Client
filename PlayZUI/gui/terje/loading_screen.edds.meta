@@ -1,0 +1,16 @@
+﻿MetaFileClass {
+ Name "{88DE6D47C9E825CD}PlayZ_Client/PlayZUI/gui/terje/loading_screen.edds"
+ Author "olivier"
+ ChangeDate 143324298
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "loading_screen.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

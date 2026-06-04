@@ -1,0 +1,378 @@
+﻿FrameWidgetClass main_menu_root {
+ visible 1
+ ignorepointer 1
+ position 0 0
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 0
+ priority 951
+ {
+  FrameWidgetClass settings_panel_root {
+   ignorepointer 1
+   position 100 80
+   size 290 40
+   halign right_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   priority 3
+   {
+    ButtonWidgetClass tutorial_button {
+     visible 1
+     color 1 1 1 0
+     position 0.65 0
+     size 37 37
+     halign right_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style Empty
+     "no focus" 1
+     "next up" "play"
+     "next down" "customize_character"
+     font "gui/fonts/sdf_MetronLight24"
+     switch normal
+     {
+      ImageWidgetClass tutorial_button_image {
+       ignorepointer 1
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       image0 "set:dayz_gui image:tutorials"
+       mode blend
+       "src alpha" 1
+       "clamp mode" clamp
+       filter 0
+      }
+     }
+    }
+    ButtonWidgetClass message_button {
+     visible 1
+     color 1 1 1 0
+     position 0.4 0
+     size 45 33
+     halign right_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     fixaspect inside
+     style Empty
+     "no focus" 1
+     "next up" "play"
+     "next down" "customize_character"
+     font "gui/fonts/sdf_MetronLight24"
+     switch normal
+     {
+      ImageWidgetClass message_button_image {
+       ignorepointer 1
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       image0 "set:dayz_gui image:credits"
+       mode blend
+       "src alpha" 1
+       "clamp mode" clamp
+       filter 0
+      }
+     }
+    }
+    ButtonWidgetClass settings_button {
+     color 1 1 1 0
+     position 0.2 0
+     size 37 37
+     halign right_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     fixaspect inside
+     style Empty
+     "no focus" 0
+     "next left" "news_main"
+     "next right" "exit_button"
+     "next up" "play"
+     "next down" "customize_character"
+     font "gui/fonts/sdf_MetronLight24"
+     switch normal
+     {
+      ImageWidgetClass settings_button_image {
+       ignorepointer 1
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       image0 "set:dayz_gui image:settings"
+       mode blend
+       "src alpha" 1
+       "clamp mode" clamp
+       filter 0
+      }
+     }
+    }
+    ButtonWidgetClass exit_button {
+     color 1 1 1 0
+     size 37 37
+     halign right_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     fixaspect inside
+     style Empty
+     "no focus" 0
+     "next left" "settings_button"
+     "next right" "play"
+     "next up" "play"
+     "next down" "customize_character"
+     font "gui/fonts/sdf_MetronLight24"
+     switch normal
+     {
+      ImageWidgetClass exit_button_image {
+       ignorepointer 1
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       image0 "set:dayz_gui image:exit"
+       mode blend
+       "src alpha" 1
+       "clamp mode" clamp
+       filter 0
+      }
+     }
+    }
+    ButtonWidgetClass feedback_button {
+     visible 1
+     color 1 1 1 0
+     position 0.85 0
+     size 37 37
+     halign right_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style Empty
+     "no focus" 1
+     "next up" "play"
+     "next down" "customize_character"
+     font "gui/fonts/sdf_MetronLight24"
+     switch normal
+     {
+      ImageWidgetClass feedback_button_image {
+       ignorepointer 1
+       position 0 0
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       image0 ""
+       imageTexture "{CF51626CB74FF257}gui/textures/feedback_icon.edds"
+       mode blend
+       "src alpha" 1
+       "clamp mode" clamp
+       "stretch mode" stretch_w_h
+       filter 0
+      }
+     }
+    }
+   }
+  }
+  FrameWidgetClass vignette {
+   visible 1
+   ignorepointer 1
+   position 0 0
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   priority 2
+  }
+  ButtonWidgetClass play {
+   visible 1
+   color 1 1 1 0
+   position 0 0.04
+   size 0.33 0.33
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   scaled 1
+   style Empty
+   "no focus" 0
+   {
+    ImageWidgetClass play_image {
+     visible 1
+     ignorepointer 1
+     position 0 0
+     size 1 1
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     scaled 1
+     imageTexture "{9A0DA73AC3FCC2C4}PlayZ_Client/PlayZUI/gui/textures/LOGOTEXT.edds"
+     mode blend
+     "src alpha" 1
+     "clamp mode" clamp
+     "stretch mode" stretch_w_h
+     "flip u" 0
+     filter 0
+     nocache 0
+    }
+   }
+  }
+  GridSpacerWidgetClass GridSpacerWidget1 {
+   ignorepointer 0
+   position 0 0.05
+   size 0.25 0.05
+   halign center_ref
+   valign bottom_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   Padding 20
+   Columns 3
+   Rows 1
+   {
+    ButtonWidgetClass playz_website_button {
+     visible 1
+     inheritalpha 0
+     color 1 1 1 0
+     position 0 0
+     size 1 1
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Empty
+     "no focus" 1
+     switch normal
+     {
+      ImageWidgetClass playz_website_button_image {
+       inheritalpha 0
+       ignorepointer 1
+       position 0 0
+       size 0.5 1
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       imageTexture "{B430F40A6C69E37B}PlayZ_Client/PlayZUI/gui/icons/icon-website.edds"
+       mode blend
+       "src alpha" 1
+       "clamp mode" clamp
+       "stretch mode" fit_h_center
+      }
+     }
+    }
+    ButtonWidgetClass playz_discord_button {
+     visible 1
+     color 1 1 1 0
+     position 0 0
+     size 1 1
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Empty
+     "no focus" 1
+     switch normal
+     {
+      ImageWidgetClass playz_discord_button_image {
+       ignorepointer 1
+       position 0 0
+       size 0.5 1
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       imageTexture "{210350DC6F343CBC}PlayZ_Client/PlayZUI/gui/icons/icon_discord.edds"
+       mode blend
+       "src alpha" 1
+       "clamp mode" clamp
+       "stretch mode" fit_h_center
+      }
+     }
+    }
+    ButtonWidgetClass playz_paypal_button {
+     visible 1
+     color 1 1 1 0
+     position 0 0
+     size 1 1
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Empty
+     "no focus" 1
+     switch normal
+     {
+      ImageWidgetClass playz_paypal_button_image {
+       ignorepointer 1
+       position 0 0
+       size 0.5 1
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       imageTexture "{12017927D26BE8BF}PlayZ_Client/PlayZUI/gui/icons/icon-paypal.edds"
+       mode blend
+       "src alpha" 1
+       "clamp mode" clamp
+       "stretch mode" fit_h_center
+      }
+     }
+    }
+   }
+  }
+ }
+}

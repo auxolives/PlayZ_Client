@@ -1,0 +1,16 @@
+﻿MetaFileClass {
+ Name "{12017927D26BE8BF}PlayZ_Client/PlayZUI/gui/icons/icon-paypal.edds"
+ Author "olivier"
+ ChangeDate -1709149046
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "icon-paypal.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}
