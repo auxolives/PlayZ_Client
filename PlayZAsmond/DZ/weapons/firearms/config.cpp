@@ -77,7 +77,7 @@ class cfgWeapons
 	class Winchester70;
 
 	class Asmond_1911_Malvinas;
-	class 1911_Malvinas: Asmond_1911_Malvinas
+	class Colt1911_Malvinas: Asmond_1911_Malvinas
 	{
 		scope=2;
 		class DamageSystem
@@ -94,7 +94,7 @@ class cfgWeapons
 	};
 
 	class Asmond_1911_Black;
-	class 1911_Black: Asmond_1911_Black
+	class Colt1911_Black: Asmond_1911_Black
 	{
 		scope=2;
 		class DamageSystem
@@ -111,7 +111,7 @@ class cfgWeapons
 	};
 
 	class Asmond_1911_YellowKing;
-	class 1911_YellowKing: Asmond_1911_YellowKing
+	class Engraved1911_YellowKing: Asmond_1911_YellowKing
 	{
 		scope=2;
 		class DamageSystem
@@ -488,16 +488,16 @@ class cfgWeapons
 	};
 
 	class Asmond_AUG_Green;
-	class AUG_Green: Asmond_AUG_Green { scope=2; };
+	class Aug_Green: Asmond_AUG_Green { scope=2; };
 
 	class Asmond_AUG_Beige;
-	class AUG_Beige: Asmond_AUG_Beige { scope=2; };
+	class Aug_Beige: Asmond_AUG_Beige { scope=2; };
 
 	class Asmond_AUG_Grey;
-	class AUG_Grey: Asmond_AUG_Grey { scope=2; };
+	class Aug_Grey: Asmond_AUG_Grey { scope=2; };
 
 	class Asmond_AUG_Black;
-	class AUG_Black: Asmond_AUG_Black
+	class Aug_Black: Asmond_AUG_Black
 	{
 		scope=2;
 		class DamageSystem
@@ -514,16 +514,16 @@ class cfgWeapons
 	};
 
 	class Asmond_AUGShort_Green;
-	class AUGShort_Green: Asmond_AUGShort_Green { scope=2; };
+	class AugShort_Green: Asmond_AUGShort_Green { scope=2; };
 
 	class Asmond_AUGShort_Grey;
-	class AUGShort_Grey: Asmond_AUGShort_Grey { scope=2; };
+	class AugShort_Grey: Asmond_AUGShort_Grey { scope=2; };
 
 	class Asmond_AUGShort_Beige;
-	class AUGShort_Beige: Asmond_AUGShort_Beige { scope=2; };
+	class AugShort_Beige: Asmond_AUGShort_Beige { scope=2; };
 
 	class Asmond_AUGShort_Black;
-	class AUGShort_Black: Asmond_AUGShort_Black
+	class AugShort_Black: Asmond_AUGShort_Black
 	{
 		scope=2;
 		class DamageSystem
@@ -543,13 +543,13 @@ class cfgWeapons
 	class B95_Wood: Asmond_B95_Wood { scope=2; };
 
 	class Asmond_SawoffB95_Wood;
-	class SawoffB95_Wood: Asmond_SawoffB95_Wood { scope=2; };
+	class SawedoffB95_Wood: Asmond_SawoffB95_Wood { scope=2; };
 
 	class Asmond_B95_Dark;
 	class B95_Dark: Asmond_B95_Dark { scope=2; };
 
 	class Asmond_SawoffB95_Dark;
-	class SawoffB95_Dark: Asmond_SawoffB95_Dark { scope=2; };
+	class SawedoffB95_Dark: Asmond_SawoffB95_Dark { scope=2; };
 
 	class Asmond_B95_Winter;
 	class B95_Winter: Asmond_B95_Winter
@@ -569,7 +569,7 @@ class cfgWeapons
 	};
 
 	class Asmond_SawoffB95_Winter;
-	class SawoffB95_Winter: Asmond_SawoffB95_Winter
+	class SawedoffB95_Winter: Asmond_SawoffB95_Winter
 	{
 		scope=2;
 		class DamageSystem
@@ -603,7 +603,7 @@ class cfgWeapons
 	};
 
 	class Asmond_SawoffB95_Moss;
-	class SawoffB95_Moss: Asmond_SawoffB95_Moss
+	class SawedoffB95_Moss: Asmond_SawoffB95_Moss
 	{
 		scope=2;
 		class DamageSystem
@@ -1006,7 +1006,7 @@ class cfgWeapons
 	};
 
 	class Asmond_FNX_Desert;
-	class FNX_Desert: Asmond_FNX_Desert
+	class FNX45_Desert: Asmond_FNX_Desert
 	{
 		scope=2;
 		class DamageSystem
@@ -1023,7 +1023,7 @@ class cfgWeapons
 	};
 
 	class Asmond_FNX_Black;
-	class FNX_Black: Asmond_FNX_Black
+	class FNX45_Black: Asmond_FNX_Black
 	{
 		scope=2;
 		class DamageSystem
@@ -1040,7 +1040,7 @@ class cfgWeapons
 	};
 
 	class Asmond_Glock_Desert;
-	class Glock_Desert: Asmond_Glock_Desert
+	class Glock19_Desert: Asmond_Glock_Desert
 	{
 		scope=2;
 		class DamageSystem
@@ -1057,7 +1057,7 @@ class cfgWeapons
 	};
 
 	class Asmond_Glock_Green;
-	class Glock_Green: Asmond_Glock_Green
+	class Glock19_Green: Asmond_Glock_Green
 	{
 		scope=2;
 		class DamageSystem
@@ -1074,7 +1074,7 @@ class cfgWeapons
 	};
 
 	class Asmond_Glock_Grey;
-	class Glock_Grey: Asmond_Glock_Grey
+	class Glock19_Grey: Asmond_Glock_Grey
 	{
 		scope=2;
 		class DamageSystem
@@ -1091,13 +1091,13 @@ class cfgWeapons
 	};
 
 	class Asmond_IZH18Rifle_Black;
-	class IZH18Rifle_Black: Asmond_IZH18Rifle_Black { scope=2; };
+	class Izh18_Black: Asmond_IZH18Rifle_Black { scope=2; };
 
 	class Asmond_SawedoffIzh18_Black;
 	class SawedoffIzh18_Black: Asmond_SawedoffIzh18_Black { scope=2; };
 
 	class Asmond_IZH18Rifle_Brown;
-	class IZH18Rifle_Brown: Asmond_IZH18Rifle_Brown
+	class Izh18_Brown: Asmond_IZH18Rifle_Brown
 	{
 		scope=2;
 		class DamageSystem
@@ -1131,7 +1131,7 @@ class cfgWeapons
 	};
 
 	class Asmond_IZH18Shotgun_RedWood;
-	class IZH18Shotgun_RedWood: Asmond_IZH18Shotgun_RedWood
+	class Izh18Shotgun_RedWood: Asmond_IZH18Shotgun_RedWood
 	{
 		scope=2;
 		class DamageSystem
@@ -1165,13 +1165,13 @@ class cfgWeapons
 	};
 
 	class Asmond_IZH18Shotgun_Black;
-	class IZH18Shotgun_Black: Asmond_IZH18Shotgun_Black { scope=2; };
+	class Izh18Shotgun_Black: Asmond_IZH18Shotgun_Black { scope=2; };
 
 	class Asmond_SawedoffIzh18Shotgun_Black;
 	class SawedoffIzh18Shotgun_Black: Asmond_SawedoffIzh18Shotgun_Black { scope=2; };
 
 	class Asmond_IZH43Shotgun_RedWood;
-	class IZH43Shotgun_RedWood: Asmond_IZH43Shotgun_RedWood
+	class Izh43Shotgun_RedWood: Asmond_IZH43Shotgun_RedWood
 	{
 		scope=2;
 		class DamageSystem
@@ -1205,7 +1205,7 @@ class cfgWeapons
 	};
 
 	class Asmond_IZH43Shotgun_Green;
-	class IZH43Shotgun_Green: Asmond_IZH43Shotgun_Green { scope=2; };
+	class Izh43Shotgun_Green: Asmond_IZH43Shotgun_Green { scope=2; };
 
 	class Asmond_SawedoffIzh43Shotgun_Green;
 	class SawedoffIzh43Shotgun_Green: Asmond_SawedoffIzh43Shotgun_Green { scope=2; };
@@ -1572,7 +1572,7 @@ class cfgWeapons
 	};
 
 	class Asmond_IJ70_Beige;
-	class IJ70_Beige: Asmond_IJ70_Beige
+	class MakarovIJ70_Beige: Asmond_IJ70_Beige
 	{
 		scope=2;
 		class DamageSystem
@@ -1589,7 +1589,7 @@ class cfgWeapons
 	};
 
 	class Asmond_IJ70_Red;
-	class IJ70_Red: Asmond_IJ70_Red
+	class MakarovIJ70_Red: Asmond_IJ70_Red
 	{
 		scope=2;
 		class DamageSystem

@@ -531,10 +531,10 @@ class cfgVehicles
 	};
 
 	class Asmond_PP19_Buttstock_Red;
-	class PP19_Buttstock_Red: Asmond_PP19_Buttstock_Red { scope=2; };
+	class PP19_Bttstck_Red: Asmond_PP19_Buttstock_Red { scope=2; };
 
 	class Asmond_PP19_Buttstock_Black;
-	class PP19_Buttstock_Black: Asmond_PP19_Buttstock_Black
+	class PP19_Bttstck_Black: Asmond_PP19_Buttstock_Black
 	{
 		scope=2;
 		class DamageSystem
@@ -551,7 +551,7 @@ class cfgVehicles
 	};
 
 	class Asmond_FAL_Buttstock_DarkWood;
-	class FAL_Buttstock_DarkWood: Asmond_FAL_Buttstock_DarkWood
+	class Fal_OeBttstck_DarkWood: Asmond_FAL_Buttstock_DarkWood
 	{
 		scope=2;
 		class DamageSystem
@@ -568,13 +568,13 @@ class cfgVehicles
 	};
 
 	class Asmond_FAL_Buttstock_Moss;
-	class FAL_Buttstock_Moss: Asmond_FAL_Buttstock_Moss { scope=2; };
+	class Fal_OeBttstck_Moss: Asmond_FAL_Buttstock_Moss { scope=2; };
 
 	class Asmond_FAL_Buttstock_Winter;
-	class FAL_Buttstock_Winter: Asmond_FAL_Buttstock_Winter { scope=2; };
+	class Fal_OeBttstck_Winter: Asmond_FAL_Buttstock_Winter { scope=2; };
 
 	class Asmond_FAL_Buttstock_LightWood;
-	class FAL_Buttstock_LightWood: Asmond_FAL_Buttstock_LightWood
+	class Fal_OeBttstck_LightWood: Asmond_FAL_Buttstock_LightWood
 	{
 		scope=2;
 		class DamageSystem
@@ -663,7 +663,7 @@ class cfgVehicles
 	class M4_CQBBttstck_Black_2: Asmond_M4_CQBBttstck_Black { scope=2; };
 
 	class Asmond_MP5K_Bttstck_Sand;
-	class MP5K_Bttstck_Sand: Asmond_MP5K_Bttstck_Sand
+	class MP5k_StockBttstck_Sand: Asmond_MP5K_Bttstck_Sand
 	{
 		scope=2;
 		class DamageSystem
@@ -680,7 +680,7 @@ class cfgVehicles
 	};
 
 	class Asmond_MP5K_PlasticHndgrd_Sand;
-	class MP5K_PlasticHndgrd_Sand: Asmond_MP5K_PlasticHndgrd_Sand
+	class MP5_PlasticHndgrd_Sand: Asmond_MP5K_PlasticHndgrd_Sand
 	{
 		scope=2;
 		class DamageSystem
@@ -697,7 +697,7 @@ class cfgVehicles
 	};
 
 	class Asmond_MP5K_Bttstck_Black;
-	class MP5K_Bttstck_Black: Asmond_MP5K_Bttstck_Black
+	class MP5k_StockBttstck_Black: Asmond_MP5K_Bttstck_Black
 	{
 		scope=2;
 		class DamageSystem
@@ -714,7 +714,7 @@ class cfgVehicles
 	};
 
 	class Asmond_MP5K_PlasticHndgrd_Black;
-	class MP5K_PlasticHndgrd_Black: Asmond_MP5K_PlasticHndgrd_Black
+	class MP5_PlasticHndgrd_Black: Asmond_MP5K_PlasticHndgrd_Black
 	{
 		scope=2;
 		class DamageSystem
@@ -731,7 +731,7 @@ class cfgVehicles
 	};
 
 	class Asmond_MP5K_RailHndgrd_Black;
-	class MP5K_RailHndgrd_Black: Asmond_MP5K_RailHndgrd_Black
+	class MP5_RailHndgrd_Black: Asmond_MP5K_RailHndgrd_Black
 	{
 		scope=2;
 		class DamageSystem
@@ -748,7 +748,7 @@ class cfgVehicles
 	};
 
 	class Asmond_MP5K_RailHndgrd_Sand;
-	class MP5K_RailHndgrd_Sand: Asmond_MP5K_RailHndgrd_Sand
+	class MP5_RailHndgrd_Sand: Asmond_MP5K_RailHndgrd_Sand
 	{
 		scope=2;
 		class DamageSystem

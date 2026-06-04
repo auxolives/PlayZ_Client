@@ -364,7 +364,7 @@ class CfgMagazines
 	};
 
 	class Asmond_Mag_PP19_Black;
-	class Mag_PP19_Black: Asmond_Mag_PP19_Black
+	class Mag_PP19_64Rnd_Black: Asmond_Mag_PP19_Black
 	{
 		scope=2;
 		class DamageSystem
@@ -398,28 +398,28 @@ class CfgMagazines
 	};
 
 	class Asmond_Mag_M4A1_10Rnd_Tan;
-	class Mag_M4A1_10Rnd_Tan: Asmond_Mag_M4A1_10Rnd_Tan { scope=2; };
+	class Mag_CMAG_10Rnd_Tan: Asmond_Mag_M4A1_10Rnd_Tan { scope=2; };
 
 	class Asmond_Mag_M4A1_10Rnd_Green;
-	class Mag_M4A1_10Rnd_Green: Asmond_Mag_M4A1_10Rnd_Green { scope=2; };
+	class Mag_CMAG_10Rnd_Green_2: Asmond_Mag_M4A1_10Rnd_Green { scope=2; };
 
 	class Asmond_Mag_M4A1_20Rnd_Tan;
-	class Mag_M4A1_20Rnd_Tan: Asmond_Mag_M4A1_20Rnd_Tan { scope=2; };
+	class Mag_CMAG_20Rnd_Tan: Asmond_Mag_M4A1_20Rnd_Tan { scope=2; };
 
 	class Asmond_Mag_M4A1_20Rnd_Green;
-	class Mag_M4A1_20Rnd_Green: Asmond_Mag_M4A1_20Rnd_Green { scope=2; };
+	class Mag_CMAG_20Rnd_Green_2: Asmond_Mag_M4A1_20Rnd_Green { scope=2; };
 
 	class Asmond_Mag_M4A1_30Rnd_Tan;
-	class Mag_M4A1_30Rnd_Tan: Asmond_Mag_M4A1_30Rnd_Tan { scope=2; };
+	class Mag_CMAG_30Rnd_Tan: Asmond_Mag_M4A1_30Rnd_Tan { scope=2; };
 
 	class Asmond_Mag_M4A1_30Rnd_Green;
-	class Mag_M4A1_30Rnd_Green: Asmond_Mag_M4A1_30Rnd_Green { scope=2; };
+	class Mag_CMAG_30Rnd_Green_2: Asmond_Mag_M4A1_30Rnd_Green { scope=2; };
 
 	class Asmond_Mag_M4A1_40Rnd_Tan;
-	class Mag_M4A1_40Rnd_Tan: Asmond_Mag_M4A1_40Rnd_Tan { scope=2; };
+	class Mag_CMAG_40Rnd_Tan: Asmond_Mag_M4A1_40Rnd_Tan { scope=2; };
 
 	class Asmond_Mag_M4A1_40Rnd_Green;
-	class Mag_M4A1_40Rnd_Green: Asmond_Mag_M4A1_40Rnd_Green { scope=2; };
+	class Mag_CMAG_40Rnd_Green_2: Asmond_Mag_M4A1_40Rnd_Green { scope=2; };
 
 	class Asmond_Mag_UMP_25Rnd_Winter;
 	class Mag_UMP_25Rnd_Winter: Asmond_Mag_UMP_25Rnd_Winter

@@ -21,27 +21,27 @@ class cfgVehicles
 	class PistolSuppressor;
 
 	class Asmond_Suppressor_EAST_Winter;
-	class Suppressor_EAST_Winter: Asmond_Suppressor_EAST_Winter { scope=2; };
+	class AK_Suppressor_Winter: Asmond_Suppressor_EAST_Winter { scope=2; };
 
 	class Asmond_Suppressor_EAST_Black;
-	class Suppressor_EAST_Black: Asmond_Suppressor_EAST_Black { scope=2; };
+	class AK_Suppressor_Black: Asmond_Suppressor_EAST_Black { scope=2; };
 
 	class Asmond_Suppressor_NATO_Black;
-	class Suppressor_NATO_Black: Asmond_Suppressor_NATO_Black { scope=2; };
+	class M4_Suppressor_Black: Asmond_Suppressor_NATO_Black { scope=2; };
 
 	class Asmond_Suppressor_NATO_Tan;
-	class Suppressor_NATO_Tan: Asmond_Suppressor_NATO_Tan { scope=2; };
+	class M4_Suppressor_Tan: Asmond_Suppressor_NATO_Tan { scope=2; };
 
 	class Asmond_Suppressor_NATO_Green;
-	class Suppressor_NATO_Green: Asmond_Suppressor_NATO_Green { scope=2; };
+	class M4_Suppressor_Green: Asmond_Suppressor_NATO_Green { scope=2; };
 
 	class Asmond_Suppressor_NATO_Winter;
-	class Suppressor_NATO_Winter: Asmond_Suppressor_NATO_Winter { scope=2; };
+	class M4_Suppressor_Winter: Asmond_Suppressor_NATO_Winter { scope=2; };
 
 	class Asmond_Suppressor_Pistol_Black;
-	class Suppressor_Pistol_Black: Asmond_Suppressor_Pistol_Black { scope=2; };
+	class PistolSuppressor_Black: Asmond_Suppressor_Pistol_Black { scope=2; };
 
 	class Asmond_Suppressor_Pistol_Tan;
-	class Suppressor_Pistol_Tan: Asmond_Suppressor_Pistol_Tan { scope=2; };
+	class PistolSuppressor_Tan: Asmond_Suppressor_Pistol_Tan { scope=2; };
 
 };

@@ -25,7 +25,7 @@ class cfgVehicles
 	class ReflexOptic;
 
 	class Asmond_Optic_MiniSight_Black;
-	class Optic_MiniSight_Black: Asmond_Optic_MiniSight_Black
+	class FNP45_MRDSOptic_Black: Asmond_Optic_MiniSight_Black
 	{
 		scope=2;
 		class DamageSystem
@@ -42,7 +42,7 @@ class cfgVehicles
 	};
 
 	class Asmond_Optic_MiniSight_Tan;
-	class Optic_MiniSight_Tan: Asmond_Optic_MiniSight_Tan
+	class FNP45_MRDSOptic_Tan: Asmond_Optic_MiniSight_Tan
 	{
 		scope=2;
 		class DamageSystem
@@ -59,10 +59,10 @@ class cfgVehicles
 	};
 
 	class Asmond_Optic_MK4_Winter;
-	class Optic_MK4_Winter: Asmond_Optic_MK4_Winter { scope=2; };
+	class MK4Optic_Winter: Asmond_Optic_MK4_Winter { scope=2; };
 
 	class Asmond_Optic_PSO1_Black;
-	class Optic_PSO1_Black: Asmond_Optic_PSO1_Black
+	class PSO1Optic_Black: Asmond_Optic_PSO1_Black
 	{
 		scope=2;
 		class DamageSystem
@@ -79,7 +79,7 @@ class cfgVehicles
 	};
 
 	class Asmond_Optic_PSO11_Black;
-	class Optic_PSO11_Black: Asmond_Optic_PSO11_Black
+	class PSO11Optic_Black: Asmond_Optic_PSO11_Black
 	{
 		scope=2;
 		class DamageSystem
@@ -96,7 +96,7 @@ class cfgVehicles
 	};
 
 	class Asmond_Optic_PUScope_White;
-	class Optic_PUScope_White: Asmond_Optic_PUScope_White
+	class PUScopeOptic_White: Asmond_Optic_PUScope_White
 	{
 		scope=2;
 		class DamageSystem
@@ -113,7 +113,7 @@ class cfgVehicles
 	};
 
 	class Asmond_Optic_Reflex_Black;
-	class Optic_Reflex_Black: Asmond_Optic_Reflex_Black
+	class ReflexOptic_Black: Asmond_Optic_Reflex_Black
 	{
 		scope=2;
 		class DamageSystem
@@ -130,7 +130,7 @@ class cfgVehicles
 	};
 
 	class Asmond_Optic_Reflex_Tan;
-	class Optic_Reflex_Tan: Asmond_Optic_Reflex_Tan
+	class ReflexOptic_Tan: Asmond_Optic_Reflex_Tan
 	{
 		scope=2;
 		class DamageSystem
