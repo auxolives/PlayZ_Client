@@ -1659,7 +1659,7 @@ class CfgVehicles
 	class Sweater_Green_2: Asmond_Sweater_Green { scope=2; };
 
 	class Asmond_Sweater_Grey;
-	class Sweater_Gray: Asmond_Sweater_Grey { scope=2; };
+	class Sweater_Gray_2: Asmond_Sweater_Grey { scope=2; };
 
 	class Asmond_Sweater_Blue;
 	class Sweater_Blue_2: Asmond_Sweater_Blue { scope=2; };
