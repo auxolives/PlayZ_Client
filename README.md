@@ -46,6 +46,8 @@ Set `MOD_OUT` in `.vscode/scripts/Build-PlayZ_Client.bat` to your CFTools `@Play
 - `PlayZLighting` — custom global lighting profiles (server `lightingConfig` IDs **60–64**). Map-agnostic; vanilla Sakhal ID **2** still works via `super` when those IDs are not used.
 - `PlayZSakhal` — altitude hypoxia on **Sakhal** only: stamina cap penalty above **200 m**, client chrom/blur PPE, sprint breath audio. Winter headgear + glasses soften PPE only (no stamina mitigation without pressurized gear). Tunables in `GameConstants.c` (`PLAYZ_SAKHAL_HYPOXIA_*`).
 - `PlayZAsmond` — vanilla-name aliases for Asmond clothing (~900) and weapons (~300) under `DZ/characters/` and `DZ/weapons/`. Requires `AsmondClothing` and `AsmondWeapons` in `-mod=`; assets stay in those mods, PlayZ only forwards `Asmond_*` into vanilla class names (`scope=2`).
+- `PlayZTerjeRadiation` — vanilla clothing radiation protection, dry bag/drysack isolation, radioactive rain/snow client PPE. Requires `TerjeRadiation` in `-mod=`.
+- `PlayZUI` — custom main menu, loading screen, in-game/logout dialogs, login queue/time UI, and Terje Start Screen page layouts. Requires `TerjeStartScreen` in `-mod=`. Main-menu **Play** uses hardcoded `ConnectFromServerBrowserEx` (dev: `127.0.0.1:2305`, query `27018` — change in `scripts/5_Mission/MainMenu.c` for production).
 
 ## Adding a new shared sub-mod
 
