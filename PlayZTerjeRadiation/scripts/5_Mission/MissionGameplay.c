@@ -10,6 +10,27 @@ modded class MissionGameplay
 	{
 		super.OnUpdate(timeslice);
 		UpdatePlayZRadioactiveRainPPE(timeslice);
+		UpdatePlayZDosimeterTooltipRefresh();
+	}
+
+	protected void UpdatePlayZDosimeterTooltipRefresh()
+	{
+		if (GetGame().IsDedicatedServer())
+		{
+			return;
+		}
+
+		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+		if (!player || !player.PlayZConsumeDosimeterTooltipDirty())
+		{
+			return;
+		}
+
+		ItemManager itemManager = ItemManager.GetInstance();
+		if (itemManager)
+		{
+			itemManager.PlayZRefreshHoveredItemTooltip();
+		}
 	}
 
 	protected void UpdatePlayZRadioactiveRainPPE(float timeslice)
