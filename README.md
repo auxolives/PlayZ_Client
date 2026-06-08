@@ -2,7 +2,7 @@
 
 Shared PlayZ sub-mods for the **Sakhal** server. Everything here is packed into PBOs loaded by **both** clients and the dedicated server through `-mod=`.
 
-No DayZ Expansion modules on Sakhal — client features are vanilla + PlayZ only.
+Sakhal also loads **DayZ Expansion** as a separate third-party mod (limited scope — mainly airdrops). That stack is **not** part of `PlayZ_Client/`. See [.cursor/docs/DAYZ_EXPANSION_SAKHAL.md](../.cursor/docs/DAYZ_EXPANSION_SAKHAL.md).
 
 ## Rules
 
@@ -11,7 +11,7 @@ No DayZ Expansion modules on Sakhal — client features are vanilla + PlayZ only
 - Script `files[]` paths use the workspace prefix `PlayZ_Client/<AddonName>/scripts/...` (see existing `PlayZCore/config.cpp`).
 - `requiredAddons[]` may list engine addons (`DZ_Data`, `DZ_Scripts`) or other `PlayZ_Client/` sub-mods.
 - **Must not** require or reference any `PlayZ_Server/` addon or class.
-- **Must not** depend on DayZ Expansion.
+- **Must not** depend on DayZ Expansion (Expansion is a separate `-mod=`; keep PlayZ PBOs independent).
 
 ## Split-mod pattern (when a feature needs both sides)
 
