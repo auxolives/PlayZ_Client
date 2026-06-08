@@ -58,7 +58,7 @@
      vexactpos 0
      hexactsize 0
      vexactsize 0
-     imageTexture "{9A0DA73AC3FCC2C4}PlayZ_Client/PlayZUI/gui/textures/LOGOTEXT.edds"
+     imageTexture "{C52ED4083E5ACECC}PlayZ_Client/PlayZUI/gui/textures/LOGOTEXT.edds"
      mode blend
      "src alpha" 1
      "stretch mode" stretch_w_h
@@ -66,7 +66,6 @@
     }
     ProgressBarWidgetClass LoadingBar {
      ignorepointer 1
-     color 1 1 1 1
      position 0 0
      size 1 5
      halign center_ref
