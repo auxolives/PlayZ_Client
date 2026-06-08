@@ -40,13 +40,12 @@
 		game.GetBacklit().LoadingAnim();
 		
 		if (m_ProgressLoading)
-		{
-			m_ProgressLoading.SetColor(ARGB(255, 255, 255, 255));
 			ProgressAsync.SetProgressData(m_ProgressLoading);
-		}
 		
 		if (m_ImageBackground)
 			ProgressAsync.SetUserData(m_ImageBackground);
+
+		PlayZUIManager.ApplyPlayZLogo(m_ImageLogoMid);
 	}
 
 	override void SetTitle(string title)
@@ -85,6 +84,9 @@
 
 		ProgressAsync.SetProgressData(m_ProgressLoading);
 		ProgressAsync.SetUserData(m_ImageBackground);
+
+		// DayZ Expansion replaces ImageLogo in its LoadingScreen mod — Source Found: DayZExpansion/Scripts/3_Game/DayZExpansion/Client/LoadingScreen/ExpansionLoadingScreen.c:24-27
+		PlayZUIManager.ApplyPlayZLogo(m_ImageLogoMid);
 	}
 
 	override void Hide(bool force)
@@ -124,6 +126,8 @@ modded class LoginQueueBase
 		if (m_txtNote)
 			m_txtNote.Show(true);
 
+		PlayZUIManager.ApplyPlayZLogoOnRoot(layoutRoot);
+
 		return layoutRoot;
 	}
 }
@@ -146,6 +150,8 @@ modded class LoginTimeBase
 		
 		if (m_txtDescription)
 			m_txtDescription.Show(true);
+
+		PlayZUIManager.ApplyPlayZLogoOnRoot(layoutRoot);
 
 		return layoutRoot;
 	}
