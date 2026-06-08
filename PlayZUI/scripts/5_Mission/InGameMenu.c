@@ -227,6 +227,7 @@ modded class InGameMenu
 
 		PlayZApplyLinkIconDefaultColors();
 		PlayZApplyBoldToMenuTextButtons();
+		PlayZUIManager.ApplyPlayZLogoOnRoot(layoutRoot);
 
 		return layoutRoot;
 	}

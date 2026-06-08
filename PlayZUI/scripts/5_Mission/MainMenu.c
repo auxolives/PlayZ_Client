@@ -41,6 +41,19 @@ modded class MainMenu
 		}
 	}
 
+	protected void PlayZSetPlayLogoColor(int color)
+	{
+		if (!layoutRoot)
+		{
+			return;
+		}
+		Widget playImage = layoutRoot.FindAnyWidget("play_image");
+		if (playImage)
+		{
+			playImage.SetColor(color);
+		}
+	}
+
 	protected void PlayZApplyLinkIconDefaultColors()
 	{
 		if (!layoutRoot)
@@ -196,6 +209,7 @@ modded class MainMenu
 		g_Game.SetLoadState(DayZLoadState.MAIN_MENU_CONTROLLER_SELECT);
 
 		PlayZApplyLinkIconDefaultColors();
+		PlayZUIManager.ApplyPlayZLogoOnRoot(layoutRoot);
 
 		return layoutRoot;
 	}
@@ -454,6 +468,8 @@ modded class MainMenu
 		{
 			m_DisplayedDlcHandler.UpdateAllPromotionInfo();
 		}
+
+		PlayZUIManager.ApplyPlayZLogoOnRoot(layoutRoot);
 	}
 
 	override void OnShow()
@@ -498,12 +514,9 @@ modded class MainMenu
 		}
 		if (w.GetName() == "play" || w.GetName() == "play_image")
 		{
-			int color_pnl = PlayZMenuStyle.PanelTransparent();
-			int color_lbl = PlayZMenuStyle.AccentColor();
-			int color_img = PlayZMenuStyle.AccentColor();
-			ButtonSetColor(w, color_pnl);
-			ButtonSetTextColor(w, color_lbl);
-			ImagenSetColor(w, color_img);
+			ButtonSetColor(w, PlayZMenuStyle.PanelTransparent());
+			ButtonSetTextColor(w, PlayZMenuStyle.AccentColor());
+			PlayZSetPlayLogoColor(PlayZMenuStyle.AccentColor());
 			return;
 		}
 		super.ColorHighlight(w);
@@ -525,12 +538,9 @@ modded class MainMenu
 		}
 		if (w.GetName() == "play" || w.GetName() == "play_image")
 		{
-			int color_pnl = PlayZMenuStyle.PanelTransparent();
-			int color_lbl = PlayZMenuStyle.TextNormal();
-			int color_img = PlayZMenuStyle.IconNormal();
-			ButtonSetColor(w, color_pnl);
-			ButtonSetTextColor(w, color_lbl);
-			ImagenSetColor(w, color_img);
+			ButtonSetColor(w, PlayZMenuStyle.PanelTransparent());
+			ButtonSetTextColor(w, PlayZMenuStyle.TextNormal());
+			PlayZSetPlayLogoColor(PlayZMenuStyle.IconNormal());
 			return;
 		}
 		super.ColorNormal(w);

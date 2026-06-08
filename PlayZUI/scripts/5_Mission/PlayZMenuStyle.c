@@ -4,14 +4,12 @@ class PlayZMenuStyle
 
 	static int AccentColor()
 	{
-		// Signature PlayZ accent red (#FF3000), fully opaque.
-		return ARGB(255, 255, 48, 0);
+		return PlayZUIManager.SignatureGreen();
 	}
 
 	static int AccentColorSoft()
 	{
-		// Softer accent orange-red used for secondary highlights/icons.
-		return ARGB(255, 220, 42, 0);
+		return ARGB(255, 0, 220, 32);
 	}
 
 	static int TextNormal()
