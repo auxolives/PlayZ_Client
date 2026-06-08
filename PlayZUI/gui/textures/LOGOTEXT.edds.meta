@@ -1,7 +1,7 @@
-﻿MetaFileClass {
- Name "{9A0DA73AC3FCC2C4}PlayZ_Client/PlayZUI/gui/textures/LOGOTEXT.edds"
- Author "gs66"
- ChangeDate -1262177164
+MetaFileClass {
+ Name "{C52ED4083E5ACECC}PlayZ_Client/PlayZUI/gui/textures/LOGOTEXT.edds"
+ Author "olivier"
+ ChangeDate 756217032
  Configurations {
   PNGResourceClass PC {
    SourceFile "LOGOTEXT.png"
