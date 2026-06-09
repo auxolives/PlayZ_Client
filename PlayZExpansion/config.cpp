@@ -12,7 +12,12 @@ class CfgPatches
 			"TerjeCore",
 			"TerjeStartScreen",
 			"DayZExpansion_Core_Scripts",
-			"DayZExpansion_Market_Scripts"
+			"DayZExpansion_Scripts",
+			"DayZExpansion_Market_Scripts",
+			"DayZExpansion_P2PMarket_Scripts",
+			"DayZExpansion_Chat_Scripts",
+			"DayZExpansion_NameTags_Scripts",
+			"DayZExpansion_AI_Scripts"
 		};
 	};
 };
