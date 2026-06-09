@@ -48,6 +48,7 @@ Set `MOD_OUT` in `.vscode/scripts/Build-PlayZ_Client.bat` to your CFTools `@Play
 - `PlayZAsmond` — vanilla-name aliases for Asmond clothing (~900) and weapons (~300) under `DZ/characters/` and `DZ/weapons/`. Requires `AsmondClothing` and `AsmondWeapons` in `-mod=`; assets stay in those mods, PlayZ only forwards `Asmond_*` into vanilla class names (`scope=2`).
 - `PlayZTerjeRadiation` — vanilla clothing radiation protection, dry bag/drysack isolation, radioactive rain/snow client PPE. Requires `TerjeRadiation` in `-mod=`.
 - `PlayZUI` — custom main menu, loading screen, in-game/logout dialogs, login queue/time UI, and Terje Start Screen page layouts. Requires `TerjeStartScreen` in `-mod=`. Main-menu **Play** uses hardcoded `ConnectFromServerBrowserEx` (dev: `127.0.0.1:2305`, query `27018` — change in `scripts/5_Mission/MainMenu.c` for production).
+- `PlayZExpansion` — Sakhal Expansion compatibility patches (not a fork of Expansion). Requires `DayZ-Expansion-Market` (and P2P Market if used) in `-mod=` **after** Expansion, **with** `@PlayZExpansion` loaded after Expansion on the mod line. Currently: `NailBox` counts as one exchange unit for P2P/market currency (`Exchange.json` @ 70).
 
 ## Adding a new shared sub-mod
 
