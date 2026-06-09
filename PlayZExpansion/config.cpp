@@ -8,6 +8,8 @@ class CfgPatches
 		requiredAddons[] = {
 			"DZ_Data",
 			"DZ_Scripts",
+			"PlayZUI",
+			"DayZExpansion_Core_Scripts",
 			"DayZExpansion_Market_Scripts"
 		};
 	};
@@ -36,6 +38,13 @@ class CfgMods
 				value = "";
 				files[] = {
 					"PlayZ_Client/PlayZExpansion/scripts/4_World"
+				};
+			};
+			class missionScriptModule
+			{
+				value = "";
+				files[] = {
+					"PlayZ_Client/PlayZExpansion/scripts/5_Mission"
 				};
 			};
 		};
