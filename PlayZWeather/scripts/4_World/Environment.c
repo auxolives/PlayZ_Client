@@ -14,6 +14,16 @@ modded class Environment
 		// For a very gradual fade, we could use even smaller value or tie it to weather transition.
 		// But this provides a decent starting point for "gradual".
 		m_PlayZTempMod = Math.Lerp(m_PlayZTempMod, targetMod, pDelta * 0.05);
+
+		if (GetGame().IsServer())
+		{
+			PlayZConfig.m_AuthoritativeTempMod = m_PlayZTempMod;
+		}
+	}
+
+	void PlayZ_ApplySyncedTempMod(float mod)
+	{
+		m_PlayZTempMod = mod;
 	}
 
 	override float GetEnvironmentTemperature()

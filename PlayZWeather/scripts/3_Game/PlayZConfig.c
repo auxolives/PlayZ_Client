@@ -13,6 +13,10 @@ class PlayZConfig
 	static int m_LastVolFogTransitionStartMs = 0;
 	static float m_LastVolFogTransitionTimeSec = 0;
 
+	// Server: smoothed heatwave/coldwave tint weight + temp mod for join resync.
+	static float m_ServerScenarioTintWeight = 0.0;
+	static float m_AuthoritativeTempMod = 0.0;
+
 	private static ref PlayZWeatherConfig m_Weather;
 	private static ref PlayZPPEConfig m_PPE;
 
@@ -130,6 +134,19 @@ class PlayZConfig
 		rpc.Write(volFogHeight);
 		rpc.Write(volFogBias);
 		rpc.Write(volFogTransitionTime);
+
+		bool isJoinResync = false;
+		if (identity)
+		{
+			isJoinResync = true;
+		}
+		rpc.Write(isJoinResync);
+		if (isJoinResync)
+		{
+			rpc.Write(m_ServerScenarioTintWeight);
+			rpc.Write(m_AuthoritativeTempMod);
+		}
+
 		rpc.Send(null, PlayZRPCs.SYNC_SCENARIO, true, identity);
 	}
 

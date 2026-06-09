@@ -39,6 +39,10 @@ modded class MissionGameplay
 	protected float m_TargetR       = 1.0;
 	protected float m_TargetG       = 1.0;
 	protected float m_TargetB       = 1.0;
+	protected float m_PlayZScenarioTintWeight = 0.0;
+	protected bool m_PlayZPendingJoinWeatherSync = false;
+	protected float m_PlayZPendingJoinTintWeight = 0.0;
+	protected float m_PlayZPendingJoinTempMod = 0.0;
 
 	override void OnInit()
 	{
@@ -68,11 +72,29 @@ modded class MissionGameplay
 			float volFogHeight;
 			float volFogBias;
 			float volFogTransitionTime;
-			if (ctx.Read(scenarioName) && ctx.Read(tempMod) && ctx.Read(volFogDist) && ctx.Read(volFogHeight) && ctx.Read(volFogBias) && ctx.Read(volFogTransitionTime))
+			bool isJoinResync;
+			if (!ctx.Read(scenarioName)) return;
+			if (!ctx.Read(tempMod)) return;
+			if (!ctx.Read(volFogDist)) return;
+			if (!ctx.Read(volFogHeight)) return;
+			if (!ctx.Read(volFogBias)) return;
+			if (!ctx.Read(volFogTransitionTime)) return;
+			if (!ctx.Read(isJoinResync)) return;
+
+			PlayZConfig.m_CurrentScenarioName = scenarioName;
+			PlayZConfig.m_CurrentScenarioTempMod = tempMod;
+			PlayZConfig.ApplyClientScenarioVolFog(volFogDist, volFogHeight, volFogBias, volFogTransitionTime);
+
+			if (isJoinResync)
 			{
-				PlayZConfig.m_CurrentScenarioName = scenarioName;
-				PlayZConfig.m_CurrentScenarioTempMod = tempMod;
-				PlayZConfig.ApplyClientScenarioVolFog(volFogDist, volFogHeight, volFogBias, volFogTransitionTime);
+				float scenarioTintWeight;
+				float syncedTempMod;
+				if (!ctx.Read(scenarioTintWeight)) return;
+				if (!ctx.Read(syncedTempMod)) return;
+				m_PlayZPendingJoinTintWeight = scenarioTintWeight;
+				m_PlayZPendingJoinTempMod = syncedTempMod;
+				m_PlayZPendingJoinWeatherSync = true;
+				PlayZ_TryApplyPendingJoinWeatherState();
 			}
 		}
 	}
@@ -101,8 +123,189 @@ modded class MissionGameplay
 		return wind / maxWind;
 	}
 
+	void PlayZ_ApplyWeatherTintTargets(float overcast, float rain, float snowfall, float scenarioTintWeight, PlayZPPEConfig ppe)
+	{
+		float baseR = m_TargetR;
+		float baseG = m_TargetG;
+		float baseB = m_TargetB;
+
+		if (overcast < 0.3)
+		{
+			baseR = ppe.m_ColorClearR;
+			baseG = ppe.m_ColorClearG;
+			baseB = ppe.m_ColorClearB;
+		}
+		else if (snowfall > 0.1)
+		{
+			baseR = ppe.m_ColorSnowR;
+			baseG = ppe.m_ColorSnowG;
+			baseB = ppe.m_ColorSnowB;
+		}
+		else if (rain > 0.1 || overcast > 0.8)
+		{
+			baseR = ppe.m_ColorGloomyR;
+			baseG = ppe.m_ColorGloomyG;
+			baseB = ppe.m_ColorGloomyB;
+		}
+
+		float eventR = baseR;
+		float eventG = baseG;
+		float eventB = baseB;
+		string scenarioName = PlayZConfig.m_CurrentScenarioName;
+
+		if (scenarioName == "Heatwave")
+		{
+			eventR = ppe.m_ColorHeatwaveR;
+			eventG = ppe.m_ColorHeatwaveG;
+			eventB = ppe.m_ColorHeatwaveB;
+		}
+		else if (scenarioName == "Coldwave")
+		{
+			eventR = ppe.m_ColorColdwaveR;
+			eventG = ppe.m_ColorColdwaveG;
+			eventB = ppe.m_ColorColdwaveB;
+		}
+
+		m_TargetR = Math.Lerp(baseR, eventR, scenarioTintWeight);
+		m_TargetG = Math.Lerp(baseG, eventG, scenarioTintWeight);
+		m_TargetB = Math.Lerp(baseB, eventB, scenarioTintWeight);
+	}
+
+	void PlayZ_RecalculatePPETargets(Weather weather, PlayZPPEConfig ppe)
+	{
+		float overcast = weather.GetOvercast().GetActual();
+		float rain = weather.GetRain().GetActual();
+		float snowfall = weather.GetSnowfall().GetActual();
+		float windNormalized = GetNormalizedWindMagnitude(weather);
+
+		m_TargetSat = Math.Lerp(ppe.m_SaturationMax, ppe.m_SaturationMin, overcast);
+		m_TargetCon = Math.Lerp(ppe.m_ContrastMin, ppe.m_ContrastMax, overcast);
+
+		PlayZ_ApplyWeatherTintTargets(overcast, rain, snowfall, m_PlayZScenarioTintWeight, ppe);
+
+		if (overcast < 0.3 && m_PlayZScenarioTintWeight < 0.01)
+		{
+			m_TargetSat = ppe.m_SaturationBoostClear;
+		}
+
+		m_TargetGrain = Math.Pow(rain, 2.0) * ppe.m_GrainIntensity;
+
+		m_TargetChrom = 0;
+		if (windNormalized > 0.5)
+		{
+			m_TargetChrom = Math.InverseLerp(0.7, 1.0, windNormalized) * ppe.m_ChromIntensity;
+		}
+
+		m_TargetGodRays = Math.Clamp(1.0 - overcast, 0.0, ppe.m_GodRaysIntensity);
+		m_TargetSunVis = Math.Clamp(1.0 - overcast, 0.0, 1.0);
+
+		if (overcast > 0.6)
+		{
+			m_TargetGodRays = 0;
+			m_TargetSunVis = 0;
+		}
+
+		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+		if (player)
+		{
+			m_RoofCheckTimer += 0.2;
+			if (m_RoofCheckTimer >= 3.0)
+			{
+				m_RoofCheckTimer = 0;
+				m_IsUnderRoof = player.IsSoundInsideBuilding();
+
+				if (!m_IsUnderRoof)
+				{
+					vector curPos = player.GetPosition();
+					if (vector.DistanceSq(curPos, m_LastRoofCheckPos) > 0.25)
+					{
+						m_LastRoofCheckPos = curPos;
+						vector from = curPos;
+						vector to = from + "0 15 0";
+						Object hitObject;
+						vector hitPos;
+						vector hitNormal;
+						float hitFraction;
+						m_IsUnderRoof = DayZPhysics.RayCastBullet(from, to, PhxInteractionLayers.BUILDING|PhxInteractionLayers.VEHICLE|PhxInteractionLayers.ITEM_LARGE, null, hitObject, hitPos, hitNormal, hitFraction);
+					}
+				}
+			}
+
+			if (m_IsUnderRoof)
+			{
+				m_TargetGrain = 0;
+			}
+
+			if (player.IsSoundInsideBuilding())
+			{
+				m_TargetChrom = 0;
+			}
+		}
+	}
+
+	void PlayZ_ResetPPELastApplied()
+	{
+		m_LastSat = -1.0;
+		m_LastCon = -1.0;
+		m_LastGrain = -1.0;
+		m_LastChrom = -1.0;
+		m_LastGodRays = -1.0;
+		m_LastSunVis = -1.0;
+		m_LastR = -1.0;
+		m_LastG = -1.0;
+		m_LastB = -1.0;
+	}
+
+	void PlayZ_TryApplyPendingJoinWeatherState()
+	{
+		if (!m_PlayZPendingJoinWeatherSync)
+		{
+			return;
+		}
+
+		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+		if (!player)
+		{
+			return;
+		}
+
+		PlayZ_ApplyJoinWeatherState(m_PlayZPendingJoinTintWeight, m_PlayZPendingJoinTempMod);
+		m_PlayZPendingJoinWeatherSync = false;
+	}
+
+	void PlayZ_ApplyJoinWeatherState(float scenarioTintWeight, float syncedTempMod)
+	{
+		m_PlayZScenarioTintWeight = scenarioTintWeight;
+
+		Weather weather = GetGame().GetWeather();
+		if (weather)
+		{
+			PlayZPPEConfig ppe = PlayZConfig.GetPPE();
+			PlayZ_RecalculatePPETargets(weather, ppe);
+
+			m_PPE_Saturation = m_TargetSat;
+			m_PPE_Contrast = m_TargetCon;
+			m_PPE_Grain = m_TargetGrain;
+			m_PPE_Chrom = m_TargetChrom;
+			m_PPE_GodRays = m_TargetGodRays;
+			m_PPE_SunVis = m_TargetSunVis;
+			m_PPE_ColorR = m_TargetR;
+			m_PPE_ColorG = m_TargetG;
+			m_PPE_ColorB = m_TargetB;
+			PlayZ_ResetPPELastApplied();
+		}
+
+		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+		if (player)
+		{
+			player.PlayZ_ApplySyncedWeatherTempMod(syncedTempMod);
+		}
+	}
+
 	void UpdateWeatherPPE(float timeslice)
 	{
+		PlayZ_TryApplyPendingJoinWeatherState();
+
 		float namOverallW = PlayZWeatherNamalskPPEBridge.GetOverallWeight();
 		float namColorW = PlayZWeatherNamalskPPEBridge.GetGlowColorWeight();
 
@@ -119,114 +322,20 @@ modded class MissionGameplay
 		if (!m_PlayZWeatherPPE.IsRequesterRunning())
 			m_PlayZWeatherPPE.Start();
 
+		float scenarioTintTarget = PlayZWeatherPPE.GetScenarioTintWeightRaw(PlayZConfig.m_CurrentScenarioName, weather);
+		float scenarioTintInterp = ppe.m_WeatherFadeSpeed * timeslice;
+		if (PlayZConfig.GetWeather().m_DebugCycleScenarios)
+		{
+			scenarioTintInterp = 2.0 * timeslice;
+		}
+		m_PlayZScenarioTintWeight = Math.Lerp(m_PlayZScenarioTintWeight, scenarioTintTarget, scenarioTintInterp);
+
 		// 1. Calculate Target Values based on synced weather phenomena (5Hz Throttle)
 		m_TargetUpdateTimer += timeslice;
 		if (m_TargetUpdateTimer >= 0.2) // 5Hz
 		{
 			m_TargetUpdateTimer = 0;
-			
-			float overcast = weather.GetOvercast().GetActual();
-			float rain = weather.GetRain().GetActual();
-			float snowfall = weather.GetSnowfall().GetActual();
-			float windNormalized = GetNormalizedWindMagnitude(weather);
-
-			// Logic for Saturation/Contrast: Desaturate as it gets cloudier/rainier
-			m_TargetSat = Math.Lerp(ppe.m_SaturationMax, ppe.m_SaturationMin, overcast);
-			m_TargetCon = Math.Lerp(ppe.m_ContrastMin, ppe.m_ContrastMax, overcast); // More dramatic contrast when dark
-
-			// Logic for Tints
-			if (PlayZConfig.m_CurrentScenarioName == "Heatwave")
-			{
-				m_TargetR = ppe.m_ColorHeatwaveR; m_TargetG = ppe.m_ColorHeatwaveG; m_TargetB = ppe.m_ColorHeatwaveB;
-			}
-			else if (PlayZConfig.m_CurrentScenarioName == "Coldwave")
-			{
-				m_TargetR = ppe.m_ColorColdwaveR; m_TargetG = ppe.m_ColorColdwaveG; m_TargetB = ppe.m_ColorColdwaveB;
-			}
-			else if (overcast < 0.3) // Clear/Sunny
-			{
-				m_TargetR = ppe.m_ColorClearR; m_TargetG = ppe.m_ColorClearG; m_TargetB = ppe.m_ColorClearB;
-				m_TargetSat = ppe.m_SaturationBoostClear; 
-			}
-			else if (snowfall > 0.1) // Snowy
-			{
-				m_TargetR = ppe.m_ColorSnowR; m_TargetG = ppe.m_ColorSnowG; m_TargetB = ppe.m_ColorSnowB;
-			}
-			else if (rain > 0.1 || overcast > 0.8) // Rainy/Gloomy
-			{
-				m_TargetR = ppe.m_ColorGloomyR; m_TargetG = ppe.m_ColorGloomyG; m_TargetB = ppe.m_ColorGloomyB;
-			}
-
-			// Logic for Film Grain: Scales with Rain (Power Progression)
-			m_TargetGrain = Math.Pow(rain, 2.0) * ppe.m_GrainIntensity;
-			
-			// Logic for Chromatic Aberration: Scales with Wind
-			m_TargetChrom = 0;
-			if (windNormalized > 0.5)
-			{
-				m_TargetChrom = Math.InverseLerp(0.7, 1.0, windNormalized) * ppe.m_ChromIntensity;
-			}
-
-			// Logic for God Rays: High in sunny days, diffused in light fog, 0 in storms
-			m_TargetGodRays = Math.Clamp(1.0 - overcast, 0.0, ppe.m_GodRaysIntensity);
-			m_TargetSunVis = Math.Clamp(1.0 - overcast, 0.0, 1.0);
-			
-			if (overcast > 0.6) // Too cloudy for god rays
-			{
-				m_TargetGodRays = 0;
-				m_TargetSunVis = 0;
-			}
-
-			// Logic for Shelter: Disable effects if covered
-			PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
-			if (player)
-			{
-				// Interval Raycast Check (Every 3.0s) for Roof Detection
-				m_RoofCheckTimer += 0.2; // We are in a 0.2s block
-				if (m_RoofCheckTimer >= 3.0)
-				{
-					m_RoofCheckTimer = 0;
-
-					// P0 Optimization: Use sound-engine building state first (very cheap bit-check)
-					m_IsUnderRoof = player.IsSoundInsideBuilding();
-
-					// If sound-engine says we are "outside", we might still be under a static roof (carport, shed)
-					if (!m_IsUnderRoof)
-					{
-						vector curPos = player.GetPosition();
-
-						// P1 Optimization: Skip raycast if player has not moved since last check.
-						// Static roofs don't change — if position is the same, result is the same.
-						if (vector.DistanceSq(curPos, m_LastRoofCheckPos) > 0.25)
-						{
-							m_LastRoofCheckPos = curPos;
-
-							vector from = curPos;
-							vector to = from + "0 15 0"; // Check 15m above head (sufficient for most structures)
-
-							Object hitObject;
-							vector hitPos;
-							vector hitNormal;
-							float hitFraction;
-
-							// Raycast against buildings, vehicles, and large items (tents)
-							m_IsUnderRoof = DayZPhysics.RayCastBullet(from, to, PhxInteractionLayers.BUILDING|PhxInteractionLayers.VEHICLE|PhxInteractionLayers.ITEM_LARGE, null, hitObject, hitPos, hitNormal, hitFraction);
-						}
-					}
-				}
-
-				// Grain (Noise) is blocked by ANY roof
-				if (m_IsUnderRoof)
-				{
-					m_TargetGrain = 0; 
-				}
-
-				// Chromatic Aberration (Wind) is only blocked if actually INSIDE a building volume
-				if (player.IsSoundInsideBuilding())
-				{
-					m_TargetChrom = 0;
-				}
-			}
+			PlayZ_RecalculatePPETargets(weather, ppe);
 		}
 
 		// 2. Smooth Interpolation

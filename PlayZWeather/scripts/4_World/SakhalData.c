@@ -366,6 +366,8 @@ modded class SakhalData
 			m_Weather.SetDynVolFogHeightDensity(targetVolFogHeight, phmnTime);
 			m_Weather.SetDynVolFogHeightBias(targetVolFogBias, phmnTime);
 
+			PlayZConfig.m_ServerScenarioTintWeight = PlayZWeatherPPE.GetScenarioTintWeightRaw(displayName, m_Weather);
+
 			PlayZConfig.SyncScenario(displayName, PlayZConfig.m_CurrentScenarioTempMod, targetVolFogDist, targetVolFogHeight, targetVolFogBias, phmnTime);
 			
 			Debug.WeatherLog(string.Format("PlayZWeather:: Applying Scenario: %1 (snow: %2), Overcast: %3, Precip: %4, Wind: %5, FogDist: %6, Duration: %7", displayName, m_IsSnowMode, targetOvercast, targetRain, targetWind, targetVolFogDist, totalDuration));

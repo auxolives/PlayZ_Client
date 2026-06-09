@@ -17,4 +17,28 @@ modded class MissionServer
 		// Sync PlayZ configurations to the joining player
 		PlayZConfig.SyncConfig(identity);
 	}
+
+	override void OnUpdate(float timeslice)
+	{
+		super.OnUpdate(timeslice);
+
+		if (!GetGame().IsServer())
+		{
+			return;
+		}
+
+		Weather weather = GetGame().GetWeather();
+		if (!weather)
+		{
+			return;
+		}
+
+		float targetWeight = PlayZWeatherPPE.GetScenarioTintWeightRaw(PlayZConfig.m_CurrentScenarioName, weather);
+		float interp = PlayZConfig.GetPPE().m_WeatherFadeSpeed * timeslice;
+		if (PlayZConfig.GetWeather().m_DebugCycleScenarios)
+		{
+			interp = 2.0 * timeslice;
+		}
+		PlayZConfig.m_ServerScenarioTintWeight = Math.Lerp(PlayZConfig.m_ServerScenarioTintWeight, targetWeight, interp);
+	}
 }
