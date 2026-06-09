@@ -9,9 +9,8 @@ Sakhal also loads **DayZ Expansion** as a separate third-party mod (limited scop
 - Entity/config classes, UI, inputs, models, sounds, textures, NetSync variables, and client-observable RPC contracts belong here.
 - Every sub-mod must have its own `config.cpp` with its own `CfgPatches.<Name>` entry so it packs as an independent PBO.
 - Script `files[]` paths use the workspace prefix `PlayZ_Client/<AddonName>/scripts/...` (see existing `PlayZCore/config.cpp`).
-- `requiredAddons[]` may list engine addons (`DZ_Data`, `DZ_Scripts`) or other `PlayZ_Client/` sub-mods.
+- `requiredAddons[]` may list engine addons (`DZ_Data`, `DZ_Scripts`), other `PlayZ_Client/` sub-mods, or DayZ Expansion script addons when a sub-mod integrates Expansion (e.g. `PlayZExpansion`). List only the Expansion modules the sub-mod actually uses; load `@PlayZExpansion` after Expansion workshop PBOs on the mod line.
 - **Must not** require or reference any `PlayZ_Server/` addon or class.
-- **Must not** depend on DayZ Expansion (Expansion is a separate `-mod=`; keep PlayZ PBOs independent).
 
 ## Split-mod pattern (when a feature needs both sides)
 
@@ -48,7 +47,7 @@ Set `MOD_OUT` in `.vscode/scripts/Build-PlayZ_Client.bat` to your CFTools `@Play
 - `PlayZAsmond` — vanilla-name aliases for Asmond clothing (~900) and weapons (~300) under `DZ/characters/` and `DZ/weapons/`. Requires `AsmondClothing` and `AsmondWeapons` in `-mod=`; assets stay in those mods, PlayZ only forwards `Asmond_*` into vanilla class names (`scope=2`).
 - `PlayZTerjeRadiation` — vanilla clothing radiation protection, dry bag/drysack isolation, radioactive rain/snow client PPE. Requires `TerjeRadiation` in `-mod=`.
 - `PlayZUI` — custom main menu, loading screen, in-game/logout dialogs, login queue/time UI, and Terje Start Screen page layouts. Requires `TerjeStartScreen` in `-mod=`. Main-menu **Play** uses hardcoded `ConnectFromServerBrowserEx` (dev: `127.0.0.1:2305`, query `27018` — change in `scripts/5_Mission/MainMenu.c` for production).
-- `PlayZExpansion` — Sakhal Expansion compatibility patches (not a fork of Expansion). Requires `DayZ-Expansion-Market` (and P2P Market if used) in `-mod=` **after** Expansion, **with** `@PlayZExpansion` loaded after Expansion on the mod line. Currently: `NailBox` counts as one exchange unit for P2P/market currency (`Exchange.json` @ 70).
+- `PlayZExpansion` — Sakhal Expansion compatibility patches (not a fork of Expansion). Requires `DayZ-Expansion-Core` + Market (and P2P Market if used) in `-mod=` **after** Expansion, **with** `@PlayZExpansion` loaded after `@PlayZUI` on the mod line. `NailBox` quantity shim for P2P/market currency; dead-player **Statistics** button on the PlayZ ingame menu (Expansion monitor stats; independent of `UseDeathScreen` / `UseDeathScreenStatistics`).
 
 ## Adding a new shared sub-mod
 
