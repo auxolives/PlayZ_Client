@@ -20,6 +20,7 @@ modded class InGameMenu
 	protected TextWidget m_PlayZLifeStatsPlayersKilledVal;
 	protected TextWidget m_PlayZLifeStatsAIKilledVal;
 	protected TextWidget m_PlayZLifeStatsTimeSurvivedVal;
+	protected TextWidget m_PlayZLifeStatsAnimalsKilledLabel;
 	protected ButtonWidget m_PlayZLifeStatsHideButton;
 	protected bool m_PlayZLifeStatsInvokerRegistered;
 
@@ -99,7 +100,13 @@ modded class InGameMenu
 		m_PlayZLifeStatsPlayersKilledVal = TextWidget.Cast(m_PlayZLifeStatsOverlayRoot.FindAnyWidget("PlayersKilledValue"));
 		m_PlayZLifeStatsAIKilledVal = TextWidget.Cast(m_PlayZLifeStatsOverlayRoot.FindAnyWidget("AIKilledValue"));
 		m_PlayZLifeStatsTimeSurvivedVal = TextWidget.Cast(m_PlayZLifeStatsOverlayRoot.FindAnyWidget("TimeSurvivedValue"));
+		m_PlayZLifeStatsAnimalsKilledLabel = TextWidget.Cast(m_PlayZLifeStatsOverlayRoot.FindAnyWidget("AnimalsKilledLabel"));
 		m_PlayZLifeStatsHideButton = ButtonWidget.Cast(m_PlayZLifeStatsOverlayRoot.FindAnyWidget("bHide"));
+
+		if (m_PlayZLifeStatsAnimalsKilledLabel)
+		{
+			m_PlayZLifeStatsAnimalsKilledLabel.SetText("#STR_PlayZ_Animals_killed");
+		}
 
 		PlayZTryLoadLifeStatsFromMonitor();
 	#endif
@@ -208,19 +215,46 @@ modded class InGameMenu
 		return true;
 	}
 
+	protected string PlayZGetLifeStatsDisplayName(PlayerBase player)
+	{
+		if (!player)
+		{
+			return string.Empty;
+		}
+
+		if (player.GetTerjeProfile() != null)
+		{
+			string firstName = player.GetTerjeProfile().GetFirstName();
+			if (firstName != string.Empty)
+			{
+				return firstName;
+			}
+		}
+
+		if (player.GetIdentity())
+		{
+			return player.GetIdentity().GetName();
+		}
+
+		return string.Empty;
+	}
+
 	protected void PlayZUpdateLifeStatValues()
 	{
 		PlayerBase player = PlayerBase.Cast(g_Game.GetPlayer());
-		if (!player || !player.GetIdentity())
+		if (!player)
 		{
 			return;
 		}
 
 		if (m_PlayZLifeStatsPanelTitle)
 		{
-			string name = player.GetIdentity().GetName();
-			StringLocaliser player_name = new StringLocaliser("STR_EXPANSION_DEADSCREEN_STATS_TITLE", name);
-			m_PlayZLifeStatsPanelTitle.SetText(player_name.Format());
+			string name = PlayZGetLifeStatsDisplayName(player);
+			if (name != string.Empty)
+			{
+				StringLocaliser player_name = new StringLocaliser("STR_EXPANSION_DEADSCREEN_STATS_TITLE", name);
+				m_PlayZLifeStatsPanelTitle.SetText(player_name.Format());
+			}
 		}
 
 		if (m_PlayZLifeStatsLongestShotVal)

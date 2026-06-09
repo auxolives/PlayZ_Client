@@ -9,6 +9,7 @@ class CfgPatches
 			"DZ_Data",
 			"DZ_Scripts",
 			"PlayZUI",
+			"TerjeCore",
 			"DayZExpansion_Core_Scripts",
 			"DayZExpansion_Market_Scripts"
 		};
