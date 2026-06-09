@@ -1,7 +1,7 @@
-﻿// PlayZ ingame menu: layout PlayZ_ingamemenu.layout — link buttons playz_website_button / playz_discord_button / playz_paypal_button + *_image
+// PlayZ ingame menu: layout PlayZ_ingamemenu.layout — link buttons playz_website_button / playz_discord_button / playz_paypal_button + *_image
 // g_Game.OpenURL — Source Found: scripts/3_Game/Global/Game.c:1377
 // Hover: vanilla uses opaque black panel + red text (InGameMenu.c:365-372) — overridden: transparent panel, black text/icons (main menu keeps red via MainMenu.c)
-// Image tint: PlayZLinkButtonSetImageColor — child name + "_image" — Source Found: scripts/5_Mission/GUI/InGameMenu.c:403-408
+// Image tint: PlayZLinkButtonSetImageColor — child name + _image suffix — Source Found: scripts/5_Mission/GUI/InGameMenu.c:403-408
 // Layout must use playz_paypal_button + playz_paypal_button_image (not *_button0) so FindWidget finds the image
 // Hover may target *_image child — resolve parent via GetParent — Source Found: scripts/1_Core/proto/EnWidgets.c:158
 // SetBold on labels after SetColor — Source Found: scripts/1_Core/proto/EnWidgets.c:206

@@ -1,5 +1,5 @@
-﻿// PlayZ main menu: custom layout PlayZ_main_menu.layout (minimal vs vanilla main_menu.layout).
-// Play uses ButtonWidget "play" + play_panel + play_label so ColorHighlight/ColorNormal apply like vanilla — Source Found: scripts/5_Mission/GUI/NewUI/MainMenu/MainMenu.c:610-637, gui/layouts/new_ui/main_menu.layout (ButtonWidgetClass play)
+// PlayZ main menu: custom layout PlayZ_main_menu.layout (minimal vs vanilla main_menu.layout).
+// Play uses ButtonWidget play + play_panel + play_label so ColorHighlight/ColorNormal apply like vanilla — Source Found: scripts/5_Mission/GUI/NewUI/MainMenu/MainMenu.c:610-637, gui/layouts/new_ui/main_menu.layout (ButtonWidgetClass play)
 // Link icons: child names playz_*_button_image so ImagenSetColor finds them — MainMenu.c:666-676
 // PayPal: playz_paypal_button + playz_paypal_button_image; default white tint in PlayZApplyLinkIconDefaultColors
 // Play hover: vanilla ColorHighlight sets play_panel to opaque black ARGB(255,0,0,0) — MainMenu.c:611-622 — override for transparent panel, keep red label

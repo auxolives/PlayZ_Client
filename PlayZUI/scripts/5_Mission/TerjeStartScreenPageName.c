@@ -1,4 +1,4 @@
-﻿// Source Found: TerjeStartScreen/Scripts/5_Mission/TerjeStartScreenPageName.c:29
+// Source Found: TerjeStartScreen/Scripts/5_Mission/TerjeStartScreenPageName.c:29
 modded class TerjeStartScreenPageName
 {
 	override string GetNativeLayout()

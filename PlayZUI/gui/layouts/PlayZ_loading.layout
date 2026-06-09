@@ -28,7 +28,7 @@
    {
     ImageWidgetClass ImageBackground {
      visible 1
-     color 0 1 0.14 1
+     color 0 0.824 1 1
      position 0 0
      size 1 1
      halign center_ref

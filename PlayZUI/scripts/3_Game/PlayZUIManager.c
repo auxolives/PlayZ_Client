@@ -1,17 +1,13 @@
-﻿class PlayZUIManager
+class PlayZUIManager
 {
 	static string m_CurrentBackground = "";
 	static const string LOGO_TEXTURE = "PlayZ_Client/PlayZUI/gui/textures/LOGOTEXT.edds";
+	static const string DEFAULT_BACKGROUND = "PlayZ_Client/PlayZUI/gui/textures/Background01.edds";
 
-	// Add Background02–05 paths here when .edds assets are ready.
-	static const ref array<string> BACKGROUNDS = {
-		"PlayZ_Client/PlayZUI/gui/textures/Background01.edds"
-	};
-
-	// Matches layout tint "color 0 1 0.14 1" on PlayZ backgrounds.
-	static int SignatureGreen()
+	// Layout tint color 0 0.824 1 1 on PlayZ backgrounds, accent 00D2FF.
+	static int SignatureAccent()
 	{
-		return ARGB(255, 0, 255, 36);
+		return ARGB(255, 0, 210, 255);
 	}
 
 	static void ApplyPlayZLogo(ImageWidget logo)
@@ -38,15 +34,7 @@
 	{
 		if (m_CurrentBackground == "")
 		{
-			if (BACKGROUNDS.Count() == 1)
-			{
-				m_CurrentBackground = BACKGROUNDS.Get(0);
-			}
-			else
-			{
-				int randomIndex = Math.RandomInt(0, BACKGROUNDS.Count());
-				m_CurrentBackground = BACKGROUNDS.Get(randomIndex);
-			}
+			m_CurrentBackground = DEFAULT_BACKGROUND;
 		}
 
 		return m_CurrentBackground;

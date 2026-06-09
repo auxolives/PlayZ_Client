@@ -71,7 +71,7 @@ modded class TerjeSkillWidget
 		if (!mainHeader)
 			return;
 
-		// Plain text: "SKILLS (12 Points Available)"
+		// Plain text: SKILLS (12 Points Available)
 		string pts = Widget.TranslateString("#STR_PLAYZ_GLOBAL_PTS_LABEL");
 		mainHeader.SetName("#STR_TERJESKILL_HEADER (" + m_CurrentPerkPoints + " " + pts + ")");
 	}

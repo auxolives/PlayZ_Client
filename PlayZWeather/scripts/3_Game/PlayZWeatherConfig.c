@@ -37,7 +37,7 @@ class PlayZWeatherConfig
 	void SetDefaults()
 	{
 		m_Scenarios.Clear();
-		// PlayZWeatherScenario("Name", weight, OvercastMin, OvercastMax, RainMin, RainMax, WindMin, WindMax, VolFogDistMin, VolFogDistMax, VolFogHeightMin, VolFogHeightMax, VolFogBiasMin, VolFogBiasMax, DurationMin, DurationMax)
+		// PlayZWeatherScenario(name, weight, overcast/rain/wind/volfog min-max pairs, duration min-max)
 		m_Scenarios.Insert(new PlayZWeatherScenario("Heatwave", 4.0, 0.0, 0.1, 0.0, 0.0, 0.0, 2.0, 0.0, 0.00, 1.0, 1.0, 0.0, 0.0, 600, 900));
 		m_Scenarios.Insert(new PlayZWeatherScenario("Clear", 14.0, 0.0, 0.2, 0.0, 0.0, 0.0, 2.0, 0.0, 0.2, 0.0, 0.2, 0.0, 0.0, 600, 900));
 		m_Scenarios.Insert(new PlayZWeatherScenario("Coldwave", 4.0, 0.1, 0.3, 0.0, 0.0, 14.0, 18.0, 0.0, 0.3, 0.0, 0.3, 0.0, 0.0, 600, 900));

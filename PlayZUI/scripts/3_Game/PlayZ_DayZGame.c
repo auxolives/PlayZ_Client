@@ -1,4 +1,4 @@
-﻿modded class LoadingScreen
+modded class LoadingScreen
 {
 	void LoadingScreen(DayZGame game)
 	{

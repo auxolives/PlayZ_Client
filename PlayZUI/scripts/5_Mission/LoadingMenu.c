@@ -1,4 +1,4 @@
-﻿modded class LoadingMenu
+modded class LoadingMenu
 {
 	override Widget Init()
 	{

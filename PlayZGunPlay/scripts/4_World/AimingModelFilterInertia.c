@@ -1,5 +1,4 @@
-// Changes sGunplay's inertia direction from "weapon lags behind aim movement"
-// to "weapon overshoots in the direction of movement" (pendulum swing feel).
+// Changes sGunplay inertia from weapon-lags-behind to weapon-overshoots (pendulum swing feel).
 // The only difference from the base implementation is + m_vel instead of - m_vel
 // in the SmoothCD target, reversing the inertia vector direction.
 modded class AimingModelFilterInertia

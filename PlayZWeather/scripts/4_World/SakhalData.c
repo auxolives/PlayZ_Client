@@ -4,7 +4,7 @@ class PlayZWeatherState
 	int m_EndTimestamp;
 }
 
-// Sakhal missions use SakhalData (missionBase.c "sakhal" -> new SakhalData()).
+// Sakhal missions use SakhalData (missionBase.c sakhal map id -> new SakhalData()).
 modded class SakhalData
 {
 	static const string STATE_PATH = "$profile:PlayZ/WeatherState.json";

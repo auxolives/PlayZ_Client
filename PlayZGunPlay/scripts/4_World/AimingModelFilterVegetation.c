@@ -1,6 +1,6 @@
 // Vegetation aim-disruption filter for sGunplay.
 // Amplifies base sway when the player's weapon is inside bushes or trees,
-// and fires random "branch snag" jolts at wind-modulated intervals.
+// and fires random branch-snag jolts at wind-modulated intervals.
 // Plugs into the sGunplay AimingModelFilterBase pipeline via
 // DayZPlayerImplementAiming.registerFilters().
 class AimingModelFilterVegetation extends AimingModelFilterBase

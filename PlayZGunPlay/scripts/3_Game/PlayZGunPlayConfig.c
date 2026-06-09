@@ -8,14 +8,14 @@ class PlayZGunPlayConfig
 	// -------------------------------------------------------------------------
 	// Simulates weapon catching on branches, causing aim tremors.
 	// Amplifies sway heavily when standing inside bushes or trees, and fires
-	// random directional "branch snag" jolts modulated by wind speed.
+	// random directional branch-snag jolts modulated by wind speed.
 	bool  m_EnableVegetationSwayPenalty  = true;
 
 	// Extra sway scale at maximum vegetation collision.
 	// e.g. 2.5 means a fully entangled player has 3.5x base sway.
 	float m_VegetationSwayPenaltyScale   = 2.50;
 
-	// Snag parameters — controls the random "branch hit" frequency and force
+	// Snag parameters — controls random branch-hit frequency and force
 	float m_VegSnagMinInterval           = 0.8;
 	float m_VegSnagMaxInterval           = 6.0;
 	float m_VegSnagIntensityScale        = 1.5;

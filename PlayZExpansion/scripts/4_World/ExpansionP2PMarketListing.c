@@ -1,4 +1,4 @@
-// P2P Market owner column: Terje "First Last" instead of vanilla identity name.
+// P2P Market owner column: Terje First Last name instead of vanilla identity name.
 // Source Found: DayZExpansion/P2PMarket/.../ExpansionP2PMarketListing.c:54-58
 
 modded class ExpansionP2PMarketListing

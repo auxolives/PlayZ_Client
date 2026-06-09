@@ -4,12 +4,12 @@ class PlayZMenuStyle
 
 	static int AccentColor()
 	{
-		return PlayZUIManager.SignatureGreen();
+		return PlayZUIManager.SignatureAccent();
 	}
 
 	static int AccentColorSoft()
 	{
-		return ARGB(255, 0, 220, 32);
+		return ARGB(255, 0, 190, 230);
 	}
 
 	static int TextNormal()

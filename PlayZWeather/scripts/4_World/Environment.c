@@ -12,7 +12,7 @@ modded class Environment
 		// Using a relatively slow factor (0.05) to ensure a gradual fade over several minutes
 		// 0.05 * pDelta (0.1s tick) means it takes about 200 ticks (~20-40 seconds) to reach 63% of target.
 		// For a very gradual fade, we could use even smaller value or tie it to weather transition.
-		// But this provides a decent starting point for "gradual".
+		// But this provides a decent starting point for gradual blending.
 		m_PlayZTempMod = Math.Lerp(m_PlayZTempMod, targetMod, pDelta * 0.05);
 
 		if (GetGame().IsServer())

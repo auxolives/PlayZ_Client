@@ -94,7 +94,7 @@ class PlayZConfig
 			// converges on exactly the same endpoint the server is heading to.
 			// Without this, a player connecting mid-transition locks onto the interpolated
 			// mid-value with transitionTime=0 and stays desynced until the next scenario
-			// change broadcast — the observed "some have fog some not" symptom right after
+			// change broadcast — the observed mixed fog symptom right after
 			// a server restart (when the first post-restart transition is still running).
 			float remainingSec = 0;
 			if (m_LastVolFogTransitionTimeSec > 0)
@@ -116,7 +116,7 @@ class PlayZConfig
 			return;
 
 		// Cache target + start-time whenever this is an authoritative broadcast
-		// (identity == null means "send to all"). Per-player resends (identity set) use
+		// (identity == null means send to all). Per-player resends (identity set) use
 		// the cached values and must NOT overwrite them with their own remaining time.
 		if (!identity)
 		{

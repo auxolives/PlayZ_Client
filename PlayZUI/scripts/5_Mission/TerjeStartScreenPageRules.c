@@ -1,4 +1,4 @@
-﻿// Source Found: TerjeStartScreen/Scripts/5_Mission/TerjeStartScreenPageRules.c:18
+// Source Found: TerjeStartScreen/Scripts/5_Mission/TerjeStartScreenPageRules.c:18
 modded class TerjeStartScreenPageRules
 {
 	override string GetNativeLayout()

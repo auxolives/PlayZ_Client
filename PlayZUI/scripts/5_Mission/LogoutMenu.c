@@ -1,4 +1,4 @@
-﻿modded class LogoutMenu
+modded class LogoutMenu
 {
 	// Source Found: scripts/5_Mission/GUI/LogoutMenu.c:169
 	// ZenAntiCombatLogout overrides this flow and can tint description red.

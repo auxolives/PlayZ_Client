@@ -56,7 +56,7 @@ modded class ActionFishingNew
 
 		// Local client: force rod visual closed + sync request. MP can skip part of the chain so super.OnEnd
 		// alone leaves fishing pose / action widget state wrong for the acting player; observers may then see
-		// "fishing with nothing" while the fisher's client is stuck until drop/pickup.
+		// fishing-with-nothing state while the fisher client is stuck until drop/pickup.
 		FishingActionData fad;
 		if (!Class.CastTo(fad, action_data))
 			return;
