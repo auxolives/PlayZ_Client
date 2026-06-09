@@ -21,6 +21,50 @@ modded class TerjeDosimetrBase
 		PlayZMarkDosimeterTooltipDirty();
 	}
 
+	override float CalculateTerjeEnvironmentRadiation()
+	{
+		float hierarhyProtection = 0;
+		ItemBase hierarhyParentItem;
+		EntityAI hierarhyParent = GetHierarchyParent();
+		while (hierarhyParent)
+		{
+			if (ItemBase.CastTo(hierarhyParentItem, hierarhyParent))
+			{
+				hierarhyProtection = hierarhyProtection + hierarhyParentItem.GetTerjeRadiationInventoryIsolation();
+			}
+			else
+			{
+				break;
+			}
+
+			hierarhyParent = hierarhyParent.GetHierarchyParent();
+		}
+
+		float result = 0;
+		hierarhyProtection = 1.0 - Math.Clamp(hierarhyProtection, 0, 1);
+		PluginTerjeScriptableAreas plugin = GetTerjeScriptableAreas();
+		if (plugin && hierarhyProtection > 0)
+		{
+			float zoneRadiation = plugin.CalculateTerjeEffectValue(this, "rad") * hierarhyProtection;
+			float rainRadiation = 0;
+			EntityAI root = GetHierarchyRoot();
+			if (!root)
+			{
+				root = this;
+			}
+
+			if (root && !MiscGameplayFunctions.IsUnderRoof(root))
+			{
+				rainRadiation = plugin.GetEnvironmentRainRadioactivity();
+			}
+
+			result = Math.Max(result, zoneRadiation + rainRadiation);
+			result = Math.Max(result, plugin.CalculateTerjeRadiationFromNearestEntities(this, GetTerjeSensitivityRadius(), true) * hierarhyProtection);
+		}
+
+		return result;
+	}
+
 	override void OnWork(float consumed_energy)
 	{
 		super.OnWork(consumed_energy);
