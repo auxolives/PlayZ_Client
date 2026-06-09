@@ -1,6 +1,10 @@
 // Expansion life statistics overlay for PlayZ ingame menu (dead players only).
 // Source Found: DayZExpansion/DayZExpansion/Scripts/5_Mission/DayZExpansion/GUI/InGameMenu.c
-// Bypasses UseDeathScreen / UseDeathScreenStatistics — stats from ExpansionMonitorModule.
+// Source Found: TerjeStartScreen/Scripts/4_World/Entities/PlayerBase.c:102-124 (GetTerjeCharacterName client cache)
+// Source Found: TerjeStartScreen/Scripts/4_World/Entities/PlayerBase.c:167-181 (tss.name.req / tss.name.res RPC)
+// Source Found: TerjeCore/Scripts/4_World/Classes/TerjePlayerRecordsBase.c:53-55 (tp.fname serverOnly — not on client)
+// Module rule: InGameMenu is 5_Mission; PlayerBase is 4_World — no cross-module modded class refs (see ENGINE_TRUTH.md).
+// Terje first name: client reads GetTerjeCharacterName(), not GetTerjeProfile().GetFirstName().
 
 modded class InGameMenu
 {
@@ -23,6 +27,9 @@ modded class InGameMenu
 	protected TextWidget m_PlayZLifeStatsAnimalsKilledLabel;
 	protected ButtonWidget m_PlayZLifeStatsHideButton;
 	protected bool m_PlayZLifeStatsInvokerRegistered;
+	protected bool m_PlayZLifeStatsTitlePending;
+	protected float m_PlayZLifeStatsTitlePollTimer;
+	protected string m_PlayZLifeStatsTitleLastName;
 
 	override void OnShow()
 	{
@@ -37,6 +44,7 @@ modded class InGameMenu
 				m_PlayZLifeStatsInvokerRegistered = true;
 			}
 		}
+		PlayZBeginLifeStatsTitleRefresh();
 		PlayZRefreshLifeStatsData();
 	#endif
 	}
@@ -130,6 +138,7 @@ modded class InGameMenu
 		string wn = w.GetName();
 		if (wn == "life_stats_button" || wn == "life_stats_button_label")
 		{
+			PlayZBeginLifeStatsTitleRefresh();
 			PlayZUpdateLifeStatValues();
 			PlayZOpenLifeStatsPanel();
 			return true;
@@ -148,6 +157,7 @@ modded class InGameMenu
 	override protected void PlayZCloseLifeStatsPanel()
 	{
 	#ifdef EXPANSIONMONITORMODULE
+		m_PlayZLifeStatsTitlePending = false;
 		if (m_PlayZLifeStatsPanel)
 		{
 			m_PlayZLifeStatsPanel.Show(false);
@@ -159,6 +169,22 @@ modded class InGameMenu
 		}
 	#endif
 		super.PlayZCloseLifeStatsPanel();
+	}
+
+	override void Update(float timeslice)
+	{
+		super.Update(timeslice);
+	#ifdef EXPANSIONMONITORMODULE
+		if (m_PlayZLifeStatsTitlePending)
+		{
+			m_PlayZLifeStatsTitlePollTimer = m_PlayZLifeStatsTitlePollTimer + timeslice;
+			if (m_PlayZLifeStatsTitlePollTimer >= 0.1)
+			{
+				m_PlayZLifeStatsTitlePollTimer = 0;
+				PlayZTryApplyLifeStatsTitle();
+			}
+		}
+	#endif
 	}
 
 #ifdef EXPANSIONMONITORMODULE
@@ -215,6 +241,66 @@ modded class InGameMenu
 		return true;
 	}
 
+	protected void PlayZRequestTerjeCharacterName()
+	{
+		PlayerBase player = PlayerBase.Cast(g_Game.GetPlayer());
+		if (!player)
+		{
+			return;
+		}
+
+		player.TerjeRPCSingleParam("tss.name.req", null, true);
+	}
+
+	protected void PlayZBeginLifeStatsTitleRefresh()
+	{
+		m_PlayZLifeStatsTitlePending = true;
+		m_PlayZLifeStatsTitlePollTimer = 0;
+		PlayZRequestTerjeCharacterName();
+	}
+
+	protected void PlayZTryApplyLifeStatsTitle()
+	{
+		PlayerBase player = PlayerBase.Cast(g_Game.GetPlayer());
+		if (!player || !m_PlayZLifeStatsPanelTitle)
+		{
+			return;
+		}
+
+		string name = PlayZGetLifeStatsDisplayName(player);
+		if (name == string.Empty)
+		{
+			return;
+		}
+
+		if (name == m_PlayZLifeStatsTitleLastName)
+		{
+			m_PlayZLifeStatsTitlePending = false;
+			return;
+		}
+
+		m_PlayZLifeStatsTitleLastName = name;
+		m_PlayZLifeStatsTitlePending = false;
+		StringLocaliser player_name = new StringLocaliser("STR_EXPANSION_DEADSCREEN_STATS_TITLE", name);
+		m_PlayZLifeStatsPanelTitle.SetText(player_name.Format());
+	}
+
+	protected string PlayZExtractTerjeFirstName(string charName)
+	{
+		if (charName == string.Empty)
+		{
+			return string.Empty;
+		}
+
+		int spaceIdx = charName.IndexOf(" ");
+		if (spaceIdx > 0)
+		{
+			return charName.Substring(0, spaceIdx);
+		}
+
+		return charName;
+	}
+
 	protected string PlayZGetLifeStatsDisplayName(PlayerBase player)
 	{
 		if (!player)
@@ -222,21 +308,22 @@ modded class InGameMenu
 			return string.Empty;
 		}
 
-		if (player.GetTerjeProfile() != null)
+		string charName = player.GetTerjeCharacterName();
+		if (charName == string.Empty)
 		{
-			string firstName = player.GetTerjeProfile().GetFirstName();
-			if (firstName != string.Empty)
-			{
-				return firstName;
-			}
+			return string.Empty;
 		}
 
 		if (player.GetIdentity())
 		{
-			return player.GetIdentity().GetName();
+			string identityName = player.GetIdentity().GetName();
+			if (charName == identityName)
+			{
+				return string.Empty;
+			}
 		}
 
-		return string.Empty;
+		return PlayZExtractTerjeFirstName(charName);
 	}
 
 	protected void PlayZUpdateLifeStatValues()
@@ -247,15 +334,7 @@ modded class InGameMenu
 			return;
 		}
 
-		if (m_PlayZLifeStatsPanelTitle)
-		{
-			string name = PlayZGetLifeStatsDisplayName(player);
-			if (name != string.Empty)
-			{
-				StringLocaliser player_name = new StringLocaliser("STR_EXPANSION_DEADSCREEN_STATS_TITLE", name);
-				m_PlayZLifeStatsPanelTitle.SetText(player_name.Format());
-			}
-		}
+		PlayZTryApplyLifeStatsTitle();
 
 		if (m_PlayZLifeStatsLongestShotVal)
 		{

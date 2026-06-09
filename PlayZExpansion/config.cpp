@@ -10,6 +10,7 @@ class CfgPatches
 			"DZ_Scripts",
 			"PlayZUI",
 			"TerjeCore",
+			"TerjeStartScreen",
 			"DayZExpansion_Core_Scripts",
 			"DayZExpansion_Market_Scripts"
 		};
