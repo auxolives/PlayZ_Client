@@ -8,6 +8,13 @@
 
 modded class InGameMenu
 {
+	protected Widget m_PlayZLifeStatsButton;
+	protected bool m_PlayZLifeStatsDataReady;
+	protected bool m_PlayZLifeStatsPanelOpen;
+	protected Widget m_PlayZLifeStatsOverlayRoot;
+	protected Widget m_PlayZLifeStatsPanel;
+	protected Widget m_PlayZMenuPanel;
+
 	protected Widget PlayZResolveLinkButtonForHover(Widget w)
 	{
 		if (!w)
@@ -38,6 +45,7 @@ modded class InGameMenu
 		ids.Insert("restartbtn");
 		ids.Insert("feedbackbtn");
 		ids.Insert("optionsbtn");
+		ids.Insert("life_stats_button");
 		int i;
 		int c = ids.Count();
 		for (i = 0; i < c; i++)
@@ -98,10 +106,64 @@ modded class InGameMenu
 		}
 	}
 
+	protected void PlayZInitLifeStatsButton()
+	{
+		if (!layoutRoot)
+		{
+			return;
+		}
+		m_PlayZMenuPanel = layoutRoot.FindAnyWidget("play_panel_root");
+		m_PlayZLifeStatsButton = layoutRoot.FindAnyWidget("life_stats_button");
+		if (m_PlayZLifeStatsButton)
+		{
+			m_PlayZLifeStatsButton.Show(false);
+		}
+	}
+
+	protected void PlayZOnInitLifeStatsIntegration()
+	{
+	}
+
+	protected void PlayZRefreshLifeStatsData()
+	{
+	}
+
+	protected bool PlayZOnLifeStatsMenuClick(Widget w)
+	{
+		return false;
+	}
+
+	protected void PlayZSetMenuPanelVisible(bool show)
+	{
+		if (m_PlayZMenuPanel)
+		{
+			m_PlayZMenuPanel.Show(show);
+		}
+	}
+
+	protected void PlayZCloseLifeStatsPanel()
+	{
+		m_PlayZLifeStatsPanelOpen = false;
+		PlayZSetMenuPanelVisible(true);
+
+		if (m_PlayZLifeStatsPanel)
+		{
+			m_PlayZLifeStatsPanel.Show(false);
+		}
+		if (m_PlayZLifeStatsOverlayRoot)
+		{
+			m_PlayZLifeStatsOverlayRoot.Show(false);
+		}
+	}
+
 	override bool OnClick(Widget w, int x, int y, int button)
 	{
 		if (button == MouseState.LEFT && w)
 		{
+			if (PlayZOnLifeStatsMenuClick(w))
+			{
+				return true;
+			}
 			string wn = w.GetName();
 			if (wn == "playz_website_button" || wn == "playz_website_button_image")
 			{
@@ -225,6 +287,8 @@ modded class InGameMenu
 			mission.Pause();
 		}
 
+		PlayZInitLifeStatsButton();
+		PlayZOnInitLifeStatsIntegration();
 		PlayZApplyLinkIconDefaultColors();
 		PlayZApplyBoldToMenuTextButtons();
 		PlayZUIManager.ApplyPlayZLogoOnRoot(layoutRoot);
@@ -235,10 +299,12 @@ modded class InGameMenu
 	override void OnShow()
 	{
 		super.OnShow();
+		PlayZRefreshLifeStatsData();
 	}
 
 	override void OnHide()
 	{
+		PlayZCloseLifeStatsPanel();
 		super.OnHide();
 	}
 
@@ -278,14 +344,19 @@ modded class InGameMenu
 		#ifdef BULDOZER
 		m_RestartButton.Show(false);
 		m_RespawnButton.Show(false);
+		if (m_PlayZLifeStatsButton)
+		{
+			m_PlayZLifeStatsButton.Show(false);
+		}
 		#else
 		Man player = g_Game.GetPlayer();
 		bool playerAlive = player && player.GetPlayerState() == EPlayerStates.ALIVE;
+		bool playerDead = player && !playerAlive;
 
 		if (g_Game.IsMultiplayer())
 		{
 			m_RestartButton.Show(playerAlive && player.IsUnconscious() && !CfgGameplayHandler.GetDisableRespawnInUnconsciousness());
-			m_RespawnButton.Show(!playerAlive);
+			m_RespawnButton.Show(playerDead);
 		}
 		else
 		{
@@ -298,6 +369,17 @@ modded class InGameMenu
 		}
 
 		m_ContinueButton.Show(playerAlive);
+
+		if (m_PlayZLifeStatsButton && !m_PlayZLifeStatsPanelOpen)
+		{
+			bool showLifeStats = playerDead && g_Game.IsMultiplayer() && m_PlayZLifeStatsDataReady;
+			m_PlayZLifeStatsButton.Show(showLifeStats);
+		}
+
+		if (m_PlayZMenuPanel && !m_PlayZLifeStatsPanelOpen)
+		{
+			m_PlayZMenuPanel.Show(true);
+		}
 		#endif
 	}
 }
