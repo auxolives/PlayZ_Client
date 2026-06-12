@@ -75,6 +75,7 @@ PanelWidgetClass TextInputDialogRoot {
    text_proportion 0.4
    font "gui/fonts/sdf_MetronBook24"
    "disabled text color" 0.341 0.341 0.341 1
+   "bold text" 1
   }
   GridSpacerWidgetClass GridSpacerWidget0 {
    ignorepointer 1
@@ -104,7 +105,7 @@ PanelWidgetClass TextInputDialogRoot {
      style Bold
      text "#str_position_in_queue:"
      font "gui/fonts/sdf_MetronBook72"
-     "bold text" 0
+     "bold text" 1
      "exact text" 1
      "exact text size" 20
      "size to text h" 0
@@ -126,7 +127,7 @@ PanelWidgetClass TextInputDialogRoot {
      font "gui/fonts/sdf_MetronLight24"
      "text offset" 10 0
      "text spacing" 20 0
-     "bold text" 0
+     "bold text" 1
      "exact text" 1
      "exact text size" 20
      "size to text h" 0
