@@ -17,6 +17,7 @@ PlayZCore · PlayZGunPlay · PlayZTerje* · PlayZUI · PlayZExpansion
 | [01-playzcore-ui.md](01-playzcore-ui.md) | Earplugs overlay, ACL logout, inputs, stringtable |
 | [02-sibling-modules.md](02-sibling-modules.md) | Full grep inventory — Expansion, GunPlay, Terje* |
 | [03-load-order-conflicts.md](03-load-order-conflicts.md) | Conflict matrix + testing checklist |
+| [04-death-screen.md](04-death-screen.md) | Custom death screen — flow, layout, script map, do-not-regress |
 
 ## Milestone 2 — do not break PlayZCore checklist
 
@@ -33,7 +34,7 @@ Before merging any PlayZUI screen rewrite:
 
 | Surface | Owner |
 |---------|-------|
-| Main menu, loading, pause, options, logout layouts | **PlayZUI** |
+| Main menu, loading, pause, death screen, options, logout layouts | **PlayZUI** |
 | Earplugs flash, ACL logout logic | **PlayZCore** |
 | Nametags, chat names, killfeed, EXPANSION options tab | **PlayZExpansion** |
 | Terje HUD badges, skills panel | **Terje mods** / **PlayZTerje*** |

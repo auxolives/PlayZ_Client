@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{452694762D12EEB6}PlayZ_Client/PlayZUI/gui/textures/Deathscreen_01.edds"
+ Author "olivier"
+ ChangeDate -648825652
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "Deathscreen_01.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

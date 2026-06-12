@@ -76,16 +76,19 @@ Shared chrome across queue/login/loading: `BottomPanel`, `hintIcon`, `LinesImage
 
 **Docs:** [vanilla/05](vanilla/05-screen-main-menu.md), [expansion/02](expansion/02-menu-overrides.md)
 
-### In-game menu (pause)
+### In-game menu (pause + death)
 
 | Layer | Class | Rule |
 |-------|-------|------|
 | Vanilla | `InGameMenu` | Pause side effects, logout navigation |
-| Expansion | `InGameMenu` | Death screen overlay — **requires super.Init()** |
-| Terje | `MissionGameplay` | Dead player → respawn path |
-| PlayZUI | Custom layout | Never skip Expansion death UI |
+| Expansion | `InGameMenu` | News feed on pause (GeneralSettings); death overlay **not used** (`UseDeathScreen: false`) |
+| Terje | `MissionGameplay` | Dead-before-ready → vanilla death path (not PlayZ custom flow) |
+| PlayZUI | `playz_ingamemenu.layout` | Pause reskin; `super.Init()` + Expansion news feed |
+| PlayZUI | `playz_death_screen.layout` | Custom death: cover-based reveal, no `super.Init()` in death mode |
 
-**Docs:** [vanilla/06](vanilla/06-screen-ingame-menu.md), [expansion/02](expansion/02-menu-overrides.md)
+**Death screen:** overlay-only reveal (`death_picture_cover` / `death_buttons_cover`); block vanilla `DeathEffectTimer`, PPE death darkening, and engine `ScreenFadeIn(duration)` while menu is open. See [playz/04-death-screen.md](playz/04-death-screen.md).
+
+**Docs:** [vanilla/06](vanilla/06-screen-ingame-menu.md), [expansion/02](expansion/02-menu-overrides.md), [playz/04-death-screen.md](playz/04-death-screen.md)
 
 ### Logout menu
 
@@ -167,7 +170,7 @@ Before merging any PlayZUI screen PR:
 | `super.Init()` skipped | Menu open | Expansion features missing |
 | `GetMenu() != null` | Pause/inventory open | Earplugs blocked; nametags hidden |
 | `Expansion_CanShowHUDElements()` | Menu or ScriptView open | HUD overlays hidden |
-| `GeneralSettings.UseDeathScreen` | false | No death overlay (Expansion handles) |
+| `GeneralSettings.UseDeathScreen` | false | PlayZUI death screen (`playz_death_screen.layout`) |
 | Terje Start Screen active | Wizard open | Blocks normal gameplay input |
 
 ---
@@ -231,7 +234,8 @@ Full matrix: [playz/03-load-order-conflicts.md](playz/03-load-order-conflicts.md
 |--------|--------|--------|--------|------|
 | Loading + connect shell | done | `playz_loading.layout`, `playz_dialog_queue_position.layout`, `playz_dialog_login_time.layout`, `dialog_input_password.layout` | `PlayZUILoadingScreen.c`, `PlayZUILoadingMenu.c`, `PlayZUILoginQueueBase.c`, `PlayZUILoginTimeBase.c` | 2026-06-12 |
 | Main menu | pending | — | — | — |
-| Pause | pending | — | — | — |
+| Death screen | done | `playz_death_screen.layout` | `PlayZUIDayZPlayerImplement.c`, `PlayZUIInGameMenu.c`, `PlayZUIMissionGameplay.c`, `PlayZUIDeathScreenState.c`, `PlayZUIPPEDeathDarkening.c`, `PlayZUIDeathScreenCompat.c`, `PlayZUIPlayerBase.c` | 2026-06-12 |
+| Pause | done | `playz_ingamemenu.layout` | `PlayZUIInGameMenu.c` | 2026-06-12 |
 | Logout | pending | — | — | — |
 | Options | pending | — | — | — |
 | Terje pages | pending | — | — | — |

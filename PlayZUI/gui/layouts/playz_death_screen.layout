@@ -1,0 +1,193 @@
+FrameWidgetClass death_root {
+ ignorepointer 0
+ keepsafezone 0
+ size 1 1
+ halign center_ref
+ valign center_ref
+ priority 995
+ {
+  PanelWidgetClass death_black_backdrop {
+   ignorepointer 1
+   color 0 0 0 1
+   position 0 0
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_colorable
+  }
+  ImageWidgetClass death_background {
+   visible 1
+   ignorepointer 1
+   position 0 0
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   image0 ""
+   imageTexture "{452694762D12EEB6}PlayZ_Client/PlayZUI/gui/textures/Deathscreen_01.edds"
+   mode blend
+   "src alpha" 1
+   "no wrap" 0
+   stretch 1
+   filter 1
+  }
+  PanelWidgetClass death_overlay {
+   ignorepointer 1
+   color 0 0 0 0.7
+   position 0 0
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_colorable
+  }
+  PanelWidgetClass death_picture_cover {
+   ignorepointer 1
+   color 0 0 0 1
+   position 0 0
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 998
+   style rover_sim_colorable
+  }
+  WrapSpacerWidgetClass death_actions {
+   visible 1
+   clipchildren 0
+   ignorepointer 0
+   position 0 0.2
+   size 400 0
+   halign center_ref
+   valign bottom_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 1
+   vexactsize 1
+   Padding 0
+   Margin 0
+   "Size To Content H" 1
+   "Size To Content V" 1
+   content_halign center
+   content_valign bottom
+   {
+    FrameWidgetClass death_separator {
+     ignorepointer 1
+     color 1 1 1 0.25
+     position 0 0
+     size 120 1
+     halign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ButtonWidgetClass respawn_button {
+     visible 1
+     ignorepointer 0
+     color 0 0 0 0
+     position 0 0
+     size 1 90
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     {
+      PanelWidgetClass respawn_button_panel {
+       ignorepointer 1
+       color 0 0 0 0
+       position 0 0
+       size 1 1
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style DayZDefaultPanel
+      }
+      TextWidgetClass respawn_button_label {
+       ignorepointer 1
+       size 1 0.6
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       text "#main_menu_respawn"
+       font "gui/fonts/sdf_MetronLight72"
+       "text halign" center
+       "text valign" center
+      }
+     }
+    }
+    ButtonWidgetClass exitbtn {
+     visible 1
+     ignorepointer 0
+     color 0 0 0 0
+     position 0 0
+     size 1 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     {
+      PanelWidgetClass exitbtn_panel {
+       ignorepointer 1
+       color 0 0 0 0
+       position 0 0
+       size 1 1
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style DayZDefaultPanel
+      }
+      TextWidgetClass exitbtn_label {
+       clipchildren 0
+       ignorepointer 1
+       color 1 1 1 0.5
+       size 1 0.55
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       text "#main_menu_exit"
+       font "gui/fonts/sdf_MetronLight24"
+       "text halign" center
+       "text valign" center
+      }
+     }
+    }
+   }
+  }
+  PanelWidgetClass death_buttons_cover {
+   ignorepointer 1
+   color 0 0 0 1
+   position 0 0
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 999
+   style rover_sim_colorable
+  }
+ }
+}

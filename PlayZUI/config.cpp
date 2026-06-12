@@ -10,6 +10,7 @@ class CfgPatches
 			"DZ_Scripts",
 			"TerjeCore",
 			"TerjeStartScreen",
+			"sFramework",
 			"DayZExpansion_Core_Scripts",
 			"DayZExpansion_Scripts"
 		};
@@ -29,6 +30,7 @@ class CfgMods
 		type = "mod";
 		dependencies[] = {
 			"Game",
+			"World",
 			"Mission"
 		};
 		class defs
@@ -38,6 +40,13 @@ class CfgMods
 				value = "";
 				files[] = {
 					"PlayZ_Client/PlayZUI/scripts/3_Game"
+				};
+			};
+			class worldScriptModule
+			{
+				value = "";
+				files[] = {
+					"PlayZ_Client/PlayZUI/scripts/4_World"
 				};
 			};
 			class missionScriptModule

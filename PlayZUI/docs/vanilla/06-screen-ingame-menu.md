@@ -95,14 +95,26 @@ PlayZUI pause reskin must not block Terje respawn button wiring on `respawn_butt
 
 ## PlayZUI bridge rules
 
-1. `layoutRoot = super.Init()` first — mandatory for Expansion death UI.
+### Pause (`playz_ingamemenu.layout`)
+
+1. `layoutRoot = super.Init()` first — mandatory for Expansion news feed and licensing.
 2. Preserve all widget names above.
 3. Do **not** add `modded class IngameHud` in PlayZUI — HUD is PlayZExpansion / Terje scope.
 4. Test: open pause → nametags disappear → close → nametags return.
 
+### Death (`playz_death_screen.layout`)
+
+PlayZUI owns a **separate** death layout. Death `Init()` does **not** call `super.Init()`.
+
+- Reveal uses black **cover panels** on top of full-opacity content — not content `SetAlpha()`.
+- Vanilla `DeathEffectTimer`, `PPERequester_DeathDarkening`, and timed `ScreenFadeIn` are suppressed during custom death.
+
+Full spec: [docs/playz/04-death-screen.md](../playz/04-death-screen.md).
+
 ## Related docs
 
 - [07-screen-logout-menu.md](07-screen-logout-menu.md)
+- [docs/playz/04-death-screen.md](../playz/04-death-screen.md)
 - [docs/playz/01-playzcore-ui.md](../playz/01-playzcore-ui.md) (earplugs gate)
 - [docs/expansion/02-menu-overrides.md](../expansion/02-menu-overrides.md)
 - [docs/expansion/03-ingame-hud.md](../expansion/03-ingame-hud.md)

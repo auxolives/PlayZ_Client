@@ -1,6 +1,16 @@
 modded class InGameMenu
 {
-	protected void PlayZRebindInGameMenuWidgets()
+	protected bool m_PlayZDeathMode;
+	protected bool m_PlayZDeathRevealActive;
+	protected float m_PlayZDeathPictureCoverLevel;
+	protected float m_PlayZDeathButtonsCoverLevel;
+	protected float m_PlayZDeathRevealElapsed;
+	protected float m_PlayZDeathRevealTimerSlice;
+	protected ImageWidget m_PlayZDeathBackground;
+	protected Widget m_PlayZDeathPictureCover;
+	protected Widget m_PlayZDeathButtonsCover;
+
+	protected void PlayZBindInGameMenuWidgets()
 	{
 		m_ContinueButton = layoutRoot.FindAnyWidget("continuebtn");
 		m_SeparatorPanel = layoutRoot.FindAnyWidget("separator_red");
@@ -11,105 +21,213 @@ modded class InGameMenu
 		m_RestartDeadCustomButton = layoutRoot.FindAnyWidget("respawn_button_custom");
 		m_OptionsButton = layoutRoot.FindAnyWidget("optionsbtn");
 		m_ModdedWarning = TextWidget.Cast(layoutRoot.FindAnyWidget("ModdedWarning"));
-		m_ServerInfoPanel = layoutRoot.FindAnyWidget("server_info");
-		m_ServerIP = TextWidget.Cast(layoutRoot.FindAnyWidget("server_ip"));
-		m_ServerPort = TextWidget.Cast(layoutRoot.FindAnyWidget("server_port"));
-		m_ServerName = TextWidget.Cast(layoutRoot.FindAnyWidget("server_name"));
-		m_FavoriteImage = layoutRoot.FindAnyWidget("favorite_image");
-		m_UnfavoriteImage = layoutRoot.FindAnyWidget("unfavorite_image");
-		m_CopyInfoButton = layoutRoot.FindAnyWidget("copy_button");
 		m_FeedbackButton = layoutRoot.FindAnyWidget("feedbackbtn");
 		m_HintPanel = null;
 	}
 
-	protected void PlayZReparentExpansionWidgets(Widget playzRoot)
+	protected void PlayZBindDeathMenuWidgets()
 	{
-		if (m_DeadScreenRoot)
+		m_ExitButton = layoutRoot.FindAnyWidget("exitbtn");
+		m_RespawnButton = layoutRoot.FindAnyWidget("respawn_button");
+		m_ContinueButton = null;
+		m_SeparatorPanel = null;
+		m_RestartButton = null;
+		m_RestartDeadRandomButton = null;
+		m_RestartDeadCustomButton = null;
+		m_OptionsButton = null;
+		m_ModdedWarning = null;
+		m_FeedbackButton = null;
+		m_HintPanel = null;
+	}
+
+	protected void PlayZInitPauseOverlays()
+	{
+		m_Logo = ImageWidget.Cast(layoutRoot.FindAnyWidget("dayz_logo"));
+
+		m_Licensing = WrapSpacerWidget.Cast(layoutRoot.FindAnyWidget("Licensing"));
+		if (m_Licensing)
 		{
-			Widget deadParent = m_DeadScreenRoot.GetParent();
-			if (deadParent)
+			m_Licensing.Show(true);
+
+			Widget version = m_Licensing.FindAnyWidget("version");
+			if (version)
 			{
-				deadParent.RemoveChild(m_DeadScreenRoot);
+				version.Show(true);
 			}
-			playzRoot.AddChild(m_DeadScreenRoot, true);
+
+			Widget copyright = m_Licensing.FindAnyWidget("copyright");
+			if (copyright)
+			{
+				copyright.Show(true);
+			}
 		}
 
-		if (m_NewsFeed)
+		m_NewsFeed = new ExpansionNewsFeed();
+		Widget newsFeedRoot = m_NewsFeed.GetLayoutRoot();
+		if (newsFeedRoot)
 		{
-			Widget newsFeedRoot = m_NewsFeed.GetLayoutRoot();
-			if (newsFeedRoot)
-			{
-				Widget newsParent = newsFeedRoot.GetParent();
-				if (newsParent)
-				{
-					newsParent.RemoveChild(newsFeedRoot);
-				}
-				playzRoot.AddChild(newsFeedRoot, true);
-			}
+			layoutRoot.AddChild(newsFeedRoot, true);
+			newsFeedRoot.Show(false);
+		}
+
+		if (GetExpansionSettings().GetGeneral(false).IsLoaded())
+		{
+			Expansion_OnGeneralSettingsUpdated();
 		}
 	}
 
-	protected Widget PlayZSwapToPlayZLayout()
+	protected Widget PlayZInitPauseMenu()
 	{
-		Widget oldRoot = layoutRoot;
-		Widget playzRoot = g_Game.GetWorkspace().CreateWidgets(PlayZUIPaths.LAYOUT_INGAME);
+		layoutRoot = g_Game.GetWorkspace().CreateWidgets(PlayZUIPaths.LAYOUT_INGAME);
+		PlayZBindInGameMenuWidgets();
 
-		PlayZReparentExpansionWidgets(playzRoot);
-
-		if (oldRoot)
+		if (g_Game.IsMultiplayer())
 		{
-			oldRoot.Unlink();
+			ButtonSetText(m_RestartButton, "#main_menu_respawn");
+		}
+		else
+		{
+			ButtonSetText(m_RestartButton, "#main_menu_restart");
 		}
 
-		layoutRoot = playzRoot;
-		PlayZRebindInGameMenuWidgets();
+		HudShow(false);
+		SetGameVersion();
 
 		if (m_ModdedWarning)
 		{
 			m_ModdedWarning.Show(false);
 		}
 
-		SetServerInfoVisibility(SetServerInfo() && g_Game.GetProfileOption(EDayZProfilesOptions.SERVERINFO_DISPLAY));
+		PlayZInitPauseOverlays();
 
-		m_Logo = ImageWidget.Cast(layoutRoot.FindAnyWidget("dayz_logo"));
+		Mission mission = g_Game.GetMission();
+		if (mission)
+		{
+			mission.Pause();
+		}
 
 		return layoutRoot;
 	}
 
-	protected bool PlayZIsLinkWidget(Widget w, string linkName)
+	protected void PlayZDeathRevealApplyCovers()
 	{
-		if (!w)
+		if (m_PlayZDeathPictureCover)
 		{
-			return false;
+			m_PlayZDeathPictureCover.SetAlpha(m_PlayZDeathPictureCoverLevel);
 		}
 
-		string wn = w.GetName();
-		if (wn == linkName)
+		if (m_PlayZDeathButtonsCover)
 		{
-			return true;
+			m_PlayZDeathButtonsCover.SetAlpha(m_PlayZDeathButtonsCoverLevel);
+		}
+	}
+
+	protected void PlayZDeathRevealFinish()
+	{
+		m_PlayZDeathRevealActive = false;
+		m_PlayZDeathPictureCoverLevel = 0;
+		m_PlayZDeathButtonsCoverLevel = 0;
+		PlayZDeathScreen_SetIntroActive(false);
+		PlayZDeathRevealApplyCovers();
+		PlayZDeathScreen_MaintainDeathMenuView();
+	}
+
+	protected bool PlayZDeathRevealIsComplete()
+	{
+		return m_PlayZDeathPictureCoverLevel <= 0 && m_PlayZDeathButtonsCoverLevel <= 0;
+	}
+
+	protected Widget PlayZInitDeathMenu()
+	{
+		layoutRoot = g_Game.GetWorkspace().CreateWidgets(PlayZUIPaths.LAYOUT_DEATH_SCREEN);
+		PlayZBindDeathMenuWidgets();
+
+		m_PlayZDeathBackground = ImageWidget.Cast(layoutRoot.FindAnyWidget("death_background"));
+		m_PlayZDeathPictureCover = layoutRoot.FindAnyWidget("death_picture_cover");
+		m_PlayZDeathButtonsCover = layoutRoot.FindAnyWidget("death_buttons_cover");
+
+		if (m_PlayZDeathBackground)
+		{
+			m_PlayZDeathBackground.LoadImageFile(0, PlayZUIPaths.TEX_DEATHSCREEN);
 		}
 
-		if (wn == linkName + "_label")
+		m_PlayZDeathPictureCoverLevel = 1;
+		m_PlayZDeathButtonsCoverLevel = 1;
+		PlayZDeathRevealApplyCovers();
+
+		m_PlayZDeathRevealElapsed = 0;
+		m_PlayZDeathRevealTimerSlice = 0;
+		m_PlayZDeathRevealActive = true;
+
+		HudShow(false);
+		PlayZDeathScreen_MaintainDeathMenuView();
+
+		Mission mission = g_Game.GetMission();
+		if (mission)
 		{
-			return true;
+			mission.Pause();
 		}
 
-		return false;
+		return layoutRoot;
+	}
+
+	protected void PlayZDeathRevealShow(float timeslice)
+	{
+		if (!m_PlayZDeathRevealActive)
+		{
+			return;
+		}
+
+		m_PlayZDeathRevealElapsed = m_PlayZDeathRevealElapsed + timeslice;
+
+		if (m_PlayZDeathPictureCoverLevel > 0)
+		{
+			float newPictureCover = m_PlayZDeathPictureCoverLevel - (1 / PlayZUIPaths.DEATH_REVEAL_PICTURE_SEC) * timeslice;
+			if (newPictureCover > 0)
+			{
+				m_PlayZDeathPictureCoverLevel = newPictureCover;
+			}
+			else
+			{
+				m_PlayZDeathPictureCoverLevel = 0;
+			}
+		}
+
+		if (m_PlayZDeathRevealElapsed >= PlayZUIPaths.DEATH_REVEAL_BUTTONS_DELAY_SEC && m_PlayZDeathButtonsCoverLevel > 0)
+		{
+			float newButtonsCover = m_PlayZDeathButtonsCoverLevel - (1 / PlayZUIPaths.DEATH_REVEAL_BUTTONS_SEC) * timeslice;
+			if (newButtonsCover > 0)
+			{
+				m_PlayZDeathButtonsCoverLevel = newButtonsCover;
+			}
+			else
+			{
+				m_PlayZDeathButtonsCoverLevel = 0;
+			}
+		}
+
+		PlayZDeathRevealApplyCovers();
+
+		if (PlayZDeathRevealIsComplete())
+		{
+			PlayZDeathRevealFinish();
+		}
 	}
 
 	override Widget Init()
 	{
-		layoutRoot = super.Init();
-		return PlayZSwapToPlayZLayout();
+		m_PlayZDeathMode = PlayZDeathScreen_IsMenuMode();
+
+		if (m_PlayZDeathMode)
+		{
+			return PlayZInitDeathMenu();
+		}
+
+		return PlayZInitPauseMenu();
 	}
 
 	void Expansion_OnGeneralSettingsUpdated()
 	{
-		if (!GetExpansionSettings().GetGeneral().UseDeathScreenStatistics || !GetValuesFromMonitor())
-		{
-			m_DeadSceenStatsButtonPanel.Show(false);
-		}
-
 		if (m_NewsFeed && !GetExpansionSettings().GetGeneral().UseNewsFeedInGameMenu)
 		{
 			Widget newsFeedRoot = m_NewsFeed.GetLayoutRoot();
@@ -120,23 +238,66 @@ modded class InGameMenu
 		}
 	}
 
-	override bool OnClick(Widget w, int x, int y, int button)
+	void OnSettingChanged()
 	{
-		if (button == MouseState.LEFT)
-		{
-			if (PlayZIsLinkWidget(w, "playz_website_link"))
-			{
-				g_Game.OpenURL("https://playzthegoat.com/");
-				return true;
-			}
+	}
 
-			if (PlayZIsLinkWidget(w, "playz_discord_link"))
+	override void SetServerInfoVisibility(bool show)
+	{
+	}
+
+	override protected bool SetServerInfo()
+	{
+		return false;
+	}
+
+	override void Update(float timeslice)
+	{
+		if (m_PlayZDeathMode)
+		{
+			PlayZDeathScreen_MaintainDeathMenuView();
+
+			if (m_PlayZDeathRevealActive)
 			{
-				g_Game.OpenURL("https://discord.gg/SgNhCNtb5N");
-				return true;
+				m_PlayZDeathRevealTimerSlice = m_PlayZDeathRevealTimerSlice + timeslice;
+				if (m_PlayZDeathRevealTimerSlice >= 0.01)
+				{
+					PlayZDeathRevealShow(timeslice);
+					m_PlayZDeathRevealTimerSlice = 0;
+				}
+			}
+			else
+			{
+				PlayZDeathRevealApplyCovers();
 			}
 		}
 
-		return super.OnClick(w, x, y, button);
+		super.Update(timeslice);
+	}
+
+	override void UpdateGUI()
+	{
+		if (m_PlayZDeathMode)
+		{
+			return;
+		}
+
+		super.UpdateGUI();
+	}
+
+	override protected void GameRespawn(bool random)
+	{
+		PlayZDeathScreen_Reset();
+		super.GameRespawn(random);
+	}
+
+	override protected void OnClick_Exit()
+	{
+		if (m_PlayZDeathMode)
+		{
+			PlayZDeathScreen_Reset();
+		}
+
+		super.OnClick_Exit();
 	}
 }

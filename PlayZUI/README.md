@@ -22,7 +22,7 @@ Third-party stack (abbreviated):
 
 | Surface | Owner | Notes |
 |---------|-------|-------|
-| Main menu, loading, pause, options shell, logout | **PlayZUI** | `modded class` + custom layouts |
+| Main menu, loading, pause, options shell, logout, death screen | **PlayZUI** | `modded class` + custom layouts |
 | Terje Start Screen page skins | **PlayZUI** | `GetNativeLayout()` overrides only |
 | Expansion nametags, chat names, killfeed, life stats, options EXPANSION tab | **PlayZExpansion** | Narrow hooks after PlayZUI |
 | Terje HUD badges, skills panel, medicine/rad notifiers | **Terje mods** | PlayZUI documents; PlayZTerje* may extend |
@@ -66,6 +66,7 @@ Third-party stack (abbreviated):
 | [01-playzcore-ui.md](docs/playz/01-playzcore-ui.md) | Earplugs, ACL logout, inputs |
 | [02-sibling-modules.md](docs/playz/02-sibling-modules.md) | Full UI grep inventory |
 | [03-load-order-conflicts.md](docs/playz/03-load-order-conflicts.md) | Conflict matrix |
+| [04-death-screen.md](docs/playz/04-death-screen.md) | Custom death flow, cover reveal, vanilla PPE/fade fixes |
 
 ### Terje (`docs/terje/`)
 
