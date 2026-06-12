@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{A69694697B5CAF48}PlayZ_Client/PlayZUI/gui/textures/PlayZ.edds"
+ Author "olivier"
+ ChangeDate 1171403980
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "PlayZ.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

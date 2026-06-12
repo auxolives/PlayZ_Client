@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{6BCB267A268B56DC}PlayZ_Client/PlayZUI/gui/textures/Background_01.edds"
+ Author "olivier"
+ ChangeDate 1171403980
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "Background_01.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

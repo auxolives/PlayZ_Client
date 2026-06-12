@@ -1,4 +1,4 @@
-﻿FrameWidgetClass LoadingFrame {
+FrameWidgetClass LoadingFrame {
  color 0 0 0 1
  position 0 0
  size 1 1
@@ -28,7 +28,7 @@
    {
     ImageWidgetClass ImageBackground {
      visible 1
-     color 0 0.824 1 1
+     ignorepointer 1
      position 0 0
      size 1 1
      halign center_ref
@@ -38,34 +38,127 @@
      hexactsize 0
      vexactsize 0
      image0 ""
-     imageTexture "{4A5BA03522015F2C}PlayZ_Client/PlayZUI/gui/textures/Background01.edds"
+     imageTexture "{6BCB267A268B56DC}PlayZ_Client/PlayZUI/gui/textures/Background_01.edds"
      mode opaque
      "src alpha" 1
      "clamp mode" invalid
      "stretch mode" stretch_w_h
      filter 1
-     pivot 0 0
-     "Transition width" 0
     }
-    ImageWidgetClass ImageLogo {
-     visible 1
+    PanelWidgetClass BackgroundOverlay {
      ignorepointer 1
-     position 0 0.04
-     size 0.33 0.33
+     color 0 0 0 0.4
+     position 0 0
+     size 1 1
      halign center_ref
      valign center_ref
      hexactpos 0
      vexactpos 0
      hexactsize 0
      vexactsize 0
-     imageTexture "{C52ED4083E5ACECC}PlayZ_Client/PlayZUI/gui/textures/LOGOTEXT.edds"
+     style rover_sim_colorable
+    }
+    ImageWidgetClass ImageLogoMid {
+     visible 1
+     ignorepointer 1
+     position 0 0
+     size 0.3 0.3
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     imageTexture "{A69694697B5CAF48}PlayZ_Client/PlayZUI/gui/textures/PlayZ.edds"
      mode blend
      "src alpha" 1
-     "stretch mode" stretch_w_h
+     "clamp mode" border
+     "stretch mode" fit_h_center
      filter 1
+    }
+    ImageWidgetClass ImageLogoCorner {
+     visible 0
+     ignorepointer 1
+     position 0 0
+     size 0.01 0.01
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    ImageWidgetClass ImageLoadingIcon {
+     visible 0
+     ignorepointer 1
+     position 0 0
+     size 0.01 0.01
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    TextWidgetClass TextWidget {
+     visible 0
+     ignorepointer 1
+     position 0 0
+     size 0.01 0.01
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    TextWidgetClass StatusText {
+     visible 0
+     ignorepointer 1
+     position 0 0
+     size 0.01 0.01
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    TextWidgetClass ProgressText {
+     visible 0
+     ignorepointer 1
+     position 0 0
+     size 0.01 0.01
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    MultilineTextWidgetClass ModdedWarning {
+     visible 0
+     ignorepointer 1
+     position 0 0
+     size 0.01 0.01
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    FrameWidgetClass hint_frame {
+     visible 0
+     ignorepointer 1
+     position 0 0
+     size 0.01 0.01
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    WrapSpacerWidgetClass notification_root {
+     visible 0
+     ignorepointer 1
+     position 0 0
+     size 0.01 0.01
+     hexactpos 0
+     vexactpos 0
+     hexactsize 1
+     vexactsize 1
     }
     ProgressBarWidgetClass LoadingBar {
      ignorepointer 1
+     color 1 1 1 1
      position 0 0
      size 1 5
      halign center_ref
@@ -78,16 +171,18 @@
      current 0
      vertical 0
     }
-    TextWidgetClass StatusText {
-     visible 1
+    ProgressBarWidgetClass ProgressBarWidget {
+     visible 0
+     ignorepointer 1
      position 0 0
-     size 1 5
-     halign center_ref
-     valign bottom_ref
-     vexactsize 1
-     "exact text" 1
-     "text halign" center
-     "text valign" center
+     size 0.01 0.01
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Loading
+     current 0
+     vertical 0
     }
    }
   }
