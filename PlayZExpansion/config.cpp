@@ -8,9 +8,9 @@ class CfgPatches
 		requiredAddons[] = {
 			"DZ_Data",
 			"DZ_Scripts",
-			"PlayZUI",
 			"TerjeCore",
 			"TerjeStartScreen",
+			"PlayZUI",
 			"DayZExpansion_Core_Scripts",
 			"DayZExpansion_Scripts",
 			"DayZExpansion_Market_Scripts",
@@ -34,7 +34,6 @@ class CfgMods
 		author = "Olivier";
 		type = "mod";
 		dependencies[] = {
-			"Game",
 			"World",
 			"Mission"
 		};
