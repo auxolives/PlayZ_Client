@@ -1,15 +1,17 @@
-﻿class CfgPatches
+class CfgPatches
 {
 	class PlayZUI
 	{
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.1;
-		requiredAddons[] = 
-		{
+		requiredAddons[] = {
 			"DZ_Data",
 			"DZ_Scripts",
-			"TerjeStartScreen"
+			"TerjeCore",
+			"TerjeStartScreen",
+			"DayZExpansion_Core_Scripts",
+			"DayZExpansion_Scripts"
 		};
 	};
 };
@@ -21,7 +23,7 @@ class CfgMods
 		dir = "PlayZUI";
 		hideName = 1;
 		hidePicture = 1;
-		name = "PlayZUI";
+		name = "PlayZ UI";
 		credits = "";
 		author = "Olivier";
 		type = "mod";
@@ -34,12 +36,16 @@ class CfgMods
 			class gameScriptModule
 			{
 				value = "";
-				files[] = { "PlayZ_Client/PlayZUI/scripts/3_Game" };
+				files[] = {
+					"PlayZ_Client/PlayZUI/scripts/3_Game"
+				};
 			};
 			class missionScriptModule
 			{
 				value = "";
-				files[] = { "PlayZ_Client/PlayZUI/scripts/5_Mission" };
+				files[] = {
+					"PlayZ_Client/PlayZUI/scripts/5_Mission"
+				};
 			};
 		};
 	};
