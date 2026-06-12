@@ -4,27 +4,21 @@ modded class MainMenu
 	{
 		layoutRoot = g_Game.GetWorkspace().CreateWidgets(PlayZUIPaths.LAYOUT_MAIN_MENU);
 
-		m_Play				= layoutRoot.FindAnyWidget("play");
-		m_Feedback			= layoutRoot.FindAnyWidget("feedback_button");
-		m_TutorialButton	= layoutRoot.FindAnyWidget("tutorial_button");
-		m_MessageButton		= layoutRoot.FindAnyWidget("message_button");
-		m_SettingsButton	= layoutRoot.FindAnyWidget("settings_button");
-		m_Exit				= layoutRoot.FindAnyWidget("exit_button");
-		m_Version			= TextWidget.Cast(layoutRoot.FindAnyWidget("version"));
-
-		m_LastPlayedTooltip = layoutRoot.FindAnyWidget("last_server_info");
-		if (m_LastPlayedTooltip)
-		{
-			m_LastPlayedTooltip.Show(false);
-			m_LastPlayedTooltipLabel = m_LastPlayedTooltip.FindAnyWidget("last_server_info_label");
-			m_LastPlayedTooltipName = TextWidget.Cast(m_LastPlayedTooltip.FindAnyWidget("last_server_info_name"));
-			m_LastPlayedTooltipIP = TextWidget.Cast(m_LastPlayedTooltip.FindAnyWidget("last_server_info_ip"));
-			m_LastPlayedTooltipPort = TextWidget.Cast(m_LastPlayedTooltip.FindAnyWidget("last_server_info_port"));
-			m_LastPlayedTooltipTimer = new WidgetFadeTimer();
-		}
+		m_Play = layoutRoot.FindAnyWidget("play");
+		m_Feedback = layoutRoot.FindAnyWidget("feedback_button");
+		m_TutorialButton = layoutRoot.FindAnyWidget("tutorial_button");
+		m_MessageButton = layoutRoot.FindAnyWidget("message_button");
+		m_SettingsButton = layoutRoot.FindAnyWidget("settings_button");
+		m_Exit = layoutRoot.FindAnyWidget("exit_button");
+		m_Version = TextWidget.Cast(layoutRoot.FindAnyWidget("version"));
 
 		m_Mission = MissionMainMenu.Cast(g_Game.GetMission());
 		m_LastFocusedButton = m_Play;
+
+		if (m_Play)
+		{
+			ColorNormal(m_Play);
+		}
 
 		string version;
 		g_Game.GetVersion(version);
@@ -41,6 +35,32 @@ modded class MainMenu
 		g_Game.SetLoadState(DayZLoadState.MAIN_MENU_CONTROLLER_SELECT);
 
 		return layoutRoot;
+	}
+
+	override void Play()
+	{
+		g_Game.GetCallQueue(CALL_CATEGORY_GUI).CallByName(this, "PlayZConnectHardcodedServer");
+	}
+
+	protected void PlayZConnectHardcodedServer()
+	{
+		g_Game.ConnectFromServerBrowserEx(PlayZUIPaths.SERVER_IP, PlayZUIPaths.SERVER_GAME_PORT, PlayZUIPaths.SERVER_STEAM_QUERY_PORT, "");
+	}
+
+	override bool OnClick(Widget w, int x, int y, int button)
+	{
+		if (button == MouseState.LEFT && w)
+		{
+			string wn = w.GetName();
+			if (wn == "play" || wn == "play_image")
+			{
+				m_LastFocusedButton = m_Play;
+				Play();
+				return true;
+			}
+		}
+
+		return super.OnClick(w, x, y, button);
 	}
 
 	override void LoadMods()
@@ -98,20 +118,6 @@ modded class MainMenu
 		}
 	}
 
-	override void ConnectLastSession()
-	{
-		string ip = "";
-		int port = 0;
-
-		if (TryConnectLastSession(ip, port))
-		{
-			g_Game.ConnectFromServerBrowserEx(ip, port, 0, "");
-			return;
-		}
-
-		OpenMenuServerBrowser();
-	}
-
 	override bool OnMouseEnter(Widget w, int x, int y)
 	{
 		if (IsFocusable(w))
@@ -141,7 +147,13 @@ modded class MainMenu
 			return false;
 		}
 
-		if (w == m_Play || w == m_TutorialButton || w == m_MessageButton || w == m_SettingsButton)
+		string wn = w.GetName();
+		if (wn == "play" || wn == "play_image")
+		{
+			return true;
+		}
+
+		if (w == m_TutorialButton || w == m_MessageButton || w == m_SettingsButton)
 		{
 			return true;
 		}
@@ -152,5 +164,57 @@ modded class MainMenu
 		}
 
 		return false;
+	}
+
+	override void ColorHighlight(Widget w)
+	{
+		if (!w)
+		{
+			return;
+		}
+
+		string wn = w.GetName();
+		if (wn == "play" || wn == "play_image")
+		{
+			Widget playBtn = w;
+			if (wn == "play_image")
+			{
+				playBtn = w.GetParent();
+			}
+
+			int color_pnl = ARGB(0, 0, 0, 0);
+			int color_img = ARGB(255, 200, 0, 0);
+			ButtonSetColor(playBtn, color_pnl);
+			ImagenSetColor(playBtn, color_img);
+			return;
+		}
+
+		super.ColorHighlight(w);
+	}
+
+	override void ColorNormal(Widget w)
+	{
+		if (!w)
+		{
+			return;
+		}
+
+		string wn = w.GetName();
+		if (wn == "play" || wn == "play_image")
+		{
+			Widget playBtn = w;
+			if (wn == "play_image")
+			{
+				playBtn = w.GetParent();
+			}
+
+			int color_pnl = ARGB(0, 0, 0, 0);
+			int color_img = ARGB(255, 255, 255, 255);
+			ButtonSetColor(playBtn, color_pnl);
+			ImagenSetColor(playBtn, color_img);
+			return;
+		}
+
+		super.ColorNormal(w);
 	}
 }
