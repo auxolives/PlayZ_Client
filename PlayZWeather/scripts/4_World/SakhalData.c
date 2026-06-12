@@ -41,6 +41,9 @@ modded class SakhalData
 
 	void InitScenarioDeferred()
 	{
+		if (!GetGame().IsServer())
+			return;
+
 		if (!LoadState())
 		{
 			PickNextScenario();
@@ -124,6 +127,9 @@ modded class SakhalData
 		if (!GetGame().IsServer())
 			return;
 
+		if (!m_Scenarios || m_Scenarios.Count() == 0)
+			return;
+
 		string prevName = "";
 		if (m_CurrentScenario)
 			prevName = m_CurrentScenario.m_Name;
@@ -185,16 +191,37 @@ modded class SakhalData
 			}
 		}
 
-		if (!m_CurrentScenario && m_Scenarios.Count() > 0)
+		if (!m_CurrentScenario)
 			m_CurrentScenario = m_Scenarios[0]; // fallback
-			
-		Debug.WeatherLog(string.Format("PlayZWeather:: Scenario selected: %1 (Clear restricted: %2)", m_CurrentScenario.m_Name, currentIsClear));
+
+		if (m_CurrentScenario)
+			Debug.WeatherLog(string.Format("PlayZWeather:: Scenario selected: %1 (Clear restricted: %2)", m_CurrentScenario.m_Name, currentIsClear));
 	}
 
 	override bool WeatherOnBeforeChange( EWeatherPhenomenon type, float actual, float change, float time )
 	{
 		if (!PlayZConfig.GetWeather().m_EnablePlayZWeather)
 			return super.WeatherOnBeforeChange(type, actual, change, time);
+
+		// Clients have no scenario table (config loads server-side only). Do not pick or
+		// author phenomena locally; accept engine replication and SYNC_SCENARIO vol fog.
+		if (!GetGame().IsServer())
+		{
+			m_Weather.GetRain().SetLimits(0, 1);
+			m_Weather.GetOvercast().SetLimits(0.07, 1);
+			m_Weather.GetSnowfall().SetLimits(0, 1);
+
+			if (type == EWeatherPhenomenon.FOG)
+			{
+				m_Weather.GetFog().Set(0.0, 10, 1000);
+				return true;
+			}
+
+			if (type == EWeatherPhenomenon.WIND_DIRECTION || type == EWeatherPhenomenon.VOLFOG_HEIGHT_DENSITY || type == EWeatherPhenomenon.VOLFOG_DISTANCE_DENSITY || type == EWeatherPhenomenon.VOLFOG_HEIGHT_BIAS)
+				return true;
+
+			return false;
+		}
 
 		// Sakhal vanilla pins rain to 0; widen limits so PlayZ scenarios can drive snowfall/rain.
 		m_Weather.GetRain().SetLimits(0, 1);
