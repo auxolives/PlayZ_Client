@@ -46,8 +46,7 @@ Set `MOD_OUT` in `.vscode/scripts/Build-PlayZ_Client.bat` to your CFTools `@Play
 - `PlayZSakhal` — altitude hypoxia on **Sakhal** only: stamina cap penalty above **200 m**, client chrom/blur PPE, sprint breath audio. Winter headgear + glasses soften PPE only (no stamina mitigation without pressurized gear). Tunables in `GameConstants.c` (`PLAYZ_SAKHAL_HYPOXIA_*`).
 - `PlayZAsmond` — vanilla-name aliases for Asmond clothing (~900) and weapons (~300) under `DZ/characters/` and `DZ/weapons/`. Requires `AsmondClothing` and `AsmondWeapons` in `-mod=`; assets stay in those mods, PlayZ only forwards `Asmond_*` into vanilla class names (`scope=2`).
 - `PlayZTerjeRadiation` — vanilla clothing radiation protection, dry bag/drysack isolation, radioactive rain/snow client PPE. Requires `TerjeRadiation` in `-mod=`.
-- `PlayZUI` — custom main menu, loading screen, in-game/logout dialogs, login queue/time UI, and Terje Start Screen page layouts. Requires `TerjeStartScreen` in `-mod=`. Main-menu **Play** uses hardcoded `ConnectFromServerBrowserEx` (dev: `127.0.0.1:2305`, query `27018` — change in `scripts/5_Mission/MainMenu.c` for production).
-- `PlayZExpansion` — Sakhal Expansion compatibility patches (not a fork of Expansion). Requires `DayZ-Expansion-Core` + Market + P2P Market + Chat + NameTags + AI + TerjeStartScreen in `-mod=` **after** Expansion, **with** `@PlayZExpansion` loaded after `@PlayZUI` on the mod line. Hides Expansion AI hostility cooldown timer; dead-player **Statistics** on PlayZ ingame menu; Terje **First Last** identity on P2P owner, killfeed, and chat; floating **nametags** enabled with `DisplayPlayerNamesMode` face-cover gate; corpse cursor suppresses vanilla `Survivor` when name display is blocked.
+- `PlayZUI` — Sakhal UI rework (menus, loading, Terje Start Screen skins). Load after `PlayZCore` / `PlayZTerje*` and before `PlayZExpansion`. See [PlayZUI/README.md](PlayZUI/README.md).
 
 ## Adding a new shared sub-mod
 
