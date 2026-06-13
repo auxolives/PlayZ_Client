@@ -1,5 +1,4 @@
-//! Client-side weight for radioactive precipitation tint (matches Terje rain rad logic + shelter).
-//! Website accent: PlayZ_Website/config/themes/sakhal.ts primary #5ECF6E
+//! Client-side weight for radioactive precipitation desaturation (matches Terje rain rad logic + shelter).
 
 class PlayZRadioactiveRainPPE
 {
@@ -7,13 +6,9 @@ class PlayZRadioactiveRainPPE
 	static const float PRECIP_MAX = 1.0;
 	static const float FADE_SPEED = 0.05;
 
-	static const float COLOR_RAIN_R = 0.62;
-	static const float COLOR_RAIN_G = 1.42;
-	static const float COLOR_RAIN_B = 0.68;
-
-	static const float COLOR_SNOW_R = 0.58;
-	static const float COLOR_SNOW_G = 1.38;
-	static const float COLOR_SNOW_B = 0.88;
+	//! Glow saturation at max precip (0.1 = 90% desaturated).
+	static const float SATURATION_MIN = 0.1;
+	static const float SATURATION_MAX = 1.0;
 
 	static float GetTargetWeight()
 	{
@@ -66,50 +61,8 @@ class PlayZRadioactiveRainPPE
 		return Math.InverseLerp(PRECIP_MIN, PRECIP_MAX, precip);
 	}
 
-	static void GetColorizationForWeight(float weight, out float r, out float g, out float b)
+	static float GetSaturationForWeight(float weight)
 	{
-		float targetR;
-		float targetG;
-		float targetB;
-		GetColorTargetsForPrecip(targetR, targetG, targetB);
-
-		r = Math.Lerp(1.0, targetR, weight);
-		g = Math.Lerp(1.0, targetG, weight);
-		b = Math.Lerp(1.0, targetB, weight);
-	}
-
-	protected static void GetColorTargetsForPrecip(out float r, out float g, out float b)
-	{
-		Weather weather = GetGame().GetWeather();
-		float rain = 0;
-		float snow = 0;
-
-		if (weather)
-		{
-			Rain rainFx = weather.GetRain();
-			if (rainFx)
-			{
-				rain = rainFx.GetActual();
-			}
-
-			Snowfall snowfall = weather.GetSnowfall();
-			if (snowfall)
-			{
-				snow = snowfall.GetActual();
-			}
-		}
-
-		if (snow >= rain)
-		{
-			r = COLOR_SNOW_R;
-			g = COLOR_SNOW_G;
-			b = COLOR_SNOW_B;
-		}
-		else
-		{
-			r = COLOR_RAIN_R;
-			g = COLOR_RAIN_G;
-			b = COLOR_RAIN_B;
-		}
+		return Math.Lerp(SATURATION_MAX, SATURATION_MIN, weight);
 	}
 }
