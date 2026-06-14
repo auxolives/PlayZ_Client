@@ -25,7 +25,8 @@ class CfgMods
 		type = "mod";
 		dependencies[] = {
 			"Game",
-			"World"
+			"World",
+			"Mission"
 		};
 		class defs
 		{
@@ -41,6 +42,13 @@ class CfgMods
 				value = "";
 				files[] = {
 					"PlayZ_Client/PlayZAntiCheatClient/scripts/4_World"
+				};
+			};
+			class missionScriptModule
+			{
+				value = "";
+				files[] = {
+					"PlayZ_Client/PlayZAntiCheatClient/scripts/5_Mission"
 				};
 			};
 		};
