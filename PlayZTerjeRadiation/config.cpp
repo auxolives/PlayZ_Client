@@ -10,9 +10,11 @@ class CfgPatches
 			"DZ_Scripts",
 			"PlayZCore",
 			"TerjeCore",
+			"TerjeMedicine",
 			"TerjeRadiation",
 			"TerjeRadiation_Protection",
-			"PlayZTerjeCore"
+			"PlayZTerjeCore",
+			"PlayZTerjeMedicine"
 		};
 	};
 };
@@ -55,6 +57,36 @@ class CfgMods
 					"PlayZ_Client/PlayZTerjeRadiation/scripts/5_Mission"
 				};
 			};
+		};
+	};
+};
+
+class CfgTerjeSkills
+{
+	class SkillsBase;
+	class Immunity: SkillsBase
+	{
+		class Modifiers
+		{
+			class RadiationResist
+			{
+				id="radres";
+				enabled=1;
+				text = "#STR_TERJESKILL_IMMUNITY_MOD0radresmod";
+				value = 0.01;
+			};
+			class RadiationRegen
+			{
+				id="radregen";
+				enabled=1;
+				text = "#STR_TERJESKILL_IMMUNITY_MOD0radregenmod";
+				value = 0.025;
+			};
+		}
+		class Perks
+		{
+			class RadiationResist { enabled = 0; };
+			class RadiationRegen { enabled = 0; };
 		};
 	};
 };
