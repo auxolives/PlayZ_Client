@@ -9,6 +9,8 @@ modded class InGameMenu
 	protected ImageWidget m_PlayZDeathBackground;
 	protected Widget m_PlayZDeathPictureCover;
 	protected Widget m_PlayZDeathButtonsCover;
+	protected Widget m_WebsiteButton;
+	protected Widget m_DiscordButton;
 
 	protected void PlayZBindInGameMenuWidgets()
 	{
@@ -22,6 +24,8 @@ modded class InGameMenu
 		m_OptionsButton = layoutRoot.FindAnyWidget("optionsbtn");
 		m_ModdedWarning = TextWidget.Cast(layoutRoot.FindAnyWidget("ModdedWarning"));
 		m_FeedbackButton = layoutRoot.FindAnyWidget("feedbackbtn");
+		m_WebsiteButton = layoutRoot.FindAnyWidget("websitebtn");
+		m_DiscordButton = layoutRoot.FindAnyWidget("discordbtn");
 		m_HintPanel = null;
 	}
 
@@ -37,6 +41,8 @@ modded class InGameMenu
 		m_OptionsButton = null;
 		m_ModdedWarning = null;
 		m_FeedbackButton = null;
+		m_WebsiteButton = null;
+		m_DiscordButton = null;
 		m_HintPanel = null;
 	}
 
@@ -299,5 +305,25 @@ modded class InGameMenu
 		}
 
 		super.OnClick_Exit();
+	}
+
+	override bool OnClick(Widget w, int x, int y, int button)
+	{
+		if (!m_PlayZDeathMode && button == MouseState.LEFT)
+		{
+			if (w == m_WebsiteButton)
+			{
+				g_Game.OpenURL(PlayZUIPaths.URL_WEBSITE);
+				return true;
+			}
+
+			if (w == m_DiscordButton)
+			{
+				g_Game.OpenURL(PlayZUIPaths.URL_DISCORD);
+				return true;
+			}
+		}
+
+		return super.OnClick(w, x, y, button);
 	}
 }

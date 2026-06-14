@@ -21,4 +21,7 @@ class PlayZUIPaths
 	static const string SERVER_IP = "127.0.0.1";
 	static const int SERVER_GAME_PORT = 2502;
 	static const int SERVER_STEAM_QUERY_PORT = 27018;
+
+	static const string URL_WEBSITE = "https://playzthegoat.com/";
+	static const string URL_DISCORD = "https://discord.gg/SgNhCNtb5N";
 };
