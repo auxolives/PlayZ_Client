@@ -8,10 +8,26 @@ class CfgPatches
 		requiredAddons[] = {
 			"DZ_Data",
 			"DZ_Scripts",
+			"DZ_Gear_Navigation",
 			"PlayZCore"
 		};
 	};
 };
+
+class CfgWorlds
+{
+	class DefaultWorld;
+	class CAWorld: DefaultWorld
+	{
+	};
+	class sakhal: CAWorld
+	{
+		mapTextureClosed = "dz/worlds/sakhal/data/map_folded_sakhal_co.paa";
+		mapTextureOpened = "PlayZSakhal/DZ/worlds/sakhal/data/map_unfolded_sakhal_co.paa";
+		mapTextureLegend = "dz/worlds/sakhal/data/map_legend_sakhal_co.paa";
+	};
+};
+
 class CfgMods
 {
 	class PlayZSakhal
