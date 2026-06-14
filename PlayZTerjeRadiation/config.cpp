@@ -82,7 +82,7 @@ class CfgTerjeSkills
 				text = "#STR_TERJESKILL_IMMUNITY_MOD0radregenmod";
 				value = 0.025;
 			};
-		}
+		};
 		class Perks
 		{
 			class RadiationResist { enabled = 0; };
