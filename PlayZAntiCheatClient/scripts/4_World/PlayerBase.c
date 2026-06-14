@@ -8,6 +8,10 @@ modded class PlayerBase
 		{
 			HandlePlayZACCameraRequest(ctx);
 		}
+		else if (rpc_type == RPC_PLAYZ_AC_KICK_MESSAGE)
+		{
+			HandlePlayZACKickMessage(ctx);
+		}
 	}
 
 	protected void HandlePlayZACCameraRequest(ParamsReadContext ctx)
@@ -34,5 +38,17 @@ modded class PlayerBase
 		rpc.Write(clientTime);
 		rpc.Write(flags);
 		rpc.Send(this, RPC_PLAYZ_AC_CAMERA_RESPONSE, true, NULL);
+	}
+
+	protected void HandlePlayZACKickMessage(ParamsReadContext ctx)
+	{
+		if (!GetGame() || GetGame().IsServer())
+			return;
+
+		string reason;
+		if (!ctx.Read(reason))
+			return;
+
+		PlayZACDeferredKickMessage.Queue(reason);
 	}
 };
