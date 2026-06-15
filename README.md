@@ -47,6 +47,7 @@ Set `MOD_OUT` in `.vscode/scripts/Build-PlayZ_Client.bat` to your CFTools `@Play
 - `PlayZAsmond` — vanilla-name aliases for Asmond clothing (~900) and weapons (~300) under `DZ/characters/` and `DZ/weapons/`. Requires `AsmondClothing` and `AsmondWeapons` in `-mod=`; assets stay in those mods, PlayZ only forwards `Asmond_*` into vanilla class names (`scope=2`).
 - `PlayZTerjeRadiation` — vanilla clothing radiation protection, dry bag/drysack isolation, radioactive rain/snow client PPE. Requires `TerjeRadiation` in `-mod=`.
 - `PlayZUI` — Sakhal UI rework (menus, loading, Terje Start Screen skins). Load after `PlayZCore` / `PlayZTerje*` and before `PlayZExpansion`. See [PlayZUI/README.md](PlayZUI/README.md).
+- `PlayZJammingSyncFix` — disables firearm jamming (`JamCheck` false, blocks `SetJammed(true)`, clears persisted jam on load). Load after third-party weapon jam overrides when present.
 - `PlayZmCommandWeaponsFix` — guards null `m_CommandWeapons` in `DayZPlayerCamera1stPerson` (`UpdateUDAngleUnlocked` access violation). Load **last** in `@PlayZ_Client` (after `sVisual` / Expansion).
 
 ## Adding a new shared sub-mod
