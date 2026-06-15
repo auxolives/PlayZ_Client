@@ -11,6 +11,8 @@ modded class InGameMenu
 	protected Widget m_PlayZDeathButtonsCover;
 	protected Widget m_WebsiteButton;
 	protected Widget m_DiscordButton;
+	protected Widget m_StatisticsButton;
+	protected bool m_PlayZDeathStatsButtonResolved;
 
 	protected void PlayZBindInGameMenuWidgets()
 	{
@@ -33,6 +35,7 @@ modded class InGameMenu
 	{
 		m_ExitButton = layoutRoot.FindAnyWidget("exitbtn");
 		m_RespawnButton = layoutRoot.FindAnyWidget("respawn_button");
+		m_StatisticsButton = layoutRoot.FindAnyWidget("statistics_button");
 		m_ContinueButton = null;
 		m_SeparatorPanel = null;
 		m_RestartButton = null;
@@ -143,6 +146,100 @@ modded class InGameMenu
 		return m_PlayZDeathPictureCoverLevel <= 0 && m_PlayZDeathButtonsCoverLevel <= 0;
 	}
 
+	protected void PlayZInitExpansionDeathStatsOverlay()
+	{
+		m_DeadScreenRoot = g_Game.GetWorkspace().CreateWidgets(PlayZUIPaths.LAYOUT_EXPANSION_DEATH_STATISTICS, layoutRoot);
+		if (!m_DeadScreenRoot)
+		{
+			return;
+		}
+
+		m_DeadScreenRoot.SetAlpha(1);
+		m_DeadScreenRoot.Show(false);
+
+		m_DeadScreen = m_DeadScreenRoot.FindAnyWidget("dead_screen");
+		if (m_DeadScreen)
+		{
+			m_DeadScreen.Show(false);
+		}
+
+		m_DeadScreenImage = ImageWidget.Cast(m_DeadScreenRoot.FindAnyWidget("dead_screen_image"));
+		if (m_DeadScreenImage)
+		{
+			m_DeadScreenImage.Show(false);
+		}
+
+		m_DeadSceenStatsButtonPanel = m_DeadScreenRoot.FindAnyWidget("ButtonPanel");
+		if (m_DeadSceenStatsButtonPanel)
+		{
+			m_DeadSceenStatsButtonPanel.Show(false);
+		}
+
+		m_DeadSceenStatsPanel = m_DeadScreenRoot.FindAnyWidget("PlayerStatisticsPanel");
+		m_DeadSceenStatsPanelTitle = TextWidget.Cast(m_DeadScreenRoot.FindAnyWidget("Caption"));
+		m_DeadSourceVal = TextWidget.Cast(m_DeadScreenRoot.FindAnyWidget("DeadSourceValue"));
+		m_LongestShotVal = TextWidget.Cast(m_DeadScreenRoot.FindAnyWidget("LongRangeShotValue"));
+		m_DistanceVal = TextWidget.Cast(m_DeadScreenRoot.FindAnyWidget("DistanceTraveledValue"));
+		m_AnimalsKilledVal = TextWidget.Cast(m_DeadScreenRoot.FindAnyWidget("AnimalsKilledValue"));
+		m_InfectedKilledVal = TextWidget.Cast(m_DeadScreenRoot.FindAnyWidget("InfectedKilledValue"));
+		m_PlayersKilledVal = TextWidget.Cast(m_DeadScreenRoot.FindAnyWidget("PlayersKilledValue"));
+	#ifdef ENFUSION_AI_PROJECT
+		m_AIKilledVal = TextWidget.Cast(m_DeadScreenRoot.FindAnyWidget("AIKilledValue"));
+	#endif
+		m_TimeSurvivedVal = TextWidget.Cast(m_DeadScreenRoot.FindAnyWidget("TimeSurvivedValue"));
+		m_DeadScreenStatsHideButton = ButtonWidget.Cast(m_DeadScreenRoot.FindAnyWidget("bHide"));
+
+		if (m_DeadSceenStatsPanel)
+		{
+			m_DeadSceenStatsPanel.Show(false);
+		}
+	}
+
+	protected void PlayZRefreshDeathStatisticsButton()
+	{
+		if (!m_StatisticsButton)
+		{
+			return;
+		}
+
+		bool showButton = GetValuesFromMonitor();
+		m_StatisticsButton.Show(showButton);
+		if (showButton)
+		{
+			m_PlayZDeathStatsButtonResolved = true;
+		}
+	}
+
+	protected void PlayZShowDeathStatistics()
+	{
+		if (!GetValuesFromMonitor())
+		{
+			return;
+		}
+
+		if (!m_DeadScreenRoot || !m_DeadSceenStatsPanel)
+		{
+			return;
+		}
+
+		UpdatePlayerStatValues();
+		m_DeadScreenRoot.Show(true);
+		m_DeadSceenStatsPanel.Show(true);
+	}
+
+	protected void PlayZHideDeathStatistics()
+	{
+		if (m_DeadSceenStatsPanel)
+		{
+			m_DeadSceenStatsPanel.Show(false);
+		}
+
+		if (m_DeadScreenRoot)
+		{
+			m_DeadScreenRoot.Show(false);
+		}
+	}
+
 	protected Widget PlayZInitDeathMenu()
 	{
 		layoutRoot = g_Game.GetWorkspace().CreateWidgets(PlayZUIPaths.LAYOUT_DEATH_SCREEN);
@@ -164,6 +261,10 @@ modded class InGameMenu
 		m_PlayZDeathRevealElapsed = 0;
 		m_PlayZDeathRevealTimerSlice = 0;
 		m_PlayZDeathRevealActive = true;
+		m_PlayZDeathStatsButtonResolved = false;
+
+		PlayZInitExpansionDeathStatsOverlay();
+		PlayZRefreshDeathStatisticsButton();
 
 		HudShow(false);
 		PlayZDeathScreen_MaintainDeathMenuView();
@@ -276,6 +377,11 @@ modded class InGameMenu
 			{
 				PlayZDeathRevealApplyCovers();
 			}
+
+			if (!m_PlayZDeathStatsButtonResolved)
+			{
+				PlayZRefreshDeathStatisticsButton();
+			}
 		}
 
 		super.Update(timeslice);
@@ -309,6 +415,21 @@ modded class InGameMenu
 
 	override bool OnClick(Widget w, int x, int y, int button)
 	{
+		if (m_PlayZDeathMode && button == MouseState.LEFT)
+		{
+			if (w == m_StatisticsButton)
+			{
+				PlayZShowDeathStatistics();
+				return true;
+			}
+
+			if (w == m_DeadScreenStatsHideButton)
+			{
+				PlayZHideDeathStatistics();
+				return true;
+			}
+		}
+
 		if (!m_PlayZDeathMode && button == MouseState.LEFT)
 		{
 			if (w == m_WebsiteButton)

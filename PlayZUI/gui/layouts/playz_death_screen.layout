@@ -34,8 +34,7 @@ FrameWidgetClass death_root {
    imageTexture "{452694762D12EEB6}PlayZ_Client/PlayZUI/gui/textures/Deathscreen_01.edds"
    mode blend
    "src alpha" 1
-   "no wrap" 0
-   stretch 1
+   "stretch mode" stretch_w_h
    filter 1
   }
   PanelWidgetClass death_overlay {
@@ -69,7 +68,7 @@ FrameWidgetClass death_root {
    visible 1
    clipchildren 0
    ignorepointer 0
-   position 0 0.2
+   position 0 0.25
    size 400 0
    halign center_ref
    valign bottom_ref
@@ -128,6 +127,44 @@ FrameWidgetClass death_root {
        vexactsize 0
        text "#main_menu_respawn"
        font "gui/fonts/sdf_MetronLight72"
+       "text halign" center
+       "text valign" center
+      }
+     }
+    }
+    ButtonWidgetClass statistics_button {
+     visible 0
+     ignorepointer 0
+     color 0 0 0 0
+     position 0 0
+     size 1 60
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     {
+      PanelWidgetClass statistics_button_panel {
+       ignorepointer 1
+       color 0 0 0 0
+       position 0 0
+       size 1 1
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style DayZDefaultPanel
+      }
+      TextWidgetClass statistics_button_label {
+       ignorepointer 1
+       size 1 0.6
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       text "#main_menu_statistics"
+       font "gui/fonts/sdf_MetronLight42"
        "text halign" center
        "text valign" center
       }

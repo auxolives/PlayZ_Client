@@ -24,4 +24,6 @@ class PlayZUIPaths
 
 	static const string URL_WEBSITE = "https://playzthegoat.com/";
 	static const string URL_DISCORD = "https://discord.gg/SgNhCNtb5N";
+
+	static const string LAYOUT_EXPANSION_DEATH_STATISTICS = "DayZExpansion/GUI/layouts/ui/expansion_dead_screen.layout";
 };
