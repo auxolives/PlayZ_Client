@@ -316,7 +316,7 @@ modded class MissionGameplay
 
 		if (!m_PlayZWeatherPPE)
 		{
-			m_PlayZWeatherPPE = PPERequester_PlayZWeather.Cast(PPERequesterBank.GetRequester(PPERequester_PlayZWeather));
+			m_PlayZWeatherPPE = PPERequester_PlayZWeather.Cast(PPERequesterBank.GetRequester(PPERequesterBank.REQ_PLAYZ_WEATHER));
 		}
 
 		if (!m_PlayZWeatherPPE.IsRequesterRunning())
