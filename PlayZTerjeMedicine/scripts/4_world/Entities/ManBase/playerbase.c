@@ -1,6 +1,18 @@
 modded class PlayerBase
 {
 	static const float RABIES_HYDRO_THRESHOLD = 20.0;
+
+	bool PlayZ_CanReceivePlayerSyringeInjection()
+	{
+		#ifdef EXPANSIONMODAI
+		if (IsAI())
+		{
+			return false;
+		}
+		#endif
+
+		return true;
+	}
 	protected float m_PlayZ_CachedRabiesValue = 0;
 	protected float m_PlayZ_RabiesCacheTimestamp = -1;
 
