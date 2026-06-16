@@ -18,9 +18,6 @@ class cfgWeapons
 {
 	class Pistol_Base;
 	class Rifle_Base;
-	class AK74_Base;
-	class AK101_Base;
-	class AKM_Base;
 	class BoltActionRifle_Base;
 	class BoltActionRifle_ExternalMagazine_Base;
 	class BoltActionRifle_InnerMagazine_Base;
@@ -135,6 +132,15 @@ class cfgWeapons
 		s_recoilControlKick = 0.26;
 	};
 
+	class MP5K_Base: Rifle_Base
+	{
+		s_recoilControlStabilityX = 0.28;
+		s_recoilControlStabilityY = 0.24;
+		s_recoilControlMisalignmentX = 0.16;
+		s_recoilControlMisalignmentY = 0.12;
+		s_recoilControlKick = 0.18;
+	};
+
 	class PM73Rak_Base: Rifle_Base
 	{
 		s_recoilControlStabilityX = 0.25;
@@ -199,6 +205,24 @@ class cfgWeapons
 		s_recoilControlKick = 0.28;
 	};
 
+	class M16A2_Base: Rifle_Base
+	{
+		s_recoilControlStabilityX = 0.44;
+		s_recoilControlStabilityY = 0.40;
+		s_recoilControlMisalignmentX = 0.32;
+		s_recoilControlMisalignmentY = 0.28;
+		s_recoilControlKick = 0.30;
+	};
+
+	class M4A1_Base: Rifle_Base
+	{
+		s_recoilControlStabilityX = 0.20;
+		s_recoilControlStabilityY = 0.18;
+		s_recoilControlMisalignmentX = 0.12;
+		s_recoilControlMisalignmentY = 0.10;
+		s_recoilControlKick = 0.10;
+	};
+
 	class FAL_Base: Rifle_Base
 	{
 		s_recoilControlStabilityX = 0.28;
@@ -206,6 +230,42 @@ class cfgWeapons
 		s_recoilControlMisalignmentX = 0.22;
 		s_recoilControlMisalignmentY = 0.18;
 		s_recoilControlKick = 0.18;
+	};
+
+	class AK74_Base: Rifle_Base
+	{
+		s_recoilControlStabilityX = 0.22;
+		s_recoilControlStabilityY = 0.20;
+		s_recoilControlMisalignmentX = 0.14;
+		s_recoilControlMisalignmentY = 0.12;
+		s_recoilControlKick = 0.12;
+	};
+
+	class AKS74U: AK74_Base
+	{
+		s_recoilControlStabilityX = 0.34;
+		s_recoilControlStabilityY = 0.30;
+		s_recoilControlMisalignmentX = 0.22;
+		s_recoilControlMisalignmentY = 0.18;
+		s_recoilControlKick = 0.20;
+	};
+
+	class AK101_Base: Rifle_Base
+	{
+		s_recoilControlStabilityX = 0.24;
+		s_recoilControlStabilityY = 0.22;
+		s_recoilControlMisalignmentX = 0.16;
+		s_recoilControlMisalignmentY = 0.14;
+		s_recoilControlKick = 0.14;
+	};
+
+	class AKM_Base: Rifle_Base
+	{
+		s_recoilControlStabilityX = 0.20;
+		s_recoilControlStabilityY = 0.18;
+		s_recoilControlMisalignmentX = 0.12;
+		s_recoilControlMisalignmentY = 0.10;
+		s_recoilControlKick = 0.10;
 	};
 
 	class B95_Base: Rifle_Base
@@ -353,6 +413,14 @@ class cfgWeapons
 		s_recoilControlKick = 0.14;
 	};
 
+	class M14_Base: Rifle_Base
+	{
+		s_recoilControlStabilityX = 0.30;
+		s_recoilControlStabilityY = 0.26;
+		s_recoilControlMisalignmentX = 0.22;
+		s_recoilControlMisalignmentY = 0.18;
+		s_recoilControlKick = 0.18;
+	};
 
 	class Mp133Shotgun_Base: Shotgun_Base
 	{
