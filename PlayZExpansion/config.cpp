@@ -34,11 +34,19 @@ class CfgMods
 		author = "Olivier";
 		type = "mod";
 		dependencies[] = {
+			"Game",
 			"World",
 			"Mission"
 		};
 		class defs
 		{
+			class gameScriptModule
+			{
+				value = "";
+				files[] = {
+					"PlayZ_Client/PlayZExpansion/scripts/3_Game"
+				};
+			};
 			class worldScriptModule
 			{
 				value = "";
