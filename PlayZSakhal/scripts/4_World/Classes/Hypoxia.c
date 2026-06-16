@@ -5,9 +5,7 @@ class Hypoxia
 		string wn = "";
 		GetGame().GetWorldName(wn);
 		wn.ToLower();
-		if (wn == "sakhal")
-			return true;
-		return false;
+		return wn == "sakhal";
 	}
 
 	//! PPE chrom/blur: up to two soft slots (headgear + eyewear), capped at 2.
@@ -93,20 +91,34 @@ class Hypoxia
 		return false;
 	}
 
+	static float GetAltStartM()
+	{
+		return PlayZSakhalManager.GetSakhal().m_AltStartM;
+	}
+
+	static float GetAltFullM()
+	{
+		return PlayZSakhalManager.GetSakhal().m_AltFullM;
+	}
+
 	static float ComputeCapPenalty(PlayerBase player)
 	{
 		if (!player)
 			return 0;
 
-		float alt = player.GetPosition()[1];
-		if (alt < GameConstants.PLAYZ_SAKHAL_HYPOXIA_ALT_START_M)
+		if (!PlayZSakhalManager.GetSakhal().m_EnableHypoxiaStamina)
 			return 0;
 
-		float span = GameConstants.PLAYZ_SAKHAL_HYPOXIA_ALT_FULL_M - GameConstants.PLAYZ_SAKHAL_HYPOXIA_ALT_START_M;
+		float alt = player.GetPosition()[1];
+		float altStart = GetAltStartM();
+		if (alt < altStart)
+			return 0;
+
+		float span = GetAltFullM() - altStart;
 		if (span <= 0)
 			return 0;
 
-		float t = (alt - GameConstants.PLAYZ_SAKHAL_HYPOXIA_ALT_START_M) / span;
+		float t = (alt - altStart) / span;
 		if (t < 0)
 			t = 0;
 		if (t > 1)
@@ -117,18 +129,19 @@ class Hypoxia
 
 	static bool IsHypoxicAltitude(float altitudeM)
 	{
-		if (altitudeM >= GameConstants.PLAYZ_SAKHAL_HYPOXIA_ALT_START_M)
+		if (altitudeM >= GetAltStartM())
 			return true;
 		return false;
 	}
 
 	static float GetAltitudeNorm(float altitudeM)
 	{
-		float span = GameConstants.PLAYZ_SAKHAL_HYPOXIA_ALT_FULL_M - GameConstants.PLAYZ_SAKHAL_HYPOXIA_ALT_START_M;
+		float altStart = GetAltStartM();
+		float span = GetAltFullM() - altStart;
 		if (span <= 0)
 			return 0;
 
-		float t = (altitudeM - GameConstants.PLAYZ_SAKHAL_HYPOXIA_ALT_START_M) / span;
+		float t = (altitudeM - altStart) / span;
 		if (t < 0)
 			t = 0;
 		if (t > 1)
@@ -150,6 +163,18 @@ class Hypoxia
 		return true;
 	}
 
+	static float ApplySoftPpeMitigation(float value, int ppeLevel)
+	{
+		if (ppeLevel <= 0)
+			return value;
+
+		float mul = GameConstants.PLAYZ_SAKHAL_HYPOXIA_SOFT_PPE_PARTIAL_MUL;
+		if (ppeLevel == 1)
+			return value * mul;
+
+		return value * mul * mul;
+	}
+
 	static float GetHypoxiaChromForPPE(PlayerBase player, float altitudeM)
 	{
 		if (!player)
@@ -159,19 +184,12 @@ class Hypoxia
 			return 0;
 
 		int ppeLevel = GetPpeMitigationLevel(player);
-		if (ppeLevel == 2)
-			return 0;
-
 		float t = GetAltitudeNorm(altitudeM);
-		float chrom = t * GameConstants.PLAYZ_SAKHAL_HYPOXIA_CLIENT_CHROM_MAX;
-
-		if (ppeLevel == 1)
-			chrom = chrom * GameConstants.PLAYZ_SAKHAL_HYPOXIA_SOFT_PPE_PARTIAL_MUL;
+		float chrom = t * PlayZSakhalManager.GetSakhal().m_ClientChromMax;
+		chrom = ApplySoftPpeMitigation(chrom, ppeLevel);
 
 		if (IsSprintingErect(player))
 			chrom = chrom * GameConstants.PLAYZ_SAKHAL_HYPOXIA_CLIENT_SPRINT_PPE_MUL;
-		else
-			chrom = chrom * GameConstants.PLAYZ_SAKHAL_HYPOXIA_CLIENT_REST_PPE_MUL;
 
 		return chrom;
 	}
@@ -185,14 +203,9 @@ class Hypoxia
 			return 0;
 
 		int ppeLevel = GetPpeMitigationLevel(player);
-		if (ppeLevel == 2)
-			return 0;
-
 		float t = GetAltitudeNorm(altitudeM);
-		float blur = t * GameConstants.PLAYZ_SAKHAL_HYPOXIA_CLIENT_BLUR_MAX;
-
-		if (ppeLevel == 1)
-			blur = blur * GameConstants.PLAYZ_SAKHAL_HYPOXIA_SOFT_PPE_PARTIAL_MUL;
+		float blur = t * PlayZSakhalManager.GetSakhal().m_ClientBlurMax;
+		blur = ApplySoftPpeMitigation(blur, ppeLevel);
 
 		if (IsSprintingErect(player))
 			blur = blur * GameConstants.PLAYZ_SAKHAL_HYPOXIA_CLIENT_SPRINT_PPE_MUL;
@@ -200,5 +213,26 @@ class Hypoxia
 			blur = blur * GameConstants.PLAYZ_SAKHAL_HYPOXIA_CLIENT_REST_PPE_MUL;
 
 		return blur;
+	}
+
+	static float GetHypoxiaVignetteForPPE(PlayerBase player, float altitudeM)
+	{
+		if (!player)
+			return 0;
+
+		if (!IsHypoxicAltitude(altitudeM))
+			return 0;
+
+		int ppeLevel = GetPpeMitigationLevel(player);
+		float t = GetAltitudeNorm(altitudeM);
+		float vignette = t * PlayZSakhalManager.GetSakhal().m_ClientVignetteMax;
+		vignette = ApplySoftPpeMitigation(vignette, ppeLevel);
+
+		if (IsSprintingErect(player))
+			vignette = vignette * GameConstants.PLAYZ_SAKHAL_HYPOXIA_CLIENT_SPRINT_PPE_MUL;
+		else
+			vignette = vignette * GameConstants.PLAYZ_SAKHAL_HYPOXIA_CLIENT_REST_PPE_MUL;
+
+		return vignette;
 	}
 }

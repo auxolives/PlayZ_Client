@@ -1,5 +1,0 @@
-//<'PlayZSakhal.pbo' properties via Mikero's dos tools>
-product=dayz;
-prefix=PlayZSakhal;
-version=1;
-//PboType=Arma Addon;
