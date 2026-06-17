@@ -142,7 +142,7 @@ class CfgWorlds
 	class sakhal: CAWorld
 	{
 		mapTextureClosed = "dz/worlds/sakhal/data/map_folded_sakhal_co.paa";
-		mapTextureOpened = "PlayZSakhal/DZ/worlds/sakhal/data/map_unfolded_sakhal_co.paa";
+		mapTextureOpened = "PlayZ_Client/PlayZSakhal/DZ/worlds/sakhal/data/map_unfolded_sakhal_co.paa";
 		mapTextureLegend = "dz/worlds/sakhal/data/map_legend_sakhal_co.paa";
 	};
 };
