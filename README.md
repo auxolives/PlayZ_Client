@@ -48,6 +48,7 @@ Set `MOD_OUT` in `.vscode/scripts/Build-PlayZ_Client.bat` to your CFTools `@Play
 - `PlayZTerjeRadiation` — vanilla clothing radiation protection, dry bag/drysack isolation, two-stack client PPE (requires `TerjeRadiation` in `-mod=`). **Environmental** (outdoors): zone + rain/snow dose on Terje 0.6–5.0 scale — full desaturation 0.6→1.1, film grain 1.2→5.0. **Body buffer** (`GetTerjeRadiation()` 0–5000, works indoors): olive vignette 500→2000, Gauss fever blur 1000→3000, radial blur 1000→5000, HMP ghost pulses 2000→5000. Replaces Terje’s default sickness colorization. Tunables in `PlayZRadPPE.c`.
 - `PlayZUI` — Sakhal UI rework (menus, loading, Terje Start Screen skins). Load after `PlayZCore` / `PlayZTerje*` and before `PlayZExpansion`. See [PlayZUI/README.md](PlayZUI/README.md).
 - `PlayZJammingSyncFix` — disables firearm jamming (`JamCheck` false, blocks `SetJammed(true)`, clears persisted jam on load). Load after third-party weapon jam overrides when present.
+- `PlayZTerjeJMPlayerFormCOTFix` — drop-in replacement for workshop `TerjeCompatibilityCOT` (fixed COT Player perks tab: no `CreateGridSpacer(result, skillCount, 1)` overflow). **Remove `TerjeCompatibilityCOT` from `-mod=`** when this sub-mod is packed; keep `JM_COT_Scripts` + `TerjeSkills`.
 - `PlayZmCommandWeaponsFix` — guards null `m_CommandWeapons` in `DayZPlayerCamera1stPerson` (`UpdateUDAngleUnlocked` access violation). Load **last** in `@PlayZ_Client` (after `sVisual` / Expansion).
 
 ## Adding a new shared sub-mod

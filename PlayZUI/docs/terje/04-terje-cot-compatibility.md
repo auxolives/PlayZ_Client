@@ -4,10 +4,10 @@ Reference documentation for Community Online Tools integration. PlayZUI does not
 
 ## Mod dependency
 
-**Source Found:** `TerjeCompatibilityCOT/config.cpp:8-12`
+**Source Found:** `PlayZTerjeJMPlayerFormCOTFix/config.cpp` — replaces workshop `TerjeCompatibilityCOT` (do not load both).
 
 ```
-requiredAddons[] = { "TerjeCore", "JM_COT_Scripts" }
+requiredAddons[] = { "TerjeCore", "JM_COT_Scripts", "TerjeSkills" }
 ```
 
 Perks tab requires `TERJE_SKILLS_MOD` compile flag from TerjeSkills:
@@ -34,7 +34,7 @@ Hooks COT player detail panel via `override private Widget InitActionWidgetsStat
 **Source Found:** `TerjeCompatibilityCOT/Scripts/5_Mission/JMPlayerForm.c:69-123`
 
 - Reuses `TerjeSkills/Layouts/TerjePerkLayout.layout` per perk
-- Grid rows via `TerjeCompatibilityCOT/GUI/Layouts/GridSpacer11.layout` (77, 99)
+- Grid rows via `PlayZTerjeJMPlayerFormCOTFix/GUI/Layouts/GridSpacer11.layout` (perk rows; skills use `CreateWrapSpacer` on the stats panel — not `CreateGridSpacer(result, skillCount, 1)`)
 - Composite widget name: `skillId:perkId`
 - Mouse: left = `TRPC_PLAYER_PERK_APPLY`, right = `TRPC_PLAYER_PERK_DEC` (243-246)
 - Tooltip: `TerjePerkTooltip.GetPerkTooltipWidget` (180-190)
