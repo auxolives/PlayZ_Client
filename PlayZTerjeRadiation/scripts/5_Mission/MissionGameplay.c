@@ -1,7 +1,32 @@
 modded class MissionGameplay
 {
 	protected ref PPERequester_PlayZRadEnvironment m_PlayZRadEnvPPE;
+
+	override void OnInit()
+	{
+		super.OnInit();
+		DayZGame.Event_OnRPC.Insert(OnPlayZRadiationRPC);
+	}
+
+	void ~MissionGameplay()
+	{
+		if (DayZGame.Event_OnRPC)
+		{
+			DayZGame.Event_OnRPC.Remove(OnPlayZRadiationRPC);
+		}
+	}
+
+	void OnPlayZRadiationRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx)
+	{
+		if (rpc_type == PlayZRadiationRPCs.SYNC_RADIATION)
+		{
+			PlayZRadiationManager.OnRadiationRPC(ctx);
+		}
+	}
 	protected float m_PlayZRadEnvDoseSmoothed;
+	protected float m_PlayZRadSicknessSmoothed;
+	protected float m_PlayZRadEnvTargetDose;
+	protected float m_PlayZRadEnvTargetSick;
 	protected float m_PlayZRadEnvLastSat = 1.0;
 	protected float m_PlayZRadEnvLastGrainSharp;
 	protected float m_PlayZRadEnvLastGrainSize = 2.75;
@@ -9,6 +34,7 @@ modded class MissionGameplay
 
 	protected ref PPERequester_PlayZRadBody m_PlayZRadBodyPPE;
 	protected float m_PlayZRadBodyDoseSmoothed;
+	protected float m_PlayZRadBodyTargetDose;
 	protected float m_PlayZRadBodyVignetteSmoothed;
 	protected float m_PlayZRadBodyFeverSmoothed;
 	protected float m_PlayZRadBodyRadialSmoothed;
@@ -21,6 +47,17 @@ modded class MissionGameplay
 	protected bool m_PlayZRadGhostStopping;
 	protected bool m_PlayZRadEnvPPEWarned;
 	protected bool m_PlayZRadBodyPPEWarned;
+	protected ref PlayZPPEUpdateGate m_PlayZRadPPESampleGate;
+
+	protected bool PlayZ_ShouldSampleRadPPE(float timeslice)
+	{
+		if (!m_PlayZRadPPESampleGate)
+		{
+			m_PlayZRadPPESampleGate = new PlayZPPEUpdateGate();
+		}
+
+		return m_PlayZRadPPESampleGate.ConsumeSampleTick(timeslice);
+	}
 
 	override void OnUpdate(float timeslice)
 	{
@@ -58,15 +95,32 @@ modded class MissionGameplay
 		}
 
 		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
-		float targetDose = 0;
-		if (player)
+		if (PlayZ_ShouldSampleRadPPE(timeslice))
 		{
-			targetDose = PlayZRadEnvironmentPPE.GetDose(player);
+			if (player && player.PlayZIsTerjeRadPPEPlayerReady())
+			{
+				m_PlayZRadEnvTargetDose = PlayZRadEnvironmentPPE.GetDose(player);
+				m_PlayZRadEnvTargetSick = PlayZRadEnvironmentPPE.GetSickness(player);
+				m_PlayZRadBodyTargetDose = PlayZRadBodyPPE.GetDose(player);
+			}
+			else
+			{
+				m_PlayZRadEnvTargetDose = 0;
+				m_PlayZRadEnvTargetSick = 0;
+				m_PlayZRadBodyTargetDose = 0;
+			}
 		}
 
-		m_PlayZRadEnvDoseSmoothed = PlayZRadPPE.EnvFadeLerp(m_PlayZRadEnvDoseSmoothed, targetDose, timeslice);
+		m_PlayZRadEnvDoseSmoothed = PlayZRadPPE.EnvFadeLerp(m_PlayZRadEnvDoseSmoothed, m_PlayZRadEnvTargetDose, timeslice);
+		m_PlayZRadSicknessSmoothed = PlayZRadPPE.BodyFadeLerp(m_PlayZRadSicknessSmoothed, m_PlayZRadEnvTargetSick, timeslice);
 
-		if (!PlayZRadEnvironmentPPE.HasAnyEffect(m_PlayZRadEnvDoseSmoothed))
+		bool envActive = PlayZRadEnvironmentPPE.HasAnyEffect(m_PlayZRadEnvDoseSmoothed, m_PlayZRadSicknessSmoothed);
+		if (!envActive)
+		{
+			envActive = PlayZRadEnvironmentPPE.HasAnyEffect(m_PlayZRadEnvTargetDose, m_PlayZRadEnvTargetSick);
+		}
+
+		if (!envActive)
 		{
 			PlayZ_StopRadEnvironmentPPE();
 			return;
@@ -92,8 +146,8 @@ modded class MissionGameplay
 			m_PlayZRadEnvPPE.Start();
 		}
 
-		float satWeight = PlayZRadEnvironmentPPE.GetSaturationWeight(m_PlayZRadEnvDoseSmoothed);
-		float grainWeight = PlayZRadEnvironmentPPE.GetGrainWeight(m_PlayZRadEnvDoseSmoothed);
+		float satWeight = PlayZRadEnvironmentPPE.GetSaturationWeight(m_PlayZRadEnvDoseSmoothed, m_PlayZRadSicknessSmoothed);
+		float grainWeight = PlayZRadEnvironmentPPE.GetGrainWeight(m_PlayZRadEnvDoseSmoothed, m_PlayZRadSicknessSmoothed);
 		float saturation = PlayZRadEnvironmentPPE.GetSaturationForWeight(satWeight);
 		float grainSharp = PlayZRadEnvironmentPPE.GetGrainSharpnessForWeight(grainWeight);
 		float grainSize = PlayZRadEnvironmentPPE.GetGrainSizeForWeight(grainWeight);
@@ -133,7 +187,7 @@ modded class MissionGameplay
 	{
 		m_PlayZRadEnvLastSat = 1.0;
 		m_PlayZRadEnvLastGrainSharp = 0;
-		m_PlayZRadEnvLastGrainSize = PlayZRadPPE.ENV_GRAIN_SIZE_DEFAULT;
+		m_PlayZRadEnvLastGrainSize = PlayZRadPPE.Cfg().m_EnvGrainSizeDefault;
 		m_PlayZRadEnvLastNoiseMult = 0;
 
 		if (m_PlayZRadEnvPPE && m_PlayZRadEnvPPE.IsRequesterRunning())
@@ -149,19 +203,12 @@ modded class MissionGameplay
 			return;
 		}
 
-		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
-		float targetDose = 0;
-		if (player)
-		{
-			targetDose = PlayZRadBodyPPE.GetDose(player);
-		}
+		m_PlayZRadBodyDoseSmoothed = PlayZRadPPE.BodyFadeLerp(m_PlayZRadBodyDoseSmoothed, m_PlayZRadBodyTargetDose, timeslice);
 
-		m_PlayZRadBodyDoseSmoothed = PlayZRadPPE.BodyFadeLerp(m_PlayZRadBodyDoseSmoothed, targetDose, timeslice);
-
-		float targetVignette = PlayZRadBodyPPE.GetVignetteIntensity(PlayZRadBodyPPE.GetVignetteWeight(m_PlayZRadBodyDoseSmoothed));
-		float targetFever = PlayZRadBodyPPE.GetFeverIntensity(PlayZRadBodyPPE.GetFeverWeight(m_PlayZRadBodyDoseSmoothed));
-		float targetRadial = PlayZRadBodyPPE.GetRadialPower(PlayZRadBodyPPE.GetRadialWeight(m_PlayZRadBodyDoseSmoothed));
-		float ghostWeight = PlayZRadBodyPPE.GetGhostWeight(m_PlayZRadBodyDoseSmoothed);
+		float targetVignette = PlayZRadBodyPPE.GetVignetteIntensity(PlayZRadBodyPPE.GetVignetteWeight(m_PlayZRadBodyDoseSmoothed, m_PlayZRadSicknessSmoothed));
+		float targetFever = PlayZRadBodyPPE.GetFeverIntensity(PlayZRadBodyPPE.GetFeverWeight(m_PlayZRadBodyDoseSmoothed, m_PlayZRadSicknessSmoothed));
+		float targetRadial = PlayZRadBodyPPE.GetRadialPower(PlayZRadBodyPPE.GetRadialWeight(m_PlayZRadBodyDoseSmoothed, m_PlayZRadSicknessSmoothed));
+		float ghostWeight = PlayZRadBodyPPE.GetGhostWeight(m_PlayZRadBodyDoseSmoothed, m_PlayZRadSicknessSmoothed);
 
 		m_PlayZRadBodyVignetteSmoothed = PlayZRadPPE.BodyFadeLerp(m_PlayZRadBodyVignetteSmoothed, targetVignette, timeslice);
 		m_PlayZRadBodyFeverSmoothed = PlayZRadPPE.BodyFadeLerp(m_PlayZRadBodyFeverSmoothed, targetFever, timeslice);
@@ -184,8 +231,13 @@ modded class MissionGameplay
 		}
 
 		bool ghostActive = ghostWeight > PlayZRadPPE.EPSILON;
+		bool bodyTargetActive = m_PlayZRadBodyTargetDose > PlayZRadPPE.EPSILON;
+		if (!bodyTargetActive)
+		{
+			bodyTargetActive = m_PlayZRadEnvTargetSick > PlayZRadPPE.EPSILON;
+		}
 
-		if (!bodyVisualActive && !ghostActive && !m_PlayZRadGhostStopping)
+		if (!bodyVisualActive && !ghostActive && !bodyTargetActive && !m_PlayZRadGhostStopping)
 		{
 			PlayZ_StopRadBodyPPE();
 			PlayZ_StopRadGhostPPE();

@@ -14,39 +14,73 @@ class PlayZRadBodyPPE
 		return player.PlayZGetRadBodyBufferForPPE();
 	}
 
-	static float GetVignetteWeight(float dose)
+	static float GetSickness(PlayerBase player)
 	{
-		return PlayZRadPPE.TierWeight(PlayZRadPPE.BODY_VIGNETTE_MIN, PlayZRadPPE.BODY_VIGNETTE_MAX, dose);
+		if (!player)
+		{
+			return 0;
+		}
+
+		return player.PlayZGetRadSicknessForPPE();
+	}
+
+	static float GetVignetteWeight(float bufferDose, float sickValue)
+	{
+		if (!PlayZRadPPE.Cfg().m_EnableBodyVignette)
+		{
+			return 0;
+		}
+
+		PlayZRadiationConfig cfg = PlayZRadPPE.Cfg();
+		return PlayZRadPPE.MaxTierWeight(bufferDose, cfg.m_BodyVignetteMin, cfg.m_BodyVignetteMax, sickValue, cfg.m_SickVignetteMin, cfg.m_SickVignetteMax);
 	}
 
 	static float GetVignetteIntensity(float weight)
 	{
-		return weight * PlayZRadPPE.BODY_VIGNETTE_INTENSITY_MAX;
+		return weight * PlayZRadPPE.Cfg().m_BodyVignetteIntensityMax;
 	}
 
-	static float GetFeverWeight(float dose)
+	static float GetFeverWeight(float bufferDose, float sickValue)
 	{
-		return PlayZRadPPE.TierWeight(PlayZRadPPE.BODY_FEVER_MIN, PlayZRadPPE.BODY_FEVER_MAX, dose);
+		if (!PlayZRadPPE.Cfg().m_EnableBodyFever)
+		{
+			return 0;
+		}
+
+		PlayZRadiationConfig cfg = PlayZRadPPE.Cfg();
+		return PlayZRadPPE.MaxTierWeight(bufferDose, cfg.m_BodyFeverMin, cfg.m_BodyFeverMax, sickValue, cfg.m_SickFeverMin, cfg.m_SickFeverMax);
 	}
 
 	static float GetFeverIntensity(float weight)
 	{
-		return weight * PlayZRadPPE.BODY_FEVER_INTENSITY_MAX;
+		return weight * PlayZRadPPE.Cfg().m_BodyFeverIntensityMax;
 	}
 
-	static float GetRadialWeight(float dose)
+	static float GetRadialWeight(float bufferDose, float sickValue)
 	{
-		return PlayZRadPPE.TierWeight(PlayZRadPPE.BODY_RADIAL_MIN, PlayZRadPPE.BODY_RADIAL_MAX, dose);
+		if (!PlayZRadPPE.Cfg().m_EnableBodyRadial)
+		{
+			return 0;
+		}
+
+		PlayZRadiationConfig cfg = PlayZRadPPE.Cfg();
+		return PlayZRadPPE.MaxTierWeight(bufferDose, cfg.m_BodyRadialMin, cfg.m_BodyRadialMax, sickValue, cfg.m_SickRadialMin, cfg.m_SickRadialMax);
 	}
 
 	static float GetRadialPower(float weight)
 	{
-		return weight * PlayZRadPPE.BODY_RADIAL_POWER_MAX;
+		return weight * PlayZRadPPE.Cfg().m_BodyRadialPowerMax;
 	}
 
-	static float GetGhostWeight(float dose)
+	static float GetGhostWeight(float bufferDose, float sickValue)
 	{
-		return PlayZRadPPE.TierWeight(PlayZRadPPE.BODY_GHOST_MIN, PlayZRadPPE.BODY_GHOST_MAX, dose);
+		if (!PlayZRadPPE.Cfg().m_EnableBodyGhost)
+		{
+			return 0;
+		}
+
+		PlayZRadiationConfig cfg = PlayZRadPPE.Cfg();
+		return PlayZRadPPE.MaxTierWeight(bufferDose, cfg.m_BodyGhostMin, cfg.m_BodyGhostMax, sickValue, cfg.m_SickGhostMin, cfg.m_SickGhostMax);
 	}
 
 	static float GetGhostPulseProgress(float elapsedTime, float weight)
@@ -56,24 +90,24 @@ class PlayZRadBodyPPE
 		return (wave + 1.0) * 0.5 * weight;
 	}
 
-	static bool HasAnyEffect(float dose)
+	static bool HasAnyEffect(float bufferDose, float sickValue)
 	{
-		if (GetVignetteWeight(dose) > PlayZRadPPE.EPSILON)
+		if (GetVignetteWeight(bufferDose, sickValue) > PlayZRadPPE.EPSILON)
 		{
 			return true;
 		}
 
-		if (GetFeverWeight(dose) > PlayZRadPPE.EPSILON)
+		if (GetFeverWeight(bufferDose, sickValue) > PlayZRadPPE.EPSILON)
 		{
 			return true;
 		}
 
-		if (GetRadialWeight(dose) > PlayZRadPPE.EPSILON)
+		if (GetRadialWeight(bufferDose, sickValue) > PlayZRadPPE.EPSILON)
 		{
 			return true;
 		}
 
-		if (GetGhostWeight(dose) > PlayZRadPPE.EPSILON)
+		if (GetGhostWeight(bufferDose, sickValue) > PlayZRadPPE.EPSILON)
 		{
 			return true;
 		}

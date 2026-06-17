@@ -12,9 +12,25 @@ class PlayZRadEnvironmentPPE
 		return player.PlayZGetRadEnvironmentExposureForPPE();
 	}
 
-	static float GetSaturationWeight(float dose)
+	static float GetSickness(PlayerBase player)
 	{
-		return PlayZRadPPE.TierWeight(PlayZRadPPE.ENV_SAT_DOSE_MIN, PlayZRadPPE.ENV_SAT_DOSE_MAX, dose);
+		if (!player)
+		{
+			return 0;
+		}
+
+		return player.PlayZGetRadSicknessForPPE();
+	}
+
+	static float GetSaturationWeight(float envDose, float sickValue)
+	{
+		if (!PlayZRadPPE.Cfg().m_EnableEnvSaturation)
+		{
+			return 0;
+		}
+
+		PlayZRadiationConfig cfg = PlayZRadPPE.Cfg();
+		return PlayZRadPPE.MaxTierWeight(envDose, cfg.m_EnvSatDoseMin, cfg.m_EnvSatDoseMax, sickValue, cfg.m_SickSatMin, cfg.m_SickSatMax);
 	}
 
 	static float GetSaturationForWeight(float weight)
@@ -22,34 +38,41 @@ class PlayZRadEnvironmentPPE
 		return Math.Lerp(1.0, 0.0, weight);
 	}
 
-	static float GetGrainWeight(float dose)
+	static float GetGrainWeight(float envDose, float sickValue)
 	{
-		return PlayZRadPPE.TierWeight(PlayZRadPPE.ENV_GRAIN_DOSE_MIN, PlayZRadPPE.ENV_GRAIN_DOSE_MAX, dose);
+		if (!PlayZRadPPE.Cfg().m_EnableEnvGrain)
+		{
+			return 0;
+		}
+
+		PlayZRadiationConfig cfg = PlayZRadPPE.Cfg();
+		return PlayZRadPPE.MaxTierWeight(envDose, cfg.m_EnvGrainDoseMin, cfg.m_EnvGrainDoseMax, sickValue, cfg.m_SickGrainMin, cfg.m_SickGrainMax);
 	}
 
 	static float GetGrainSharpnessForWeight(float weight)
 	{
-		return Math.Lerp(0.0, PlayZRadPPE.ENV_GRAIN_SHARPNESS_MAX, weight);
+		return Math.Lerp(0.0, PlayZRadPPE.Cfg().m_EnvGrainSharpnessMax, weight);
 	}
 
 	static float GetGrainSizeForWeight(float weight)
 	{
-		return Math.Lerp(PlayZRadPPE.ENV_GRAIN_SIZE_DEFAULT, PlayZRadPPE.ENV_GRAIN_SIZE_MIN, weight);
+		PlayZRadiationConfig cfg = PlayZRadPPE.Cfg();
+		return Math.Lerp(cfg.m_EnvGrainSizeDefault, cfg.m_EnvGrainSizeMin, weight);
 	}
 
 	static float GetNoiseMultForWeight(float weight)
 	{
-		return Math.Lerp(0.0, PlayZRadPPE.ENV_NOISE_MULT_MAX, weight);
+		return Math.Lerp(0.0, PlayZRadPPE.Cfg().m_EnvNoiseMultMax, weight);
 	}
 
-	static bool HasAnyEffect(float dose)
+	static bool HasAnyEffect(float envDose, float sickValue)
 	{
-		if (GetSaturationWeight(dose) > PlayZRadPPE.EPSILON)
+		if (GetSaturationWeight(envDose, sickValue) > PlayZRadPPE.EPSILON)
 		{
 			return true;
 		}
 
-		if (GetGrainWeight(dose) > PlayZRadPPE.EPSILON)
+		if (GetGrainWeight(envDose, sickValue) > PlayZRadPPE.EPSILON)
 		{
 			return true;
 		}

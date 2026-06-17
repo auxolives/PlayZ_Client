@@ -1,4 +1,5 @@
 //! Shared tier weights and fade constants for PlayZ radiation PPE stacks.
+//! Tunables: $profile:PlayZ/Radiation.json (synced from server).
 
 class PlayZRadPPE
 {
@@ -6,32 +7,24 @@ class PlayZRadPPE
 	static const float ENV_FADE_SPEED = 0.05;
 	static const float BODY_FADE_SEC = 1.0;
 
-	static const float ENV_SAT_DOSE_MIN = 0.4;
-	static const float ENV_SAT_DOSE_MAX = 1.0;
-	static const float ENV_GRAIN_DOSE_MIN = 0.8;
-	static const float ENV_GRAIN_DOSE_MAX = 3.0;
+	static PlayZRadiationConfig Cfg()
+	{
+		return PlayZRadiationManager.GetRadiation();
+	}
 
-	static const float BODY_VIGNETTE_MIN = 400.0;
-	static const float BODY_VIGNETTE_MAX = 1500.0;
-	static const float BODY_FEVER_MIN = 600.0;
-	static const float BODY_FEVER_MAX = 2500.0;
-	static const float BODY_RADIAL_MIN = 1000.0;
-	static const float BODY_RADIAL_MAX = 5000.0;
-	static const float BODY_GHOST_MIN = 2000.0;
-	static const float BODY_GHOST_MAX = 5000.0;
-
-	static const float BODY_VIGNETTE_INTENSITY_MAX = 1.0;
-	static const float BODY_FEVER_INTENSITY_MAX = 0.4;
-	static const float BODY_RADIAL_POWER_MAX = 0.25;
-
-	static const float ENV_GRAIN_SHARPNESS_MAX = 10.0;
-	static const float ENV_GRAIN_SIZE_MIN = 1.0;
-	static const float ENV_GRAIN_SIZE_DEFAULT = 2.75;
-	static const float ENV_NOISE_MULT_MAX = 0.15;
-
+	//! Ease-out cubic on inverse-lerp: fast ramp after min dose, slower approach to full weight at max.
 	static float TierWeight(float minDose, float maxDose, float dose)
 	{
-		return Math.Clamp(Math.InverseLerp(minDose, maxDose, dose), 0.0, 1.0);
+		float linear = Math.Clamp(Math.InverseLerp(minDose, maxDose, dose), 0.0, 1.0);
+		float inv = 1.0 - linear;
+		return 1.0 - Math.Pow(inv, 3.0);
+	}
+
+	static float MaxTierWeight(float doseA, float minA, float maxA, float doseB, float minB, float maxB)
+	{
+		float wA = TierWeight(minA, maxA, doseA);
+		float wB = TierWeight(minB, maxB, doseB);
+		return Math.Max(wA, wB);
 	}
 
 	static float EnvFadeLerp(float current, float target, float timeslice)
