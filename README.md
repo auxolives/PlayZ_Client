@@ -51,6 +51,7 @@ Set `MOD_OUT` in `.vscode/scripts/Build-PlayZ_Client.bat` to your CFTools `@Play
 - `PlayZJammingSyncFix` — disables firearm jamming (`JamCheck` false, blocks `SetJammed(true)`, clears persisted jam on load). Load after third-party weapon jam overrides when present.
 - `PlayZTerjeJMPlayerFormCOTFix` — drop-in replacement for workshop `TerjeCompatibilityCOT` (fixed COT Player perks tab: no `CreateGridSpacer(result, skillCount, 1)` overflow). **Remove `TerjeCompatibilityCOT` from `-mod=`** when this sub-mod is packed; keep `JM_COT_Scripts` + `TerjeSkills`.
 - `PlayZmCommandWeaponsFix` — guards null `m_CommandWeapons` in `DayZPlayerCamera1stPerson` (`UpdateUDAngleUnlocked` access violation). Load **last** in `@PlayZ_Client` (after `sVisual` / Expansion).
+- `PlayZNoBase` — blocks crafting `FenceKit`, `WatchtowerKit`, and `TerritoryFlagKit` (recipe `CanDo` false). Looted/spawned kits still deploy. Load after Expansion Base Building if that workshop module is on the mod line.
 
 ## Adding a new shared sub-mod
 
