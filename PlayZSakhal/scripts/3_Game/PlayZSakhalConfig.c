@@ -6,11 +6,11 @@ class PlayZSakhalConfig
 	bool m_EnableHypoxiaPPE = true;
 	bool m_EnableHypoxiaStamina = true;
 
-	float m_AltStartM = 300.0;
+	float m_AltStartM = 250.0;
 	float m_AltFullM = 600.0;
-	float m_ClientChromMax = 0.05;
-	float m_ClientBlurMax = 0.30;
-	float m_ClientVignetteMax = 0.40;
+	float m_ClientChromMax = 0.01;
+	float m_ClientBlurMax = 0.10;
+	float m_ClientVignetteMax = 0.70;
 
 	void Load()
 	{
@@ -39,8 +39,8 @@ class PlayZSakhalConfig
 		m_EnableHypoxiaStamina = true;
 		m_AltStartM = 300.0;
 		m_AltFullM = 600.0;
-		m_ClientChromMax = 0.05;
-		m_ClientBlurMax = 0.30;
-		m_ClientVignetteMax = 0.40;
+		m_ClientChromMax = 0.10;
+		m_ClientBlurMax = 0.15;
+		m_ClientVignetteMax = 0.70;
 	}
 }
