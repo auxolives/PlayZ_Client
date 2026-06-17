@@ -53,6 +53,7 @@ class PlayZConfig
 			ScriptRPC rpc = new ScriptRPC();
 			
 			// Weather Sync
+			rpc.Write(GetWeather().m_EnablePlayZWeather);
 			rpc.Write(GetWeather().m_DebugCycleScenarios);
 			
 			// PPE Sync
@@ -180,6 +181,7 @@ class PlayZConfig
 	static void OnRPC(ParamsReadContext ctx)
 	{
 		// Weather Sync
+		if (!ctx.Read(GetWeather().m_EnablePlayZWeather)) return;
 		if (!ctx.Read(GetWeather().m_DebugCycleScenarios)) return;
 		
 		// PPE Sync

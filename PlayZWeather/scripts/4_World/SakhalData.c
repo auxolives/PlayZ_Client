@@ -15,6 +15,7 @@ modded class SakhalData
 	ref array<ref PlayZWeatherScenario> m_Scenarios;
 	ref PlayZWeatherScenario m_CurrentScenario;
 	bool m_IsSnowMode = false;
+	bool m_IgnoreOvercastPick = false;
 
 	override void Init()
 	{
@@ -276,6 +277,9 @@ modded class SakhalData
 
 		if (type == EWeatherPhenomenon.OVERCAST)
 		{
+			if (m_IgnoreOvercastPick)
+				return true;
+
 			// Prevent rapid scenario skipping (especially in debug mode)
 			// Wait at least 5 seconds before allowing another scenario change via overcast event
 			if (GetGame().GetTime() < m_NextScenarioTimer)
@@ -329,6 +333,55 @@ modded class SakhalData
 		return super.WeatherOnBeforeChange(type, actual, change, time);
 	}
 	
+	bool ForceScenarioByName(string name)
+	{
+		PlayZWeatherDebug.Log("SakhalData.ForceScenarioByName: " + name);
+
+		if (!GetGame().IsServer())
+			return false;
+
+		if (!PlayZConfig.GetWeather().m_EnablePlayZWeather)
+		{
+			PlayZWeatherDebug.Log("SakhalData.ForceScenarioByName: m_EnablePlayZWeather is false");
+			return false;
+		}
+
+		if (!m_Scenarios || m_Scenarios.Count() == 0)
+		{
+			PlayZWeatherDebug.Log("SakhalData.ForceScenarioByName: no scenarios loaded");
+			return false;
+		}
+
+		if (name == "")
+			return false;
+
+		PlayZWeatherScenario found;
+		foreach (PlayZWeatherScenario sc : m_Scenarios)
+		{
+			if (sc.m_Name == name)
+			{
+				found = sc;
+				break;
+			}
+		}
+
+		if (!found)
+		{
+			PlayZWeatherDebug.Log("SakhalData.ForceScenarioByName: unknown scenario " + name);
+			return false;
+		}
+
+		m_CurrentScenario = found;
+		m_NextScenarioTimer = GetGame().GetTime() + 5000;
+
+		m_IgnoreOvercastPick = true;
+		ApplyScenario();
+		m_IgnoreOvercastPick = false;
+
+		PlayZWeatherDebug.Log("SakhalData.ForceScenarioByName: applied " + name);
+		return true;
+	}
+
 	void ApplyScenario(int forceDuration = -1)
 	{
 		if (!GetGame().IsServer())
