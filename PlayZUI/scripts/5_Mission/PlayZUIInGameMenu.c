@@ -177,6 +177,18 @@ modded class InGameMenu
 
 		m_DeadSceenStatsPanel = m_DeadScreenRoot.FindAnyWidget("PlayerStatisticsPanel");
 		m_DeadSceenStatsPanelTitle = TextWidget.Cast(m_DeadScreenRoot.FindAnyWidget("Caption"));
+		TextWidget timeSurvivedLabel = TextWidget.Cast(m_DeadScreenRoot.FindAnyWidget("TimeSurvivedLabel"));
+		if (timeSurvivedLabel)
+		{
+			timeSurvivedLabel.SetText("#STR_PlayZ_DeathStats_TimeSurvived");
+		}
+
+		TextWidget animalsKilledLabel = TextWidget.Cast(m_DeadScreenRoot.FindAnyWidget("AnimalsKilledLabel"));
+		if (animalsKilledLabel)
+		{
+			animalsKilledLabel.SetText("#STR_PlayZ_DeathStats_AnimalKills");
+		}
+
 		m_DeadSourceVal = TextWidget.Cast(m_DeadScreenRoot.FindAnyWidget("DeadSourceValue"));
 		m_LongestShotVal = TextWidget.Cast(m_DeadScreenRoot.FindAnyWidget("LongRangeShotValue"));
 		m_DistanceVal = TextWidget.Cast(m_DeadScreenRoot.FindAnyWidget("DistanceTraveledValue"));
@@ -188,6 +200,11 @@ modded class InGameMenu
 	#endif
 		m_TimeSurvivedVal = TextWidget.Cast(m_DeadScreenRoot.FindAnyWidget("TimeSurvivedValue"));
 		m_DeadScreenStatsHideButton = ButtonWidget.Cast(m_DeadScreenRoot.FindAnyWidget("bHide"));
+		TextWidget hideStatsLabel = TextWidget.Cast(m_DeadScreenRoot.FindAnyWidget("bHideLable"));
+		if (hideStatsLabel)
+		{
+			hideStatsLabel.SetText("#STR_PlayZ_DeathStats_Close");
+		}
 
 		if (m_DeadSceenStatsPanel)
 		{
@@ -240,6 +257,27 @@ modded class InGameMenu
 		}
 	}
 
+	protected string PlayZResolveDeathStatsPlayerName(PlayerBase player)
+	{
+		if (!player)
+		{
+			return string.Empty;
+		}
+
+		string terjeName = player.GetTerjeCharacterName();
+		if (terjeName != string.Empty)
+		{
+			return terjeName;
+		}
+
+		if (player.GetIdentity())
+		{
+			return player.GetIdentity().GetName();
+		}
+
+		return string.Empty;
+	}
+
 	protected Widget PlayZInitDeathMenu()
 	{
 		layoutRoot = g_Game.GetWorkspace().CreateWidgets(PlayZUIPaths.LAYOUT_DEATH_SCREEN);
@@ -276,6 +314,26 @@ modded class InGameMenu
 		}
 
 		return layoutRoot;
+	}
+
+	override protected void UpdatePlayerStatValues()
+	{
+		super.UpdatePlayerStatValues();
+
+		PlayerBase player = PlayerBase.Cast(g_Game.GetPlayer());
+		if (!player || !m_DeadSceenStatsPanelTitle)
+		{
+			return;
+		}
+
+		string name = PlayZResolveDeathStatsPlayerName(player);
+		if (name == string.Empty)
+		{
+			return;
+		}
+
+		StringLocaliser player_name = new StringLocaliser("STR_EXPANSION_DEADSCREEN_STATS_TITLE", name);
+		m_DeadSceenStatsPanelTitle.SetText(player_name.Format());
 	}
 
 	protected void PlayZDeathRevealShow(float timeslice)
