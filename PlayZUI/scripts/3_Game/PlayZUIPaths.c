@@ -18,9 +18,13 @@ class PlayZUIPaths
 	static const float DEATH_REVEAL_BUTTONS_SEC = 2;
 	static const float DEATH_REVEAL_BUTTONS_DELAY_SEC = 1;
 
-	static const string SERVER_IP = "127.0.0.1";
-	static const int SERVER_GAME_PORT = 2502;
-	static const int SERVER_STEAM_QUERY_PORT = 27018;
+	static const string SERVER_IP = "51.255.77.214";
+	static const int SERVER_GAME_PORT = 2402;
+	static const int SERVER_STEAM_QUERY_PORT = 27017;
+
+	// static const string SERVER_IP = "127.0.0.1";
+	// static const int SERVER_GAME_PORT = 2502;
+	// static const int SERVER_STEAM_QUERY_PORT = 27018;
 
 	static const string URL_WEBSITE = "https://playzthegoat.com/";
 	static const string URL_DISCORD = "https://discord.gg/SgNhCNtb5N";
