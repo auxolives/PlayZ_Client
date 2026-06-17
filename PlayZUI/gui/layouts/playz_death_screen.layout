@@ -68,10 +68,9 @@ FrameWidgetClass death_root {
    visible 1
    clipchildren 0
    ignorepointer 0
-   position 0 0.25
    size 400 0
    halign center_ref
-   valign bottom_ref
+   valign center_ref
    hexactpos 0
    vexactpos 0
    hexactsize 1

@@ -11,8 +11,21 @@ modded class InGameMenu
 	protected Widget m_PlayZDeathButtonsCover;
 	protected Widget m_WebsiteButton;
 	protected Widget m_DiscordButton;
+	protected Widget m_MedicalButton;
+	protected Widget m_InfectedButton;
+	protected Widget m_RadiationButton;
+	protected Widget m_PlayerStatsButton;
 	protected Widget m_StatisticsButton;
 	protected bool m_PlayZDeathStatsButtonResolved;
+
+	protected void PlayZDismissInventoryTooltips()
+	{
+		ItemManager itemManager = ItemManager.GetInstance();
+		if (itemManager != null)
+		{
+			itemManager.HideTooltip();
+		}
+	}
 
 	protected void PlayZBindInGameMenuWidgets()
 	{
@@ -26,6 +39,10 @@ modded class InGameMenu
 		m_OptionsButton = layoutRoot.FindAnyWidget("optionsbtn");
 		m_ModdedWarning = TextWidget.Cast(layoutRoot.FindAnyWidget("ModdedWarning"));
 		m_FeedbackButton = layoutRoot.FindAnyWidget("feedbackbtn");
+		m_MedicalButton = layoutRoot.FindAnyWidget("medicalbtn");
+		m_InfectedButton = layoutRoot.FindAnyWidget("infectedbtn");
+		m_RadiationButton = layoutRoot.FindAnyWidget("radiationbtn");
+		m_PlayerStatsButton = layoutRoot.FindAnyWidget("playerstatsbtn");
 		m_WebsiteButton = layoutRoot.FindAnyWidget("websitebtn");
 		m_DiscordButton = layoutRoot.FindAnyWidget("discordbtn");
 		m_HintPanel = null;
@@ -44,6 +61,10 @@ modded class InGameMenu
 		m_OptionsButton = null;
 		m_ModdedWarning = null;
 		m_FeedbackButton = null;
+		m_MedicalButton = null;
+		m_InfectedButton = null;
+		m_RadiationButton = null;
+		m_PlayerStatsButton = null;
 		m_WebsiteButton = null;
 		m_DiscordButton = null;
 		m_HintPanel = null;
@@ -100,6 +121,7 @@ modded class InGameMenu
 		}
 
 		HudShow(false);
+		PlayZDismissInventoryTooltips();
 		SetGameVersion();
 
 		if (m_ModdedWarning)
@@ -305,6 +327,7 @@ modded class InGameMenu
 		PlayZRefreshDeathStatisticsButton();
 
 		HudShow(false);
+		PlayZDismissInventoryTooltips();
 		PlayZDeathScreen_MaintainDeathMenuView();
 
 		Mission mission = g_Game.GetMission();
@@ -314,6 +337,11 @@ modded class InGameMenu
 		}
 
 		return layoutRoot;
+	}
+
+	void ~InGameMenu()
+	{
+		PlayZDismissInventoryTooltips();
 	}
 
 	override protected void UpdatePlayerStatValues()
@@ -490,6 +518,30 @@ modded class InGameMenu
 
 		if (!m_PlayZDeathMode && button == MouseState.LEFT)
 		{
+			if (w == m_MedicalButton)
+			{
+				g_Game.OpenURL(PlayZUIPaths.URL_MEDICAL);
+				return true;
+			}
+
+			if (w == m_InfectedButton)
+			{
+				g_Game.OpenURL(PlayZUIPaths.URL_INFECTED);
+				return true;
+			}
+
+			if (w == m_RadiationButton)
+			{
+				g_Game.OpenURL(PlayZUIPaths.URL_RADIATION);
+				return true;
+			}
+
+			if (w == m_PlayerStatsButton)
+			{
+				g_Game.OpenURL(PlayZUIPaths.URL_PLAYER_STATS);
+				return true;
+			}
+
 			if (w == m_WebsiteButton)
 			{
 				g_Game.OpenURL(PlayZUIPaths.URL_WEBSITE);

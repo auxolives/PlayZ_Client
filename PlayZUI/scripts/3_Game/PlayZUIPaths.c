@@ -24,6 +24,10 @@ class PlayZUIPaths
 
 	static const string URL_WEBSITE = "https://playzthegoat.com/";
 	static const string URL_DISCORD = "https://discord.gg/SgNhCNtb5N";
+	static const string URL_MEDICAL = "https://www.playzthegoat.com/en/sakhal/survival/medical";
+	static const string URL_INFECTED = "https://www.playzthegoat.com/en/sakhal/survival/infected";
+	static const string URL_RADIATION = "https://www.playzthegoat.com/en/sakhal/survival/radiation";
+	static const string URL_PLAYER_STATS = "https://www.playzthegoat.com/en/sakhal/stats";
 
 	static const string LAYOUT_EXPANSION_DEATH_STATISTICS = "DayZExpansion/GUI/layouts/ui/expansion_dead_screen.layout";
 };
