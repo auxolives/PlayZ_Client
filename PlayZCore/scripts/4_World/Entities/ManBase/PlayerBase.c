@@ -1,5 +1,70 @@
 modded class PlayerBase
 {
+	protected int m_PlayZDyingHealthSynch = 1000;
+	protected float m_PlayZDyingHealthSyncAccum;
+
+	override void Init()
+	{
+		super.Init();
+		RegisterNetSyncVariableInt("m_PlayZDyingHealthSynch", 0, 1000);
+	}
+
+	override void OnScheduledTick(float deltaTime)
+	{
+		super.OnScheduledTick(deltaTime);
+		PlayZUpdateDyingHealthSynchServer(deltaTime);
+	}
+
+	void PlayZUpdateDyingHealthSynchServer(float deltaTime)
+	{
+		if (!GetGame().IsServer() || !IsAlive())
+		{
+			return;
+		}
+
+		if (!PlayZCoreConfig.GetInstance().m_EnableDyingPPE)
+		{
+			return;
+		}
+
+		m_PlayZDyingHealthSyncAccum = m_PlayZDyingHealthSyncAccum + deltaTime;
+		if (m_PlayZDyingHealthSyncAccum < PlayZPPEUpdateGate.SAMPLE_INTERVAL_SEC)
+		{
+			return;
+		}
+
+		m_PlayZDyingHealthSyncAccum = 0;
+
+		float health = GetHealth("GlobalHealth", "Health");
+		float start = PlayZCoreConfig.GetInstance().m_DyingHealthStart;
+		int newSynch;
+
+		if (health > start + 5.0)
+		{
+			newSynch = 1000;
+		}
+		else
+		{
+			newSynch = Math.Clamp(Math.Round(health * 10), 0, 1000);
+		}
+
+		if (m_PlayZDyingHealthSynch != newSynch)
+		{
+			m_PlayZDyingHealthSynch = newSynch;
+			SetSynchDirty();
+		}
+	}
+
+	float PlayZGetDyingPPEHealthForPPE()
+	{
+		if (GetGame().IsClient())
+		{
+			return m_PlayZDyingHealthSynch * 0.1;
+		}
+
+		return GetHealth("GlobalHealth", "Health");
+	}
+
 	override bool CanEatAndDrink()
 	{
 		if (!super.CanEatAndDrink())

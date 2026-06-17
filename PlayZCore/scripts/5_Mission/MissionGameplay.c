@@ -6,6 +6,17 @@ modded class MissionGameplay
 
 	autoptr EarPlugsWidget m_earplugswidget = new EarPlugsWidget();
 
+	protected ref PPERequester_PlayZDying m_PlayZDyingPPE;
+	protected float m_PlayZDyingWeightSmoothed;
+	protected float m_PlayZDyingTargetWeight;
+	protected ref PlayZDyingPulseState m_PlayZDyingPulseState;
+	protected ref PlayZPPEUpdateGate m_PlayZDyingPPESampleGate;
+	protected float m_PlayZDyingLastVignette;
+	protected float m_PlayZDyingLastGauss;
+	protected float m_PlayZDyingLastOverlay;
+	protected float m_PlayZDyingLastExposure;
+	protected bool m_PlayZDyingPPEWarned;
+
 	override void OnInit()
 	{
 		super.OnInit();
@@ -88,6 +99,147 @@ modded class MissionGameplay
 		if (GetGame().GetInput().LocalPress("UATakeMouthBlockerToHands") && GetGame().GetUIManager().GetMenu() == NULL)
 		{
 			PlayZ_TryToggleMouthBlocker();
+		}
+
+		UpdatePlayZDyingPPE(timeslice);
+	}
+
+	protected bool PlayZ_ShouldSampleDyingPPE(float timeslice)
+	{
+		if (!m_PlayZDyingPPESampleGate)
+		{
+			m_PlayZDyingPPESampleGate = new PlayZPPEUpdateGate();
+		}
+
+		return m_PlayZDyingPPESampleGate.ConsumeSampleTick(timeslice);
+	}
+
+	protected float PlayZ_GetDyingPPEHealth(PlayerBase player)
+	{
+		if (!player)
+		{
+			return 100;
+		}
+
+		return player.PlayZGetDyingPPEHealthForPPE();
+	}
+
+	protected bool PlayZ_IsDyingPPEPlayerReady(PlayerBase player)
+	{
+		if (!player || !player.IsAlive() || !player.IsControlledPlayer())
+		{
+			return false;
+		}
+
+		if (player.HasActiveTerjeStartScreen())
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	protected void UpdatePlayZDyingPPE(float timeslice)
+	{
+		if (GetGame().IsDedicatedServer())
+		{
+			return;
+		}
+
+		if (!PlayZCoreConfig.GetInstance().m_EnableDyingPPE)
+		{
+			PlayZ_StopDyingPPE();
+			return;
+		}
+
+		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+		if (!PlayZ_IsDyingPPEPlayerReady(player))
+		{
+			PlayZ_StopDyingPPE();
+			return;
+		}
+
+		if (PlayZ_ShouldSampleDyingPPE(timeslice))
+		{
+			float health = PlayZ_GetDyingPPEHealth(player);
+			m_PlayZDyingTargetWeight = PlayZDyingPPE.GetTargetWeight(health);
+		}
+
+		m_PlayZDyingWeightSmoothed = PlayZDyingPPE.FadeLerp(m_PlayZDyingWeightSmoothed, m_PlayZDyingTargetWeight, timeslice);
+
+		if (!PlayZDyingPPE.HasAnyEffect(m_PlayZDyingWeightSmoothed))
+		{
+			PlayZ_StopDyingPPE();
+			return;
+		}
+
+		if (!m_PlayZDyingPulseState)
+		{
+			m_PlayZDyingPulseState = new PlayZDyingPulseState();
+		}
+
+		float pulse = PlayZDyingPPE.UpdatePulseEnvelope(m_PlayZDyingPulseState, timeslice, m_PlayZDyingWeightSmoothed);
+
+		float vignette = 0;
+		float gauss = 0;
+		float overlay = 0;
+		float exposure = 0;
+		PlayZDyingPPE.ComputeChannels(m_PlayZDyingWeightSmoothed, pulse, vignette, gauss, overlay, exposure);
+
+		if (!m_PlayZDyingPPE)
+		{
+			m_PlayZDyingPPE = PPERequester_PlayZDying.Cast(PPERequesterBank.GetRequester(PPERequesterBank.REQ_PLAYZ_DYING));
+		}
+
+		if (!m_PlayZDyingPPE)
+		{
+			if (!m_PlayZDyingPPEWarned)
+			{
+				m_PlayZDyingPPEWarned = true;
+				Error("PlayZCore: PPERequester_PlayZDying not in bank — rebuild and deploy @PlayZCore on the client.");
+			}
+			return;
+		}
+
+		if (!m_PlayZDyingPPE.IsRequesterRunning())
+		{
+			m_PlayZDyingPPE.Start();
+		}
+
+		m_PlayZDyingPPE.SetVignette(vignette);
+		m_PlayZDyingPPE.SetGaussBlur(gauss);
+		m_PlayZDyingPPE.SetOverlay(overlay);
+		m_PlayZDyingPPE.SetExposureDarken(exposure);
+		m_PlayZDyingLastVignette = vignette;
+		m_PlayZDyingLastGauss = gauss;
+		m_PlayZDyingLastOverlay = overlay;
+		m_PlayZDyingLastExposure = exposure;
+
+		m_PlayZDyingPPE.SetRequesterUpdating(true);
+	}
+
+	protected void PlayZ_StopDyingPPE()
+	{
+		m_PlayZDyingWeightSmoothed = 0;
+		m_PlayZDyingTargetWeight = 0;
+		m_PlayZDyingLastVignette = 0;
+		m_PlayZDyingLastGauss = 0;
+		m_PlayZDyingLastOverlay = 0;
+		m_PlayZDyingLastExposure = 0;
+
+		if (m_PlayZDyingPulseState)
+		{
+			m_PlayZDyingPulseState.Reset();
+		}
+
+		if (m_PlayZDyingPPE)
+		{
+			if (m_PlayZDyingPPE.IsRequesterRunning())
+			{
+				m_PlayZDyingPPE.ClearAll();
+				m_PlayZDyingPPE.SetRequesterUpdating(true);
+				m_PlayZDyingPPE.Stop();
+			}
 		}
 	}
 

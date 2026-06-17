@@ -29,8 +29,18 @@ modded class MissionGameplay
 	protected float m_LastB			= -1.0;
 	
 	// Throttled target variables for interpolation
-	protected float m_TargetUpdateTimer = 0.0;
 	protected float m_TargetSat     = 1.0;
+	protected ref PlayZPPEUpdateGate m_PlayZWeatherPPESampleGate;
+
+	protected bool PlayZ_ShouldSampleWeatherPPE(float timeslice)
+	{
+		if (!m_PlayZWeatherPPESampleGate)
+		{
+			m_PlayZWeatherPPESampleGate = new PlayZPPEUpdateGate();
+		}
+
+		return m_PlayZWeatherPPESampleGate.ConsumeSampleTick(timeslice);
+	}
 	protected float m_TargetCon     = 1.0;
 	protected float m_TargetGrain   = 0.0;
 	protected float m_TargetChrom   = 0.0;
@@ -330,11 +340,9 @@ modded class MissionGameplay
 		}
 		m_PlayZScenarioTintWeight = Math.Lerp(m_PlayZScenarioTintWeight, scenarioTintTarget, scenarioTintInterp);
 
-		// 1. Calculate Target Values based on synced weather phenomena (5Hz Throttle)
-		m_TargetUpdateTimer += timeslice;
-		if (m_TargetUpdateTimer >= 0.2) // 5Hz
+		// 1. Calculate target values from synced weather (1 Hz — shared PlayZ PPE sample gate)
+		if (PlayZ_ShouldSampleWeatherPPE(timeslice))
 		{
-			m_TargetUpdateTimer = 0;
 			PlayZ_RecalculatePPETargets(weather, ppe);
 		}
 

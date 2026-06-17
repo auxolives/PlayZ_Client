@@ -7,7 +7,21 @@ modded class MissionGameplay
 	protected float m_PlayZHypoxiaChromSmoothed;
 	protected float m_PlayZHypoxiaBlurSmoothed;
 	protected float m_PlayZHypoxiaVignetteSmoothed;
+	protected float m_PlayZHypoxiaTargetChrom;
+	protected float m_PlayZHypoxiaTargetBlur;
+	protected float m_PlayZHypoxiaTargetVignette;
 	protected bool m_PlayZHypoxiaPPEWarned;
+	protected ref PlayZPPEUpdateGate m_PlayZHypoxiaPPESampleGate;
+
+	protected bool PlayZ_ShouldSampleHypoxiaPPE(float timeslice)
+	{
+		if (!m_PlayZHypoxiaPPESampleGate)
+		{
+			m_PlayZHypoxiaPPESampleGate = new PlayZPPEUpdateGate();
+		}
+
+		return m_PlayZHypoxiaPPESampleGate.ConsumeSampleTick(timeslice);
+	}
 
 	override void OnInit()
 	{
@@ -39,6 +53,9 @@ modded class MissionGameplay
 			m_PlayZHypoxiaChromSmoothed = 0;
 			m_PlayZHypoxiaBlurSmoothed = 0;
 			m_PlayZHypoxiaVignetteSmoothed = 0;
+			m_PlayZHypoxiaTargetChrom = 0;
+			m_PlayZHypoxiaTargetBlur = 0;
+			m_PlayZHypoxiaTargetVignette = 0;
 			PlayZ_StopHypoxiaPPE();
 			return;
 		}
@@ -48,6 +65,9 @@ modded class MissionGameplay
 			m_PlayZHypoxiaChromSmoothed = 0;
 			m_PlayZHypoxiaBlurSmoothed = 0;
 			m_PlayZHypoxiaVignetteSmoothed = 0;
+			m_PlayZHypoxiaTargetChrom = 0;
+			m_PlayZHypoxiaTargetBlur = 0;
+			m_PlayZHypoxiaTargetVignette = 0;
 			PlayZ_StopHypoxiaPPE();
 			return;
 		}
@@ -56,24 +76,27 @@ modded class MissionGameplay
 		if (!player)
 			return;
 
-		float alt = player.GetPosition()[1];
-		float targetChrom = 0;
-		float targetBlur = 0;
-		float targetVignette = 0;
-		if (Hypoxia.IsHypoxicAltitude(alt))
+		if (PlayZ_ShouldSampleHypoxiaPPE(timeslice))
 		{
-			targetChrom = Hypoxia.GetHypoxiaChromForPPE(player, alt);
-			targetBlur = Hypoxia.GetHypoxiaBlurForPPE(player, alt);
-			targetVignette = Hypoxia.GetHypoxiaVignetteForPPE(player, alt);
+			float alt = player.GetPosition()[1];
+			m_PlayZHypoxiaTargetChrom = 0;
+			m_PlayZHypoxiaTargetBlur = 0;
+			m_PlayZHypoxiaTargetVignette = 0;
+			if (Hypoxia.IsHypoxicAltitude(alt))
+			{
+				m_PlayZHypoxiaTargetChrom = Hypoxia.GetHypoxiaChromForPPE(player, alt);
+				m_PlayZHypoxiaTargetBlur = Hypoxia.GetHypoxiaBlurForPPE(player, alt);
+				m_PlayZHypoxiaTargetVignette = Hypoxia.GetHypoxiaVignetteForPPE(player, alt);
+			}
 		}
 
 		float k = timeslice / GameConstants.PLAYZ_SAKHAL_HYPOXIA_PPE_FADE_SEC;
 		if (k > 1.0)
 			k = 1.0;
 
-		m_PlayZHypoxiaChromSmoothed = Math.Lerp(m_PlayZHypoxiaChromSmoothed, targetChrom, k);
-		m_PlayZHypoxiaBlurSmoothed = Math.Lerp(m_PlayZHypoxiaBlurSmoothed, targetBlur, k);
-		m_PlayZHypoxiaVignetteSmoothed = Math.Lerp(m_PlayZHypoxiaVignetteSmoothed, targetVignette, k);
+		m_PlayZHypoxiaChromSmoothed = Math.Lerp(m_PlayZHypoxiaChromSmoothed, m_PlayZHypoxiaTargetChrom, k);
+		m_PlayZHypoxiaBlurSmoothed = Math.Lerp(m_PlayZHypoxiaBlurSmoothed, m_PlayZHypoxiaTargetBlur, k);
+		m_PlayZHypoxiaVignetteSmoothed = Math.Lerp(m_PlayZHypoxiaVignetteSmoothed, m_PlayZHypoxiaTargetVignette, k);
 
 		if (m_PlayZHypoxiaChromSmoothed < 0.0001 && m_PlayZHypoxiaBlurSmoothed < 0.0001 && m_PlayZHypoxiaVignetteSmoothed < 0.0001)
 		{
@@ -109,7 +132,7 @@ modded class MissionGameplay
 			player.GetMovementState(move);
 			if (move.m_iMovement == DayZPlayerConstants.MOVEMENTIDX_SPRINT && move.m_iStanceIdx == DayZPlayerConstants.STANCEIDX_ERECT)
 			{
-				if (targetBlur > 0.0001 || targetChrom > 0.0001 || targetVignette > 0.0001)
+				if (m_PlayZHypoxiaTargetBlur > 0.0001 || m_PlayZHypoxiaTargetChrom > 0.0001 || m_PlayZHypoxiaTargetVignette > 0.0001)
 				{
 					player.RequestSoundEvent(EPlayerSoundEventID.STAMINA_DOWN_HEAVY, false);
 					m_PlayZ_HypoxiaSoundCooldownUntil = now + GameConstants.PLAYZ_SAKHAL_HYPOXIA_SOUND_COOLDOWN_MS;
