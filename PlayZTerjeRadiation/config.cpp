@@ -70,23 +70,41 @@ class CfgTerjeSkills
 		{
 			class RadiationResist
 			{
-				id="radres";
-				enabled=1;
+				id = "radres";
+				enabled = 0;
 				text = "#STR_TERJESKILL_IMMUNITY_MOD0radresmod";
 				value = 0.01;
 			};
 			class RadiationRegen
 			{
-				id="radregen";
-				enabled=1;
+				id = "radregen";
+				enabled = 0;
 				text = "#STR_TERJESKILL_IMMUNITY_MOD0radregenmod";
 				value = 0.025;
 			};
 		};
 		class Perks
 		{
-			class RadiationResist { enabled = 0; };
-			class RadiationRegen { enabled = 0; };
+			class RadiationResist
+			{
+				enabled = 1;
+				stagesCount = 5;
+				requiredSkillLevels[] = { 0, 5, 10, 15, 20 };
+				requiredPerkPoints[] = { 1, 2, 3, 5, 10 };
+				values[] = { 0.10, 0.20, 0.30, 0.40, 0.50 };
+				displayName = "#STR_PLAYZ_PERK_IMMUNITY_RADIATION_RESIST_NAME";
+				description = "#STR_PLAYZ_PERK_IMMUNITY_RADIATION_RESIST_DESC";
+			};
+			class RadiationRegen
+			{
+				enabled = 1;
+				stagesCount = 5;
+				requiredSkillLevels[] = { 0, 5, 10, 15, 20 };
+				requiredPerkPoints[] = { 1, 2, 3, 5, 10 };
+				values[] = { 0.10, 0.25, 0.45, 0.70, 1.00 };
+				displayName = "#STR_PLAYZ_PERK_IMMUNITY_RADIATION_REGEN_NAME";
+				description = "#STR_PLAYZ_PERK_IMMUNITY_RADIATION_REGEN_DESC";
+			};
 		};
 	};
 };
