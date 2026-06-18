@@ -83,7 +83,7 @@ class CfgVehicles
 	{
 		class Protection
 		{
-			melee = 0.3;
+			melee = 0.65;
 			firearm = 0.15;
 		};
 	};
