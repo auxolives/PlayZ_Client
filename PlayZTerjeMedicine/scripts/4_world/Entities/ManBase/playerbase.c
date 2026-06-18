@@ -1,6 +1,35 @@
+// Source Found: TerjeMedicine/Scripts/4_World/Entities/PlayerBase.c:254-257
+// Source Found: TerjeMedicine/Scripts/4_World/Classes/TerjeModifiers/TerjePlayerModifierSleeping.c:130
+
 modded class PlayerBase
 {
 	static const float RABIES_HYDRO_THRESHOLD = 20.0;
+
+	override bool HasTerjeSicknesOrInjures()
+	{
+		if (!GetTerjeStats())
+		{
+			return super.HasTerjeSicknesOrInjures();
+		}
+
+		int savedMindLevel = GetTerjeStats().GetMindLevel();
+		int savedMindTendency = GetTerjeStats().GetMindTendency();
+		bool maskLowMind = savedMindLevel > 3;
+
+		if (maskLowMind)
+		{
+			GetTerjeStats().SetMindLevelAndTendency(3, savedMindTendency);
+		}
+
+		bool result = super.HasTerjeSicknesOrInjures();
+
+		if (maskLowMind)
+		{
+			GetTerjeStats().SetMindLevelAndTendency(savedMindLevel, savedMindTendency);
+		}
+
+		return result;
+	}
 
 	bool PlayZ_CanReceivePlayerSyringeInjection()
 	{
