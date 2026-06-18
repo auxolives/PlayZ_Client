@@ -13,7 +13,8 @@ class CfgPatches
 			"DZ_Characters_Gloves",
 			"DZ_Characters_Backpacks",
 			"DZ_Characters_Headgear",
-			"DZ_Characters_Shoes"
+			"DZ_Characters_Shoes",
+			"DZ_Characters_Vests"
 		};
 	};
 };
@@ -151,7 +152,7 @@ class CfgVehicles
 	};
 	class NBCPantsBase: Clothing
 	{
-		itemsCargoSize[] = {4,3};
+		itemsCargoSize[] = {4,4};
 	};
 	class OMKPants_ColorBase: Clothing
 	{
@@ -183,7 +184,7 @@ class CfgVehicles
 	};
 	class SlacksPants_ColorBase: Clothing
 	{
-		itemsCargoSize[] = {4,2};
+		itemsCargoSize[] = {4,3};
 	};
 	class TTSKOPants: Clothing
 	{
@@ -289,7 +290,7 @@ class CfgVehicles
 	};
 	class NBCJacketBase: Clothing
 	{
-		itemsCargoSize[] = {4,3};
+		itemsCargoSize[] = {4,4};
 	};
 	class NurseDress_ColorBase: Clothing
 	{
@@ -448,6 +449,10 @@ class CfgVehicles
 	class SlingBag_ColorBase: Clothing
 	{
 		itemsCargoSize[] = {4,5};
+	};
+	class SmershVest: Clothing
+	{
+		descriptionShort = "#STR_PlayZ_SmershVest_Desc";
 	};
 	class SmershBag: Clothing
 	{
