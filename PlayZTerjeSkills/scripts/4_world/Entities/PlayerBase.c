@@ -5,8 +5,8 @@ modded class PlayerBase
 		float perkValue;
 		float modVal;
 
-		// Stealth perks (QuietStep/ColdBlooded/QuietShooter) are off in PlayZ config; modifiers use the same ids.
-		// Terje bitmask/perk paths ignore modifiers — apply modifier fallbacks here before base Terje runs.
+		// QuietStep stays modifier-only; ColdBlooded/QuietShooter use perk bitmask when enabled.
+		// Modifier fallback below applies only when the bitmask perk path is inactive.
 		if (GetGame() && GetGame().IsDedicatedServer() && GetTerjeSkills() != null)
 		{
 			if (soundType == TERJE_SOUND_EVENT_TYPE_VOICE)

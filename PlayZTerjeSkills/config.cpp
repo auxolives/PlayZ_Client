@@ -80,7 +80,7 @@ class CfgTerjeSkills
 			class QuickFeet
 			{
 				id = "quickf";
-				enabled = 1;
+				enabled = 0;
 				text = "#STR_TERJESKILL_ATHLETIC_MOD0quickf";
 				value = -0.025;
 			};
@@ -101,14 +101,23 @@ class CfgTerjeSkills
 			class StrongBones
 			{
 				id = "strbones";
-				enabled = 1;
+				enabled = 0;
 				text = "#STR_TERJESKILL_ATHLETIC_MOD0strbones";
 				value = -0.015;
 			};
 		};
 		class Perks
 		{
-			class QuickFeet { enabled = 0; };
+			class QuickFeet
+			{
+				enabled = 1;
+				stagesCount = 5;
+				requiredSkillLevels[] = { 0, 5, 10, 15, 20 };
+				requiredPerkPoints[] = { 1, 2, 3, 5, 10 };
+				values[] = { -0.05, -0.15, -0.30, -0.50, -0.75 };
+				displayName = "#STR_PLAYZ_PERK_ATH_QUICK_FEET_NAME";
+				description = "#STR_PLAYZ_PERK_ATH_QUICK_FEET_DESC";
+			};
 			class Marathoner { enabled = 0; };
 			class ProperBreathing
 			{
@@ -143,7 +152,16 @@ class CfgTerjeSkills
 				displayName = "#STR_PLAYZ_PERK_ATH_STUNTMAN_NAME";
 				description = "#STR_PLAYZ_PERK_ATH_STUNTMAN_DESC";
 			};
-			class StrongBones { enabled = 0; };
+			class StrongBones
+			{
+				enabled = 1;
+				stagesCount = 1;
+				requiredSkillLevels[] = { 20 };
+				requiredPerkPoints[] = { 15 };
+				values[] = {-0.99 };
+				displayName = "#STR_PLAYZ_PERK_ATH_STRONG_BONES_NAME";
+				description = "#STR_PLAYZ_PERK_ATH_STRONG_BONES_DESC";
+			};
 		};
 	};
 	class Strength
@@ -174,14 +192,14 @@ class CfgTerjeSkills
 			class LightAttacksForce
 			{
 				id = "lattkforce";
-				enabled = 1;
+				enabled = 0;
 				text = "#STR_TERJESKILL_STRENGTH_MOD0lattkforce";
 				value = 0.015;
 			};
 			class HeavyAttacksForce
 			{
 				id = "hattkforce";
-				enabled = 1;
+				enabled = 0;
 				text = "#STR_TERJESKILL_STRENGTH_MOD0hattkforce";
 				value = 0.01;
 			};
@@ -211,9 +229,27 @@ class CfgTerjeSkills
 			class MasterOfDefence { enabled = 0; };
 			class MasterOfEvasion { enabled = 0; };
 			class LightAttacksSpeed { enabled = 0; };
-			class LightAttacksForce { enabled = 0; };
+			class LightAttacksForce
+			{
+				enabled = 1;
+				stagesCount = 1;
+				requiredSkillLevels[] = { 15 };
+				requiredPerkPoints[] = { 10 };
+				values[] = { 0.25 };
+				displayName = "#STR_PLAYZ_PERK_STRNG_LIGHT_STRIKE_NAME";
+				description = "#STR_PLAYZ_PERK_STRNG_LIGHT_STRIKE_DESC";
+			};
 			class HeavyAttacksSpeed { enabled = 0; };
-			class HeavyAttacksForce { enabled = 0; };
+			class HeavyAttacksForce
+			{
+				enabled = 1;
+				stagesCount = 1;
+				requiredSkillLevels[] = { 25 };
+				requiredPerkPoints[] = { 15 };
+				values[] = { 0.20 };
+				displayName = "#STR_PLAYZ_PERK_STRNG_HEAVY_STRIKE_NAME";
+				description = "#STR_PLAYZ_PERK_STRNG_HEAVY_STRIKE_DESC";
+			};
 			class LightweightArmor
 			{
 				enabled = 1;
@@ -275,8 +311,26 @@ class CfgTerjeSkills
 			class HydrationControl { enabled = 0; };
 			class EnregyContainment { enabled = 0; };
 			class WaterContainment { enabled = 0; };
-			class ResistWater { enabled = 0; };
-			class ResistHunger { enabled = 0; };
+			class ResistWater
+			{
+				enabled = 1;
+				stagesCount = 1;
+				requiredSkillLevels[] = { 10 };
+				requiredPerkPoints[] = { 10 };
+				values[] = { -0.50 };
+				displayName = "#STR_PLAYZ_PERK_MET_RESIST_WATER_NAME";
+				description = "#STR_PLAYZ_PERK_MET_RESIST_WATER_DESC";
+			};
+			class ResistHunger
+			{
+				enabled = 1;
+				stagesCount = 5;
+				requiredSkillLevels[] = { 10 };
+				requiredPerkPoints[] = { 10 };
+				values[] = { -0.25 };
+				displayName = "#STR_PLAYZ_PERK_MET_RESIST_HUNGER_NAME";
+				description = "#STR_PLAYZ_PERK_MET_RESIST_HUNGER_DESC";
+			};
 			class WildMeatLover
 			{
 				enabled = 1;
@@ -310,14 +364,14 @@ class CfgTerjeSkills
 			class ColdBlooded
 			{
 				id = "coldbldd";
-				enabled = 1;
+				enabled = 0;
 				text = "#STR_TERJESKILL_STEALTH_MOD0coldbldd";
 				value = -0.03;
 			};
 			class QuietShooter
 			{
 				id = "qshooter";
-				enabled = 1;
+				enabled = 0;
 				text = "#STR_TERJESKILL_STEALTH_MOD0qshooter";
 				value = -0.02;
 			};
@@ -333,8 +387,26 @@ class CfgTerjeSkills
 		class Perks
 		{
 			class QuietStep { enabled = 0; };
-			class ColdBlooded { enabled = 0; };
-			class QuietShooter { enabled = 0; };
+			class ColdBlooded
+			{
+				enabled = 1;
+				stagesCount = 5;
+				requiredSkillLevels[] = { 0, 5, 10, 15, 20 };
+				requiredPerkPoints[] = { 1, 2, 3, 5, 10 };
+				values[] = { -0.05, -0.15, -0.30, -0.50, -0.75 };
+				displayName = "#STR_PLAYZ_PERK_STLTH_COLD_BLOODED_NAME";
+				description = "#STR_PLAYZ_PERK_STLTH_COLD_BLOODED_DESC";
+			};
+			class QuietShooter
+			{
+				enabled = 1;
+				stagesCount = 5;
+				requiredSkillLevels[] = { 0, 5, 10, 15, 20 };
+				requiredPerkPoints[] = { 1, 2, 3, 5, 10 };
+				values[] = { -0.05, -0.15, -0.30, -0.50, -0.75 };
+				displayName = "#STR_PLAYZ_PERK_STLTH_QUIET_SHOOTER_NAME";
+				description = "#STR_PLAYZ_PERK_STLTH_QUIET_SHOOTER_DESC";
+			};
 			class FittingEquipment { enabled = 0; };
 			class InvisibleMan
 			{
@@ -418,7 +490,7 @@ class CfgTerjeSkills
 			class MaintainingFire
 			{
 				id = "maintngfire";
-				enabled = 1;
+				enabled = 0;
 				text = "#STR_TERJESKILL_SURVIVAL_maintngfire";
 				value = 0.10;
 			};
@@ -426,7 +498,16 @@ class CfgTerjeSkills
 		class Perks
 		{
 			class StartingFire { enabled = 0; };
-			class ColdResistance { enabled = 0; };
+			class ColdResistance
+			{
+				enabled = 1;
+				stagesCount = 5;
+				requiredSkillLevels[] = { 0, 5, 10, 15, 20 };
+				requiredPerkPoints[] = { 1, 2, 3, 5, 10 };
+				values[] = { 0.05, 0.10, 0.20, 0.35, 0.60 };
+				displayName = "#STR_PLAYZ_PERK_SURV_COLD_RESISTANCE_NAME";
+				description = "#STR_PLAYZ_PERK_SURV_COLD_RESISTANCE_DESC";
+			};
 			class RoughFeet
 			{
 				enabled = 1;
@@ -439,7 +520,16 @@ class CfgTerjeSkills
 			};
 			class RoughHands { enabled = 0; };
 			class AncestralTechnologies { enabled = 0; };
-			class MaintainingFire { enabled = 0; };
+			class MaintainingFire
+			{
+				enabled = 1;
+				stagesCount = 5;
+				requiredSkillLevels[] = { 0, 5, 10, 15, 20 };
+				requiredPerkPoints[] = { 1, 2, 3, 5, 10 };
+				values[] = { 0.25, 0.50, 1.00, 1.50, 3.00 };
+				displayName = "#STR_PLAYZ_PERK_SURV_MAINTAINING_FIRE_NAME";
+				description = "#STR_PLAYZ_PERK_SURV_MAINTAINING_FIRE_DESC";
+			};
 			class DurableEquipment
 			{
 				enabled = 1;

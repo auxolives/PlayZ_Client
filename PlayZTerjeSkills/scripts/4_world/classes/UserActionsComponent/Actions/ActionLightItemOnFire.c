@@ -21,7 +21,6 @@ modded class ActionLightItemOnFire
             baseChance = 0.5; // Fallback to 50%
         }
         float successModifier;
-        float durationModifier;
         
         // Success Chance Math
         if (accessor.GetSkillModifierValue("surv", "startfire", successModifier))
@@ -43,14 +42,13 @@ modded class ActionLightItemOnFire
             
             int expGain;
             if (GetTerjeSettingInt(TerjeSettingsCollection.SKILLS_SURV_MAKE_FIRE_SUCCESS_GAIN_EXP, expGain))
-                accessor.AddSkillExperience("surv", expGain); 
+                accessor.AddSkillExperience("surv", expGain);
 
-            // Maintaining Fire Duration (Burn rate modifier)
             FireplaceBase targetFireplace = FireplaceBase.Cast(target_item);
-            if (targetFireplace && accessor.GetSkillModifierValue("surv", "maintngfire", durationModifier))
+            float perkMaintngfire;
+            if (targetFireplace && accessor.GetPerkValue("surv", "maintngfire", perkMaintngfire))
             {
-                // durationModifier is positive (e.g. 0.10 per level)
-                targetFireplace.SetTerjeSkillSurvFuelModifier(1.0 + durationModifier);
+                targetFireplace.SetTerjeSkillSurvFuelModifier(1.0 + perkMaintngfire);
             }
         }
         else
