@@ -191,7 +191,7 @@ class CfgTerjeSkills
 			class CleanlinessSterility
 			{
 				id = "cleanstr";
-				enabled = 1;
+				enabled = 0;
 				text = "#STR_TERJESKILL_MEDICINE_MOD0cleanstr";
 				value = -0.025;
 			};
@@ -233,7 +233,7 @@ class CfgTerjeSkills
 			class Pharmacologist
 			{
 				id = "pharmac";
-				enabled = 1;
+				enabled = 0;
 				text = "#STR_TERJESKILL_MEDICINE_MOD0pharmac";
 				value = 0.03;
 			};
@@ -243,8 +243,26 @@ class CfgTerjeSkills
 			class SurgeryStabWound { enabled = 0; };
 			class SurgeryBulletWound { enabled = 0; };
 			class SurgeryInternalWound { enabled = 0; };
-			class CleanlinessSterility { enabled = 0; };
-			class Pharmacologist { enabled = 0; };
+			class CleanlinessSterility
+			{
+				enabled = 1;
+				stagesCount = 5;
+				requiredSkillLevels[] = { 0, 5, 10, 15, 20 };
+				requiredPerkPoints[] = { 1, 2, 3, 5, 10 };
+				values[] = { -0.05, -0.10, -0.15, -0.35, -0.75 };
+				displayName = "#STR_PLAYZ_PERK_MED_CLEANLINESS_NAME";
+				description = "#STR_PLAYZ_PERK_MED_CLEANLINESS_DESC";
+			};
+			class Pharmacologist
+			{
+				enabled = 1;
+				stagesCount = 5;
+				requiredSkillLevels[] = { 0, 5, 10, 15, 20 };
+				requiredPerkPoints[] = { 1, 2, 3, 5, 10 };
+				values[] = { 0.10, 0.25, 0.45, 0.70, 1.00 };
+				displayName = "#STR_PLAYZ_PERK_MED_PHARMACOLOGIST_NAME";
+				description = "#STR_PLAYZ_PERK_MED_PHARMACOLOGIST_DESC";
+			};
 			class MasterDressing { enabled = 0; };
 			class Surgeon { enabled = 0; };
 			class BringingLife { enabled = 0; };
