@@ -114,7 +114,7 @@ class CfgTerjeSkills
 			class RecoveryShock
 			{
 				id = "recshock";
-				enabled = 1;
+				enabled = 0;
 				text = "#STR_TERJESKILL_IMMUNITY_MOD0recshock";
 				value = 0.045;
 			};
@@ -136,23 +136,23 @@ class CfgTerjeSkills
 			class IntoxicResist { enabled = 0; };
 			class FastSleep { enabled = 0; };
 			class IronMind { enabled = 0; };
-			class RecoveryShock { enabled = 0; };
+			class RecoveryShock
+			{
+				enabled = 1;
+				stagesCount = 5;
+				requiredSkillLevels[] = { 0, 5, 10, 15, 20 };
+				requiredPerkPoints[] = { 1, 2, 3, 5, 10 };
+				values[] = { 0.10, 0.25, 0.45, 0.70, 1.0 };
+				displayName = "#STR_PLAYZ_PERK_IMMUNITY_RECOVERY_SHOCK_NAME";
+				description = "#STR_PLAYZ_PERK_IMMUNITY_RECOVERY_SHOCK_DESC";
+			};
 			class ImpactResist { enabled = 0; };
 			class DurableLeather { enabled = 0; };
 			class ResistZmbVirus { enabled = 0; };
 			class ResistSepsis { enabled = 0; };
 			class FeetWarm { enabled = 0; };
 			class SafeDinner { enabled = 0; };
-			class QuickHealing
-			{
-				enabled = 1;
-				stagesCount = 4;
-				requiredSkillLevels[] = { 0, 5, 10, 15 };
-				requiredPerkPoints[] = { 1, 2, 3, 5 };
-				values[] = { 0.1, 0.25, 0.5, 0.75 };
-				displayName = "#STR_PLAYZ_PERK_IMMUNITY_QUICKHEALING_NAME";
-				description = "#STR_PLAYZ_PERK_IMMUNITY_QUICKHEALING_DESC";
-			};
+			class QuickHealing { enabled = 0; };
 			class BloodRegen { enabled = 0; };
 			class ThickBlood { enabled = 0; };
 			class RabiesResist
