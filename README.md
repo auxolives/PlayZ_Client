@@ -56,6 +56,7 @@ Set `MOD_OUT` in `.vscode/scripts/Build-PlayZ_Client.bat` to your CFTools `@Play
 - `PlayZmCommandWeaponsFix` — guards null `m_CommandWeapons` in `DayZPlayerCamera1stPerson` (`UpdateUDAngleUnlocked` access violation). Load **last** in `@PlayZ_Client` (after `sVisual` / Expansion).
 - `PlayZNoBase` — blocks crafting `FenceKit`, `WatchtowerKit`, and `TerritoryFlagKit` (recipe `CanDo` false). Looted/spawned kits still deploy. Load after Expansion Base Building if that workshop module is on the mod line.
 - `PlayZGas` — gas contaminated zones (`ContaminatedArea_Static`): gas mask + filter on MASK slot is sufficient; skips NBC body-slot bleeding from `AreaExposureMdfr`. Halves mask filter/oxygen consumption (vanilla `MaskMdfr` + Terje `Radiation.ZoneGasMaskFilterConsumption`). Cold cyan particles (`graphics/particles/playz_gas_*`) + `PPERequester_PlayZGasAreaTint` (reference in mission `cfgeffectarea.json`). Load after `DZ_Scripts`; clients need `@PlayZGas` for particles/PPE.
+- `PlayZNotes` — write/read/placed survivor notes (pen + paper → `PlayZNote`). Vanilla-font GUI, paper stacking, pen ink consumption, fireplace fuel, damage overlay. Config: `$profile:PlayZ/Notes.json` (`PenConsumeQuantity`, `MaxNoteLength`, `DeleteAllNotes` one-shot wipe). Requires `PlayZTerjeCore` (strings). Note writes logged via `PlayZLogs` (`EnableLogNotes` in `$profile:PlayZ/Log.json`). Based on ZenNotes by Zenarchist. Load after `PlayZCore`.
 
 ## Adding a new shared sub-mod
 

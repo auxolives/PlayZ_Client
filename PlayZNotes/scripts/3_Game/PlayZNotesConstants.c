@@ -1,0 +1,11 @@
+enum PlayZNotesRPCs
+{
+	SEND_WRITTEN_NOTE = -4761990,
+	RECEIVE_WRITTEN_NOTE,
+	RECEIVE_NOTE_DATE,
+}
+
+enum PlayZNotesMenu
+{
+	NOTE_GUI = -4762190
+}
