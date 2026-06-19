@@ -324,7 +324,7 @@ class CfgTerjeSkills
 			class ResistHunger
 			{
 				enabled = 1;
-				stagesCount = 5;
+				stagesCount = 1;
 				requiredSkillLevels[] = { 10 };
 				requiredPerkPoints[] = { 10 };
 				values[] = { -0.25 };
