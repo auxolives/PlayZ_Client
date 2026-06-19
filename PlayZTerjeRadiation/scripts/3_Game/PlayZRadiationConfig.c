@@ -46,6 +46,10 @@ class PlayZRadiationConfig
 	float m_EnvGrainSizeDefault = 2.75;
 	float m_EnvNoiseMultMax = 0.15;
 
+	bool m_ProtectHealthEnabled = true;
+	float m_ProtectHealthFloor = 0.8;
+	float m_ProtectMaxPenalty = 0.5;
+
 	void Load()
 	{
 		if (FileExist(CONFIG_PATH))
@@ -113,5 +117,9 @@ class PlayZRadiationConfig
 		m_EnvGrainSizeMin = 1.0;
 		m_EnvGrainSizeDefault = 2.75;
 		m_EnvNoiseMultMax = 0.15;
+
+		m_ProtectHealthEnabled = true;
+		m_ProtectHealthFloor = 0.8;
+		m_ProtectMaxPenalty = 0.5;
 	}
 }

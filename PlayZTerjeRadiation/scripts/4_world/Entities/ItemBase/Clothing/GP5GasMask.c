@@ -4,19 +4,14 @@ modded class GP5GasMask
 {
 	static const float PLAYZ_RAD_PROTECT_FILTERED = 0.95;
 
-	override float GetTerjeProtectionLevel(string protectionType)
+	override protected float PlayZ_GetRadiationProtectionBase()
 	{
-		if (protectionType != "radiation")
-		{
-			return super.GetTerjeProtectionLevel(protectionType);
-		}
-
 		if (!HasValidFilter())
 		{
 			return 0;
 		}
 
-		float level = super.GetTerjeProtectionLevel(protectionType);
+		float level = super.PlayZ_GetRadiationProtectionBase();
 		if (level > 0)
 		{
 			return level;

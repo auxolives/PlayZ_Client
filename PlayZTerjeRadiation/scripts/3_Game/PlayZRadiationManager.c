@@ -61,6 +61,9 @@ class PlayZRadiationManager
 		rpc.Write(cfg.m_SickSatMax);
 		rpc.Write(cfg.m_SickGrainMin);
 		rpc.Write(cfg.m_SickGrainMax);
+		rpc.Write(cfg.m_ProtectHealthEnabled);
+		rpc.Write(cfg.m_ProtectHealthFloor);
+		rpc.Write(cfg.m_ProtectMaxPenalty);
 		rpc.Send(null, PlayZRadiationRPCs.SYNC_RADIATION, true, identity);
 	}
 
@@ -212,6 +215,18 @@ class PlayZRadiationManager
 			return;
 		}
 		if (!ctx.Read(cfg.m_SickGrainMax))
+		{
+			return;
+		}
+		if (!ctx.Read(cfg.m_ProtectHealthEnabled))
+		{
+			return;
+		}
+		if (!ctx.Read(cfg.m_ProtectHealthFloor))
+		{
+			return;
+		}
+		if (!ctx.Read(cfg.m_ProtectMaxPenalty))
 		{
 			return;
 		}

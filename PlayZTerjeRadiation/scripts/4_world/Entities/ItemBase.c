@@ -37,4 +37,29 @@ modded class ItemBase
 
 		return super.AddTerjeRadiation(rAmount);
 	}
+
+	protected float PlayZ_GetRadiationProtectionBase()
+	{
+		return super.GetTerjeProtectionLevel("radiation");
+	}
+
+	override float GetTerjeProtectionLevel(string protectionType)
+	{
+		if (protectionType != "radiation")
+		{
+			return super.GetTerjeProtectionLevel(protectionType);
+		}
+
+		return PlayZRadProtectionHealth.ApplyPenalty(this, PlayZ_GetRadiationProtectionBase());
+	}
+
+	override float GetTerjeProtectionAdvanced(string protectionType, float power)
+	{
+		if (protectionType == "radiation")
+		{
+			return GetTerjeProtectionLevel("radiation");
+		}
+
+		return super.GetTerjeProtectionAdvanced(protectionType, power);
+	}
 }

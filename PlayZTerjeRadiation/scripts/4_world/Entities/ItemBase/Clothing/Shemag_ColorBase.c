@@ -5,13 +5,8 @@ modded class Shemag_ColorBase
 	static const float PLAYZ_RAD_PROTECT_MASK = 0.45;
 	static const float PLAYZ_RAD_PROTECT_HEADGEAR = 0.28;
 
-	override float GetTerjeProtectionLevel(string protectionType)
+	override protected float PlayZ_GetRadiationProtectionBase()
 	{
-		if (protectionType != "radiation")
-		{
-			return super.GetTerjeProtectionLevel(protectionType);
-		}
-
 		PlayerBase player = PlayerBase.Cast(GetHierarchyRootPlayer());
 		if (!player)
 		{
