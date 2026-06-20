@@ -466,4 +466,10 @@ class CfgVehicles
 	{
 		itemsCargoSize[] = {7,8};
 	};
+
+	class Headtorch_ColorBase;
+	class Headtorch_Black: Headtorch_ColorBase
+	{
+		descriptionShort = "#STR_PlayZ_Headtorch_Black1";
+	};
 };
