@@ -216,7 +216,7 @@ modded class MissionGameplay
 		}
 
 		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
-		if (player)
+		if (player && PlayZMissionClientGate.IsPPEReady(player))
 		{
 			m_RoofCheckTimer += 0.2;
 			if (m_RoofCheckTimer >= 3.0)
@@ -264,6 +264,71 @@ modded class MissionGameplay
 		m_LastR = -1.0;
 		m_LastG = -1.0;
 		m_LastB = -1.0;
+	}
+
+	protected bool PlayZ_WeatherPPEChannelDeltaAtRest(float smoothed, float target, float epsilon)
+	{
+		return Math.AbsFloat(smoothed - target) <= epsilon;
+	}
+
+	protected bool PlayZ_WeatherPPEChannelsAtRest(float scenarioTintTarget, float epsilon)
+	{
+		if (m_PlayZPendingJoinWeatherSync)
+		{
+			return false;
+		}
+
+		if (!PlayZ_WeatherPPEChannelDeltaAtRest(m_PlayZScenarioTintWeight, scenarioTintTarget, epsilon))
+		{
+			return false;
+		}
+
+		if (!PlayZ_WeatherPPEChannelDeltaAtRest(m_PPE_Saturation, m_TargetSat, epsilon))
+		{
+			return false;
+		}
+
+		if (!PlayZ_WeatherPPEChannelDeltaAtRest(m_PPE_Contrast, m_TargetCon, epsilon))
+		{
+			return false;
+		}
+
+		if (!PlayZ_WeatherPPEChannelDeltaAtRest(m_PPE_Grain, m_TargetGrain, epsilon))
+		{
+			return false;
+		}
+
+		if (!PlayZ_WeatherPPEChannelDeltaAtRest(m_PPE_Chrom, m_TargetChrom, epsilon))
+		{
+			return false;
+		}
+
+		if (!PlayZ_WeatherPPEChannelDeltaAtRest(m_PPE_GodRays, m_TargetGodRays, epsilon))
+		{
+			return false;
+		}
+
+		if (!PlayZ_WeatherPPEChannelDeltaAtRest(m_PPE_SunVis, m_TargetSunVis, epsilon))
+		{
+			return false;
+		}
+
+		if (!PlayZ_WeatherPPEChannelDeltaAtRest(m_PPE_ColorR, m_TargetR, epsilon))
+		{
+			return false;
+		}
+
+		if (!PlayZ_WeatherPPEChannelDeltaAtRest(m_PPE_ColorG, m_TargetG, epsilon))
+		{
+			return false;
+		}
+
+		if (!PlayZ_WeatherPPEChannelDeltaAtRest(m_PPE_ColorB, m_TargetB, epsilon))
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	void PlayZ_TryApplyPendingJoinWeatherState()
@@ -323,14 +388,12 @@ modded class MissionGameplay
 		if (!weather) return;
 
 		PlayZPPEConfig ppe = PlayZConfig.GetPPE();
+		const float EPSILON = 0.001;
 
 		if (!m_PlayZWeatherPPE)
 		{
 			m_PlayZWeatherPPE = PPERequester_PlayZWeather.Cast(PPERequesterBank.GetRequester(PPERequesterBank.REQ_PLAYZ_WEATHER));
 		}
-
-		if (!m_PlayZWeatherPPE.IsRequesterRunning())
-			m_PlayZWeatherPPE.Start();
 
 		float scenarioTintTarget = PlayZWeatherPPE.GetScenarioTintWeightRaw(PlayZConfig.m_CurrentScenarioName, weather);
 		float scenarioTintInterp = ppe.m_WeatherFadeSpeed * timeslice;
@@ -338,12 +401,26 @@ modded class MissionGameplay
 		{
 			scenarioTintInterp = 2.0 * timeslice;
 		}
-		m_PlayZScenarioTintWeight = Math.Lerp(m_PlayZScenarioTintWeight, scenarioTintTarget, scenarioTintInterp);
+
+		if (!PlayZ_WeatherPPEChannelDeltaAtRest(m_PlayZScenarioTintWeight, scenarioTintTarget, EPSILON))
+		{
+			m_PlayZScenarioTintWeight = Math.Lerp(m_PlayZScenarioTintWeight, scenarioTintTarget, scenarioTintInterp);
+		}
 
 		// 1. Calculate target values from synced weather (1 Hz — shared PlayZ PPE sample gate)
 		if (PlayZ_ShouldSampleWeatherPPE(timeslice))
 		{
 			PlayZ_RecalculatePPETargets(weather, ppe);
+		}
+
+		if (PlayZ_WeatherPPEChannelsAtRest(scenarioTintTarget, EPSILON))
+		{
+			return;
+		}
+
+		if (!m_PlayZWeatherPPE.IsRequesterRunning())
+		{
+			m_PlayZWeatherPPE.Start();
 		}
 
 		// 2. Smooth Interpolation
@@ -382,7 +459,6 @@ modded class MissionGameplay
 		float outB = Math.Lerp(1.0, m_PPE_ColorB, namColorW);
 
 		// 3. Apply to Requester (Throttled by Epsilon Delta)
-		const float EPSILON = 0.001;
 
 		if (Math.AbsFloat(outSat - m_LastSat) > EPSILON)
 		{
