@@ -59,6 +59,66 @@ modded class MissionGameplay
 		return m_PlayZRadPPESampleGate.ConsumeSampleTick(timeslice);
 	}
 
+	protected bool PlayZ_RadPPEFullyIdle()
+	{
+		if (m_PlayZRadGhostStopping)
+		{
+			return false;
+		}
+
+		if (m_PlayZRadEnvTargetDose > PlayZRadPPE.EPSILON)
+		{
+			return false;
+		}
+
+		if (m_PlayZRadEnvTargetSick > PlayZRadPPE.EPSILON)
+		{
+			return false;
+		}
+
+		if (m_PlayZRadBodyTargetDose > PlayZRadPPE.EPSILON)
+		{
+			return false;
+		}
+
+		if (m_PlayZRadEnvDoseSmoothed > PlayZRadPPE.EPSILON)
+		{
+			return false;
+		}
+
+		if (m_PlayZRadSicknessSmoothed > PlayZRadPPE.EPSILON)
+		{
+			return false;
+		}
+
+		if (m_PlayZRadBodyDoseSmoothed > PlayZRadPPE.EPSILON)
+		{
+			return false;
+		}
+
+		if (m_PlayZRadBodyVignetteSmoothed > PlayZRadPPE.EPSILON)
+		{
+			return false;
+		}
+
+		if (m_PlayZRadBodyFeverSmoothed > PlayZRadPPE.EPSILON)
+		{
+			return false;
+		}
+
+		if (m_PlayZRadBodyRadialSmoothed > PlayZRadPPE.EPSILON)
+		{
+			return false;
+		}
+
+		if (m_PlayZRadGhostPPE && m_PlayZRadGhostPPE.IsRequesterRunning())
+		{
+			return false;
+		}
+
+		return true;
+	}
+
 	override void OnUpdate(float timeslice)
 	{
 		super.OnUpdate(timeslice);
@@ -109,6 +169,12 @@ modded class MissionGameplay
 				m_PlayZRadEnvTargetSick = 0;
 				m_PlayZRadBodyTargetDose = 0;
 			}
+		}
+
+		if (PlayZ_RadPPEFullyIdle())
+		{
+			PlayZ_StopRadEnvironmentPPE();
+			return;
 		}
 
 		m_PlayZRadEnvDoseSmoothed = PlayZRadPPE.EnvFadeLerp(m_PlayZRadEnvDoseSmoothed, m_PlayZRadEnvTargetDose, timeslice);
@@ -200,6 +266,13 @@ modded class MissionGameplay
 	{
 		if (GetGame().IsDedicatedServer())
 		{
+			return;
+		}
+
+		if (PlayZ_RadPPEFullyIdle())
+		{
+			PlayZ_StopRadBodyPPE();
+			PlayZ_StopRadGhostPPE();
 			return;
 		}
 
