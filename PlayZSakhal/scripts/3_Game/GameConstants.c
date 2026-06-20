@@ -1,7 +1,7 @@
 modded class GameConstants
 {
 	//! Vanilla 0.01 — Sakhal: 3× slower heat buffer drain (per enviro tick).
-	const float ENVIRO_PLAYER_HEATBUFFER_DECREASE = 0.003;
+	const float ENVIRO_PLAYER_HEATBUFFER_DECREASE = 0.006;
 
 	//! Thin-air hypoxia (Sakhal): altitude/chrom/blur tunables in $profile:PlayZ/Sakhal.json.
 	const float PLAYZ_SAKHAL_HYPOXIA_CAP_PENALTY_MAX = 100.0;
