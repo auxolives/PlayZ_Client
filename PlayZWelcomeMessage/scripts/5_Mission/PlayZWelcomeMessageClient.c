@@ -6,6 +6,11 @@ modded class MissionGameplay
 	{
 		super.OnUpdate(timeslice);
 
+		if (!m_PlayZWelcomeMessageOverlay && !PlayZWelcomeMessageClientState.HasPendingConfig())
+		{
+			return;
+		}
+
 		if (!m_PlayZWelcomeMessageOverlay && PlayZWelcomeMessageClientState.HasPendingConfig())
 		{
 			if (PlayZWelcomeMessage_ShouldShowOverlay())
