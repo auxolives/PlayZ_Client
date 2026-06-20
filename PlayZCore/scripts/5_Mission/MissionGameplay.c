@@ -126,17 +126,7 @@ modded class MissionGameplay
 
 	protected bool PlayZ_IsDyingPPEPlayerReady(PlayerBase player)
 	{
-		if (!player || !player.IsAlive() || !player.IsControlledPlayer())
-		{
-			return false;
-		}
-
-		if (player.HasActiveTerjeStartScreen())
-		{
-			return false;
-		}
-
-		return true;
+		return PlayZMissionClientGate.IsPPEReady(player);
 	}
 
 	protected void UpdatePlayZDyingPPE(float timeslice)
@@ -163,6 +153,12 @@ modded class MissionGameplay
 		{
 			float health = PlayZ_GetDyingPPEHealth(player);
 			m_PlayZDyingTargetWeight = PlayZDyingPPE.GetTargetWeight(health);
+		}
+
+		if (m_PlayZDyingTargetWeight <= 0 && !PlayZDyingPPE.HasAnyEffect(m_PlayZDyingWeightSmoothed))
+		{
+			PlayZ_StopDyingPPE();
+			return;
 		}
 
 		m_PlayZDyingWeightSmoothed = PlayZDyingPPE.FadeLerp(m_PlayZDyingWeightSmoothed, m_PlayZDyingTargetWeight, timeslice);
