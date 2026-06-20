@@ -76,6 +76,9 @@ modded class MissionGameplay
 		if (!player)
 			return;
 
+		if (!PlayZMissionClientGate.IsPPEReady(player))
+			return;
+
 		if (PlayZ_ShouldSampleHypoxiaPPE(timeslice))
 		{
 			float alt = player.GetPosition()[1];
