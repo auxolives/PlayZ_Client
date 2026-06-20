@@ -53,6 +53,15 @@ modded class MissionGameplay
 	protected bool m_PlayZPendingJoinWeatherSync = false;
 	protected float m_PlayZPendingJoinTintWeight = 0.0;
 	protected float m_PlayZPendingJoinTempMod = 0.0;
+	protected bool m_PlayZPendingVolFogSync = false;
+	protected float m_PlayZPendingVolFogDist = 0;
+	protected float m_PlayZPendingVolFogHeight = 0;
+	protected float m_PlayZPendingVolFogBias = 0;
+	protected float m_PlayZPendingVolFogTransitionTime = 0;
+	protected bool m_PlayZPendingVolFogJoinResync = false;
+	protected float m_PlayZPendingVolFogCurDist = 0;
+	protected float m_PlayZPendingVolFogCurHeight = 0;
+	protected float m_PlayZPendingVolFogCurBias = 0;
 
 	override void OnInit()
 	{
@@ -93,7 +102,18 @@ modded class MissionGameplay
 
 			PlayZConfig.m_CurrentScenarioName = scenarioName;
 			PlayZConfig.m_CurrentScenarioTempMod = tempMod;
-			PlayZConfig.ApplyClientScenarioVolFog(volFogDist, volFogHeight, volFogBias, volFogTransitionTime);
+
+			float curVolFogDist = 0;
+			float curVolFogHeight = 0;
+			float curVolFogBias = 0;
+			if (isJoinResync)
+			{
+				if (!ctx.Read(curVolFogDist)) return;
+				if (!ctx.Read(curVolFogHeight)) return;
+				if (!ctx.Read(curVolFogBias)) return;
+			}
+
+			PlayZ_ApplyScenarioVolFogFromRPC(volFogDist, volFogHeight, volFogBias, volFogTransitionTime, isJoinResync, curVolFogDist, curVolFogHeight, curVolFogBias);
 
 			if (isJoinResync)
 			{
@@ -109,10 +129,45 @@ modded class MissionGameplay
 		}
 	}
 
+	void PlayZ_ApplyScenarioVolFogFromRPC(float volFogDist, float volFogHeight, float volFogBias, float volFogTransitionTime, bool joinResync, float curVolFogDist, float curVolFogHeight, float curVolFogBias)
+	{
+		bool applied = PlayZConfig.ApplyClientScenarioVolFog(volFogDist, volFogHeight, volFogBias, volFogTransitionTime, joinResync, curVolFogDist, curVolFogHeight, curVolFogBias);
+		if (applied)
+		{
+			m_PlayZPendingVolFogSync = false;
+			return;
+		}
+
+		m_PlayZPendingVolFogSync = true;
+		m_PlayZPendingVolFogDist = volFogDist;
+		m_PlayZPendingVolFogHeight = volFogHeight;
+		m_PlayZPendingVolFogBias = volFogBias;
+		m_PlayZPendingVolFogTransitionTime = volFogTransitionTime;
+		m_PlayZPendingVolFogJoinResync = joinResync;
+		m_PlayZPendingVolFogCurDist = curVolFogDist;
+		m_PlayZPendingVolFogCurHeight = curVolFogHeight;
+		m_PlayZPendingVolFogCurBias = curVolFogBias;
+	}
+
+	void PlayZ_TryApplyPendingVolFog()
+	{
+		if (!m_PlayZPendingVolFogSync)
+		{
+			return;
+		}
+
+		bool applied = PlayZConfig.ApplyClientScenarioVolFog(m_PlayZPendingVolFogDist, m_PlayZPendingVolFogHeight, m_PlayZPendingVolFogBias, m_PlayZPendingVolFogTransitionTime, m_PlayZPendingVolFogJoinResync, m_PlayZPendingVolFogCurDist, m_PlayZPendingVolFogCurHeight, m_PlayZPendingVolFogCurBias);
+		if (applied)
+		{
+			m_PlayZPendingVolFogSync = false;
+		}
+	}
+
 	override void OnUpdate(float timeslice)
 	{
 		super.OnUpdate(timeslice);
 
+		PlayZ_TryApplyPendingVolFog();
 		PlayZWeatherNamalskPPEBridge.OnTick(timeslice);
 
 		if (!PlayZConfig.GetPPE().m_EnableWeatherPPE)

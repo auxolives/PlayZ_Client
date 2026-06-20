@@ -90,13 +90,10 @@ class PlayZConfig
 
 			rpc.Send(null, PlayZRPCs.SYNC_CONFIG, true, identity);
 
-			// Send the authoritative scenario + vol fog TARGET (not the current interpolated
-			// snapshot) with the remaining transition time, so the joining player's client
-			// converges on exactly the same endpoint the server is heading to.
-			// Without this, a player connecting mid-transition locks onto the interpolated
-			// mid-value with transitionTime=0 and stays desynced until the next scenario
-			// change broadcast — the observed mixed fog symptom right after
-			// a server restart (when the first post-restart transition is still running).
+			// Join resync: cached target + remaining transition time, plus the server's
+			// current interpolated vol fog (read in SyncScenario). Client snaps to
+			// current then continues the transition — target+remaining alone is not
+			// enough because SetDynVolFog lerps from the client's local value.
 			float remainingSec = 0;
 			if (m_LastVolFogTransitionTimeSec > 0)
 			{
@@ -144,6 +141,19 @@ class PlayZConfig
 		rpc.Write(isJoinResync);
 		if (isJoinResync)
 		{
+			float curDist = 0;
+			float curHeight = 0;
+			float curBias = 0;
+			Weather weather = GetGame().GetWeather();
+			if (weather)
+			{
+				curDist = weather.GetDynVolFogDistanceDensity();
+				curHeight = weather.GetDynVolFogHeightDensity();
+				curBias = weather.GetDynVolFogHeightBias();
+			}
+			rpc.Write(curDist);
+			rpc.Write(curHeight);
+			rpc.Write(curBias);
 			rpc.Write(m_ServerScenarioTintWeight);
 			rpc.Write(m_AuthoritativeTempMod);
 		}
@@ -152,20 +162,29 @@ class PlayZConfig
 	}
 
 	//! Clients only: apply server-authoritative vol fog + zero classic fog (PlayZ replaces fog with volumetric).
-	static void ApplyClientScenarioVolFog(float volFogDist, float volFogHeight, float volFogBias, float transitionTime)
+	//! Returns false when weather is not ready yet (caller may retry).
+	static bool ApplyClientScenarioVolFog(float volFogDist, float volFogHeight, float volFogBias, float transitionTime, bool joinResync = false, float curDist = 0, float curHeight = 0, float curBias = 0)
 	{
 		if (GetGame().IsServer())
-			return;
+			return true;
 
 		Weather w = GetGame().GetWeather();
 		if (!w)
-			return;
+			return false;
+
+		if (joinResync && transitionTime > 0)
+		{
+			w.SetDynVolFogDistanceDensity(curDist, 0);
+			w.SetDynVolFogHeightDensity(curHeight, 0);
+			w.SetDynVolFogHeightBias(curBias, 0);
+		}
 
 		w.SetDynVolFogDistanceDensity(volFogDist, transitionTime);
 		w.SetDynVolFogHeightDensity(volFogHeight, transitionTime);
 		w.SetDynVolFogHeightBias(volFogBias, transitionTime);
 		w.GetFog().SetLimits(0.0, 1.0);
 		w.GetFog().Set(0.0, 10, 1000);
+		return true;
 	}
 
 	static float GetTempModifierByName(string scenarioName)
