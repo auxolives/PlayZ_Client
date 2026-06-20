@@ -3,6 +3,29 @@ modded class PlayerBase
 	protected bool m_PlayZDosimeterTooltipDirty;
 	protected int m_PlayZRadSicknessSynch = 0;
 
+	protected void PlayZ_InvalidateTerjeBodyProtectionCache()
+	{
+		PluginTerjeScriptableAreas plugin = GetTerjeScriptableAreas();
+		if (plugin)
+		{
+			plugin.PlayZ_InvalidateBodyProtectionCache(this);
+		}
+	}
+
+	override void EEItemAttached(EntityAI item, string slot_name)
+	{
+		super.EEItemAttached(item, slot_name);
+		PlayZ_InvalidateTerjeBodyProtectionCache();
+		PlayZSetDosimeterTooltipDirty(true);
+	}
+
+	override void EEItemDetached(EntityAI item, string slot_name)
+	{
+		super.EEItemDetached(item, slot_name);
+		PlayZ_InvalidateTerjeBodyProtectionCache();
+		PlayZSetDosimeterTooltipDirty(true);
+	}
+
 	override void Init()
 	{
 		super.Init();
@@ -72,17 +95,12 @@ modded class PlayerBase
 
 	bool PlayZIsTerjeRadPPEPlayerReady()
 	{
-		if (!IsAlive() || !GetIdentity() || !IsTerjeLocalControlledPlayer())
+		if (!GetIdentity() || !IsTerjeLocalControlledPlayer())
 		{
 			return false;
 		}
 
-		if (HasActiveTerjeStartScreen())
-		{
-			return false;
-		}
-
-		return true;
+		return PlayZMissionClientGate.IsPPEReady(this);
 	}
 
 	//! Env PPE dose after gear + radres perk — same scaling as AddTerjeRadiationAdvanced.
