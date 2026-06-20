@@ -485,7 +485,7 @@ modded class InGameMenu
 
 	override protected void GameRespawn(bool random)
 	{
-		PlayZDeathScreen_Reset();
+		PlayZDeathScreen_BeginTransitionCurtain();
 		super.GameRespawn(random);
 	}
 

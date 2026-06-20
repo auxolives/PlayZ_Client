@@ -1,5 +1,8 @@
 bool g_PlayZDeathIntroActive;
 bool g_PlayZDeathMenuMode;
+bool g_PlayZUIRespawnTransitionActive;
+bool g_PlayZUIRespawnTransitionReleaseScheduled;
+float g_PlayZUIRespawnTransitionElapsed;
 
 void PlayZDeathScreen_SetIntroActive(bool active)
 {
@@ -65,11 +68,99 @@ void PlayZDeathScreen_StopDynamicMusic()
 	}
 }
 
+bool PlayZDeathScreen_IsTransitionActive()
+{
+	if (!g_Game || !g_Game.IsClient())
+	{
+		return false;
+	}
+
+	return g_PlayZUIRespawnTransitionActive;
+}
+
 void PlayZDeathScreen_Reset()
 {
 	PlayZDeathScreen_StopBlackout();
 	g_PlayZDeathIntroActive = false;
 	g_PlayZDeathMenuMode = false;
+	g_PlayZUIRespawnTransitionActive = false;
+	g_PlayZUIRespawnTransitionReleaseScheduled = false;
+	g_PlayZUIRespawnTransitionElapsed = 0;
+}
+
+void PlayZDeathScreen_BeginTransitionCurtain()
+{
+	if (!g_Game || !g_Game.IsClient())
+	{
+		return;
+	}
+
+	g_PlayZUIRespawnTransitionActive = true;
+	g_PlayZUIRespawnTransitionReleaseScheduled = false;
+	g_PlayZUIRespawnTransitionElapsed = 0;
+	g_PlayZDeathIntroActive = false;
+	g_PlayZDeathMenuMode = false;
+	PlayZDeathScreen_BeginBlackout();
+}
+
+void PlayZDeathScreen_MaintainTransitionCurtain()
+{
+	if (!g_Game || !g_Game.IsClient())
+	{
+		return;
+	}
+
+	PlayZDeathScreen_StopBlackout();
+	PlayZDeathScreen_SilenceWorldAudio();
+
+	UIManager ui = g_Game.GetUIManager();
+	if (ui && !ui.ScreenFadeVisible())
+	{
+		ui.ScreenFadeIn(0, " ", FadeColors.BLACK, FadeColors.WHITE);
+	}
+}
+
+void PlayZDeathScreen_ScheduleEndTransitionCurtain()
+{
+	if (!g_Game || !g_Game.IsClient())
+	{
+		return;
+	}
+
+	if (g_PlayZUIRespawnTransitionReleaseScheduled)
+	{
+		return;
+	}
+
+	if (!g_PlayZUIRespawnTransitionActive)
+	{
+		return;
+	}
+
+	g_PlayZUIRespawnTransitionReleaseScheduled = true;
+	g_Game.GetCallQueue(CALL_CATEGORY_GUI).Call(PlayZDeathScreen_EndTransitionCurtain);
+}
+
+void PlayZDeathScreen_EndTransitionCurtain()
+{
+	if (!g_Game || !g_Game.IsClient())
+	{
+		return;
+	}
+
+	if (!g_PlayZUIRespawnTransitionActive)
+	{
+		g_PlayZUIRespawnTransitionReleaseScheduled = false;
+		return;
+	}
+
+	UIManager ui = g_Game.GetUIManager();
+	if (ui)
+	{
+		ui.ScreenFadeOut(0);
+	}
+
+	PlayZDeathScreen_Reset();
 }
 
 void PlayZDeathScreen_StopBlackout()

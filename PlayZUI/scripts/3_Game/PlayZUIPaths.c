@@ -17,6 +17,7 @@ class PlayZUIPaths
 	static const float DEATH_REVEAL_PICTURE_SEC = 10;
 	static const float DEATH_REVEAL_BUTTONS_SEC = 2;
 	static const float DEATH_REVEAL_BUTTONS_DELAY_SEC = 1;
+	static const float RESPAWN_TRANSITION_TIMEOUT_SEC = 5;
 
 	static const string SERVER_IP = "51.255.77.214";
 	static const int SERVER_GAME_PORT = 2402;

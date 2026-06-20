@@ -40,13 +40,13 @@ Widget names `respawn_button` and `exitbtn` match vanilla / Terje pause bindings
 | File | Role |
 |------|------|
 | `PlayZUIPaths.c` | Layout paths, texture path, timing constants |
-| `PlayZUIDeathScreenState.c` | Intro/menu flags, blackout, `OpenDeathMenu()`, audio silence, `MaintainDeathMenuView()` |
+| `PlayZUIDeathScreenState.c` | Intro/menu flags, blackout, transition curtain, `OpenDeathMenu()`, audio silence, `MaintainDeathMenuView()` |
 | `PlayZUIPPEDeathDarkening.c` | Blocks `PPERequester_DeathDarkening.OnStart` while custom death is active |
 | `PlayZUIDayZPlayerImplement.c` | Custom `SimulateDeath` / `ShowDeadScreen`; no vanilla death timer or `ScreenFadeIn(duration)` |
 | `PlayZUIPlayerBase.c` | No-op `SetDeathDarknessLevel` on local player; clears sVisual overlays on death |
 | `PlayZUIDeathScreenCompat.c` | Terje maintenance / Start Screen guards (`PlayZDeathScreen_ShouldUseCustomFlow`) |
 | `PlayZUIInGameMenu.c` | Death vs pause `Init()`; cover-based reveal in `Update(timeslice)` |
-| `PlayZUIMissionGameplay.c` | Pause/continue blocks; `MaintainDeathMenuView()` while menu open |
+| `PlayZUIMissionGameplay.c` | Pause/continue blocks; `MaintainDeathMenuView()` while menu open; respawn transition curtain |
 
 `InGameMenu.Init()` does **not** call `super.Init()` in death mode — death layout is standalone. Pause mode uses `playz_ingamemenu.layout` and Expansion news feed as before.
 
@@ -91,6 +91,36 @@ PlayZDeathScreen_MaintainDeathMenuView() — Stop PPE + clear engine screen fade
 
 After reveal completes, `PlayZUIInGameMenu.Update` keeps cover alphas at 0 and calls `MaintainDeathMenuView()` every frame.
 
+## Respawn transition curtain
+
+Clicking **Respawn** tears down the death layout before Terje Start Screen opens. Without a bridge, vanilla `GameRespawn` destroys menus and unpauses the world for a few frames (corpse / world flash).
+
+**Fix:** arm an engine black curtain on Respawn click and hold it until Terje covers the screen.
+
+| Phase | What happens |
+|-------|----------------|
+| **Arm** | `GameRespawn` calls `PlayZDeathScreen_BeginTransitionCurtain()` (instant `ScreenFadeIn(0)`) — **not** `Reset()` |
+| **Hold** | `PlayZUIMissionGameplay.OnUpdate` calls `MaintainTransitionCurtain()` while transition active or `IsPlayerRespawning()` |
+| **Release** | When `TerjeStartScreenMenu` is open → `ScheduleEndTransitionCurtain()` (next GUI frame); no-wizard path → immediate `EndTransitionCurtain()`; stuck → `RESPAWN_TRANSITION_TIMEOUT_SEC` (5s) |
+
+Tune timeout in `PlayZUIPaths.c` (`RESPAWN_TRANSITION_TIMEOUT_SEC`).
+
+**Guards:**
+
+- `ShowDeadScreen(false)` during transition is ignored (blocks `OnPlayerRespawned` fade peel).
+- `SimulateDeath(true)` during respawn uses vanilla path (no custom death intro re-entry).
+- `MaintainDeathMenuView()` is skipped while transition is active (avoids `ClearEngineFade` fighting the curtain).
+
+```text
+PlayZDeathScreen_IsTransitionActive()       — respawn curtain armed
+PlayZDeathScreen_BeginTransitionCurtain()   — arm on Respawn click
+PlayZDeathScreen_MaintainTransitionCurtain() — re-apply black fade; no ClearEngineFade
+PlayZDeathScreen_ScheduleEndTransitionCurtain() — deferred release (Terje menu open)
+PlayZDeathScreen_EndTransitionCurtain()     — ScreenFadeOut(0) + Reset
+```
+
+**Follow-up (not in Phase 1):** Terje wizard page-to-page flicker — persistent overlay inside `TerjeStartScreenMenu`.
+
 ## Do not regress
 
 - [ ] Reveal uses **cover panels only** — never fade content widget alpha for the deathscreen/buttons.
@@ -99,6 +129,8 @@ After reveal completes, `PlayZUIInGameMenu.Update` keeps cover alphas at 0 and c
 - [ ] Death `Init()` must not call `super.Init()` (would mount Expansion death widgets on the wrong layout).
 - [ ] Preserve `respawn_button` / `exitbtn` widget names for Terje respawn wiring.
 - [ ] Pack `Deathscreen_01.edds` via `.edds.meta` scaffold under `gui/textures/`.
+- [ ] Do **not** call `PlayZDeathScreen_Reset()` before `super.GameRespawn()` — use `BeginTransitionCurtain()` instead.
+- [ ] Do **not** call `MaintainDeathMenuView()` while `PlayZDeathScreen_IsTransitionActive()` (curtain uses engine fade).
 
 ## Related docs
 
