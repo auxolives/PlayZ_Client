@@ -1,0 +1,4 @@
+enum PlayZOverdoseRPCs
+{
+	SYNC_OVERDOSE_CONFIG = 992110,
+}

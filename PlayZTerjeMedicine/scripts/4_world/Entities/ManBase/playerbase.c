@@ -4,6 +4,66 @@
 modded class PlayerBase
 {
 	static const float RABIES_HYDRO_THRESHOLD = 20.0;
+	protected int m_PlayZOverdoseValueSynch = 0;
+
+	override void Init()
+	{
+		super.Init();
+		RegisterNetSyncVariableInt("m_PlayZOverdoseValueSynch", 0, 500);
+	}
+
+	override void OnTerjeUpdateServerTick(float deltaTime)
+	{
+		super.OnTerjeUpdateServerTick(deltaTime);
+		PlayZUpdateOverdoseValueSynch();
+	}
+
+	//! Client PPE reads NetSync (tm.ovd_v is server-only on Terje stats).
+	float PlayZGetOverdoseValueForPPE()
+	{
+		if (!IsAlive() || !IsTerjeLocalControlledPlayer())
+		{
+			return 0;
+		}
+
+		if (HasActiveTerjeStartScreen())
+		{
+			return 0;
+		}
+
+		if (GetGame().IsClient())
+		{
+			return m_PlayZOverdoseValueSynch * 0.01;
+		}
+
+		TerjePlayerStats stats = GetTerjeStats();
+		if (!stats)
+		{
+			return 0;
+		}
+
+		return stats.GetOverdoseValue();
+	}
+
+	protected void PlayZUpdateOverdoseValueSynch()
+	{
+		if (!GetGame().IsServer())
+		{
+			return;
+		}
+
+		if (!IsAlive() || !GetTerjeStats())
+		{
+			return;
+		}
+
+		int newValue = Math.Clamp(Math.Round(GetTerjeStats().GetOverdoseValue() * 100), 0, 500);
+		if (m_PlayZOverdoseValueSynch != newValue)
+		{
+			m_PlayZOverdoseValueSynch = newValue;
+			SetSynchDirty();
+		}
+	}
 
 	override bool HasTerjeSicknesOrInjures()
 	{
