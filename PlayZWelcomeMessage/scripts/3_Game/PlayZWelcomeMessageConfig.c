@@ -59,15 +59,6 @@ class PlayZWelcomeMessageConfig
 		InformationTextLineKeys.Insert("STR_PlayZ_Welcome_Line2");
 		InformationTextLineKeys.Insert("STR_PlayZ_Welcome_Line3");
 		InformationTextLineKeys.Insert("STR_PlayZ_Welcome_Line4");
-		InformationTextLineKeys.Insert("STR_PlayZ_Welcome_Line5");
-		InformationTextLineKeys.Insert("STR_PlayZ_Welcome_Line6");
-		InformationTextLineKeys.Insert("STR_PlayZ_Welcome_Line7");
-		InformationTextLineKeys.Insert("STR_PlayZ_Welcome_Line8");
-		InformationTextLineKeys.Insert("STR_PlayZ_Welcome_Line9");
-		InformationTextLineKeys.Insert("");
-		InformationTextLineKeys.Insert("STR_PlayZ_Welcome_Discord");
-		InformationTextLineKeys.Insert("STR_PlayZ_Welcome_DiscordUrl");
-		InformationTextLineKeys.Insert("");
 		InformationTextLineKeys.Insert("STR_PlayZ_Welcome_GoodLuck");
 	}
 
