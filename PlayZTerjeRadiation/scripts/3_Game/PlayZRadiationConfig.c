@@ -50,6 +50,9 @@ class PlayZRadiationConfig
 	float m_ProtectHealthFloor = 0.8;
 	float m_ProtectMaxPenalty = 0.5;
 
+	//! Server-only: scales Terje food rad buffer gain on eat (1 = vanilla Terje).
+	float m_FoodIngestRadMultiplier = 0.25;
+
 	void Load()
 	{
 		if (FileExist(CONFIG_PATH))
@@ -121,5 +124,7 @@ class PlayZRadiationConfig
 		m_ProtectHealthEnabled = true;
 		m_ProtectHealthFloor = 0.8;
 		m_ProtectMaxPenalty = 0.5;
+
+		m_FoodIngestRadMultiplier = 0.25;
 	}
 }
