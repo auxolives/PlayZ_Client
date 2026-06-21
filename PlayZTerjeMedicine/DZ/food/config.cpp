@@ -22,12 +22,13 @@ class CfgVehicles
 	};
 	class PsilocybeMushroom: MushroomBase
 	{
-		//Handle via PsilocybeMushroom.c
+		inventorySlot[] = {"Ingredient","DirectCookingA","DirectCookingB","DirectCookingC","SmokingA","SmokingB","SmokingC","SmokingD","Trap_Bait_2"};
 		overdosedIncrement = 0.01;
 	};
 	class AmanitaMushroom: MushroomBase
 	{
-		//Handle via PsilocybeMushroom.c
-		overdosedIncrement = 0.02;
+		inventorySlot[] = {"Ingredient","DirectCookingA","DirectCookingB","DirectCookingC","SmokingA","SmokingB","SmokingC","SmokingD","Trap_Bait_2"};
+		medFoodPoisonIncrement = 0.01;
+		overdosedIncrement = 0.012;
 	};
 };
