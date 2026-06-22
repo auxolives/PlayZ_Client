@@ -21,4 +21,29 @@ class PlayZMissionClientGate
 
 		return true;
 	}
+
+	static bool IsToastReady(PlayerBase player)
+	{
+		if (GetGame().IsDedicatedServer())
+		{
+			return false;
+		}
+
+		if (!player || !player.IsAlive() || !player.IsControlledPlayer())
+		{
+			return false;
+		}
+
+		if (player.HasActiveTerjeStartScreen())
+		{
+			return false;
+		}
+
+		if (GetGame().GetUIManager().GetMenu())
+		{
+			return false;
+		}
+
+		return true;
+	}
 }
