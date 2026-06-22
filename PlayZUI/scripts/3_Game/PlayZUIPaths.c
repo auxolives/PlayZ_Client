@@ -8,6 +8,7 @@ class PlayZUIPaths
 	static const string LAYOUT_LOGIN_TIME = PLAYZ_UI_ROOT + "layouts/playz_dialog_login_time.layout";
 	static const string LAYOUT_INGAME = PLAYZ_UI_ROOT + "layouts/playz_ingamemenu.layout";
 	static const string LAYOUT_DEATH_SCREEN = PLAYZ_UI_ROOT + "layouts/playz_death_screen.layout";
+	static const string LAYOUT_LOGOUT = PLAYZ_UI_ROOT + "layouts/playz_logout_dialog.layout";
 
 	static const string TEX_BACKGROUND = PLAYZ_UI_ROOT + "textures/Background_01.edds";
 	static const string TEX_DEATHSCREEN = PLAYZ_UI_ROOT + "textures/Deathscreen_01.edds";
