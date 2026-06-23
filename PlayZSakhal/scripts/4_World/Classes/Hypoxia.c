@@ -180,6 +180,9 @@ class Hypoxia
 		if (!player)
 			return 0;
 
+		if (player.IsInVehicle())
+			return 0;
+
 		if (!IsHypoxicAltitude(altitudeM))
 			return 0;
 
@@ -197,6 +200,9 @@ class Hypoxia
 	static float GetHypoxiaBlurForPPE(PlayerBase player, float altitudeM)
 	{
 		if (!player)
+			return 0;
+
+		if (player.IsInVehicle())
 			return 0;
 
 		if (!IsHypoxicAltitude(altitudeM))
