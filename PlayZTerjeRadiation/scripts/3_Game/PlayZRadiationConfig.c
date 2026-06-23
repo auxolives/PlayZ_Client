@@ -53,6 +53,13 @@ class PlayZRadiationConfig
 	//! Server-only: scales Terje food rad buffer gain on eat (1 = vanilla Terje).
 	float m_FoodIngestRadMultiplier = 0.25;
 
+	//! Server-only: VehicleBattery zone exposure charge drain (drainEnergy/s = effectiveZone / divisor).
+	bool m_BatteryZoneDrainEnabled = true;
+	float m_BatteryZoneDrainThreshold = 0.5;
+	float m_BatteryZoneDrainDivisor = 15.0;
+	float m_BatteryZoneDrainMaxZone = 5.0;
+	float m_BatteryZoneDrainTickSeconds = 1.0;
+
 	void Load()
 	{
 		if (FileExist(CONFIG_PATH))
@@ -126,5 +133,11 @@ class PlayZRadiationConfig
 		m_ProtectMaxPenalty = 0.5;
 
 		m_FoodIngestRadMultiplier = 0.25;
+
+		m_BatteryZoneDrainEnabled = true;
+		m_BatteryZoneDrainThreshold = 0.5;
+		m_BatteryZoneDrainDivisor = 15.0;
+		m_BatteryZoneDrainMaxZone = 5.0;
+		m_BatteryZoneDrainTickSeconds = 1.0;
 	}
 }

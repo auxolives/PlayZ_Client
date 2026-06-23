@@ -8,6 +8,8 @@ class CfgPatches
 		requiredAddons[] = {
 			"DZ_Data",
 			"DZ_Scripts",
+			"DZ_Gear_Camping",
+			"DayZExpansion_Vehicles_Objects_Gear",
 			"TerjeCore",
 			"TerjeStartScreen",
 			"PlayZUI",
