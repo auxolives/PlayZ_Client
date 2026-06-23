@@ -13,7 +13,8 @@ class CfgPatches
 			"DZ_Characters_Gloves",
 			"DZ_Characters_Masks",
 			"DZ_Characters_Headgear",
-			"DZ_Characters_Vests"
+			"DZ_Characters_Vests",
+			"PlayZAsmond_masks"
 		};
 	};
 };
@@ -178,7 +179,7 @@ class CfgVehicles
 	{
 		class Protection
 		{
-			radiation = 0.36;
+			radiation = 0.46;
 		};
 	};
 	class USMCJacket_ColorBase: Clothing
@@ -199,14 +200,14 @@ class CfgVehicles
 	{
 		class Protection
 		{
-			radiation = 0.34;
+			radiation = 0.44;
 		};
 	};
 	class FirefighterJacket_ColorBase: Clothing
 	{
 		class Protection
 		{
-			radiation = 0.34;
+			radiation = 0.42;
 		};
 	};
 	class ParamedicJacket_ColorBase: Clothing
@@ -294,14 +295,14 @@ class CfgVehicles
 	{
 		class Protection
 		{
-			radiation = 0.34;
+			radiation = 0.54;
 		};
 	};
 	class FirefightersPants_ColorBase: Clothing
 	{
 		class Protection
 		{
-			radiation = 0.32;
+			radiation = 0.42;
 		};
 	};
 	class ParamedicPants_ColorBase: Clothing
@@ -603,7 +604,7 @@ class CfgVehicles
 	{
 		class Protection
 		{
-			radiation = 0.34;
+			radiation = 0.44;
 		};
 	};
 	class LeatherPants_ColorBase: Clothing
@@ -706,6 +707,14 @@ class CfgVehicles
 		class Protection
 		{
 			radiation = 0.30;
+		};
+	};
+	class Asmond_NioshMask_Hazmat;
+	class NioshMask_Hazmat: Asmond_NioshMask_Hazmat
+	{
+		class Protection
+		{
+			radiation = 0.75;
 		};
 	};
 	class FaceCover_Improvised: Clothing
