@@ -14,7 +14,8 @@ class CfgPatches
 			"DZ_Characters_Backpacks",
 			"DZ_Characters_Headgear",
 			"DZ_Characters_Shoes",
-			"DZ_Characters_Vests"
+			"DZ_Characters_Vests",
+			"DZ_Characters_Masks"
 		};
 	};
 };
@@ -153,6 +154,19 @@ class CfgVehicles
 	class NBCPantsBase: Clothing
 	{
 		itemsCargoSize[] = {4,4};
+		inventorySlot[] += {"HazmatBag_Pants"};
+	};
+	class NBCHoodBase: Clothing
+	{
+		inventorySlot[] += {"HazmatBag_Hood"};
+	};
+	class NBCGloves_ColorBase: Clothing
+	{
+		inventorySlot[] += {"HazmatBag_Gloves"};
+	};
+	class NBCBootsBase: Clothing
+	{
+		inventorySlot[] += {"HazmatBag_Boots"};
 	};
 	class OMKPants_ColorBase: Clothing
 	{
@@ -291,6 +305,19 @@ class CfgVehicles
 	class NBCJacketBase: Clothing
 	{
 		itemsCargoSize[] = {4,4};
+		inventorySlot[] += {"HazmatBag_Jacket"};
+	};
+	class GasMask: Clothing
+	{
+		inventorySlot[] += {"HazmatBag_GasMask"};
+	};
+	class GP5GasMask: Clothing
+	{
+		inventorySlot[] += {"HazmatBag_GasMask"};
+	};
+	class AirborneMask: Clothing
+	{
+		inventorySlot[] += {"HazmatBag_GasMask"};
 	};
 	class NurseDress_ColorBase: Clothing
 	{

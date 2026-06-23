@@ -14,6 +14,46 @@ class CfgPatches
 	};
 };
 
+class CfgSlots
+{
+	class Slot_HazmatBag_Jacket
+	{
+		name = "HazmatBag_Jacket";
+		displayName = "#STR_CfgBody0";
+		ghostIcon = "set:dayz_inventory image:body";
+	};
+	class Slot_HazmatBag_Pants
+	{
+		name = "HazmatBag_Pants";
+		displayName = "#STR_CfgLegs0";
+		ghostIcon = "set:dayz_inventory image:legs";
+	};
+	class Slot_HazmatBag_Hood
+	{
+		name = "HazmatBag_Hood";
+		displayName = "#STR_CfgHeadgear0";
+		ghostIcon = "set:dayz_inventory image:headgear";
+	};
+	class Slot_HazmatBag_Gloves
+	{
+		name = "HazmatBag_Gloves";
+		displayName = "#STR_CfgGloves0";
+		ghostIcon = "set:dayz_inventory image:gloves";
+	};
+	class Slot_HazmatBag_Boots
+	{
+		name = "HazmatBag_Boots";
+		displayName = "#STR_CfgFeet0";
+		ghostIcon = "set:dayz_inventory image:feet";
+	};
+	class Slot_HazmatBag_GasMask
+	{
+		name = "HazmatBag_GasMask";
+		displayName = "#STR_CfgMask0";
+		ghostIcon = "set:dayz_inventory image:mask";
+	};
+};
+
 class CfgVehicles
 {
 	class AliceBag_ColorBase;
@@ -151,7 +191,52 @@ class CfgVehicles
 	class DryBag_Brown: Asmond_DryBag_Brown { scope=2; };
 
 	class Asmond_DryBag_Hazmat;
-	class DryBag_Hazmat: Asmond_DryBag_Hazmat { scope=2; };
+	class DryBag_Hazmat: Asmond_DryBag_Hazmat
+	{
+		scope = 2;
+		itemsCargoSize[] = {6,5};
+		attachments[] = {
+			"Chemlight",
+			"WalkieTalkie",
+			"Backpack_1",
+			"HazmatBag_Jacket",
+			"HazmatBag_Pants",
+			"HazmatBag_Hood",
+			"HazmatBag_Gloves",
+			"HazmatBag_Boots",
+			"HazmatBag_GasMask"
+		};
+		class GUIInventoryAttachmentsProps
+		{
+			class NBCKit
+			{
+				name = "NBC";
+				description = "";
+				attachmentSlots[] = {
+					"HazmatBag_Jacket",
+					"HazmatBag_Pants",
+					"HazmatBag_Hood",
+					"HazmatBag_Gloves",
+					"HazmatBag_Boots",
+					"HazmatBag_GasMask"
+				};
+				icon = "set:dayz_inventory image:cat_common_cargo";
+				view_index = 1;
+			};
+			class Accessories
+			{
+				name = "$STR_attachment_accessories";
+				description = "";
+				attachmentSlots[] = {
+					"Chemlight",
+					"WalkieTalkie",
+					"Backpack_1"
+				};
+				icon = "set:dayz_inventory image:cat_fp_tents";
+				view_index = 2;
+			};
+		};
+	};
 
 	class Asmond_DuffelBagSmall_Leather;
 	class DuffelBagSmall_Leather: Asmond_DuffelBagSmall_Leather
