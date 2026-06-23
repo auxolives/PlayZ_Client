@@ -26,4 +26,4 @@ Inside `@PlayZ_Client`, **after** workshop `DayZ-Expansion-Core` and `PlayZUI`:
 - Queued while menu or Terje Start Screen is open; stale entries purged after `BlockedQueueStaleSeconds` (default 30s).
 - Hold duration from mod RPC `show_time` when `UsePayloadDuration` is true, clamped by min/max.
 - Until server config RPC arrives, toasts are held (Expansion UI suppressed); they play after sync.
-- **Terje skill level-ups:** message-only `CATEGORY: level` (e.g. `STRENGTH: 13`). Requires `ShowMessage: 1` (default). Other Terje toasts (skillbooks, perk gates) unchanged.
+- **Terje skill level-ups:** message-only sentence (`Your STRENGTH skill has ranked up to 13` — MSG1 + skill name + MSG2 + level, no inventory hint). Requires `ShowMessage: 1` (default). Other Terje toasts (skillbooks, perk gates) unchanged.

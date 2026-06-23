@@ -178,7 +178,6 @@ class PlayZNotificationQueue
 
 		string title = ResolveTextKey(data.GetTitleText());
 		string message = ResolveTextKey(data.GetDetailText());
-		message = FormatSkillLevelUpMessage(message);
 
 		if (config.UsesShowTitle() && IsPlaceholderTitle(title))
 		{
@@ -276,31 +275,6 @@ class PlayZNotificationQueue
 		}
 
 		return false;
-	}
-
-	static string FormatSkillLevelUpMessage(string message)
-	{
-		if (message == "")
-		{
-			return message;
-		}
-
-		int colonIndex = message.LastIndexOf(": ");
-		if (colonIndex < 0)
-		{
-			return message;
-		}
-
-		string skillKey = message.Substring(0, colonIndex);
-		string level = message.Substring(colonIndex + 2, message.Length() - colonIndex - 2);
-
-		if (skillKey.IndexOf("STR_TERJESKILL_") < 0 || skillKey.IndexOf("_NAME") < 0)
-		{
-			return message;
-		}
-
-		skillKey = ResolveTextKey(skillKey);
-		return Widget.TranslateString(skillKey) + ": " + level;
 	}
 
 	static string ResolveTextKey(string key)

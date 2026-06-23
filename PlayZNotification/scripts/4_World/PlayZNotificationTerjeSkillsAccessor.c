@@ -28,7 +28,7 @@ modded class TerjePlayerSkillsAccessor
 			return;
 		}
 
-		string message = skillCfg.GetDisplayName() + ": " + highAfter.ToString();
+		string message = "#STR_TERJESKILL_NEWLEVEL_MSG1 " + skillCfg.GetDisplayName() + " #STR_TERJESKILL_NEWLEVEL_MSG2 " + highAfter.ToString();
 		NotificationSystem.SendNotificationToPlayerIdentityExtended(m_Player.GetIdentity(), 8, "", message, skillCfg.GetIcon());
 	}
 }
