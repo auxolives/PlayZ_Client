@@ -1,15 +1,9 @@
-// Same 1.29 ADS lean/jitter workaround as ironsights (T195618).
+// T195618 / sGunplay exp d94487e: sVisual sets mode 3 after super — restore 4. sVisual lean unchanged.
 modded class DayZPlayerCameraOptics
 {
-	override bool isHeadLeanEnabled()
-	{
-		return false;
-	}
-
 	override void AdjustCameraParameters(float pDt, inout DayZPlayerCameraResult pOutResult)
 	{
 		super.AdjustCameraParameters(pDt, pOutResult);
 		pOutResult.m_iDirectBoneMode = 4;
-		pOutResult.m_fIgnoreParentRoll = 1.0;
 	}
 }

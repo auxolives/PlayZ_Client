@@ -1,17 +1,25 @@
-// 1.29 T195618: ADS cameras on RightHand_Dummy with m_iDirectBoneMode = 3 roll/jitter when
-// leaning (sGunplay/sVisual use 3 for head lean; vanilla ironsights use 4). Restore 4 and
-// ignore parent roll so Q/E lean does not affect the sight picture on Sakhal.
+// T195618 / sGunplay exp: m_iDirectBoneMode 4 (d94487e), yaw m_CurrentCameraYaw (a8fc8ef). sVisual lean kept.
 modded class DayZPlayerCameraIronsights
 {
-	override bool isHeadLeanEnabled()
+	override void OnUpdate(float pDt, out DayZPlayerCameraResult pOutResult)
 	{
-		return false;
+		updateDOF();
+		updateAimAngle(m_CurrentCameraYaw, m_CurrentCameraPitch, pDt);
+		computeHandsOffset(m_handsOffsetX, m_handsOffsetY, pDt);
+		updateCamera(pDt, pOutResult);
+		updateCameraShake(pDt);
+		AdjustCameraParameters(pDt, pOutResult);
+		updateFOVFocus(pDt, pOutResult);
+		updateFocusingOverlay(pDt, pOutResult);
+		UpdateBatteryOptics(GetCurrentSightEntity());
+		UpdateCameraNV(m_player);
+		updateDDOF(pDt, pOutResult);
+		updateCamAngles(pDt, pOutResult);
 	}
 
 	override void AdjustCameraParameters(float pDt, inout DayZPlayerCameraResult pOutResult)
 	{
 		super.AdjustCameraParameters(pDt, pOutResult);
 		pOutResult.m_iDirectBoneMode = 4;
-		pOutResult.m_fIgnoreParentRoll = 1.0;
 	}
 }
