@@ -29,7 +29,11 @@ class cfgVehicles
 		s_recoilControlKick = 0;
 	};
 
-	class ItemOptics;
+	class ItemOptics
+	{
+		repairableWithKits[] = {7};
+		repairCosts[] = {25.0};
+	};
 	class ItemOptics_Base: ItemOptics
 	{
 		s_pipOffset[] = {0,0};
@@ -38,6 +42,8 @@ class cfgVehicles
 		s_pipMagnification = 0;
 		s_pipBlur = 0.01;
 		s_pipChromAber = 0.01;
+		repairableWithKits[] = {7};
+		repairCosts[] = {25.0};
 	};
 
 	class ItemSuppressor;
@@ -74,6 +80,8 @@ class cfgVehicles
 		s_pipBlur = 0.03;
 		s_pipChromAber = 0.2;
 		s_nearPlaneOverride = 0.23;
+		repairableWithKits[] = {7};
+		repairCosts[] = {25.0};
 	};
 
 	class KashtanOptic: ItemOptics_Base
@@ -155,6 +163,8 @@ class cfgVehicles
 		s_pipMagnification = -0.3;
 		s_pipBlur = 0.05;
 		s_pipChromAber = 0.01;
+		repairableWithKits[] = {7};
+		repairCosts[] = {25.0};
 	};
 
 	class StarlightOptic: ItemOptics_Base
@@ -165,6 +175,8 @@ class cfgVehicles
 		s_pipMagnification = -0.3;
 		s_pipBlur = 0.05;
 		s_pipChromAber = 0.01;
+		repairableWithKits[] = {7};
+		repairCosts[] = {25.0};
 	};
 
 	class AugOptic: ItemOptics
@@ -173,6 +185,8 @@ class cfgVehicles
 		s_pipMagnification = 0.25;
 		s_pipBlur = 0.01;
 		s_pipChromAber = 0.1;
+		repairableWithKits[] = {7};
+		repairCosts[] = {25.0};
 	};
 
 	class M4_OEBttstck: Inventory_Base
