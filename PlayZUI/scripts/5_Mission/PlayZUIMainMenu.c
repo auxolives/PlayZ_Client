@@ -37,6 +37,11 @@ modded class MainMenu
 		return layoutRoot;
 	}
 
+	override void Exit()
+	{
+		PlayZUIDialog.Show("#main_menu_exit", "#main_menu_exit_desc", IDC_MAIN_QUIT, DBT_YESNO, DBB_YES, DMT_QUESTION, this);
+	}
+
 	override void Play()
 	{
 		g_Game.GetCallQueue(CALL_CATEGORY_GUI).CallByName(this, "PlayZConnectHardcodedServer");
@@ -105,17 +110,18 @@ modded class MainMenu
 
 	override void Update(float timeslice)
 	{
+		if (g_Game && GetUApi().GetInputByID(UAUIBack).LocalPress())
+		{
+			if (PlayZUIDialog.IsVisible())
+			{
+				PlayZUIDialog.Cancel();
+				return;
+			}
+		}
+
 		super.Update(timeslice);
 
 		CheckWidth();
-
-		if (g_Game && GetUApi().GetInputByID(UAUIBack).LocalPress())
-		{
-			if (!g_Game.GetUIManager().IsDialogHiding())
-			{
-				Exit();
-			}
-		}
 	}
 
 	override bool OnMouseEnter(Widget w, int x, int y)
