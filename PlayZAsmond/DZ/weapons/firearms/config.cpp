@@ -8,7 +8,9 @@ class CfgPatches
 		requiredAddons[] = {
 			"DZ_Data",
 			"DZ_Weapons_Firearms",
+			"DZ_Weapons_Magazines",
 			"PlayZAsmond",
+			"PlayZAsmond_attachments_magazine",
 			"AsmondWeapons",
 		};
 	};
@@ -16,12 +18,161 @@ class CfgPatches
 
 class cfgWeapons
 {
+	class Colt1911_Base
+	{
+		magazines[] += {
+			"Mag_1911_7Rnd_Black",
+			"Mag_1911_7Rnd_Gold"
+		};
+	};
+
+	class VSS_Base
+	{
+		magazines[] += {
+			"Mag_VSS_10Rnd_Red",
+			"Mag_VAL_20Rnd_Red",
+			"Mag_Vikhr_30Rnd_Red"
+		};
+	};
+
+	class ASVAL
+	{
+		magazines[] += {
+			"Mag_VSS_10Rnd_Red",
+			"Mag_VAL_20Rnd_Red",
+			"Mag_Vikhr_30Rnd_Red"
+		};
+	};
+
+	class Vikhr
+	{
+		magazines[] += {
+			"Mag_VSS_10Rnd_Red",
+			"Mag_VAL_20Rnd_Red",
+			"Mag_Vikhr_30Rnd_Red"
+		};
+	};
+
+	class AK101_Base
+	{
+		magazines[] += {
+			"Mag_AK101_30Rnd_Black_2",
+			"Mag_AK101_30Rnd_Winter",
+			"Mag_AK101_30Rnd_Tan"
+		};
+	};
+
+	class AK74_Base
+	{
+		magazines[] += {
+			"Mag_AK74_30Rnd_Black_2",
+			"Mag_AK74_30Rnd_Camo",
+			"Mag_AK74_30Rnd_Tan",
+			"Mag_AK74_30Rnd_Winter",
+			"Mag_AK74_30Rnd_Green_2",
+			"Mag_AK74_45Rnd_Black",
+			"Mag_AK74_45Rnd_Green",
+			"Mag_AK74_45Rnd_Tan",
+			"Mag_AK74_45Rnd_Black_Taped"
+		};
+	};
+
+	class AKS74U_Base
+	{
+		magazines[] += {
+			"Mag_AK74_30Rnd_Black_2",
+			"Mag_AK74_30Rnd_Camo",
+			"Mag_AK74_30Rnd_Tan",
+			"Mag_AK74_30Rnd_Winter",
+			"Mag_AK74_30Rnd_Green_2",
+			"Mag_AK74_45Rnd_Black",
+			"Mag_AK74_45Rnd_Green",
+			"Mag_AK74_45Rnd_Tan",
+			"Mag_AK74_45Rnd_Black_Taped"
+		};
+	};
+
+	class AKM_Base
+	{
+		magazines[] += {
+			"Mag_AKM_30Rnd_Winter",
+			"Mag_AKM_30Rnd_Green",
+			"Mag_AKM_Palm30Rnd_Winter",
+			"Mag_AKM_Palm30Rnd_Green_2",
+			"Mag_AKM_Drum75Rnd_Winter",
+			"Mag_AKM_Drum75Rnd_Green_2"
+		};
+	};
+
+	class M4A1_Base
+	{
+		magazines[] += {
+			"Mag_CMAG_10Rnd_Tan",
+			"Mag_CMAG_10Rnd_Green_2",
+			"Mag_CMAG_20Rnd_Tan",
+			"Mag_CMAG_20Rnd_Green_2",
+			"Mag_CMAG_30Rnd_Tan",
+			"Mag_CMAG_30Rnd_Green_2",
+			"Mag_CMAG_40Rnd_Tan",
+			"Mag_CMAG_40Rnd_Green_2"
+		};
+	};
+
+	class M16A2_Base
+	{
+		magazines[] += {
+			"Mag_CMAG_10Rnd_Tan",
+			"Mag_CMAG_10Rnd_Green_2",
+			"Mag_CMAG_20Rnd_Tan",
+			"Mag_CMAG_20Rnd_Green_2",
+			"Mag_CMAG_30Rnd_Tan",
+			"Mag_CMAG_30Rnd_Green_2",
+			"Mag_CMAG_40Rnd_Tan",
+			"Mag_CMAG_40Rnd_Green_2"
+		};
+	};
+
+	class Aug
+	{
+		magazines[] += {
+			"Mag_CMAG_10Rnd_Tan",
+			"Mag_CMAG_10Rnd_Green_2",
+			"Mag_CMAG_20Rnd_Tan",
+			"Mag_CMAG_20Rnd_Green_2",
+			"Mag_CMAG_30Rnd_Tan",
+			"Mag_CMAG_30Rnd_Green_2",
+			"Mag_CMAG_40Rnd_Tan",
+			"Mag_CMAG_40Rnd_Green_2"
+		};
+	};
+
+	class FAMAS_Base
+	{
+		magazines[] += {
+			"Mag_FAMAS_25Rnd_Black"
+		};
+	};
+
+	class PP19_Base
+	{
+		magazines[] += {
+			"Mag_PP19_64Rnd_Black"
+		};
+	};
+
+	class UMP45_Base
+	{
+		magazines[] += {
+			"Mag_UMP_25Rnd_Winter",
+			"Mag_UMP_25Rnd_Sand",
+			"Mag_UMP_25Rnd_Green"
+		};
+	};
+
 	class AK101;
 	class AK74;
 	class AKM;
 	class AKS74U;
-	class ASVAL;
-	class Aug;
 	class AugShort;
 	class B95;
 	class CZ527;
@@ -73,7 +224,6 @@ class cfgWeapons
 	class Scout;
 	class UMP45;
 	class VSS;
-	class Vikhr;
 	class Winchester70;
 
 	class Asmond_1911_Malvinas;
@@ -2406,5 +2556,4 @@ class cfgWeapons
 					};
 				};
 	};
-
 };
