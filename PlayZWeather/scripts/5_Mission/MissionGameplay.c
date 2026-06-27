@@ -100,9 +100,6 @@ modded class MissionGameplay
 			if (!ctx.Read(volFogTransitionTime)) return;
 			if (!ctx.Read(isJoinResync)) return;
 
-			PlayZConfig.m_CurrentScenarioName = scenarioName;
-			PlayZConfig.m_CurrentScenarioTempMod = tempMod;
-
 			float curVolFogDist = 0;
 			float curVolFogHeight = 0;
 			float curVolFogBias = 0;
@@ -124,6 +121,34 @@ modded class MissionGameplay
 				m_PlayZPendingJoinTintWeight = scenarioTintWeight;
 				m_PlayZPendingJoinTempMod = syncedTempMod;
 				m_PlayZPendingJoinWeatherSync = true;
+			}
+
+			int scenarioEventTintStartMs;
+			if (!ctx.Read(scenarioEventTintStartMs)) return;
+
+			int scenarioEventTintFadeOutStartMs;
+			if (!ctx.Read(scenarioEventTintFadeOutStartMs)) return;
+
+			string eventTintScenarioName;
+			if (!ctx.Read(eventTintScenarioName)) return;
+
+			float eventTintFadeOutWeightPeak;
+			if (!ctx.Read(eventTintFadeOutWeightPeak)) return;
+
+			PlayZConfig.m_CurrentScenarioName = scenarioName;
+			PlayZConfig.m_CurrentScenarioTempMod = tempMod;
+			PlayZConfig.m_ScenarioEventTintStartMs = scenarioEventTintStartMs;
+			PlayZConfig.m_ScenarioEventTintFadeOutStartMs = scenarioEventTintFadeOutStartMs;
+			PlayZConfig.m_EventTintScenarioName = eventTintScenarioName;
+			PlayZConfig.m_EventTintFadeOutWeightPeak = eventTintFadeOutWeightPeak;
+
+			if (!isJoinResync && PlayZWeatherPPE.IsEventTintScenario(scenarioName))
+			{
+				m_PlayZScenarioTintWeight = 0.0;
+			}
+
+			if (isJoinResync)
+			{
 				PlayZ_TryApplyPendingJoinWeatherState();
 			}
 		}
@@ -216,7 +241,7 @@ modded class MissionGameplay
 		float eventR = baseR;
 		float eventG = baseG;
 		float eventB = baseB;
-		string scenarioName = PlayZConfig.m_CurrentScenarioName;
+		string scenarioName = PlayZWeatherPPE.GetActiveEventTintScenarioName();
 
 		if (scenarioName == "Heatwave")
 		{
@@ -450,7 +475,7 @@ modded class MissionGameplay
 			m_PlayZWeatherPPE = PPERequester_PlayZWeather.Cast(PPERequesterBank.GetRequester(PPERequesterBank.REQ_PLAYZ_WEATHER));
 		}
 
-		float scenarioTintTarget = PlayZWeatherPPE.GetScenarioTintWeightRaw(PlayZConfig.m_CurrentScenarioName, weather);
+		float scenarioTintTarget = PlayZWeatherPPE.GetScenarioTintWeight(weather);
 		float scenarioTintInterp = ppe.m_WeatherFadeSpeed * timeslice;
 		if (PlayZConfig.GetWeather().m_DebugCycleScenarios)
 		{
@@ -462,11 +487,13 @@ modded class MissionGameplay
 			m_PlayZScenarioTintWeight = Math.Lerp(m_PlayZScenarioTintWeight, scenarioTintTarget, scenarioTintInterp);
 		}
 
-		// 1. Calculate target values from synced weather (1 Hz — shared PlayZ PPE sample gate)
-		if (PlayZ_ShouldSampleWeatherPPE(timeslice))
+		bool eventTintActive = PlayZWeatherPPE.IsEventTintVisualActive();
+		if (PlayZ_ShouldSampleWeatherPPE(timeslice) || eventTintActive)
 		{
 			PlayZ_RecalculatePPETargets(weather, ppe);
 		}
+
+		PlayZWeatherPPE.TryCompleteScenarioEventTintFadeOut();
 
 		if (PlayZ_WeatherPPEChannelsAtRest(scenarioTintTarget, EPSILON))
 		{

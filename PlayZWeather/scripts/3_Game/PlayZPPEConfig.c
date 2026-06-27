@@ -19,6 +19,8 @@ class PlayZPPEConfig
 
 	float m_ShelterFadeSpeed = 0.5;
 	float m_WeatherFadeSpeed = 0.05;
+	//! Heatwave / Coldwave color tint ramps from 0 to full over this many seconds (weather factor still applies).
+	float m_ScenarioEventTintFadeSec = 180.0;
 
 	float m_ColorClearR = 1.07;
 	float m_ColorClearG = 1.03;

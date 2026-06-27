@@ -16,6 +16,14 @@ class PlayZConfig
 	// Server: smoothed heatwave/coldwave tint weight + temp mod for join resync.
 	static float m_ServerScenarioTintWeight = 0.0;
 	static float m_AuthoritativeTempMod = 0.0;
+	//! GetGame().GetTime() when the current Heatwave/Coldwave tint fade-in began (0 = not fading in).
+	static int m_ScenarioEventTintStartMs = 0;
+	//! GetGame().GetTime() when the last event tint fade-out began (0 = not fading out).
+	static int m_ScenarioEventTintFadeOutStartMs = 0;
+	//! Heatwave/Coldwave name kept alive during fade-out after the live scenario changes.
+	static string m_EventTintScenarioName = "";
+	//! Tint weight captured at fade-out start so the ramp mirrors fade-in strength.
+	static float m_EventTintFadeOutWeightPeak = 0.0;
 
 	private static ref PlayZWeatherConfig m_Weather;
 	private static ref PlayZPPEConfig m_PPE;
@@ -69,6 +77,7 @@ class PlayZConfig
 			rpc.Write(ppe.m_GodRaysIntensity);
 			rpc.Write(ppe.m_ShelterFadeSpeed);
 			rpc.Write(ppe.m_WeatherFadeSpeed);
+			rpc.Write(ppe.m_ScenarioEventTintFadeSec);
 			rpc.Write(ppe.m_ColorClearR);
 			rpc.Write(ppe.m_ColorClearG);
 			rpc.Write(ppe.m_ColorClearB);
@@ -158,6 +167,11 @@ class PlayZConfig
 			rpc.Write(m_AuthoritativeTempMod);
 		}
 
+		rpc.Write(m_ScenarioEventTintStartMs);
+		rpc.Write(m_ScenarioEventTintFadeOutStartMs);
+		rpc.Write(m_EventTintScenarioName);
+		rpc.Write(m_EventTintFadeOutWeightPeak);
+
 		rpc.Send(null, PlayZRPCs.SYNC_SCENARIO, true, identity);
 	}
 
@@ -216,6 +230,7 @@ class PlayZConfig
 		if (!ctx.Read(ppe.m_GodRaysIntensity)) return;
 		if (!ctx.Read(ppe.m_ShelterFadeSpeed)) return;
 		if (!ctx.Read(ppe.m_WeatherFadeSpeed)) return;
+		if (!ctx.Read(ppe.m_ScenarioEventTintFadeSec)) return;
 		if (!ctx.Read(ppe.m_ColorClearR)) return;
 		if (!ctx.Read(ppe.m_ColorClearG)) return;
 		if (!ctx.Read(ppe.m_ColorClearB)) return;

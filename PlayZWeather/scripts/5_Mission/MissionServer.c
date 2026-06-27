@@ -33,12 +33,13 @@ modded class MissionServer
 			return;
 		}
 
-		float targetWeight = PlayZWeatherPPE.GetScenarioTintWeightRaw(PlayZConfig.m_CurrentScenarioName, weather);
+		float targetWeight = PlayZWeatherPPE.GetScenarioTintWeight(weather);
 		float interp = PlayZConfig.GetPPE().m_WeatherFadeSpeed * timeslice;
 		if (PlayZConfig.GetWeather().m_DebugCycleScenarios)
 		{
 			interp = 2.0 * timeslice;
 		}
 		PlayZConfig.m_ServerScenarioTintWeight = Math.Lerp(PlayZConfig.m_ServerScenarioTintWeight, targetWeight, interp);
+		PlayZWeatherPPE.TryCompleteScenarioEventTintFadeOut();
 	}
 }

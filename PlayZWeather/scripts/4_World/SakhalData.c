@@ -446,7 +446,18 @@ modded class SakhalData
 			m_Weather.SetDynVolFogHeightDensity(targetVolFogHeight, phmnTime);
 			m_Weather.SetDynVolFogHeightBias(targetVolFogBias, phmnTime);
 
-			PlayZConfig.m_ServerScenarioTintWeight = PlayZWeatherPPE.GetScenarioTintWeightRaw(displayName, m_Weather);
+			if (PlayZWeatherPPE.IsEventTintScenario(displayName))
+			{
+				PlayZWeatherPPE.BeginScenarioEventTintFadeIn(displayName);
+			}
+			else if (PlayZConfig.m_EventTintScenarioName != "")
+			{
+				PlayZWeatherPPE.BeginScenarioEventTintFadeOut();
+			}
+			else
+			{
+				PlayZWeatherPPE.ClearScenarioEventTintState();
+			}
 
 			PlayZConfig.SyncScenario(displayName, PlayZConfig.m_CurrentScenarioTempMod, targetVolFogDist, targetVolFogHeight, targetVolFogBias, phmnTime);
 			
