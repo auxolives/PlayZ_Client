@@ -29,11 +29,12 @@ class cfgVehicles
 		s_recoilControlKick = 0;
 	};
 
-	class ItemOptics
+	class ItemOptics: Inventory_Base
 	{
 		repairableWithKits[] = {7};
 		repairCosts[] = {25.0};
 	};
+	
 	class ItemOptics_Base: ItemOptics
 	{
 		s_pipOffset[] = {0,0};
