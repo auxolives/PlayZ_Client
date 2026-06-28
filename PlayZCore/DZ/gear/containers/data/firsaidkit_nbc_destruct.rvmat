@@ -20,7 +20,7 @@ class Stage1
 };
 class Stage2
 {
-	texture = "PlayZCore\DZ\gear\containers\data\firstaidkit_nbc_co.paa";
+	texture = "PlayZ_Client\PlayZCore\DZ\gear\containers\data\firstaidkit_nbc_co.paa";
 	uvSource = "tex";
 	class uvTransform
 	{

@@ -8,7 +8,20 @@ Sakhal also loads **DayZ Expansion** as a separate third-party mod (limited scop
 
 - Entity/config classes, UI, inputs, models, sounds, textures, NetSync variables, and client-observable RPC contracts belong here.
 - Every sub-mod must have its own `config.cpp` with its own `CfgPatches.<Name>` entry so it packs as an independent PBO.
-- Script `files[]` paths use the workspace prefix `PlayZ_Client/<AddonName>/scripts/...` (see existing `PlayZCore/config.cpp`).
+- **No `$PBOPREFIX$`.** PlayZ does not use it. Every path into a PlayZ PBO must use the **full** prefix `PlayZ_Client/<AddonName>/` (never the addon folder name alone).
+- Script `files[]` paths: `PlayZ_Client/<AddonName>/scripts/...` (forward slashes) — see `PlayZCore/config.cpp`.
+- **Asset paths in `config.cpp` and `.rvmat`** (textures, materials, PlayZ-authored models): `PlayZ_Client\<AddonName>\...` (backslashes).
+
+  ```cpp
+  // Correct
+  hiddenSelectionsTextures[] = {"PlayZ_Client\PlayZCore\DZ\gear\containers\data\firstaidkit_nbc_co.paa"};
+
+  // Wrong — missing PlayZ_Client\ prefix; texture will not load
+  hiddenSelectionsTextures[] = {"PlayZCore\DZ\gear\containers\data\firstaidkit_nbc_co.paa"};
+  ```
+
+  In practice a single backslash per segment is fine in the string: `"PlayZ_Client\PlayZCore\DZ\gear\..."`. Vanilla/engine assets keep vanilla paths (`DZ\gear\...`).
+- UI layouts, particles, and other paths in `.c` scripts: `PlayZ_Client/<AddonName>/...` (forward slashes).
 - `requiredAddons[]` may list engine addons (`DZ_Data`, `DZ_Scripts`), other `PlayZ_Client/` sub-mods, or DayZ Expansion script addons when a sub-mod integrates Expansion (e.g. `PlayZExpansion`). List only the Expansion modules the sub-mod actually uses; load `@PlayZExpansion` after Expansion workshop PBOs on the mod line.
 - **Must not** require or reference any `PlayZ_Server/` addon or class.
 

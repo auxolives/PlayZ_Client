@@ -154,19 +154,19 @@ class CfgVehicles
 	class NBCPantsBase: Clothing
 	{
 		itemsCargoSize[] = {4,4};
-		inventorySlot[] += {"HazmatBag_Pants"};
+		inventorySlot[] += {"NBC_Pants"};
 	};
 	class NBCHoodBase: Clothing
 	{
-		inventorySlot[] += {"HazmatBag_Hood"};
+		inventorySlot[] += {"NBC_Hood"};
 	};
 	class NBCGloves_ColorBase: Clothing
 	{
-		inventorySlot[] += {"HazmatBag_Gloves"};
+		inventorySlot[] += {"NBC_Gloves"};
 	};
 	class NBCBootsBase: Clothing
 	{
-		inventorySlot[] += {"HazmatBag_Boots"};
+		inventorySlot[] += {"NBC_Boots"};
 	};
 	class OMKPants_ColorBase: Clothing
 	{
@@ -305,27 +305,27 @@ class CfgVehicles
 	class NBCJacketBase: Clothing
 	{
 		itemsCargoSize[] = {4,4};
-		inventorySlot[] += {"HazmatBag_Jacket"};
+		inventorySlot[] += {"NBC_Jacket"};
 	};
 	class GasMask: Clothing
 	{
-		inventorySlot[] += {"HazmatBag_GasMask"};
+		inventorySlot[] += {"NBC_GasMask"};
 	};
 	class GP5GasMask: Clothing
 	{
-		inventorySlot[] += {"HazmatBag_GasMask"};
+		inventorySlot[] += {"NBC_GasMask"};
 	};
 	class AirborneMask: Clothing
 	{
-		inventorySlot[] += {"HazmatBag_GasMask"};
+		inventorySlot[] += {"NBC_GasMask"};
 	};
 	class GP5GasMask_Filter: Inventory_Base
 	{
 		inventorySlot[] += {
-			"HazmatBag_Filter1",
-			"HazmatBag_Filter2",
-			"HazmatBag_Filter3",
-			"HazmatBag_Filter4"
+			"NBC_Filter1",
+			"NBC_Filter2",
+			"NBC_Filter3",
+			"NBC_Filter4"
 		};
 	};
 	class NurseDress_ColorBase: Clothing

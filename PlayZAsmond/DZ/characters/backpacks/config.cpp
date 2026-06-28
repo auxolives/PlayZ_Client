@@ -16,63 +16,63 @@ class CfgPatches
 
 class CfgSlots
 {
-	class Slot_HazmatBag_Jacket
+	class Slot_NBC_Jacket
 	{
-		name = "HazmatBag_Jacket";
+		name = "NBC_Jacket";
 		displayName = "#STR_CfgBody0";
 		ghostIcon = "set:dayz_inventory image:body";
 	};
-	class Slot_HazmatBag_Pants
+	class Slot_NBC_Pants
 	{
-		name = "HazmatBag_Pants";
+		name = "NBC_Pants";
 		displayName = "#STR_CfgLegs0";
 		ghostIcon = "set:dayz_inventory image:legs";
 	};
-	class Slot_HazmatBag_Hood
+	class Slot_NBC_Hood
 	{
-		name = "HazmatBag_Hood";
+		name = "NBC_Hood";
 		displayName = "#STR_CfgHeadgear0";
 		ghostIcon = "set:dayz_inventory image:headgear";
 	};
-	class Slot_HazmatBag_Gloves
+	class Slot_NBC_Gloves
 	{
-		name = "HazmatBag_Gloves";
+		name = "NBC_Gloves";
 		displayName = "#STR_CfgGloves0";
 		ghostIcon = "set:dayz_inventory image:gloves";
 	};
-	class Slot_HazmatBag_Boots
+	class Slot_NBC_Boots
 	{
-		name = "HazmatBag_Boots";
+		name = "NBC_Boots";
 		displayName = "#STR_CfgFeet0";
 		ghostIcon = "set:dayz_inventory image:feet";
 	};
-	class Slot_HazmatBag_GasMask
+	class Slot_NBC_GasMask
 	{
-		name = "HazmatBag_GasMask";
+		name = "NBC_GasMask";
 		displayName = "#STR_CfgMask0";
 		ghostIcon = "set:dayz_inventory image:mask";
 	};
-	class Slot_HazmatBag_Filter1
+	class Slot_NBC_Filter1
 	{
-		name = "HazmatBag_Filter1";
+		name = "NBC_Filter1";
 		displayName = "#STR_GasMask_Filter0";
 		ghostIcon = "set:dayz_inventory image:gasmaskfilter";
 	};
-	class Slot_HazmatBag_Filter2
+	class Slot_NBC_Filter2
 	{
-		name = "HazmatBag_Filter2";
+		name = "NBC_Filter2";
 		displayName = "#STR_GasMask_Filter0";
 		ghostIcon = "set:dayz_inventory image:gasmaskfilter";
 	};
-	class Slot_HazmatBag_Filter3
+	class Slot_NBC_Filter3
 	{
-		name = "HazmatBag_Filter3";
+		name = "NBC_Filter3";
 		displayName = "#STR_GasMask_Filter0";
 		ghostIcon = "set:dayz_inventory image:gasmaskfilter";
 	};
-	class Slot_HazmatBag_Filter4
+	class Slot_NBC_Filter4
 	{
-		name = "HazmatBag_Filter4";
+		name = "NBC_Filter4";
 		displayName = "#STR_GasMask_Filter0";
 		ghostIcon = "set:dayz_inventory image:gasmaskfilter";
 	};
@@ -223,16 +223,16 @@ class CfgVehicles
 			"Chemlight",
 			"WalkieTalkie",
 			"Backpack_1",
-			"HazmatBag_Jacket",
-			"HazmatBag_Pants",
-			"HazmatBag_Hood",
-			"HazmatBag_Gloves",
-			"HazmatBag_Boots",
-			"HazmatBag_GasMask",
-			"HazmatBag_Filter1",
-			"HazmatBag_Filter2",
-			"HazmatBag_Filter3",
-			"HazmatBag_Filter4"
+			"NBC_Jacket",
+			"NBC_Pants",
+			"NBC_Hood",
+			"NBC_Gloves",
+			"NBC_Boots",
+			"NBC_GasMask",
+			"NBC_Filter1",
+			"NBC_Filter2",
+			"NBC_Filter3",
+			"NBC_Filter4"
 		};
 		class GUIInventoryAttachmentsProps
 		{
@@ -241,16 +241,16 @@ class CfgVehicles
 				name = "NBC";
 				description = "";
 				attachmentSlots[] = {
-					"HazmatBag_Jacket",
-					"HazmatBag_Pants",
-					"HazmatBag_Hood",
-					"HazmatBag_Gloves",
-					"HazmatBag_Boots",
-					"HazmatBag_GasMask",
-					"HazmatBag_Filter1",
-					"HazmatBag_Filter2",
-					"HazmatBag_Filter3",
-					"HazmatBag_Filter4"
+					"NBC_Jacket",
+					"NBC_Pants",
+					"NBC_Hood",
+					"NBC_Gloves",
+					"NBC_Boots",
+					"NBC_GasMask",
+					"NBC_Filter1",
+					"NBC_Filter2",
+					"NBC_Filter3",
+					"NBC_Filter4"
 				};
 				icon = "set:dayz_inventory image:cat_common_cargo";
 				view_index = 1;

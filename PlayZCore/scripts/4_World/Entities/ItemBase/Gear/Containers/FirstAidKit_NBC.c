@@ -1,5 +1,10 @@
-class FirstAidKit_NBC extends FirstAidKit
+class FirstAidKit_NBC extends Container_Base
 {
+	override int GetDamageSystemVersionChange()
+	{
+		return 110;
+	}
+
 	override bool CanReceiveItemIntoCargo(EntityAI item)
 	{
 		return false;

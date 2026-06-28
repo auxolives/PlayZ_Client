@@ -28,19 +28,19 @@ class CfgVehicles
 	class GasMask_Filter: Inventory_Base
 	{
 		inventorySlot[] += {
-			"HazmatBag_Filter1",
-			"HazmatBag_Filter2",
-			"HazmatBag_Filter3",
-			"HazmatBag_Filter4"
+			"NBC_Filter1",
+			"NBC_Filter2",
+			"NBC_Filter3",
+			"NBC_Filter4"
 		};
 	};
 	class GasMask_Filter_Improvised: Inventory_Base
 	{
 		inventorySlot[] += {
-			"HazmatBag_Filter1",
-			"HazmatBag_Filter2",
-			"HazmatBag_Filter3",
-			"HazmatBag_Filter4"
+			"NBC_Filter1",
+			"NBC_Filter2",
+			"NBC_Filter3",
+			"NBC_Filter4"
 		};
 	};
 };

@@ -2,7 +2,69 @@ class PlayZ_NBCGearStorage
 {
 	static bool IsNBCStorageSlot(string slotName)
 	{
-		return slotName.IndexOf("HazmatBag_") == 0;
+		return slotName.IndexOf("NBC_") == 0;
+	}
+
+	static bool IsNBCGearStorageHost(EntityAI entity)
+	{
+		if (!entity)
+		{
+			return false;
+		}
+		if (entity.IsKindOf("DryBag_Hazmat"))
+		{
+			return true;
+		}
+		return entity.IsKindOf("FirstAidKit_NBC");
+	}
+
+	static bool IsAttachedToNBCGearStorage(EntityAI item)
+	{
+		if (!item)
+		{
+			return false;
+		}
+		if (!item.GetInventory().IsAttachment())
+		{
+			return false;
+		}
+		return IsNBCGearStorageHost(item.GetHierarchyParent());
+	}
+
+	static bool HasCargoContents(EntityAI item)
+	{
+		GameInventory inventory = item.GetInventory();
+		if (!inventory)
+		{
+			return false;
+		}
+		CargoBase cargo = inventory.GetCargo();
+		if (!cargo)
+		{
+			return false;
+		}
+		return cargo.GetItemCount() > 0;
+	}
+
+	static bool IsNBCClothingStorageSlot(string slotName)
+	{
+		if (slotName == "NBC_Jacket")
+		{
+			return true;
+		}
+		if (slotName == "NBC_Pants")
+		{
+			return true;
+		}
+		if (slotName == "NBC_Hood")
+		{
+			return true;
+		}
+		if (slotName == "NBC_Gloves")
+		{
+			return true;
+		}
+		return slotName == "NBC_Boots";
 	}
 
 	static bool CanReceiveNBCAttachment(EntityAI attachment, string slotName)
@@ -12,31 +74,49 @@ class PlayZ_NBCGearStorage
 			return false;
 		}
 
-		if (slotName == "HazmatBag_Jacket")
+		if (slotName == "NBC_Jacket")
 		{
-			return attachment.IsInherited(NBCJacketBase);
+			if (!attachment.IsInherited(NBCJacketBase))
+			{
+				return false;
+			}
 		}
-		if (slotName == "HazmatBag_Pants")
+		else if (slotName == "NBC_Pants")
 		{
-			return attachment.IsInherited(NBCPantsBase);
+			if (!attachment.IsInherited(NBCPantsBase))
+			{
+				return false;
+			}
 		}
-		if (slotName == "HazmatBag_Hood")
+		else if (slotName == "NBC_Hood")
 		{
-			return attachment.IsInherited(NBCHoodBase);
+			if (!attachment.IsInherited(NBCHoodBase))
+			{
+				return false;
+			}
 		}
-		if (slotName == "HazmatBag_Gloves")
+		else if (slotName == "NBC_Gloves")
 		{
-			return attachment.IsInherited(NBCGloves_ColorBase);
+			if (!attachment.IsInherited(NBCGloves_ColorBase))
+			{
+				return false;
+			}
 		}
-		if (slotName == "HazmatBag_Boots")
+		else if (slotName == "NBC_Boots")
 		{
-			return attachment.IsInherited(NBCBootsBase);
+			if (!attachment.IsInherited(NBCBootsBase))
+			{
+				return false;
+			}
 		}
-		if (slotName == "HazmatBag_GasMask")
+		else if (slotName == "NBC_GasMask")
 		{
-			return attachment.IsInherited(MaskBase);
+			if (!attachment.IsInherited(MaskBase))
+			{
+				return false;
+			}
 		}
-		if (slotName == "HazmatBag_Filter1" || slotName == "HazmatBag_Filter2" || slotName == "HazmatBag_Filter3" || slotName == "HazmatBag_Filter4")
+		else if (slotName == "NBC_Filter1" || slotName == "NBC_Filter2" || slotName == "NBC_Filter3" || slotName == "NBC_Filter4")
 		{
 			if (attachment.IsInherited(GasMask_Filter))
 			{
@@ -44,7 +124,16 @@ class PlayZ_NBCGearStorage
 			}
 			return attachment.IsKindOf("GP5GasMask_Filter");
 		}
+		else
+		{
+			return false;
+		}
 
-		return false;
+		if (IsNBCClothingStorageSlot(slotName) && HasCargoContents(attachment))
+		{
+			return false;
+		}
+
+		return true;
 	}
 }
