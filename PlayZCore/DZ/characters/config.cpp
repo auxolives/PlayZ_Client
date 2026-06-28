@@ -319,6 +319,15 @@ class CfgVehicles
 	{
 		inventorySlot[] += {"HazmatBag_GasMask"};
 	};
+	class GP5GasMask_Filter: Inventory_Base
+	{
+		inventorySlot[] += {
+			"HazmatBag_Filter1",
+			"HazmatBag_Filter2",
+			"HazmatBag_Filter3",
+			"HazmatBag_Filter4"
+		};
+	};
 	class NurseDress_ColorBase: Clothing
 	{
 		itemsCargoSize[] = {5,4};

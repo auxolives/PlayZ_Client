@@ -6,7 +6,8 @@ class CfgPatches
 		weapons[] = {};
 		requiredVersion = 0.1;
 		requiredAddons[] = {
-			"DZ_Gear_Consumables"
+			"DZ_Gear_Consumables",
+			"DZ_Gear_Crafting"
 		};
 	};
 };
@@ -23,5 +24,23 @@ class CfgVehicles
 	class Nail: Inventory_Base
 	{
 		weight = 10;
+	};
+	class GasMask_Filter: Inventory_Base
+	{
+		inventorySlot[] += {
+			"HazmatBag_Filter1",
+			"HazmatBag_Filter2",
+			"HazmatBag_Filter3",
+			"HazmatBag_Filter4"
+		};
+	};
+	class GasMask_Filter_Improvised: Inventory_Base
+	{
+		inventorySlot[] += {
+			"HazmatBag_Filter1",
+			"HazmatBag_Filter2",
+			"HazmatBag_Filter3",
+			"HazmatBag_Filter4"
+		};
 	};
 };

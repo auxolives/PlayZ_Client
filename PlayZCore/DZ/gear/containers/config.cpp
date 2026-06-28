@@ -23,6 +23,38 @@ class CfgVehicles
 		scope = 2;
 		displayName = "$STR_PlayZ_FirstAidKit_NBC0";
 		descriptionShort = "$STR_PlayZ_FirstAidKit_NBC1";
+		itemsCargoSize[] = {0,0};
+		allowOwnedCargoManipulation = 0;
+		randomQuantity = 0;
+		attachments[] = {
+			"HazmatBag_Jacket",
+			"HazmatBag_Pants",
+			"HazmatBag_Hood",
+			"HazmatBag_Gloves",
+			"HazmatBag_Boots",
+			"HazmatBag_GasMask",
+			"HazmatBag_Filter1",
+			"HazmatBag_Filter2"
+		};
+		class GUIInventoryAttachmentsProps
+		{
+			class NBCKit
+			{
+				name = "NBC";
+				description = "";
+				attachmentSlots[] = {
+					"HazmatBag_Jacket",
+					"HazmatBag_Pants",
+					"HazmatBag_Hood",
+					"HazmatBag_Gloves",
+					"HazmatBag_Boots",
+					"HazmatBag_GasMask",
+					"HazmatBag_Filter1",
+					"HazmatBag_Filter2"
+				};
+				icon = "set:dayz_inventory image:cat_common_cargo";
+			};
+		};
 		class DamageSystem: DamageSystem
 		{
 			class GlobalHealth
