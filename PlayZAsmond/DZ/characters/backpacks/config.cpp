@@ -52,6 +52,30 @@ class CfgSlots
 		displayName = "#STR_CfgMask0";
 		ghostIcon = "set:dayz_inventory image:mask";
 	};
+	class Slot_HazmatBag_Filter1
+	{
+		name = "HazmatBag_Filter1";
+		displayName = "#STR_GasMask_Filter0";
+		ghostIcon = "set:dayz_inventory image:gasmaskfilter";
+	};
+	class Slot_HazmatBag_Filter2
+	{
+		name = "HazmatBag_Filter2";
+		displayName = "#STR_GasMask_Filter0";
+		ghostIcon = "set:dayz_inventory image:gasmaskfilter";
+	};
+	class Slot_HazmatBag_Filter3
+	{
+		name = "HazmatBag_Filter3";
+		displayName = "#STR_GasMask_Filter0";
+		ghostIcon = "set:dayz_inventory image:gasmaskfilter";
+	};
+	class Slot_HazmatBag_Filter4
+	{
+		name = "HazmatBag_Filter4";
+		displayName = "#STR_GasMask_Filter0";
+		ghostIcon = "set:dayz_inventory image:gasmaskfilter";
+	};
 };
 
 class CfgVehicles
@@ -204,7 +228,11 @@ class CfgVehicles
 			"HazmatBag_Hood",
 			"HazmatBag_Gloves",
 			"HazmatBag_Boots",
-			"HazmatBag_GasMask"
+			"HazmatBag_GasMask",
+			"HazmatBag_Filter1",
+			"HazmatBag_Filter2",
+			"HazmatBag_Filter3",
+			"HazmatBag_Filter4"
 		};
 		class GUIInventoryAttachmentsProps
 		{
@@ -218,7 +246,11 @@ class CfgVehicles
 					"HazmatBag_Hood",
 					"HazmatBag_Gloves",
 					"HazmatBag_Boots",
-					"HazmatBag_GasMask"
+					"HazmatBag_GasMask",
+					"HazmatBag_Filter1",
+					"HazmatBag_Filter2",
+					"HazmatBag_Filter3",
+					"HazmatBag_Filter4"
 				};
 				icon = "set:dayz_inventory image:cat_common_cargo";
 				view_index = 1;
