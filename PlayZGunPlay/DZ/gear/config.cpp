@@ -298,6 +298,24 @@ class cfgVehicles
 		s_recoilControlKick = 0.08;
 	};
 
+	class SCAR_StockBttstck: Inventory_Base
+	{
+		s_recoilControlStabilityX = 0.17;
+		s_recoilControlStabilityY = 0.15;
+		s_recoilControlMisalignmentX = 0.02;
+		s_recoilControlMisalignmentY = 0.05;
+		s_recoilControlKick = 0.11;
+	};
+
+	class SCAR_PrecisionBttstck: Inventory_Base
+	{
+		s_recoilControlStabilityX = 0.15;
+		s_recoilControlStabilityY = 0.14;
+		s_recoilControlMisalignmentX = 0.04;
+		s_recoilControlMisalignmentY = 0.07;
+		s_recoilControlKick = 0.09;
+	};
+
 	class PP19_Bttstck: Inventory_Base
 	{
 		s_recoilControlStabilityX = 0.10;

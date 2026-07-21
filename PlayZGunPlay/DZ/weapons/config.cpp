@@ -225,11 +225,20 @@ class cfgWeapons
 
 	class FAL_Base: Rifle_Base
 	{
-		s_recoilControlStabilityX = 0.28;
-		s_recoilControlStabilityY = 0.24;
-		s_recoilControlMisalignmentX = 0.22;
-		s_recoilControlMisalignmentY = 0.18;
-		s_recoilControlKick = 0.18;
+		s_recoilControlStabilityX = 0.32;
+		s_recoilControlStabilityY = 0.28;
+		s_recoilControlMisalignmentX = 0.24;
+		s_recoilControlMisalignmentY = 0.20;
+		s_recoilControlKick = 0.20;
+	};
+
+	class SCARH_Base: Rifle_Base
+	{
+		s_recoilControlStabilityX = 0.36;
+		s_recoilControlStabilityY = 0.32;
+		s_recoilControlMisalignmentX = 0.26;
+		s_recoilControlMisalignmentY = 0.22;
+		s_recoilControlKick = 0.24;
 	};
 
 	class AK74_Base: Rifle_Base
