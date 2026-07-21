@@ -1,5 +1,10 @@
 class DryBag_Hazmat extends DryBag_ColorBase
 {
+	override set<int> GetAttachmentExclusionMaskAll(int slotId)
+	{
+		return PlayZ_NBCGearStorage.GetHostAttachmentExclusionMaskAll(this, slotId);
+	}
+
 	override bool CanReceiveAttachment(EntityAI attachment, int slotId)
 	{
 		if (!super.CanReceiveAttachment(attachment, slotId))

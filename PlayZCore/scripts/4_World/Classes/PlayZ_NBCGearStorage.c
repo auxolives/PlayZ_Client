@@ -18,6 +18,19 @@ class PlayZ_NBCGearStorage
 		return entity.IsKindOf("FirstAidKit_NBC");
 	}
 
+	// Stored NBC kit pieces are not worn; their mask/headgear exclusions must not block equipping the host.
+	static set<int> GetHostAttachmentExclusionMaskAll(EntityAI host, int slotId)
+	{
+		set<int> values = new set<int>();
+		set<int> slotValues = host.GetAttachmentExclusionMaskSlot(slotId);
+		if (slotValues)
+		{
+			values.InsertSet(slotValues);
+		}
+		values.InsertSet(host.GetAttachmentExclusionMaskGlobal());
+		return values;
+	}
+
 	static bool IsAttachedToNBCGearStorage(EntityAI item)
 	{
 		if (!item)
@@ -29,6 +42,23 @@ class PlayZ_NBCGearStorage
 			return false;
 		}
 		return IsNBCGearStorageHost(item.GetHierarchyParent());
+	}
+
+	static bool ShouldHideAttachmentCargo(EntityAI item)
+	{
+		if (!item)
+		{
+			return false;
+		}
+		if (!item.GetInventory().GetCargo())
+		{
+			return false;
+		}
+		if (PlayZ_SmershVestTentCargo.IsAttachedToSmershVest(item))
+		{
+			return true;
+		}
+		return !item.CanDisplayCargo();
 	}
 
 	static bool HasCargoContents(EntityAI item)

@@ -1,37 +1,22 @@
-modded class Clothing
+modded class Container_Base
 {
-	override bool CanDisplayCargo()
-	{
-		if (PlayZ_NBCGearStorage.IsAttachedToNBCGearStorage(this))
-		{
-			return false;
-		}
-		return super.CanDisplayCargo();
-	}
-
 	override bool CanReceiveItemIntoCargo(EntityAI item)
 	{
-		if (PlayZ_NBCGearStorage.IsAttachedToNBCGearStorage(this))
-		{
-			return false;
-		}
 		if (PlayZ_SmershVestTentCargo.HasAttachedTent(item))
 		{
 			return false;
 		}
+
 		return super.CanReceiveItemIntoCargo(item);
 	}
 
 	override bool CanLoadItemIntoCargo(EntityAI item)
 	{
-		if (PlayZ_NBCGearStorage.IsAttachedToNBCGearStorage(this))
-		{
-			return false;
-		}
 		if (PlayZ_SmershVestTentCargo.HasAttachedTent(item))
 		{
 			return false;
 		}
+
 		return super.CanLoadItemIntoCargo(item);
 	}
 }

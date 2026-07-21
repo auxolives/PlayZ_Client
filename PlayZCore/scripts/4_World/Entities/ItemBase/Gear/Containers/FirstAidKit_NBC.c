@@ -1,5 +1,10 @@
 class FirstAidKit_NBC extends Container_Base
 {
+	override set<int> GetAttachmentExclusionMaskAll(int slotId)
+	{
+		return PlayZ_NBCGearStorage.GetHostAttachmentExclusionMaskAll(this, slotId);
+	}
+
 	override int GetDamageSystemVersionChange()
 	{
 		return 110;
