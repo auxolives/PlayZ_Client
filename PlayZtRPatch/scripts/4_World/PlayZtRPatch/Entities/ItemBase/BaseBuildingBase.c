@@ -1,10 +1,27 @@
 //! tR_ShieldSmall: wood build also creates sashes; sash hits deal 0 and block repair.
 //! Apply equivalent wood-zone damage on sash hits (EEHitBy — after engine resolves the sash hit).
+//! Base clearance: suppress trees/bushes/clutter in type radius on place; release on delete.
 //! Source Found: scripts/4_World/Entities/ItemBase.c:1522 (EEHitBy)
 //! Source Found: scripts/3_Game/Entities/Object.c:1023 (AddHealth)
 //! Source Found: scripts/3_Game/DamageSystem.c:10 (DamageType)
 modded class BaseBuildingBase
 {
+	override void EEInit()
+	{
+		super.EEInit();
+
+		if (g_Game.IsServer())
+			PlayZBaseClearanceManager.Get().OnBaseInit(this);
+	}
+
+	override void EEDelete(EntityAI parent)
+	{
+		if (g_Game.IsServer())
+			PlayZBaseClearanceManager.Get().OnBaseDeleted(this);
+
+		super.EEDelete(parent);
+	}
+
 	override void EEHitBy(TotalDamageResult damageResult, int damageType, EntityAI source, int component, string dmgZone, string ammo, vector modelPos, float speedCoef)
 	{
 		super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
