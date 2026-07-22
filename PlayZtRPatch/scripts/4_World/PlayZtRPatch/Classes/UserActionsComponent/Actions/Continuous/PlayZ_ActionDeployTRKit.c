@@ -9,17 +9,14 @@ class PlayZ_ActionDeployTRKit: ActionDeployObject
 		{
 			if (player && player.IsPlacingLocal() && item)
 			{
-				Hologram hologram = player.GetHologramLocal();
-				if (hologram)
-					hologram.EvaluateCollision(item);
+				if (!PlayZTRPlacement.CanDeployFromHologram(player, player.GetHologramLocal(), item))
+					return false;
 
-				if (hologram && !hologram.IsColliding() && !hologram.IsFloating() && !hologram.IsHidden())
+				Hologram hologram = player.GetHologramLocal();
+				if (hologram && item.CanBePlaced(player, hologram.GetProjectionEntity().GetPosition()))
 				{
-					if (item.CanBePlaced(player, hologram.GetProjectionEntity().GetPosition()))
-					{
-						// Expansion territory / zones (static helper on ActionDeployObject).
-						return ActionDeployObject.Expansion_CheckDeploy(player, target, item, false);
-					}
+					// Expansion territory / zones (static helper on ActionDeployObject).
+					return ActionDeployObject.Expansion_CheckDeploy(player, target, item, false);
 				}
 			}
 			return false;
@@ -38,14 +35,12 @@ class PlayZ_ActionDeployTRKit: ActionDeployObject
 			if (player && player.IsPlacingServer() && item)
 			{
 				Hologram hologram = player.GetHologramServer();
-				if (hologram)
-					hologram.EvaluateCollision(item);
+				if (!PlayZTRPlacement.CanDeployFromHologram(player, hologram, item))
+					return false;
 
-				if (hologram && !hologram.IsColliding())
-				{
-					if (item.CanBePlaced(player, hologram.GetProjectionEntity().GetPosition()))
-						return true;
-				}
+				if (hologram && item.CanBePlaced(player, hologram.GetProjectionEntity().GetPosition()))
+					return true;
+
 				return false;
 			}
 			return false;

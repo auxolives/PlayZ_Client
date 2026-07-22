@@ -8,6 +8,7 @@ class CfgPatches
 		requiredAddons[] = {
 			"DZ_Data",
 			"DZ_Scripts",
+			"PlayZCore",
 			"tR_Dependence",
 			"tR_Stockade",
 			"tR_Modules",
@@ -38,11 +39,25 @@ class CfgMods
 		};
 		class defs
 		{
+			class gameScriptModule
+			{
+				value = "";
+				files[] = {
+					"PlayZ_Client/PlayZtRPatch/scripts/3_Game"
+				};
+			};
 			class worldScriptModule
 			{
 				value = "";
 				files[] = {
 					"PlayZ_Client/PlayZtRPatch/scripts/4_World"
+				};
+			};
+			class missionScriptModule
+			{
+				value = "";
+				files[] = {
+					"PlayZ_Client/PlayZtRPatch/scripts/5_Mission"
 				};
 			};
 		};

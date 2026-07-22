@@ -267,6 +267,29 @@ class PlayZTRPlacement
 		return item.IsBasebuildingKit() || item.IsDeployable();
 	}
 
+	//! Base-building deployables blocked by no-build zones (not barrels/crates/etc.).
+	static bool IsBaseBuildingDeployable(ItemBase item)
+	{
+		if (!item)
+			return false;
+
+		if (item.IsBasebuildingKit())
+			return true;
+
+		if (IsTRKitItem(item))
+			return true;
+
+		if (item.IsInherited(TentBase))
+			return true;
+
+		return false;
+	}
+
+	static bool IsInNoBuildZone(vector pos)
+	{
+		return PlayZNoBuildZonesState.IsPositionRestricted(pos);
+	}
+
 	//! Items that intentionally skip hologram collision (Notes).
 	static bool IgnoresPlacementCollision(ItemBase action_item)
 	{
@@ -297,6 +320,9 @@ class PlayZTRPlacement
 
 		EntityAI projection = hologram.GetProjectionEntity();
 		if (!projection)
+			return false;
+
+		if (IsBaseBuildingDeployable(item) && IsInNoBuildZone(projection.GetPosition()))
 			return false;
 
 		if (!item.CanBePlaced(player, projection.GetPosition()))

@@ -26,6 +26,10 @@ modded class Hologram
 			return;
 		}
 
+		ItemBase placeItem = action_item;
+		if (!placeItem)
+			Class.CastTo(placeItem, GetParentEntity());
+
 		if (!m_Player.CanPlaceItem(m_Projection))
 		{
 			PlayZ_SetIsColliding(true);
@@ -33,6 +37,11 @@ modded class Hologram
 		else if (IsFloating() || IsHidden() || IsCollidingBBox(action_item) || IsCollidingGeometryProxy(action_item) || IsCollidingPlayer() || IsClippingRoof() || !IsBaseViable() || IsCollidingGPlot() || IsCollidingZeroPos() || IsCollidingAngle() || !IsPlacementPermitted() || !HeightPlacementCheck() || IsUnderwater() || IsInTerrain())
 		{
 			PlayZ_SetIsColliding(true);
+		}
+		else if (PlayZTRPlacement.IsBaseBuildingDeployable(placeItem) && PlayZTRPlacement.IsInNoBuildZone(m_Projection.GetPosition()))
+		{
+			PlayZ_SetIsColliding(true);
+			PlayZNoBuildZonesState.NotifyRestrictedThrottled();
 		}
 		else if (PlayZTRPlacement.IsTRPlacement(GetParentEntity(), GetProjectionEntity()) && PlayZTRPlacement.IsTooCloseToOtherTR(GetParentEntity(), GetProjectionEntity(), m_Projection.GetPosition()))
 		{
