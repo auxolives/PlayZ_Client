@@ -42,11 +42,7 @@ class CfgMods
 };
 class cfgVehicles
 {
-	class ItemOptics_Base
-	{
-		repairableWithKits[] = {7};
-		repairCosts[] = {25.0};
-	};
+	class ItemOptics_Base;
 	class AD_ACOG_Base: ItemOptics_Base
 	{
         s_pipRadius = 0.35;
